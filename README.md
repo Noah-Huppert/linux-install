@@ -1,0 +1,2 @@
+# void-install
+Void installation
