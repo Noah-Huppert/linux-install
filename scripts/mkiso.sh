@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #?
-# mklive.sh - Creates a Void Linux MUSL live device
+# mkiso.sh - Creates a Void Linux MUSL live device
 #
 # USAGE
-#	mklive.sh DEVICE
+#	mkiso.sh DEVICE
 #
 # ARGUMENTS
 #	DEVICE    Device to write live image to

@@ -11,7 +11,7 @@ Linux installation instructions.
 Create a bootable USB with Void Linux:  
 
 ```
-./scripts/mklive.sh EXTERNAL_DEVICE
+./scripts/mkiso.sh EXTERNAL_DEVICE
 ```
 
 1. Download the latest Void Linux Live MUSL ISO file
