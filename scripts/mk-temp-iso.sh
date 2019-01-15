@@ -65,7 +65,12 @@ fi
 # Write to device
 echo "Writing live image to $external_device"
 
-if ! dd bs=4M status=progress if="$iso_path" of="$external_device" && sync; then
+if [[ "$EUID" != "0" ]]; then
+	echo "Must run write operation as root, you may be prompted for your sudo password"
+	dd_args="sudo"
+fi
+
+if ! $dd_args dd status=progress if="$iso_path" of="$external_device" bs=4M && sync; then
 	echo "Error: Failed to write live image to $external_device" >&2
 	exit 1
 fi
