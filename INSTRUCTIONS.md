@@ -11,11 +11,11 @@ Linux installation instructions.
 To create a Void Linux live USB a rudimentary installation of Void Linux 
 is required.
 
-*Why?: The [Void mklive](https://github.com/void-linux/void-mklive) can only be
-run on Void Linux. This tool is required until 
+*Why?: The [Void mklive](https://github.com/void-linux/void-mklive) tool can 
+only be run on Void Linux. This tool is required until 
 [Void mklive PR #14](https://github.com/void-linux/void-mklive/pull/14) 
-is merged, as the live image currently does not have enough space to install 
-the required setup tools.*  
+is merged, as the default live image currently does not have enough space to 
+install the required setup tools.*  
 
 ## Rudimentary Void Linux Install
 If you do not have an existing Void Linux installation complete the following
