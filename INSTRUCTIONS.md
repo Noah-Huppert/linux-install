@@ -3,6 +3,8 @@ Linux installation instructions.
 
 # Table Of Contents
 - [Live USB](#live-usb)
+    - [Rudimentary Void Linux Install](#rudimentary-void-linux-install)
+    - [Create Live USB For Installation](#create-live-usb-for-installation)
 - [Run Installation Script](#run-installation-script)
 
 # Live USB
