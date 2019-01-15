@@ -1,0 +1,25 @@
+From de4df2983a786138734aa1da75629a18ebace4b2 Mon Sep 17 00:00:00 2001
+From: Noah Huppert <contact@noahh.io>
+Date: Sat, 12 Jan 2019 21:56:47 -0500
+Subject: [PATCH] mklive.sh: fixed syslinux datadir value after pkg update
+
+---
+ mklive.sh.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/mklive.sh.in b/mklive.sh.in
+index dc102f2..1a160b7 100644
+--- a/mklive.sh.in
++++ b/mklive.sh.in
+@@ -364,7 +364,7 @@ CURRENT_STEP=0
+ STEP_COUNT=9
+ [ -n "${INCLUDE_DIRECTORY}" ] && ((STEP_COUNT=STEP_COUNT+1))
+ 
+-: ${SYSLINUX_DATADIR:="$VOIDHOSTDIR"/usr/share/syslinux}
++: ${SYSLINUX_DATADIR:="$VOIDHOSTDIR"/usr/lib/syslinux}
+ : ${GRUB_DATADIR:="$VOIDHOSTDIR"/usr/share/grub}
+ : ${SPLASH_IMAGE:=data/splash.png}
+ : ${XBPS_INSTALL_CMD:=xbps-install}
+-- 
+2.20.0
+
