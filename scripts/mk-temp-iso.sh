@@ -27,7 +27,7 @@ if [ -z "$1" ]; then
 fi
 external_device="$1"
 
-if [ ! -f "$external_device" ]; then
+if [ ! -e "$external_device" ]; then
 	echo "Error: EXTERNAL_DEVICE \"$external_device\" does not exist" >&2
 	exit 1
 fi
