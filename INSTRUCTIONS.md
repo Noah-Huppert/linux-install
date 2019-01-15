@@ -78,3 +78,4 @@ Boot from the Live USB, then complete the following steps.
    ```
    REPO_DIR/scripts/install.sh
    ```
+3. Delete the copy of this repository
