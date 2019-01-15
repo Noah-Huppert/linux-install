@@ -4,8 +4,6 @@ Linux installation instructions.
 # Table Of Contents
 - [Live USB](#live-usb)
 - [Run Installation Script](#run-installation-script)
-    - [Network Setup](#network-setup)
-    - [Install Salt](#install-salt)
 
 # Live USB
 To create a Void Linux live USB a rudimentary installation of Void Linux 
@@ -46,7 +44,7 @@ Create a Void Linux live USB which will be used for automated installation.
 
 Complete the following steps on an existing Void Linux installation:
 
-1. Access copy of this repository  
+1. Access the copy of this repository  
 
    If stored in your boot directory run:
 
@@ -72,22 +70,9 @@ Complete the following steps on an existing Void Linux installation:
 # Run Installation Script
 Boot from the Live USB, then complete the following steps.
 
-## Nework Setup
-Connect to the internet via WiFi:
+1. Access the copy of this repository
+2. Run the installation script:
 
-1. Add a WPA supplicant entry:
    ```
-   wpa_passphrase SSID PASSWORD >> /etc/wpa_supplicant/wpa_supplicant.conf
+   REPO_DIR/scripts/install.sh
    ```
-2. Restart WPA supplicant via the DHCPCD service
-   ```
-   sv restart dhcpcd
-   ```
-   After a few moments you will be connected to the internet.
-
-## Install Salt
-Install SaltStack:
-
-```
-xbps-install -Su salt
-```
