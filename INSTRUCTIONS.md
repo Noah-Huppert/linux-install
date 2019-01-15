@@ -8,16 +8,59 @@ Linux installation instructions.
     - [Install Salt](#install-salt)
 
 # Live USB
-Create a bootable USB with Void Linux:  
+To create a Void Linux live USB a rudimentary installation of Void Linux 
+is required.
 
-```
-./scripts/mkiso.sh EXTERNAL_DEVICE
-```
+*Why?: The [Void mklive](https://github.com/void-linux/void-mklive) can only be
+run on Void Linux. This tool is required until 
+[Void mklive PR #14](https://github.com/void-linux/void-mklive/pull/14) 
+is merged, as the live image currently does not have enough space to install 
+the required setup tools.*  
 
-1. Download the latest Void Linux Live MUSL ISO file
-2. Write the ISO to a USB drive:
+## Rudimentary Void Linux Install
+If you do not have an existing Void Linux installation complete the following
+steps to obtain one:
+
+1. Create a copy of this repository that will be accessible from the live USB. 
+   You will use scripts in this repository later.  
+
+   A recommended location is your boot directory. You will delete this 
+   copy later.
+
+2. Create a rudimentary bootable USB with Void Linux:  
+
    ```
-   sudo dd if=VOID_LIVE_MUSL.iso of=/dev/USB_DRIVE_DEVICE
+   ./scripts/mk-temp-iso.sh EXTERNAL_DEVICE
+   ```
+   Where `EXTERNAL_DEVICE` is the device file of your USB device (ex: `/dev/sdb`).
+3. Boot from this external device
+4. Run `void-installer` with default options. Install on any partition 
+   you choose
+
+## Create Live USB For Installation
+Complete the following steps on a Void Linux installation:
+
+1. Access copy of this repository  
+
+   If stored in your boot directory run:
+
+   ```
+   mount BOOT_PARTITION /mnt
+   ```
+
+   The location of this repository will be referred to as `REPO_DIR` in 
+   the future
+2. (Optional) If you are running a new rudimentary Void Linux and need to 
+   connect to the internet run:
+
+   ```
+   REPO_DIR/scripts/wifi.sh SSID PASSWORD
+   ```
+3. Create a custom Void Linux bootable USB which will be used for installation 
+   by running:
+
+   ```
+   REPO_DIR/scripts/mk-install-iso.sh EXTERNAL_DEVICE
    ```
 
 # Run Installation Script
