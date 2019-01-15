@@ -25,20 +25,21 @@ These steps will create a basic Void Linux install which we will use to create
 a Void Linux live USB for installation. We will overwrite this installation 
 almost immediately.
 
-1. Create a copy of this repository that will be accessible from the live USB. 
+1. (Optional) Setup a partition for a temporary Void Linux install
+2. Create a copy of this repository that will be accessible from the live USB. 
    You will use scripts in this repository later.  
 
    A recommended location is your boot directory. You will delete this 
    copy later.
 
-2. Create a rudimentary bootable USB with Void Linux:  
+3. Create a rudimentary bootable USB with Void Linux:  
 
    ```
    ./scripts/mk-temp-iso.sh EXTERNAL_DEVICE
    ```
    Where `EXTERNAL_DEVICE` is the device file of your USB device (ex: `/dev/sdb`).
-3. Boot from this external device
-4. Run `void-installer` with default options. Install on any partition 
+4. Boot from this external device
+5. Run `void-installer` with default options. Install on any partition 
    you choose
 
 ## Create Live USB For Installation
@@ -72,10 +73,11 @@ Complete the following steps on an existing Void Linux installation:
 # Run Installation Script
 Boot from the Live USB, then complete the following steps.
 
-1. Access the copy of this repository
-2. Run the installation script:
+1. (Optional) Setup a partition for the permanent Void Linux installation
+2. Access the copy of this repository
+3. Run the installation script:
 
    ```
    REPO_DIR/scripts/install.sh
    ```
-3. Delete the copy of this repository
+4. Delete the copy of this repository
