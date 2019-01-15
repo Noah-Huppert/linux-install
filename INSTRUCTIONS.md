@@ -42,7 +42,9 @@ almost immediately.
    you choose
 
 ## Create Live USB For Installation
-Complete the following steps on a Void Linux installation:
+Create a Void Linux live USB which will be used for automated installation.  
+
+Complete the following steps on an existing Void Linux installation:
 
 1. Access copy of this repository  
 
