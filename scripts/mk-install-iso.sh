@@ -19,19 +19,6 @@ if [ -z "$TMP_DIR" ]; then
 	TMP_DIR="/var/tmp"
 fi
 
-# {{{ Check for required software
-for prog in curl tar unzip make xz git patch; do
-	if ! which "$prog" &> /dev/null; then
-		echo "Error: $prog must be installed" >&2
-		deps_no_ok="true"
-	fi
-done
-
-if [ ! -z "$deps_not_ok" ]; then
-	echo "Error: Missing required software" >&2
-	exit 1
-fi
-
 # {{{ Install xbps
 echo "###################"
 echo "# Installing XBPS #"
@@ -67,6 +54,32 @@ else
 	echo "Already installed"
 fi
 # }
+
+# {{{ Check for required software
+for prog in curl tar unzip make xz git patch; do
+	if ! which "$prog" &> /dev/null; then
+		echo "$prog not installed, installing"
+
+		if ! xbps-install -Sy "$prog"; then
+			echo "Error: Failed to install $pro" >&2
+			exit 1
+		fi
+
+		# Special install steps
+		case "$prog" in
+			git)
+				git config --global user.name "root"
+				git config --global user.email "foo@bar.com"
+				;;
+		esac
+
+		# Final check
+		if ! which "$prog" &> /dev/null; then
+			echo "Error: Installed $prog but was not in PATH" >&2
+			exit 1
+		fi
+	fi
+done
 
 # { Install void-linux/void-mklive
 echo "#####################################"
