@@ -37,7 +37,7 @@ echo "######################################"
 echo "# Adding WPA Supplicant Config Entry #"
 echo "######################################"
 
-if ! wpa_supplicant "$ssid" "$password" >> "$wpa_supplicant_config_path"; then
+if ! wpa_passphrase "$ssid" "$password" >> "$wpa_supplicant_config_path"; then
 	echo "Error: Failed to add entry to WPA supplicant config file" >&2
 	exit 1
 fi
