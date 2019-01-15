@@ -1,4 +1,4 @@
-#!/usr/bin/ebnv bash
+#!/usr/bin/env bash
 #?
 # wifi.sh - Connect to a WiFi network using wpa_supplicant on Void Linux
 #
