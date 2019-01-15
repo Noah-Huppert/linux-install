@@ -19,7 +19,11 @@ install the required setup tools.*
 
 ## Rudimentary Void Linux Install
 If you do not have an existing Void Linux installation complete the following
-steps to obtain one:
+steps to obtain one.  
+
+These steps will create a basic Void Linux install which we will use to create 
+a Void Linux live USB for installation. We will overwrite this installation 
+almost immediately.
 
 1. Create a copy of this repository that will be accessible from the live USB. 
    You will use scripts in this repository later.  
