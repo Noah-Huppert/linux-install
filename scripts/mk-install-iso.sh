@@ -3,61 +3,92 @@
 # mkiso.sh - Creates a Void Linux MUSL live device
 #
 # USAGE
-#	mkiso.sh DEVICE
+#
+#	mkiso.sh DEVICE [--remake-iso]
+#
+# 	Note: The order options and arguments appear in does not matter
 #
 # ARGUMENTS
+#
 #	DEVICE    Device to write live image to
+#
+# OPTIONS
+#
+#	--remake-iso    Force script to rebuild the ISO, regardless of 
+#	                if the ISO already exists on the file system
 #
 # ENVIRONMENT VARIABLE CONFIGURATION
 #	TMP_DIR    Directory temporary files will be downloaded to
+#
+# BEHAVIOR
+#
+# 	Can only be run on Void Linux due to compatibility issues
+#	with XBPS tools.
+#
+# 	The script first installs required programs and libraries. 
+#
+#	Custom patches from the patches/void-mklive directory are 
+#	applied to the void-mklive tool. These patches have not 
+#	been merged into the mainline of the tool yet. But will
+#	become uncessary when they are merged.
+#
+#	Uses the void-mklive tool to generate a custom ISO. This 
+#	ISO will have resources pre-installed which will be used 
+#	to automatically setup a persistent Void Linux installation. 
+#
+# 	This ISO will be burnt onto the DEVICE specified.
+#
 #?
 
 set -e
 
-# {{{ Env var config
+# {{{1 Env var config
 if [ -z "$TMP_DIR" ]; then
 	TMP_DIR="/var/tmp"
 fi
 
-# {{{ Install xbps
-echo "###################"
-echo "# Installing XBPS #"
-echo "###################"
-
-if ! which xbps-install &> /dev/null; then
-	# Download
-	xbps_tar_path="$TMP_DIR/xbps.tar.xz"
-	if [ ! -f "$xbps_tar_path" ]; then
-		if ! curl -L "http://mirror.clarkson.edu/voidlinux/static/xbps-static-latest.x86_64-musl.tar.xz" > "$xbps_tar_path"; then
-			echo "Error: Failed to download XBPS" >&2
-			exit 1
-		fi
-	else
-		echo "Already downloaded"
-	fi
-
-	# Extract
-	xbps_dir_path="$TMP_DIR/xbps"
-	if [ ! -d "$xbps_dir_path" ]; then
-		mkdir "$xbps_dir_path"
-		if ! tar -xf "$xbps_tar_path" --directory "$xbps_dir_path"; then
-			echo "Error: Failed to extract XBPS" >&2
-			rm -rf "$xbps_dir_path"
-			exit 1
-		fi
-	else
-		echo "Already extracted"
-	fi
-
-	PATH="$PATH:$xbps_dir_path/usr/bin"
-else
-	echo "Already installed"
+# {{{1 Check if running on Void
+if ! lsb_release -c | grep 'void' &> /dev/null; then
+	echo "$0 can only be run on Void Linux due to compatibility issues with XBPS tools" >&2
+	exit 1
 fi
-# }
 
-# {{{ Check for required software
+# {{{1 Parse arguments
+while [ ! -z "$1" ]; do
+	case "$1" in
+		--remake-iso)
+			remake_iso="true"
+			shift
+			;;
+
+		*)
+			device="$1"
+			shift
+			;;
+	esac
+done
+
+# {{{1 Check arguments
+# Device
+if [ -z "$device" ]; then
+	echo "Error: DEVICE argument must be provided" >&2
+	exit 1
+fi
+
+if [ ! -e "$device" ]; then
+	echo "Error: Device $device specified by DEVICE argument does not exist" >&2
+	exit 1
+fi
+
+# {{{1 Check for required software
+echo "#############################"
+echo "# Checking For Dependencies #"
+echo "#############################"
+
 for prog in curl tar unzip make xz git patch; do
+	# Check if program is in the path
 	if ! which "$prog" &> /dev/null; then
+		# Install
 		echo "$prog not installed, installing"
 
 		if ! xbps-install -Sy "$prog"; then
@@ -81,13 +112,43 @@ for prog in curl tar unzip make xz git patch; do
 	fi
 done
 
-# { Install void-linux/void-mklive
+# {{{1 Check for required libraries
+for lib in liblz4.so.1 libburn.so.4; do
+	# Check if library file exists
+	if ! ls /usr/lib | grep "$lib" &> /dev/null; then
+		# Determine package to install
+		case "$lib" in
+			liblz4.so.1)
+				pkg_name="liblz4"
+				;;
+			libburn.so.4)
+				pkg_name="libburn"
+				;;
+		esac
+
+		# Install
+		if ! xbps-install -Sy "$pkg_name"; then
+			echo "Error: Failed to install $pkg_name to fullfil $lib" >&2
+			exit 1
+		fi
+
+		# Final check
+		if ! ls /usr/lib | grep "$lib"; then
+			echo "Error: Installed $pkg_name to fullful $lib but library was not found" >&2
+			exit 1
+		fi
+	fi
+done
+
+# {{{1 Install void-linux/void-mklive
 echo "#####################################"
 echo "# Installing void-linux/void-mklive #"
 echo "#####################################"
 
 # Download 
 void_mklive_dir_path="$TMP_DIR/void_mklive"
+
+# ... If not downloaded
 if [ ! -d "$void_mklive_dir_path" ]; then
 	if ! git clone "https://github.com/void-linux/void-mklive.git" "$void_mklive_dir_path"; then
 		echo "Error: Failed to download void-linux/void-mklive" >&2
@@ -96,10 +157,7 @@ if [ ! -d "$void_mklive_dir_path" ]; then
 fi
 
 # Patch
-original_wrkdir="$PWD"
-cd "$void_mklive_dir_path"
-
-patches_dir=$(dirname "$0")/../patches
+patches_dir=$(pwd -P)/$(dirname "$0")/../patches
 mklive_patch_files=$(ls "$patches_dir"/void-mklive/*.patch)
 
 if [[ "$?" != "0" ]]; then
@@ -107,7 +165,21 @@ if [[ "$?" != "0" ]]; then
 	exit 1
 fi
 
+original_wrkdir="$PWD"
+cd "$void_mklive_dir_path"
+
+
 for pfile in $mklive_patch_files; do
+	# Check if already patched
+	patch_applied_flag_path="$void_mklive_dir_path/$(basename $pfile).applied"
+
+	if [ -f "$patch_applied_flag_path" ]; then
+		echo "Patch \"$pfile\" already applied"
+		continue
+	else
+		echo "Patch applied flag file not found: $patch_applied_flag_path"
+	fi
+
 	# If git patch
 	if echo "$pfile" | grep ".git.patch" &> /dev/null; then
 		if ! git am < "$pfile"; then
@@ -123,12 +195,17 @@ for pfile in $mklive_patch_files; do
 		echo "Error: No patch program matched for \"$pfile\"" >&2
 		exit 1
 	fi
+
+	# Mark is patched
+	touch "$patch_applied_flag_path"
+	echo "Patch \"$pfile\" applied"
 done
 
 cd "$original_wrkdir"
 
 # Build
 void_mklive_sh_path="$void_mklive_dir_path/mklive.sh"
+
 if [ ! -f "$void_mklive_sh_path" ]; then
 	if ! make -C "$void_mklive_dir_path"; then
 		echo "Error: Failed to build void-linux/void-mklive" >&2
@@ -137,14 +214,22 @@ if [ ! -f "$void_mklive_sh_path" ]; then
 else
 	echo "Already built"
 fi
-# }
 
-# { Make Void ISO
+# {{{1 Make Void ISO
 echo "###################"
 echo "# Making Void ISO #"
 echo "###################"
 
-iso_out_path="$TMP_DIR/void-linux.iso"
+iso_out_file="void-linux.iso"
+iso_out_path="$void_mklive_dir_path/$iso_out_file"
+
+if [ -f "$iso_out_path" ] && [ ! -z "$remake_iso" ]; then
+	if ! rm "$iso_out_path"; then
+		echo "Error: Failed to remote Void ISO so it can be remade" >&2
+		exit 1
+	fi
+fi
+
 if [ ! -f "$iso_out_path" ]; then
 	echo "Running $void_mklive_sh_path as sudo, you may prompt for your sudo password"
 
@@ -157,9 +242,12 @@ if [ ! -f "$iso_out_path" ]; then
 		mklive_run_args="sudo"
 	fi
 
+	# -p "salt"
 	if ! $mklive_run_args \
 		"$void_mklive_sh_path" \
-		-o "$iso_out_path" \
+		-o "$iso_out_file" \
+		-p "salt" \
+		-I /root/iso-rootfs \
 		-a "x86_64-musl"; then
 		echo "Error: Failed to build Void Linux ISO" >&2
 		exit 1
@@ -167,5 +255,31 @@ if [ ! -f "$iso_out_path" ]; then
 else
 	echo "Already made"
 fi
+ 
+# {{{1 Write ISO to device
+echo "#########################"
+echo "# Writing ISO to DEVICE #"
+echo "#########################"
 
-#}
+echo "Devices:"
+if ! lsblk; then
+	echo "Error: Failed to list devices" >&2
+	exit 1
+fi
+
+echo "Write ISO to $device and wipe contents? [y/N] "
+read device_confirm_input
+
+if [[ "$device_confirm_input" != "y" && "$device_confirm_input" != "Y" ]]; then
+	echo "Device not confirmed, exiting..." >&2
+	exit 1
+fi
+
+echo "Writing to $device"
+
+if ! dd bs=4M status=progress if="$iso_out_path" of="$device" && sync; then
+	echo "Error: Failed to write Void ISO to $device" >&2
+	exit 1
+fi
+
+echo "Wrote to $device"
