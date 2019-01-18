@@ -242,12 +242,13 @@ if [ ! -f "$iso_out_path" ]; then
 		mklive_run_args="sudo"
 	fi
 
-	# -p "salt"
+	include_dir_path=$(pwd -P)/$(dirname "$0")/iso-rootfs
+
 	if ! $mklive_run_args \
 		"$void_mklive_sh_path" \
 		-o "$iso_out_file" \
 		-p "salt" \
-		-I /root/iso-rootfs \
+		-I "$include_dir_path" \
 		-a "x86_64-musl"; then
 		echo "Error: Failed to build Void Linux ISO" >&2
 		exit 1
