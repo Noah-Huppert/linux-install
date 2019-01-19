@@ -247,7 +247,7 @@ if [ ! -f "$iso_out_path" ]; then
 	if ! $mklive_run_args \
 		"$void_mklive_sh_path" \
 		-o "$iso_out_file" \
-		-p "salt" \
+		-p "vim salt" \
 		-I "$include_dir_path" \
 		-a "x86_64-musl"; then
 		echo "Error: Failed to build Void Linux ISO" >&2
