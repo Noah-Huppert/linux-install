@@ -52,16 +52,25 @@ boot_dir=/boot/linux-install/
 
 # {{{2 Determine copy direction
 if [ -z "$reverse" ]; then
-	# If NOT reversed
+	# {{{3 If NOT reversed
+	# Delete old directory in boot partition
+	if ! rm -rf "$boot_dir"; then
+		echo "Error: Failed to delete directory in boot partition" >&2
+		exit 1
+	fi
+
+	# Set to from vars
 	from="$repo_dir"
 	to="$boot_dir"
 else
-	# Reversed
+	# {{{3 Reversed
+	# Check directory exist
 	if [ ! -d "$boot_dir" ]; then
 		echo "Error: --reverse option cannot be provided if $boot_dir does not exist" >&2 
 		exit 1
 	fi
 
+	# Set to from vars
 	from="$boot_dir"
 
 	to="$repo_dir/.."
