@@ -63,7 +63,9 @@ else
 	fi
 
 	from="$boot_dir"
-	to="$repo_dir"
+
+	to="$repo_dir/.."
+	to=$(realpath "$to")
 fi
 
 # {{{2 Actually copy
