@@ -40,6 +40,7 @@
 #
 #?
 
+# Exit on any error
 set -e
 
 # {{{1 Env var config
@@ -113,16 +114,13 @@ for prog in curl tar unzip make xz git patch; do
 done
 
 # {{{1 Check for required libraries
-for lib in liblz4.so.1 libburn.so.4; do
+for lib in liblz4.so.1; do
 	# Check if library file exists
 	if ! ls /usr/lib | grep "$lib" &> /dev/null; then
 		# Determine package to install
 		case "$lib" in
 			liblz4.so.1)
 				pkg_name="liblz4"
-				;;
-			libburn.so.4)
-				pkg_name="libburn"
 				;;
 		esac
 
@@ -145,10 +143,10 @@ echo "#####################################"
 echo "# Installing void-linux/void-mklive #"
 echo "#####################################"
 
-# Download 
+# {{{2 Download 
 void_mklive_dir_path="$TMP_DIR/void_mklive"
 
-# ... If not downloaded
+# If not downloaded
 if [ ! -d "$void_mklive_dir_path" ]; then
 	if ! git clone "https://github.com/void-linux/void-mklive.git" "$void_mklive_dir_path"; then
 		echo "Error: Failed to download void-linux/void-mklive" >&2
@@ -156,7 +154,7 @@ if [ ! -d "$void_mklive_dir_path" ]; then
 	fi
 fi
 
-# Patch
+# {{{2 Patch
 patches_dir=$(pwd -P)/$(dirname "$0")/../patches
 mklive_patch_files=$(ls "$patches_dir"/void-mklive/*.patch)
 
@@ -165,6 +163,7 @@ if [[ "$?" != "0" ]]; then
 	exit 1
 fi
 
+# {{{3 Run commands in void-mklive directory
 original_wrkdir="$PWD"
 cd "$void_mklive_dir_path"
 
@@ -203,7 +202,7 @@ done
 
 cd "$original_wrkdir"
 
-# Build
+# {{{2 Build
 void_mklive_sh_path="$void_mklive_dir_path/mklive.sh"
 
 if [ ! -f "$void_mklive_sh_path" ]; then
@@ -223,6 +222,7 @@ echo "###################"
 iso_out_file="void-linux.iso"
 iso_out_path="$void_mklive_dir_path/$iso_out_file"
 
+# {{{2 If remake iso option set, delete old iso file
 if [ -f "$iso_out_path" ] && [ ! -z "$remake_iso" ]; then
 	if ! rm "$iso_out_path"; then
 		echo "Error: Failed to remote Void ISO so it can be remade" >&2
@@ -230,19 +230,23 @@ if [ -f "$iso_out_path" ] && [ ! -z "$remake_iso" ]; then
 	fi
 fi
 
+# {{{2 If iso doesn't exist, make
 if [ ! -f "$iso_out_path" ]; then
+	# {{{3 Check running as sudoer
 	echo "Running $void_mklive_sh_path as sudo, you may prompt for your sudo password"
-
-	if ! cd "$void_mklive_dir_path"; then
-		echo "Error: Failed to change to void-linux/void-mklive directory" >&2
-		exit 1
-	fi
 
 	if [[ "$EUID" != "0" ]]; then
 		mklive_run_args="sudo"
 	fi
 
-	include_dir_path=$(pwd -P)/$(dirname "$0")/iso-rootfs
+	# {{{3 Resolve iso-rootfs path
+	include_dir_path=$(pwd -P)/$(dirname "$0")/../iso-rootfs
+	include_dir_path=$(realpath "$include_dir_path")
+
+	# {{{3 Run commands in void-mklive dir
+	original_wrkdir=$(pwd -P)
+
+	cd "$void_mklive_dir_path"
 
 	if ! $mklive_run_args \
 		"$void_mklive_sh_path" \
@@ -253,6 +257,8 @@ if [ ! -f "$iso_out_path" ]; then
 		echo "Error: Failed to build Void Linux ISO" >&2
 		exit 1
 	fi
+
+	cd "$original_wrkdir"
 else
 	echo "Already made"
 fi
@@ -262,6 +268,7 @@ echo "#########################"
 echo "# Writing ISO to DEVICE #"
 echo "#########################"
 
+# {{{2 Confirm device to write ISO
 echo "Devices:"
 if ! lsblk; then
 	echo "Error: Failed to list devices" >&2
@@ -276,6 +283,7 @@ if [[ "$device_confirm_input" != "y" && "$device_confirm_input" != "Y" ]]; then
 	exit 1
 fi
 
+# {{{2 Write ISO to device
 echo "Writing to $device"
 
 if ! dd bs=4M status=progress if="$iso_out_path" of="$device" && sync; then
