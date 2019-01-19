@@ -14,6 +14,8 @@
 #	linux installations.
 #?
 
+set -e
+
 # Check if root
 if [[ "$EUID" != "0" ]]; then
 	echo "Error: Script must run as root" >&2
@@ -22,5 +24,11 @@ fi
 
 # Copy
 repo_dir=$(pwd -P)/$(dirname "$0")/..
+boot_dir=/boot/linux-install
 
-if ! cp -r "$repo_dir" /boot/linux-install
+if ! cp -r "$repo_dir" "$boot_dir"; then
+	echo "Error: Failed to copy $repo_dir to $boot_dir" >&2
+	exit 1
+fi
+
+echo "Copied $repo_dir to $boot_dir"
