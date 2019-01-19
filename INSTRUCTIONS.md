@@ -29,8 +29,12 @@ almost immediately.
 2. Create a copy of this repository that will be accessible from the live USB. 
    You will use scripts in this repository later.  
 
-   A recommended location is your boot directory. You will delete this 
-   copy later.
+   A recommended location is your boot partition. You will delete this 
+   copy later. To copy to the boot partition run:
+
+   ```
+   ./scripts/cp-to-boot.sh
+   ```
 
 3. Create a rudimentary bootable USB with Void Linux:  
 
