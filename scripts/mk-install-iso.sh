@@ -36,6 +36,9 @@
 #	ISO will have resources pre-installed which will be used 
 #	to automatically setup a persistent Void Linux installation. 
 #
+#	The iso-rootfs directory is mounted in the ISO at the root of the 
+#	ISO filesystem. 
+#
 # 	This ISO will be burnt onto the DEVICE specified.
 #
 #?
