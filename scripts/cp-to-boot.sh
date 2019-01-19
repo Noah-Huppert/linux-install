@@ -46,9 +46,9 @@ done
 # {{{1 Copy
 # {{{2 Resolve paths
 repo_dir=$(pwd -P)/$(dirname "$0")/..
-repo_dir=$(realpath "$repo_dir")
+repo_dir=$(realpath "$repo_dir")/
 
-boot_dir=/boot/linux-install
+boot_dir=/boot/linux-install/
 
 # {{{2 Determine copy direction
 if [ -z "$reverse" ]; then
@@ -72,4 +72,4 @@ if ! cp -r "$from" "$to"; then
 	exit 1
 fi
 
-echo "Copied $repo_dir to $boot_dir"
+echo "Copied $from to $to"
