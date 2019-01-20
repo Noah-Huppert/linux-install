@@ -252,22 +252,16 @@ if [ ! -f "$iso_out_path" ]; then
 
 	# Create arrays of directories to map from repo into ISO rootfs
 	num_iso_fs_map_dirs=3
-	repo_map_dirs=("/salt/states" "/salt/pillar" "/")
+	repo_map_dirs=("/salt/states" "/salt/pillar" "")
 	iso_fs_map_dirs=("/srv/salt" "/srv/pillar" "/root/linux-install")
 
 	create_map_i=0
-	while (( "$create_map_i" < "$num_iso_fs_map_dirs")); do
-		repo_map_dir="$repo_dir${repo_map_dirs[$create_map_i]}"
-		iso_fs_map_dir="$iso_fs_dir${iso_fs_map_dirs[$create_map_i]}"
+	for i in seq"$num_iso_fs_map_dirs"; do
+		repo_map_dir="$repo_dir${repo_map_dirs[$i]}"
+		iso_fs_map_dir="$iso_fs_dir${iso_fs_map_dirs[$i]}"
 
-		# Create mount point
-		if ! mkdir -p "$iso_fs_map_dir"; then
-			echo "Error: Failed to create mount point \"$iso_fs_map_dir\" in ISO rootfs" >&2
-			exit 1
-		fi
-
-		# Bind
-		if ! mount --bind "$repo_map_dir" "$iso_fs_map_dir"; then
+		# Copy
+		if ! cp -r "$repo_map_dir" "$iso_fs_map_dir"; then
 			echo "Error: Failed to bind \"$repo_map_dir\" to \"$iso_fs_map_dir\" in ISO rootfs" >&2
 			exit 1
 		fi
@@ -278,6 +272,7 @@ if [ ! -f "$iso_out_path" ]; then
 	cd "$void_mklive_dir_path"
 
 	# {{{3 Make ISO
+	if false;
 	if ! $mklive_run_args \
 		"$void_mklive_sh_path" \
 		-o "$iso_out_file" \
@@ -287,24 +282,12 @@ if [ ! -f "$iso_out_path" ]; then
 		echo "Error: Failed to build Void Linux ISO" >&2
 		exit 1
 	fi
+	fi
 
 	# {{{3 Return to original working directory
 	cd "$original_wrkdir"
 
 	# {{{3 Remove ISO rootfs build directory
-	# {{{4 Unmount 
-	unmount_map_i=0
-	while (( "$unmount_map_i" < "$num_iso_fs_map_dirs")); do
-		iso_fs_map_dir="$iso_fs_dir${iso_fs_map_dirs[$unmount_map_i]}"
-
-		if ! unmount "$iso_fs_map_dir"; then
-			echo "Error: Failed to unmount \"$iso_fs_map_dir\" in ISO rootfs" >&2
-			exit 1
-		fi
-	done
-
-
-	# {{{4 Delete
 	if ! rm -rf "$iso_fs_dir"; then
 		echo "Error: Failed to remove ISO rootfs build directory" >&2
 		exit 1
