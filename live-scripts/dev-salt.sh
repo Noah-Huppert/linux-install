@@ -19,6 +19,9 @@
 #	the boot partition located
 #	in linux-install/iso-rootfs/srv/{salt,pillar}
 #
+#	This allows for a quicker development cycle of the tools in 
+#	this repository.
+#
 #?
 
 # Exit on any error
