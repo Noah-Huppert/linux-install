@@ -243,67 +243,35 @@ if [ ! -f "$iso_out_path" ]; then
 	fi
 
 	# {{{3 Assemble ISO filesystem include dir
+	# Determine repo directory
 	repo_dir=$(pwd -P)/$(dirname "$0")/..
 	repo_dir=$(realpath "$repo_dir")
 
-	# {{{4 Setup directory where ISO rootfs will be built
+	# Determine ISO rootfs build directory
 	iso_fs_dir="$TMP_DIR/void-iso-rootfs"
-	if ! mkdir "$iso_fs_dir"; then
-		echo "Error: Failed to make temporary ISO rootfs build directory" >&2
-		exit 1
-	fi
 
-	# {{{4 Place salt files in ISO rootfs
-	# Resolve path of salt files in repo
-	repo_salt_dir="$repo_dir/salt"
-	
-	# Create salt file dir in ISO rootfs
-	isofs_salt_dir="$iso_fs_dir/srv"
-	if ! mkdir "$isofs_salt_dir"; then
-		echo "Error: Failed to make /srv directory in ISO rootfs" >&2
-		exit 1
-	fi
+	# Create arrays of directories to map from repo into ISO rootfs
+	num_iso_fs_map_dirs=3
+	repo_map_dirs=("/salt/states" "/salt/pillar" "/")
+	iso_fs_map_dirs=("/srv/salt" "/srv/pillar" "/root/linux-install")
 
-	# Link Salt state files in ISO rootfs
-	repo_salt_states_dir="$repo_salt_dir/states"
-	isofs_salt_states_dir="$isofs_salt_dir/salt"
+	create_map_i=0
+	while (( "$create_map_i" < "$num_iso_fs_map_dirs")); do
+		repo_map_dir="$repo_dir${repo_map_dirs[$create_map_i]}"
+		iso_fs_map_dir="$iso_fs_dir${iso_fs_map_dirs[$create_map_i]}"
 
-	if ! mkdir -p "$isofs_salt_states_dir"; then
-		echo "Error: Failed to make Salt states mount point in ISO roots" >&2
-		exit 1
-	fi
+		# Create mount point
+		if ! mkdir -p "$iso_fs_map_dir"; then
+			echo "Error: Failed to create mount point \"$iso_fs_map_dir\" in ISO rootfs" >&2
+			exit 1
+		fi
 
-	if ! mount --bind "$repo_salt_states_dir" "$isofs_salt_states_dir"; then
-		echo "Error: Failed to mount Salt states in ISO rootfs" >&2
-		exit 1
-	fi
-
-	# Link Salt pillar files in ISO rootfs
-	repo_salt_pillar_dir="$repo_salt_dir/pillar"
-	isofs_salt_pillar_dir="$isofs_salt_dir/pillar"
-
-	if ! mkdir -p "$isofs_salt_pillar_dir"; then
-		echo "Error: Failed to make Salt pillar mount point in ISO rootfs" >&2
-		exit 1
-	fi
-
-	if ! mount --bind "$repo_salt_pillar_dir" "$isofs_salt_pillar_dir"; then
-		echo "Error: Failed to mount Salt pillar in ISO rootfs" >&2
-		exit 1
-	fi
-
-	# {{{4 Place repo in ISO rootfs
-	isofs_repo_dir="$isofs_dir/root/linux-install"
-
-	if ! mkdir "$isofs_repo_dir"; then
-		echo "Error: Failed to make /root/linux-install directory in ISO rootfs" >&2
-		exit 1
-	fi
-	
-	if ! mount --bind "$repo_dir" "$isofs_repo_dir"; then
-		echo "Error: Failed to symlink /root/linux-install to repo in ISO rootfs" >&2
-		exit 1
-	fi
+		# Bind
+		if ! mount --bind "$repo_map_dir" "$iso_fs_map_dir"; then
+			echo "Error: Failed to bind \"$repo_map_dir\" to \"$iso_fs_map_dir\" in ISO rootfs" >&2
+			exit 1
+		fi
+	done
 
 	# {{{3 Run commands in void-mklive dir
 	original_wrkdir=$(pwd -P)
@@ -324,6 +292,19 @@ if [ ! -f "$iso_out_path" ]; then
 	cd "$original_wrkdir"
 
 	# {{{3 Remove ISO rootfs build directory
+	# {{{4 Unmount 
+	unmount_map_i=0
+	while (( "$unmount_map_i" < "$num_iso_fs_map_dirs")); do
+		iso_fs_map_dir="$iso_fs_dir${iso_fs_map_dirs[$unmount_map_i]}"
+
+		if ! unmount "$iso_fs_map_dir"; then
+			echo "Error: Failed to unmount \"$iso_fs_map_dir\" in ISO rootfs" >&2
+			exit 1
+		fi
+	done
+
+
+	# {{{4 Delete
 	if ! rm -rf "$iso_fs_dir"; then
 		echo "Error: Failed to remove ISO rootfs build directory" >&2
 		exit 1
