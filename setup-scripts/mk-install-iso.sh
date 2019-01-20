@@ -243,9 +243,52 @@ if [ ! -f "$iso_out_path" ]; then
 	fi
 
 	# {{{3 Assemble ISO filesystem include dir
-	#
-	iso_rootfs_dir=$(pwd -P)/$(dirname "$0")/../iso-rootfs
-	iso_rootfs_dir=$(realpath "$iso_rootfs_dir")
+	repo_dir=$(pwd -P)/$(dirname "$0")/..
+	repo_dir=$(realpath "$repo_dir")
+
+	# {{{4 Setup directory where ISO rootfs will be built
+	iso_fs_dir="$TMP_DIR/void-iso-rootfs"
+	if ! mkdir "$iso_fs_dir"; then
+		echo "Error: Failed to make temporary ISO rootfs build directory" >&2
+		exit 1
+	fi
+
+	# {{{4 Place salt files in ISO rootfs
+	# Resolve path of salt files in repo
+	repo_salt_dir="$repo_dir/salt"
+	
+	# Create salt file dir in ISO rootfs
+	isofs_salt_dir="$iso_fs_dir/srv"
+	if ! mkdir "$isofs_salt_dir"; then
+		echo "Error: Failed to make /srv directory in ISO rootfs" >&2
+		exit 1
+	fi
+
+	# Link Salt state files in ISO rootfs
+	if ! ln -s "$repo_salt_dir/states" "$isofs_salt_dir/salt"; then
+		echo "Error: Failed to symlink /srv/salt to Salt states in ISO rootfs" >&2
+		exit 1
+	fi
+
+	# Link Salt pillar files in ISO rootfs
+	if ! ln -s "$repo_salt_dir/pillar" "$isofs_salt_dir/pillar"; then
+		echo "Error: Failed to symlink /srv/pillar to Salt pillar in ISO rootfs" >&2
+		exit 1
+	fi
+
+	# {{{4 Place repo in ISO rootfs
+	isofs_repo_dir="$isofs_dir/root/linux-install"
+
+	# Create repo dir in ISO rootfs
+	if ! mkdir "$isofs_repo_dir"; then
+		echo "Error: Failed to make /root/linux-install directory in ISO rootfs" >&2
+		exit 1
+	fi
+	
+	if ! ln -s "$repo_dir" "$isofs_repo_dir"; then
+		echo "Error: Failed to symlink /root/linux-install to repo in ISO rootfs" >&2
+		exit 1
+	fi
 
 	# {{{3 Run commands in void-mklive dir
 	original_wrkdir=$(pwd -P)
@@ -256,7 +299,7 @@ if [ ! -f "$iso_out_path" ]; then
 		"$void_mklive_sh_path" \
 		-o "$iso_out_file" \
 		-p "vim salt" \
-		-I "$include_dir_path" \
+		-I "$iso_fs_dir" \
 		-a "x86_64-musl"; then
 		echo "Error: Failed to build Void Linux ISO" >&2
 		exit 1
@@ -264,6 +307,12 @@ if [ ! -f "$iso_out_path" ]; then
 
 	# {{{3 Return to original working directory
 	cd "$original_wrkdir"
+
+	# {{{3 Remove ISO rootfs build directory
+	if ! rm -rf "$iso_fs_dir"; then
+		echo "Error: Failed to remove ISO rootfs build directory" >&2
+		exit 1
+	fi
 else
 	echo "Already made"
 fi
