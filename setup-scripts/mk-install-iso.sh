@@ -265,21 +265,36 @@ if [ ! -f "$iso_out_path" ]; then
 	fi
 
 	# Link Salt state files in ISO rootfs
-	if ! mount --bind "$repo_salt_dir/states" "$isofs_salt_dir/salt"; then
-		echo "Error: Failed to symlink /srv/salt to Salt states in ISO rootfs" >&2
+	repo_salt_states_dir="$repo_salt_dir/states"
+	isofs_salt_states_dir="$isofs_salt_dir/salt"
+
+	if ! mkdir -p "$isofs_salt_states_dir"; then
+		echo "Error: Failed to make Salt states mount point in ISO roots" >&2
+		exit 1
+	fi
+
+	if ! mount --bind "$repo_salt_states_dir" "$isofs_salt_states_dir"; then
+		echo "Error: Failed to mount Salt states in ISO rootfs" >&2
 		exit 1
 	fi
 
 	# Link Salt pillar files in ISO rootfs
-	if ! mount --bind "$repo_salt_dir/pillar" "$isofs_salt_dir/pillar"; then
-		echo "Error: Failed to symlink /srv/pillar to Salt pillar in ISO rootfs" >&2
+	repo_salt_pillar_dir="$repo_salt_dir/pillar"
+	isofs_salt_pillar_dir="$isofs_salt_dir/pillar"
+
+	if ! mkdir -p "$isofs_salt_pillar_dir"; then
+		echo "Error: Failed to make Salt pillar mount point in ISO rootfs" >&2
+		exit 1
+	fi
+
+	if ! mount --bind "$repo_salt_pillar_dir" "$isofs_salt_pillar_dir"; then
+		echo "Error: Failed to mount Salt pillar in ISO rootfs" >&2
 		exit 1
 	fi
 
 	# {{{4 Place repo in ISO rootfs
 	isofs_repo_dir="$isofs_dir/root/linux-install"
 
-	# Create repo dir in ISO rootfs
 	if ! mkdir "$isofs_repo_dir"; then
 		echo "Error: Failed to make /root/linux-install directory in ISO rootfs" >&2
 		exit 1
