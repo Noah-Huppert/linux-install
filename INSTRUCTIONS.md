@@ -33,13 +33,13 @@ almost immediately.
    copy later. To copy to the boot partition run:
 
    ```
-   ./scripts/cp-to-boot.sh
+   ./setup-scripts/cp-to-boot.sh
    ```
 
 3. Create a rudimentary bootable USB with Void Linux:  
 
    ```
-   ./scripts/mk-temp-iso.sh EXTERNAL_DEVICE
+   ./setup-scripts/mk-temp-iso.sh EXTERNAL_DEVICE
    ```
    Where `EXTERNAL_DEVICE` is the device file of your USB device (ex: `/dev/sdb`).
 4. Boot from this external device
@@ -65,23 +65,21 @@ Complete the following steps on an existing Void Linux installation:
    connect to the internet run:
 
    ```
-   REPO_DIR/scripts/wifi.sh SSID PASSWORD
+   REPO_DIR/live-scripts/wifi.sh SSID PASSWORD
    ```
 3. Create a custom Void Linux bootable USB which will be used for installation 
    by running:
 
    ```
-   REPO_DIR/scripts/mk-install-iso.sh EXTERNAL_DEVICE
+   REPO_DIR/setup-scripts/mk-install-iso.sh EXTERNAL_DEVICE
    ```
+4. Delete the copy of this repository
 
 # Run Installation Script
 Boot from the Live USB, then complete the following steps.
 
-1. (Optional) Setup a partition for the permanent Void Linux installation
-2. Access the copy of this repository
-3. Run the installation script:
+1. Run the installation script:
 
    ```
-   REPO_DIR/scripts/install.sh
+   /root/linux-install/live-scripts/install.sh
    ```
-4. Delete the copy of this repository

@@ -236,21 +236,22 @@ fi
 # {{{2 If iso doesn't exist, make
 if [ ! -f "$iso_out_path" ]; then
 	# {{{3 Check running as sudoer
-	echo "Running $void_mklive_sh_path as sudo, you may prompt for your sudo password"
+	echo "Running $void_mklive_sh_path as sudo, may prompt for your sudo password"
 
 	if [[ "$EUID" != "0" ]]; then
 		mklive_run_args="sudo"
 	fi
 
-	# {{{3 Resolve iso-rootfs path
-	include_dir_path=$(pwd -P)/$(dirname "$0")/../iso-rootfs
-	include_dir_path=$(realpath "$include_dir_path")
+	# {{{3 Assemble ISO filesystem include dir
+	#
+	iso_rootfs_dir=$(pwd -P)/$(dirname "$0")/../iso-rootfs
+	iso_rootfs_dir=$(realpath "$iso_rootfs_dir")
 
 	# {{{3 Run commands in void-mklive dir
 	original_wrkdir=$(pwd -P)
-
 	cd "$void_mklive_dir_path"
 
+	# {{{3 Make ISO
 	if ! $mklive_run_args \
 		"$void_mklive_sh_path" \
 		-o "$iso_out_file" \
@@ -261,6 +262,7 @@ if [ ! -f "$iso_out_path" ]; then
 		exit 1
 	fi
 
+	# {{{3 Return to original working directory
 	cd "$original_wrkdir"
 else
 	echo "Already made"
