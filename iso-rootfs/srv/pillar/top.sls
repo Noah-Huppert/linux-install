@@ -1,3 +1,4 @@
 base:
   '*':
+    - cryptsetup-secret
     - filesystem
