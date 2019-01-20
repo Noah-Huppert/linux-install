@@ -265,13 +265,13 @@ if [ ! -f "$iso_out_path" ]; then
 	fi
 
 	# Link Salt state files in ISO rootfs
-	if ! ln -s "$repo_salt_dir/states" "$isofs_salt_dir/salt"; then
+	if ! mount --bind "$repo_salt_dir/states" "$isofs_salt_dir/salt"; then
 		echo "Error: Failed to symlink /srv/salt to Salt states in ISO rootfs" >&2
 		exit 1
 	fi
 
 	# Link Salt pillar files in ISO rootfs
-	if ! ln -s "$repo_salt_dir/pillar" "$isofs_salt_dir/pillar"; then
+	if ! mount --bind "$repo_salt_dir/pillar" "$isofs_salt_dir/pillar"; then
 		echo "Error: Failed to symlink /srv/pillar to Salt pillar in ISO rootfs" >&2
 		exit 1
 	fi
@@ -285,7 +285,7 @@ if [ ! -f "$iso_out_path" ]; then
 		exit 1
 	fi
 	
-	if ! ln -s "$repo_dir" "$isofs_repo_dir"; then
+	if ! mount --bind "$repo_dir" "$isofs_repo_dir"; then
 		echo "Error: Failed to symlink /root/linux-install to repo in ISO rootfs" >&2
 		exit 1
 	fi
