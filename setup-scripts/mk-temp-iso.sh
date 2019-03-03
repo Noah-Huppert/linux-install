@@ -55,7 +55,7 @@ if [ -z "$void_arch" ]; then
 	void_arch="$void_arch_glibc"
 fi
 
-if [[ "$void_arch" != "$void_arch_glibc" && "$void_arch" 1= "$void_arch_musl" ]]; then
+if [[ "$void_arch" != "$void_arch_glibc" && "$void_arch" != "$void_arch_musl" ]]; then
 	echo "Error: Invalid -a ARCH value: \"$void_arch\", valid values: $void_arch_glibc, $void_arch_musl" >&2
 	exit 1
 fi
