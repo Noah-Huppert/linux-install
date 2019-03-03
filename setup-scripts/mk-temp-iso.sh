@@ -4,13 +4,14 @@
 #
 # USAGE
 #
-#	mk-temp-iso.sh OPTIONS EXTERNAL_DEVICE
+#	mk-temp-iso.sh OPTIONS
 #
 # OPTIONS
 #
-#	-r         Redownload ISO
-#	-a ARCH    (Optional) Architecture of ISO to create, either x86_64 or x86_64-musl,
-#	           defaults x86_64
+#	-d DEVICE    Device to write ISO to
+#	-r           Redownload ISO
+#	-a ARCH      (Optional) Architecture of ISO to create, either x86_64 or x86_64-musl,
+#	             defaults x86_64
 #
 # ARGUMENTS
 #
@@ -30,17 +31,18 @@ tmp_dir="/var/tmp"
 
 # {{{1 Options
 # {{{2 Get
-while getopts "ra:" opt; do
+while getopts "d:ra:" opt; do
 	case "$opt" in
+		d)
+			device="$OPTARG"
+			;;
+
 		r)
 			redownload="true"
-			shift
 			;;
 
 		a)
 			void_arch="$OPTARG"
-			shift
-			shift
 			;;
 
 		'?')
@@ -51,24 +53,24 @@ while getopts "ra:" opt; do
 done
 
 # {{{2 Verify
+# {{{3 device
+if [ -z "$device" ]; then
+	echo "Error: -d DEVICE option required" >&2
+	exit 1
+fi
+
+if [ ! -e "$device" ]; then
+	echo "Error: -d DEVICE does not exist: \"$device\"" >&2
+	exit 1
+fi
+
+# {{{3 void_arch
 if [ -z "$void_arch" ]; then
 	void_arch="$void_arch_glibc"
 fi
 
 if [[ "$void_arch" != "$void_arch_glibc" && "$void_arch" != "$void_arch_musl" ]]; then
 	echo "Error: Invalid -a ARCH value: \"$void_arch\", valid values: $void_arch_glibc, $void_arch_musl" >&2
-	exit 1
-fi
-
-# {{{1 Get arguments
-if [ -z "$1" ]; then
-	echo "Error: EXTERNAL_DEVICE argument must be provided" >&2
-	exit 1
-fi
-external_device="$1"
-
-if [ ! -e "$external_device" ]; then
-	echo "Error: EXTERNAL_DEVICE \"$external_device\" does not exist" >&2
 	exit 1
 fi
 
@@ -106,7 +108,7 @@ echo "# Write ISO To Device #"
 echo "#######################"
 
 # {{{1 Confirm device
-echo "Write live image to $external_device (Will erase everything)? [y/N] "
+echo "Write live image to $device (Will erase everything)? [y/N] "
 read confirm_device_input
 
 if [[ "$confirm_device_input" != "y" && "$confirm_device_input" != "Y" ]]; then
@@ -115,15 +117,15 @@ if [[ "$confirm_device_input" != "y" && "$confirm_device_input" != "Y" ]]; then
 fi
 
 # {{{1 Write to device
-echo "Writing live image to $external_device"
+echo "Writing live image to $device"
 
 if [[ "$EUID" != "0" ]]; then
 	echo "Must run write operation as root, you may be prompted for your sudo password"
 	dd_args="sudo"
 fi
 
-if ! $dd_args dd status=progress if="$iso_path" of="$external_device" bs=4M && sync; then
-	echo "Error: Failed to write live image to $external_device" >&2
+if ! $dd_args dd status=progress if="$iso_path" of="$device" bs=4M && sync; then
+	echo "Error: Failed to write live image to $device" >&2
 	exit 1
 fi
 
