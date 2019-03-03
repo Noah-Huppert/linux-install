@@ -117,13 +117,17 @@ for prog in curl tar unzip make xz git patch; do
 done
 
 # {{{1 Check for required libraries
-for lib in liblz4.so.1; do
+for lib in liblz4.so.1 libreadline.so.8; do
 	# Check if library file exists
 	if ! ls /usr/lib | grep "$lib" &> /dev/null; then
 		# Determine package to install
 		case "$lib" in
 			liblz4.so.1)
 				pkg_name="liblz4"
+				;;
+
+			libreadline.so.8)
+				pkg_name="readline-devel"
 				;;
 		esac
 
@@ -159,51 +163,55 @@ fi
 
 # {{{2 Patch
 patches_dir=$(pwd -P)/$(dirname "$0")/../patches
-mklive_patch_files=$(ls "$patches_dir"/void-mklive/*.patch)
 
-if [[ "$?" != "0" ]]; then
-	echo "Error: Failed to find void-mklive patch files" >&2
-	exit 1
-fi
+# {{{3 If no patches
+if [ -f "$patches_dir"/void-mklive/*.patch ]; then
+	mklive_patch_files=$(ls "$patches_dir"/void-mklive/*.patch)
 
-# {{{3 Run commands in void-mklive directory
-original_wrkdir="$PWD"
-cd "$void_mklive_dir_path"
-
-
-for pfile in $mklive_patch_files; do
-	# Check if already patched
-	patch_applied_flag_path="$void_mklive_dir_path/$(basename $pfile).applied"
-
-	if [ -f "$patch_applied_flag_path" ]; then
-		echo "Patch \"$pfile\" already applied"
-		continue
-	else
-		echo "Patch applied flag file not found: $patch_applied_flag_path"
-	fi
-
-	# If git patch
-	if echo "$pfile" | grep ".git.patch" &> /dev/null; then
-		if ! git am < "$pfile"; then
-			echo "Error: Failed to apply Git patch \"$pfile\"" >&2
-			exit 1
-		fi
-	elif echo "$pfile" | grep ".patch.patch" &> /dev/null; then # Patch patch
-		if ! patch < $pfile; then
-			echo "Error: Failed to apply Patch patch \"$pfile\"" >&2
-			exit 1
-		fi
-	else
-		echo "Error: No patch program matched for \"$pfile\"" >&2
+	if [[ "$?" != "0" ]]; then
+		echo "Error: Failed to find void-mklive patch files" >&2
 		exit 1
 	fi
 
-	# Mark is patched
-	touch "$patch_applied_flag_path"
-	echo "Patch \"$pfile\" applied"
-done
+	# {{{3 Run commands in void-mklive directory
+	original_wrkdir="$PWD"
+	cd "$void_mklive_dir_path"
 
-cd "$original_wrkdir"
+
+	for pfile in $mklive_patch_files; do
+		# Check if already patched
+		patch_applied_flag_path="$void_mklive_dir_path/$(basename $pfile).applied"
+
+		if [ -f "$patch_applied_flag_path" ]; then
+			echo "Patch \"$pfile\" already applied"
+			continue
+		else
+			echo "Patch applied flag file not found: $patch_applied_flag_path"
+		fi
+
+		# If git patch
+		if echo "$pfile" | grep ".git.patch" &> /dev/null; then
+			if ! git am < "$pfile"; then
+				echo "Error: Failed to apply Git patch \"$pfile\"" >&2
+				exit 1
+			fi
+		elif echo "$pfile" | grep ".patch.patch" &> /dev/null; then # Patch patch
+			if ! patch < $pfile; then
+				echo "Error: Failed to apply Patch patch \"$pfile\"" >&2
+				exit 1
+			fi
+		else
+			echo "Error: No patch program matched for \"$pfile\"" >&2
+			exit 1
+		fi
+
+		# Mark is patched
+		touch "$patch_applied_flag_path"
+		echo "Patch \"$pfile\" applied"
+	done
+
+	cd "$original_wrkdir"
+fi
 
 # {{{2 Build
 void_mklive_sh_path="$void_mklive_dir_path/mklive.sh"
@@ -255,10 +263,22 @@ if [ ! -f "$iso_out_path" ]; then
 	repo_map_dirs=("/salt/states" "/salt/pillar" "")
 	iso_fs_map_dirs=("/srv/salt" "/srv/pillar" "/root/linux-install")
 
+	if ! mkdir -p "$iso_fs_dir"; then
+		echo "Error: Failed to make iso root fs map directory: $iso_fs_dir" >&2
+		exit 1
+	fi
+
+	# Create map
 	create_map_i=0
 	for i in seq"$num_iso_fs_map_dirs"; do
 		repo_map_dir="$repo_dir${repo_map_dirs[$i]}"
 		iso_fs_map_dir="$iso_fs_dir${iso_fs_map_dirs[$i]}"
+
+		# Make dirs
+		if ! mkdir -p "$iso_fs_map_dir"; then
+			echo "Error: Failed to make directories to make \"$repo_map_dir\" to \"$iso_fs_map_dir\" in ISO rootfs" >&2
+			exit 1
+		fi
 
 		# Copy
 		if ! cp -r "$repo_map_dir" "$iso_fs_map_dir"; then
@@ -272,7 +292,6 @@ if [ ! -f "$iso_out_path" ]; then
 	cd "$void_mklive_dir_path"
 
 	# {{{3 Make ISO
-	if false;
 	if ! $mklive_run_args \
 		"$void_mklive_sh_path" \
 		-o "$iso_out_file" \
@@ -281,7 +300,6 @@ if [ ! -f "$iso_out_path" ]; then
 		-a "x86_64"; then
 		echo "Error: Failed to build Void Linux ISO" >&2
 		exit 1
-	fi
 	fi
 
 	# {{{3 Return to original working directory
