@@ -4,35 +4,52 @@
 #
 # USAGE
 #
-#	wifi.sh SSID PASSWORD
+#	wifi.sh OPTIONS
 #
-# ARGUMENTS
+# OPTIONS
 #
-# 	SSID        Name of WiFi network
-# 	PASSWORD    Password of WiFi network
+# 	-s SSID        Name of WiFi network
+# 	-p PASSWORD    Password of WiFi network
+#
 #?
 
 set -e
 
-# Config
+# {{{1 Config
 wpa_supplicant_config_path="/etc/wpa_supplicant/wpa_supplicant.conf"
 
-# Check arguments
-# ... ssid
-if [ -z "$1" ]; then
-	echo "Error: SSID argument must be provided" >&2
+# {{{1 Options
+# {{{2 Get
+while getopts "s:p:" opt; do
+	case "$opt" in 
+		s)
+			ssid="$OPTARG"
+			;;
+
+		p)
+			password="$OPTARG"
+			;;
+
+		'?')
+			echo "Error: Unknown option \"$opt\"" >&2
+			exit 1
+			;;
+	esac
+done
+# {{{2 Verify
+# {{{3 ssid
+if [ -z "$ssid" ]; then
+	echo "Error: -s SSID option required" >&2
 	exit 1
 fi
-ssid="$1"
 
-# ... password
-if [ -z "$2" ]; then
-	echo "Error: PASSWORD argument must be provided" >&2
+# {{{3 password
+if [ -z "$password" ]; then
+	echo "Error: -p PASSWORD option required" >&2
 	exit 1
 fi
-password="$2"
 
-# Make WPA supplicant entry
+# {{{1 Make WPA supplicant entry
 echo "######################################"
 echo "# Adding WPA Supplicant Config Entry #"
 echo "######################################"
@@ -42,7 +59,7 @@ if ! wpa_passphrase "$ssid" "$password" >> "$wpa_supplicant_config_path"; then
 	exit 1
 fi
 
-# Restart DHCPCD service
+# {{{1 Restart DHCPCD service
 echo "#############################"
 echo "# Restarting DHCPCD Service #"
 echo "#############################"
@@ -60,6 +77,7 @@ echo "########################"
 for i in $(seq 20); do
 	if ! ping -c 1 google.com &> /dev/null; then
 		printf "."
+		sleep 1
 	else
 		internet_ok="true"
 		break
@@ -67,8 +85,8 @@ for i in $(seq 20); do
 done
 
 if [ ! -z "$internet_ok" ]; then
-	echo "Connected to $SSID"
+	echo "Connected to $ssid"
 else
-	echo "Error: Failed to connect to $SSID" >&2
+	echo "Error: Failed to connect to $ssid" >&2
 	exit 1
 fi
