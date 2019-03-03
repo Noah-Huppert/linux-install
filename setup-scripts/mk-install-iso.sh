@@ -4,18 +4,14 @@
 #
 # USAGE
 #
-#	mkiso.sh DEVICE [--remake-iso]
-#
-# 	Note: The order options and arguments appear in does not matter
-#
-# ARGUMENTS
-#
-#	DEVICE    Device to write live image to
+#	mkiso.sh OPTIONS
 #
 # OPTIONS
 #
-#	--remake-iso    Force script to rebuild the ISO, regardless of 
-#	                if the ISO already exists on the file system
+#	-d DEVICE    Device to write ISO to
+#	-f           Force script to rebuild ISO even if it already exists
+#	-t           Test mode, don't make ISO
+#	-h           Show help text
 #
 # ENVIRONMENT VARIABLE CONFIGURATION
 #	TMP_DIR    Directory temporary files will be downloaded to
@@ -57,30 +53,49 @@ if ! lsb_release -c | grep 'void' &> /dev/null; then
 	exit 1
 fi
 
-# {{{1 Parse arguments
-while [ ! -z "$1" ]; do
-	case "$1" in
-		--remake-iso)
-			remake_iso="true"
-			shift
+# {{{1 Options
+# {{{2 Get
+while getopts "d:fth" opt; do
+	case "$opt" in
+		d)
+			device="$OPTARG"
 			;;
 
-		*)
-			device="$1"
-			shift
+		f)
+			remake_iso="true"
+			;;
+
+		t)
+			test_mode="true"
+			;;
+
+		h)
+			echo "$0 -d DEVICE [-f -t -h]"
+			exit 1
+			;;
+
+		'?')
+			echo "Error: Unknown option \"$opt\"" >&2
+			exit 1
 			;;
 	esac
 done
 
-# {{{1 Check arguments
-# Device
+# {{{2 Verify
+# {{{3 device
 if [ -z "$device" ]; then
-	echo "Error: DEVICE argument must be provided" >&2
+	echo "Error: -d DEVICE option is required" >&2
 	exit 1
 fi
 
 if [ ! -e "$device" ]; then
-	echo "Error: Device $device specified by DEVICE argument does not exist" >&2
+	echo "Error: Device $device specified by -d DEVICE option does not exist" >&2
+	exit 1
+fi
+
+# {{{3 remake_iso and test_mode cannot be specified at the same time
+if [[ "$remake_iso" != "" && "$test_mode" != "" ]]; then
+	echo "Error: -f and -t cannot be specified at the same time" >&2
 	exit 1
 fi
 
@@ -292,14 +307,19 @@ if [ ! -f "$iso_out_path" ]; then
 	cd "$void_mklive_dir_path"
 
 	# {{{3 Make ISO
-	if ! $mklive_run_args \
-		"$void_mklive_sh_path" \
-		-o "$iso_out_file" \
-		-p "vim salt" \
-		-I "$iso_fs_dir" \
-		-a "x86_64"; then
-		echo "Error: Failed to build Void Linux ISO" >&2
-		exit 1
+	if [ ! -z "$test_mode" ]; then
+		if ! $mklive_run_args \
+			"$void_mklive_sh_path" \
+			-o "$iso_out_file" \
+			-p "vim salt" \
+			-I "$iso_fs_dir" \
+			-a "x86_64"; then
+			echo "Error: Failed to build Void Linux ISO" >&2
+			exit 1
+		fi
+	else
+		echo "Test mode, would build ISO here"
+		exit 0
 	fi
 
 	# {{{3 Return to original working directory
