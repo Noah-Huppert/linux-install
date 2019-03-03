@@ -24,7 +24,7 @@ ssid="eduroam"
 
 # {{{1 Options
 # {{{2 Get
-while getopts "u:p:h" opt; do
+while getopts "u:p:w:h" opt; do
 	case "$opt" in 
 		u)
 			user="$OPTARG"
@@ -39,7 +39,7 @@ while getopts "u:p:h" opt; do
 			;;
 
 		h)
-			show-help "$0"
+			echo "$0 -u USERNAME -p PASSWORD [-w WPA_CONF -h]"
 			exit 1
 			;;
 
@@ -74,22 +74,13 @@ if [ -z "$wpa_config" ]; then
 fi
 
 if [ ! -f "$wpa_config" ]; then
-	echo "Error: -w WPA_CONF configuration file does not exist" >&2
+	echo "Error: -w WPA_CONF configuration file does not exist: $wpa_config" >&2
 	exit 1
 fi
 
 # {{{1 Check if already configured
 if cat "$wpa_config" | grep "ssid=\"$ssid\"" &> /dev/null; then
 	echo "Error: Entry for $ssid already in $wpa_config" >&2
-	exit 1
-fi
-
-# {{{1 Generate passphrase portion of config
-psk=$(wpa_passphrase "$ssid" "$password" | grep psk)
-
-if [[ "$?" != "0" ]]; then
-	echo "$psk"
-	echo "Error: Failed to generate passphrase portion of configuration" >&2
 	exit 1
 fi
 
@@ -100,11 +91,11 @@ config+="        key_mgmt=WPA-EAP\n"
 config+="        eap=TTLS\n"
 config+="        phase2=\"auth=PAP\"\n"
 config+="        identity=\"$user\"\n"
-config+="$psk\n"
+config+="        password=\"$password\"\n"
 config+="}"
 
 echo "Configuration:"
-echo "$config"
+echo -e "$config"
 echo
 
 if ! echo -e "$config" >> "$wpa_config"; then
@@ -115,6 +106,6 @@ fi
 if ! sv restart dhcpcd; then
 	echo "Error: Failed to restart dhcpcd service" >&2
 	exit 1
-if
+fi
 
 echo "DONE"
