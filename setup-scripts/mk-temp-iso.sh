@@ -8,7 +8,9 @@
 #
 # OPTIONS
 #
-#	-d    Redownload ISO
+#	-d         Redownload ISO
+#	-a ARCH    (Optional) Architecture of ISO to create, either x86_64 or x86_64-musl,
+#	           defaults x86_64
 #
 # ARGUMENTS
 #
@@ -21,15 +23,23 @@ set -e
 # {{{1 Configuration
 mirror_url="https://a-hel-fi.m.voidlinux.org"
 void_version="20181111"
-iso_mirror_url="$mirror_url/live/current/void-live-x86_64-$void_version.iso"
+void_arch_glibc="x86_64"
+void_arch_musl="x86_64-musl"
 
 tmp_dir="/var/tmp"
 
-# {{{1 Get options
-while getopts "d" opt; do
+# {{{1 Options
+# {{{2 Get
+while getopts "da:" opt; do
 	case "$opt" in
 		d)
 			redownload="true"
+			shift
+			;;
+
+		a)
+			void_arch="$OPTARG"
+			shift
 			shift
 			;;
 
@@ -40,7 +50,17 @@ while getopts "d" opt; do
 	esac
 done
 
-# {{{1 Check arguments
+# {{{2 Verify
+if [ -z "$void_arch" ]; then
+	void_arch="$void_arch_glibc"
+fi
+
+if [[ "$void_arch" != "$void_arch_glibc" && "$void_arch" 1= "$void_arch_musl" ]]; then
+	echo "Error: Invalid -a ARCH value: \"$void_arch\", valid values: $void_arch_glibc, $void_arch_musl" >&2
+	exit 1
+fi
+
+# {{{1 Get arguments
 if [ -z "$1" ]; then
 	echo "Error: EXTERNAL_DEVICE argument must be provided" >&2
 	exit 1
@@ -57,7 +77,10 @@ echo "###########################"
 echo "# Download Void Linux ISO #"
 echo "###########################"
 
-iso_path="$tmp_dir/void-live-$void_version.iso"
+echo "Architecture: $void_arch"
+
+iso_mirror_url="$mirror_url/live/$void_version/void-live-$void_arch-$void_version.iso"
+iso_path="$tmp_dir/void-live-$void_arch-$void_version.iso"
 
 # {{{2 Delete iso if redownload option given
 if [ -f "$iso_path" ] && [ ! -z "$redownload" ]; then
