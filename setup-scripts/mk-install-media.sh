@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 #?
-# mk-temp-iso.sh - Create a default Void Linux live USB
+# mk-install-media.sh - Create a default Void Linux live USB
 #
 # USAGE
 #
-#	mk-temp-iso.sh OPTIONS
+#	mk-install-media.sh OPTIONS
 #
 # OPTIONS
 #
@@ -13,9 +13,6 @@
 #	-a ARCH      (Optional) Architecture of ISO to create, either x86_64 or x86_64-musl,
 #	             defaults x86_64
 #
-# ARGUMENTS
-#
-#	EXTERNAL_DEVICE    External USB device to write live image
 #?
 
 # {{{1 Exit on any error
