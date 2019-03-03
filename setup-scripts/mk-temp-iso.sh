@@ -8,7 +8,7 @@
 #
 # OPTIONS
 #
-#	-d         Redownload ISO
+#	-r         Redownload ISO
 #	-a ARCH    (Optional) Architecture of ISO to create, either x86_64 or x86_64-musl,
 #	           defaults x86_64
 #
@@ -30,9 +30,9 @@ tmp_dir="/var/tmp"
 
 # {{{1 Options
 # {{{2 Get
-while getopts "da:" opt; do
+while getopts "ra:" opt; do
 	case "$opt" in
-		d)
+		r)
 			redownload="true"
 			shift
 			;;
