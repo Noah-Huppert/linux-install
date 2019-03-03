@@ -60,7 +60,7 @@ echo "###########################"
 iso_path="$tmp_dir/void-live-$void_version.iso"
 
 # {{{2 Delete iso if redownload option given
-if [ -f "$iso_path" ]; then
+if [ -f "$iso_path" ] && [ ! -z "$redownload" ]; then
 	if ! rm "$iso_path"; then
 		echo "Error: Failed to delete iso so it can be redownloaded: $iso_path" >&2
 		exit 1
