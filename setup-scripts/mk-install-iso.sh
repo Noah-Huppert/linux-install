@@ -43,7 +43,7 @@
 #
 #?
 
-# Exit on any error
+# {{{1 Exit on any error
 set -e
 
 # {{{1 Env var config
@@ -278,7 +278,7 @@ if [ ! -f "$iso_out_path" ]; then
 		-o "$iso_out_file" \
 		-p "vim salt" \
 		-I "$iso_fs_dir" \
-		-a "x86_64-musl"; then
+		-a "x86_64"; then
 		echo "Error: Failed to build Void Linux ISO" >&2
 		exit 1
 	fi
