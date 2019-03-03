@@ -10,6 +10,7 @@
 #
 #	-u USERNAME    Eduroam username including `@school.edu`
 #	-p PASSWORD    Password
+#	-w WPA_CONF    WPA Supplicant configuration file
 #	-h             Show help text
 #
 # BEHAVIOR
@@ -20,7 +21,6 @@
 
 # {{{1 Configuration
 ssid="eduroam"
-wpa_config="/etc/wpa_supplicant/config.conf"
 
 # {{{1 Options
 # {{{2 Get
@@ -32,6 +32,10 @@ while getopts "u:p:h" opt; do
 
 		p)
 			password="$OPTARG"
+			;;
+
+		w)
+			wpa_config="$OPTARG"
 			;;
 
 		h)
@@ -61,6 +65,16 @@ fi
 # {{{3 password
 if [ -z "$password" ]; then
 	echo "Error: -p PASSWORD option required" >&2
+	exit 1
+fi
+
+# {{{3 wpa_config
+if [ -z "$wpa_config" ]; then
+	wpa_config="/etc/wpa_supplicant/config.conf"
+fi
+
+if [ ! -f "$wpa_config" ]; then
+	echo "Error: -w WPA_CONF configuration file does not exist" >&2
 	exit 1
 fi
 
