@@ -54,6 +54,11 @@ echo "######################################"
 echo "# Adding WPA Supplicant Config Entry #"
 echo "######################################"
 
+if cat "$wpa_supplicant_config_path" | grep "ssid=\"$ssid\""; then
+	echo "Error: Entry for $ssid already exists in $wpa_supplicant_config_path" >&2
+	exit 1
+fi
+
 if ! wpa_passphrase "$ssid" "$password" >> "$wpa_supplicant_config_path"; then
 	echo "Error: Failed to add entry to WPA supplicant config file" >&2
 	exit 1
