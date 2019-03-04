@@ -178,9 +178,6 @@ if [ ! -f "$iso_out" ]; then
 		mklive_run_args="sudo"
 	fi
 
-	# {{{3 Run commands in void-mklive dir
-	cd "$mklive_dir"
-
 	# {{{3 Make ISO
 	if ! $mklive_run_args \
 		"$mklive_sh" \
