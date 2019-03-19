@@ -19,8 +19,9 @@
 set -e
 
 # {{{1 Configuration
-mirror_url="https://a-hel-fi.m.voidlinux.org"
-void_version="20181111"
+iso_base_path="https://public.funkyboy.zone/noah/void/"
+void_version="20190303"
+
 void_arch_glibc="x86_64"
 void_arch_musl="x86_64-musl"
 
@@ -78,7 +79,7 @@ echo "###########################"
 
 echo "Architecture: $void_arch"
 
-iso_mirror_url="$mirror_url/live/$void_version/void-live-$void_arch-$void_version.iso"
+iso_mirror_url="$iso_base_path/void-live-$void_arch-$void_version.iso"
 iso_path="$tmp_dir/void-live-$void_arch-$void_version.iso"
 
 # {{{2 Delete iso if redownload option given
