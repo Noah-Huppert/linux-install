@@ -26,27 +26,24 @@ Run:
    by the following names:
 	- `ROOT_PARTITION`: Linux root file system partition
 	- `BOOT_PARTITION`: Partition with boot data
-4. Connect to internet
-   If the network you are connecting to requires a password:
-
-   ```
-   # wpa_passphrase "SSID" "PASSWORD" >> /etc/wpa_supplicant/wpa_supplicant.conf
-   # sv restart dhcpcd
-   ```
-
-   If you are trying to connect to eduroam open the 
-   `/etc/wpa_supplicant/wpa_supplicant.conf` file and add the following:
-
-   ```
-   network={
-           ssid="eduroam"
-           key_mgmt=WPA-EAP
-           eap=TTLS
-           phase2="auth=PAP"
-           identity="YOUR_SCHOOL_EMAIL"
-           password="YOU_SCHOOL_NETID_PASSWORD"
-   }
-   ```
+4. Connect to internet  
+	- If the network you are connecting to requires a password:
+      ```
+      # wpa_passphrase "SSID" "PASSWORD" >> /etc/wpa_supplicant/wpa_supplicant.conf
+      # sv restart dhcpcd
+      ```
+	- If you are trying to connect to eduroam open the 
+      `/etc/wpa_supplicant/wpa_supplicant.conf` file and add the following:
+      ```
+      network={
+              ssid="eduroam"
+              key_mgmt=WPA-EAP
+              eap=TTLS
+              phase2="auth=PAP"
+              identity="YOUR_SCHOOL_EMAIL"
+              password="YOU_SCHOOL_NETID_PASSWORD"
+      }
+      ```
 5. Download this repository:
    ```
    curl -L "https://github.com/Noah-Huppert/linux-install/archive/master.zip" > linux-install-master.zip
