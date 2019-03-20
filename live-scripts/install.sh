@@ -152,6 +152,11 @@ if ! xbps-install -Sy \
 	exit 1
 fi
 
+if ! sync; then
+	echo "Error: Failed to sync file system" >&2
+	exit 1
+fi
+
 # TODO: Setup refind
 
 # {{{1 Cleanup
