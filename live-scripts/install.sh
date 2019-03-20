@@ -121,6 +121,30 @@ echo "#########################"
 echo "# Installing Void Linux #"
 echo "#########################"
 
+# {{{2 Copy repository signing keys
+# {{{3 Configuration files
+if ! mkdir -p /mnt/usr/share; then
+	echo "Error: Failed to create /mnt/usr/share directory" >&2
+	exit 1
+fi
+
+if ! cp -a /usr/share/xbps.d /mnt/usr/share/; then
+	echo "Error: Failed to copy XBPS configuration files to new system" >&2
+	exit 1
+fi
+
+# {{{3 Keys
+if ! mkdir -p /mnt/var/db/xbps/keys; then
+	echo "Error: Failed to create XBPS keys directory" >&2
+	exit 1
+fi
+
+if ! cp /var/db/xbps/keys/*.plist /mnt/var/db/xbps/keys; then
+	echo "Error: Failed to copy XBPS keys" >&2
+	exit 1
+fi
+
+# {{{2 Install packages
 if ! xbps-install -Sy \
 	-R http://mirror.clarkson.edu/voidlinux/current \
 	-r /mnt \
