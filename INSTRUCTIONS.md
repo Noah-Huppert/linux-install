@@ -30,7 +30,7 @@ Run:
 	- If the network you are connecting to requires a password:
       ```
       # wpa_passphrase "SSID" "PASSWORD" >> /etc/wpa_supplicant/wpa_supplicant.conf
-      # sv restart dhcpcd
+      # sv start wpa_supplicant
       ```
 	- If you are trying to connect to eduroam open the 
       `/etc/wpa_supplicant/wpa_supplicant.conf` file and add the following:
@@ -46,7 +46,7 @@ Run:
       ```
 	  Then restart the `dhcpcd` service:
 	  ```
-	  # sv restart dhcpcd
+	  # sv start wpa_supplicant
 	  ```
 	- After making the above changes it can take up to a minute to connect to 
 	  the internet.  
