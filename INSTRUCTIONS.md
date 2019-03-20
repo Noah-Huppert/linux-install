@@ -48,7 +48,7 @@ Run:
 	  ```
 	  # sv restart dhcpcd
 	  ```
-	- After making the above changes it can take up to a minute connect to 
+	- After making the above changes it can take up to a minute to connect to 
 	  the internet.  
 	  If you are still having trouble try running:
 	  ```
