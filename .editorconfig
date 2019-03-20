@@ -1,0 +1,5 @@
+root = true
+
+[*.md]
+indent_style = spaces
+indent_size = 4
