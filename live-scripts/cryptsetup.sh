@@ -137,8 +137,8 @@ echo "# Creating DM-Crypt LUKS container #"
 echo "####################################"
 
 # {{{2 Create container
-if ! cryptsetup -y -v luksFormat "$container"; then
-	echo "Error: Failed to create DM-Crypt LUKS container for partition \"$partiion\"" >&2
+if ! cryptsetup -y -v luksFormat "$partition"; then
+	echo "Error: Failed to create DM-Crypt LUKS container for partition \"$partition\"" >&2
 	exit 1
 fi
 
