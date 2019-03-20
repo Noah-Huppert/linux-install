@@ -130,7 +130,7 @@ echo "# Installing Void Linux #"
 echo "#########################"
 
 if ! xbps-install -Sy \
-	-R http://auto.voidlinux.org/current \
+	-R https://alpha.de.repo.voidlinux.org/current/x86_64-repodata \
 	-r /mnt \
 	base-system lvm2 cryptsetup refind; then
 
