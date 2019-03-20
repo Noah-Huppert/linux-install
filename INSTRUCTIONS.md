@@ -3,7 +3,7 @@ Linux installation instructions.
 
 # Table Of Contents
 - [Live USB](#live-usb)
-- [Run Installation Script](#run-installation-script)
+- [Setup](#setup)
 
 # Live USB
 Create a Void Linux live USB which will be used for automated installation.  
