@@ -109,13 +109,20 @@ fi
 
 # {{{2 Erase
 # {{{3 Get size of partition
-erase_size_mb=$(blockdev --getsize64 "$partition")
+erase_size_bytes=$(blockdev --getsize64 "$partition")
 if [[ "$?" != "0" ]]; then
 	echo "Error: Failed to get size of \"$partition\"" >&2
 	exit 1
 fi
 
-if ! dd if=/dev/zero of="/dev/mapper/$erase_container" status=progress bs=1M count="$erase_size_mb"; then
+if ! dd \
+	if=/dev/zero \
+	of="/dev/mapper/$erase_container" \
+	status=progress \
+	bs=1M \
+	count="$erase_size_bytes" \
+	iflag=count_bytes; then
+
 	echo "Error: Failed to overwrite partition \"$partition\" zeros" >&2
 	erase_cleanup
 	exit 1
