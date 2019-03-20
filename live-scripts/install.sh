@@ -122,7 +122,7 @@ echo "# Installing Void Linux #"
 echo "#########################"
 
 if ! xbps-install -Sy \
-	-R http://mirror.clarkson.edu/voidlinux/current/x86_64-repodata \
+	-R http://mirror.clarkson.edu/voidlinux/current \
 	-r /mnt \
 	base-system lvm2 cryptsetup refind; then
 
