@@ -118,7 +118,7 @@ Update the live USB's system by running:
 
 ## Download This Repository
 ```
-xbps-install -Sy curl
+xbps-install -Sy curl unzip
 curl -L https://github.com/Noah-Huppert/linux-install/archive/master.zip > linux-install-master.zip
 unzip linux-install-master.zip
 cd linux-install-master
