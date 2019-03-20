@@ -108,15 +108,17 @@ if ! cryptsetup open --type plain "$partition" "$erase_container" --key-file /de
 fi
 
 # {{{2 Erase
-erase_dd_stderr=$(dd if=/dev/zero of="/dev/mapper/$erase_container" status=progress bs=1M 2>)
+# {{{3 Get size of partition
+erase_size_mb=$(blockdev --getsize64 "$partition")
+if [[ "$?" != "0" ]]; then
+	echo "Error: Failed to get size of \"$partition\"" >&2
+	exit 1
+fi
 
-if [[ "$?" != "$0" ]]; then
-	# If the cause of non-zero exit is not b/c we filled up the partition
-	if ! echo "$erase_dd_stderr" | grep "No space left on device"; then
-		echo "Error: Failed to overwrite partition \"$partition\" zeros" >&2
-		erase_cleanup
-		exit 1
-	fi
+if ! dd if=/dev/zero of="/dev/mapper/$erase_container" status=progress bs=1M count="$erase_size_mb"; then
+	echo "Error: Failed to overwrite partition \"$partition\" zeros" >&2
+	erase_cleanup
+	exit 1
 fi
 
 # {{{2 Close temporary container
