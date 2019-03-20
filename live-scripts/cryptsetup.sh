@@ -90,7 +90,7 @@ if [[ "$erase_confirm" != "y" ]]; then
 fi
 
 # {{{2 Create temporary container so we can erase
-echo "This may take some time (Replacing every bit on partition with a 0)"
+echo "This may take some time (Replacing every bit in partition with a 0)"
 
 erase_container="container"
 
