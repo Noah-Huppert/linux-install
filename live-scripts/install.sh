@@ -72,19 +72,11 @@ echo "####################"
 function mount_cleanup() {
 	# Unmount in reverse order
 	mnts=("/mnt/dev" "/mnt/proc" "/mnt/sys" "/mnt/run" "/mnt/boot/efi" "/mnt")
-	for mnt in ${mnts[@]}; do
-		# Check mount exists
-		if ! mountpoint "$mnt"; then
-			continue
-		fi
-
-		# Unmount
-		if ! umount "$mnt"; then
-			echo "Error: Failed unmount $mnt" >&2
-			echo "Ensure ${mnts[@]} are all unmounted" >&2
-			exit 1
-		fi
-	done
+	if ! umount -R /mnt; then
+		echo "Error: Failed to umount /mnt" >&2
+		echo "Ensure ${mnts[@]} are unmounted manually" >&2
+		exit 1
+	fi
 }
 
 # {{{2 Root file system
