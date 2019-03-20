@@ -59,6 +59,11 @@ if [ -z "$boot_partition" ]; then
 	exit 1
 fi
 
+if [ ! -e "$boot_partition" ]; then
+	echo "Error: -b BOOT_PARTITION does not exist" >&2
+	exit 1
+fi
+
 # {{{1 Mount devices in preparation for setup
 echo "####################"
 echo "# Mounting devices #"
