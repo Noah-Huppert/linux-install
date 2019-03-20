@@ -79,23 +79,22 @@ function mount_cleanup() {
 	fi
 }
 
+trap mount_cleanup EXIT
+
 # {{{2 Root file system
 if ! mount "/dev/mapper/$container" /mnt; then
 	echo "Error: Failed to mount /dev/mapper/$container in /mnt" >&2
-	mount_cleanup
 	exit 1
 fi
 
 # {{{2 Boot partition
 if ! mkdir -p /mnt/boot/efi; then
 	echo "Error: Failed to make mount point /mnt/boot/efi" >&2
-	mount_cleanup
 	exit 1
 fi
 
 if ! mount "$boot_partition" /mnt/boot/efi; then
 	echo "Error: Failed to mount $boot_partition in /mnt/boot/efi" >&2
-	mount_cleanup
 	exit 1
 fi
 
@@ -104,14 +103,12 @@ for dir in dev proc sys run; do
 	# {{{3 Create mount point
 	if ! mkdir -p "/mnt/$dir"; then
 		echo "Error: Failed to create mount point /mnt/$dir" >&2
-		mount_cleanup
 		exit 1
 	fi
 
 	# {{{3 Create recursive bind mount
 	if ! mount --rbind "/$dir" "/mnt/$dir"; then
 		echo "Error: Failed to create a recursive bind mount for /$dir in /mnt/$dir" >&2
-		mount_cleanup
 		exit 1
 	fi
 done
@@ -161,9 +158,6 @@ fi
 echo "###########"
 echo "# Cleanup #"
 echo "###########"
-
-# {{{2 Cleanup mounts
-mount_cleanup
 
 # {{{2 Close cryptsetup container
 if ! cryptsetup close "$container"; then
