@@ -44,6 +44,10 @@ Run:
               password="YOU_SCHOOL_NETID_PASSWORD"
       }
       ```
+	  Then restart the `dhcpcd` service:
+	  ```
+	  # sv restart dhcpcd
+	  ```
 5. Download this repository:
    ```
    curl -L "https://github.com/Noah-Huppert/linux-install/archive/master.zip" > linux-install-master.zip
