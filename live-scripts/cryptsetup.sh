@@ -51,6 +51,22 @@ if [ -z "$container" ]; then
 	exit 1
 fi
 
+# {{{1 Ensure cryptsetup is installed
+echo "#########################"
+echo "# Checking dependencies #"
+echo "#########################"
+
+if ! which cryptsetup &> /dev/null; then
+	echo "Installing cryptsetup"
+
+	if ! xbps-install -Sy cryptsetup; then
+		echo "Error: Failed to install cryptsetup" >&2
+		exit 1
+	fi
+else
+	echo "Cryptsetup already installed"
+fi
+
 # {{{1 Erase partition
 echo "##############################"
 echo "# Securely erasing partition #"
