@@ -50,18 +50,20 @@ Run:
 	  ```
 	- After making the above changes it can take up to a minute to connect to 
 	  the internet.  
+
 	  If you are still having trouble try running:
 	  ```
 	  # sv stop dhcpcd
 	  # /etc/sv/dhcpcd
 	  ```
 	  Check the output for any errors.  
+
 	  If this does not work run:
 	  ```
-	  # sv stop dhcpcd
 	  # wpa_supplicant -c /etc/wpa_supplicant/wpa_supplicant.conf -i WIRELESS_INTERFACE
 	  ```
 	  Check the output for any errors.  
+
 	  After debugging make sure to start the `dhcpcd` service back up:
 	  ```
 	  # sv start dhcpcd
@@ -70,10 +72,10 @@ Run:
    ```
    curl -L "https://github.com/Noah-Huppert/linux-install/archive/master.zip" > linux-install-master.zip
    unzip linux-install-master.zip
-   mv linux-install-master linux-install
-   cd linux-install
+   cd linux-install-master
    ```
-   The rest of this guide will assume you are in the `linux-install` directory.
+   The rest of this guide will assume you are in the 
+   `linux-install-master` directory.
 6. Setup encrypted partition:
    ```
    ./live-scripts/crypsetup.sh -p ROOT_PARTITION -c cryptroot
