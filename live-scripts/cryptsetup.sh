@@ -90,6 +90,8 @@ if [[ "$erase_confirm" != "y" ]]; then
 fi
 
 # {{{2 Create temporary container so we can erase
+echo "This may take some time (Replacing every bit on partition with a 0)"
+
 erase_container="container"
 
 if ! cryptsetup open --type plain "$partition" "$erase_container" --key-file /dev/random; then
