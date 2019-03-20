@@ -22,9 +22,6 @@
 #
 #?
 
-# {{{1 Exit on any error
-set -e
-
 # {{{1 Options
 # {{{2 Get
 while getopts "p:c:" opt; do
@@ -90,9 +87,20 @@ if [[ "$erase_confirm" != "y" ]]; then
 fi
 
 # {{{2 Create temporary container so we can erase
+erase_container="container"
+
+function erase_cleanup() {
+	# Cleanup erase container if still open
+	if [ -e "/dev/mapper/$erase_container" ]; then
+		if ! cryptsetup close "$erase_container"; then
+			echo "Error: Failed to close temporary cryptsetup container \"$erase_container\" which was used to erase partition \"$partition\"" >&2
+			echo "You will have to run \"cryptsetup close $erase_container\" manually before invoking this script again" >&2
+			exit 1
+		fi
+	fi
+}
 echo "This may take some time (Replacing every bit in partition with a 0)"
 
-erase_container="container"
 
 if ! cryptsetup open --type plain "$partition" "$erase_container" --key-file /dev/random; then
 	echo "Error: Failed to open temporary cryptsetup container for the purpose of securely erasing partition \"$partition\"" >&2
@@ -100,17 +108,19 @@ if ! cryptsetup open --type plain "$partition" "$erase_container" --key-file /de
 fi
 
 # {{{2 Erase
-if ! dd if=/dev/zero of="/dev/mapper/$erase_container" status=progress bs=1M; then
-	echo "Error: Failed to overwrite partition \"$partition\" zeros" >&2
-	exit 1
+erase_dd_stderr=$(dd if=/dev/zero of="/dev/mapper/$erase_container" status=progress bs=1M 2>)
+
+if [[ "$?" != "$0" ]]; then
+	# If the cause of non-zero exit is not b/c we filled up the partition
+	if ! echo "$erase_dd_stderr" | grep "No space left on device"; then
+		echo "Error: Failed to overwrite partition \"$partition\" zeros" >&2
+		erase_cleanup
+		exit 1
+	fi
 fi
 
 # {{{2 Close temporary container
-if ! cryptsetup close "$erase_container"; then
-	echo "Error: Failed to close temporary cryptsetup container \"$erase_container\" which was used to erase partition \"$partition\"" >&2
-	echo "You will have to run \"cryptsetup close $erase_container\" manually before invoking this script again" >&2
-	exit 1
-fi
+erase_cleanup
 
 # {{{1 Create DM-Crypt LUKS container
 echo "####################################"
