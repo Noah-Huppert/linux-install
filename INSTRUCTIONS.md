@@ -48,6 +48,24 @@ Run:
 	  ```
 	  # sv restart dhcpcd
 	  ```
+	- After making the above changes it can take up to a minute connect to 
+	  the internet.  
+	  If you are still having trouble try running:
+	  ```
+	  # sv stop dhcpcd
+	  # /etc/sv/dhcpcd
+	  ```
+	  Check the output for any errors.  
+	  If this does not work run:
+	  ```
+	  # sv stop dhcpcd
+	  # wpa_supplicant -c /etc/wpa_supplicant/wpa_supplicant.conf -i WIRELESS_INTERFACE
+	  ```
+	  Check the output for any errors.  
+	  After debugging make sure to start the `dhcpcd` service back up:
+	  ```
+	  # sv start dhcpcd
+	  ```
 5. Download this repository:
    ```
    curl -L "https://github.com/Noah-Huppert/linux-install/archive/master.zip" > linux-install-master.zip
