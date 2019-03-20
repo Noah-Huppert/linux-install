@@ -4,170 +4,154 @@
 #
 # USAGE
 #
-#	install.sh [--test]
+#	install.sh OPTIONS
 #
 # OPTIONS
 #
-#	--test    Run Salt in test mode
+#	-c CONTAINER_NAME    Name of DM-Crypt LUKS container to use as the root 
+#	                     file system
+#	-b BOOT_PARTITION    Boot partition
 #
 # BEHAVIOR
 #
-# 	Retrieves secret configuration values from the user.
+#	Expects to be run directly after the cryptsetup.sh script. This script
+#	leaves CONTAINER_NAME open and accessible 
+#	in /dev/mapper/CONTAINER_NAME.
 #
-#	Then runs a Salt high state which installs Void Linux.
+#	Installs a plain Void Linux setup in the specified DM-Crypt 
+#	LUKS container.
+#
+#	Then sets up the Refind boot loader in BOOT_PARTITION.
 #
 #?
 
-# Exit on any error
+# {{{1 Exit on any error
 set -e
 
-# Parse arguments
-while [ ! -z "$1" ]; do
-	case "$1" in
-		--test)
-			salt_test="true"
-			shift
-			;;
-
-		*)
-			echo "Error: Invalid argument \"$1\"" >&2
+# {{{1 Options
+# {{{2 Get
+while getopts "c:b:" opt; do
+	case "$opt" in
+		c) container="$OPTARG" ;;
+		b) boot_partition="$OPTARG" ;;
+		'?')
+			echo "Error: Unknown option \"$opt\"" >&2
 			exit 1
 			;;
 	esac
 done
 
-# Prompt for input, cannot be empty
-#
-# ARGUMENTS
-#
-#	1. MSG    Message to prompt user with
-#
-# RETURNS
-#
-#	Input value
-#
-# ERRORS
-#
-#	1    If not all arguments provided
-#
-function prompt() {
-	# {{{1 Check arguments
-	# {{{2 msg arg
-	if [ -z "$1" ]; then
-		echo "Error: prompt() MSG argument is required" >&2
-		return 1
-	fi
-	msg="$1"
-	shift
+# {{{2 Verify
+# {{{3 CONTAINER_NAME
+if [ -z "$container" ]; then
+	echo "Error: -c CONTAINER_NAME option required" >&2
+	exit 1
+fi
 
-	# {{{1 Read input
-	input_var=""
-	while [ -z "$input_var" ]; do
-		printf "$msg: "
-		read "input_var"
+if [ ! -e "/dev/mapper/$container" ]; then
+	echo "Error: -c CONTAINER_NAME does not exist in /dev/mapper" >&2
+	exit 1
+fi
+
+# {{{3 BOOT_PARTITION
+if [ -z "$boot_partition" ]; then
+	echo "Error: -b BOOT_PARTITION option required" >&2
+	exit 1
+fi
+
+# {{{1 Mount devices in preparation for setup
+echo "####################"
+echo "# Mounting devices #"
+echo "####################"
+
+function mount_cleanup() {
+	# Unmount in reverse order
+	mnts=("/mnt/dev" "/mnt/proc" "/mnt/sys" "/mnt/run" "/mnt/boot/efi" "/mnt")
+	for mnt in ${mnts[@]}; do
+		# Check mount exists
+		if ! mountpoint "$mnt"; then
+			continue
+		fi
+
+		# Unmount
+		if ! umount "$mnt"; then
+			echo "Error: Failed unmount $mnt" >&2
+			echo "Ensure ${mnts[@]} are all unmounted" >&2
+			exit 1
+		fi
 	done
-
-	echo "$input_var"
 }
 
-# {{{1 Load secret configuration pillars
-echo "###################################"
-echo "# Retrieving Secret Configuration #"
-echo "###################################"
+# {{{2 Root file system
+if ! mount "/dev/mapper/$container" /mnt; then
+	echo "Error: Failed to mount /dev/mapper/$container in /mnt" >&2
+	mount_cleanup
+	exit 1
+fi
 
-salt_pillars_dir=$(pwd -P)/$(dirname "$0")/..
-salt_pillars_dir=$(realpath "$salt_pillars_dir")
+# {{{2 Boot partition
+if ! mkdir -p /mnt/boot/efi; then
+	echo "Error: Failed to make mount point /mnt/boot/efi" >&2
+	mount_cleanup
+	exit 1
+fi
 
-# {{{2 Cryptsetup secret
-pillar_cryptsetup_secret_f="$salt_pillars_dir/cryptsetup-secret/init.sls"
+if ! mount "$boot_partition" /mnt/boot/efi; then
+	echo "Error: Failed to mount $boot_partition in /mnt/boot/efi" >&2
+	mount_cleanup
+	exit 1
+fi
 
-# Setup cryptsetup secret
-#
-# ARGUMENTS
-#
-# 	1. FILE    File to save secrets in
-#
-# RETURNS
-#
-#	Secret file contents
-#
-# ERRORS
-#
-#	1    Failed to prompt for input
-#
-function setup_cryptsetup_secrets() {
-	cryptsetup_volume_secret=$(prompt "Volume encryption password")
-	if [[ "$?" != "0" ]]; then
-		echo "Error: Failed to prompt to volume encryption password" >&2
-		return 1
+# {{{2 Mount system directories
+for dir in dev proc sys run; do
+	# {{{3 Create mount point
+	if ! mkdir -p "/mnt/$dir"; then
+		echo "Error: Failed to create mount point /mnt/$dir" >&2
+		mount_cleanup
+		exit 1
 	fi
 
-	echo << EOF
-cryptsetup:
-	volume_secret: $cryptsetup_volume_secret
-EOF
-}
-
-for secrets_category in cryptsetup-secret; do
-	# If secret file doesn't exist
-	secret_dir="$salt_pillars_dir/$secrets_category"
-	secret_file="$secret_file/init.sls"
-
-	if [ ! -f "$secret_file" ]; then
-		# Get secret values
-		case "$secrets_category" in
-			cryptsetup-secret)
-				secret_file_txt=$(setup_cryptsetup_secrets "$secret_file")
-				if [[ "$?" != "0" ]]; then
-					echo "Error: Failed to prompt for $secrets_category values" >&2
-					exit 1
-				fi
-				;;
-		esac
-
-		# Save secret values
-		if ! mkdir -p "$secret_dir"; then
-			echo "Error: Failed to create $secrets_category directory" >&2
-			exit 1
-		fi
-
-		if ! echo "$secrets_file_txt" > "$secret_file"; then
-			echo "Error: Failed to save $secrets_category file" >&2
-			exit 1
-		fi
-	else
-		echo "$secrets_category pillar already exists"
+	# {{{3 Create recursive bind mount
+	if ! mount --rbind "/$dir" "/mnt/$dir"; then
+		echo "Error: Failed to create a recursive bind mount for /$dir in /mnt/$dir" >&2
+		mount_cleanup
+		exit 1
 	fi
 done
 
-if [ ! -f "$pillar_cryptsetup_secret_f" ]; then
-	# {{{3 Get values
-	# Volume secret
-	cryptsetup_volume_secret=$(prompt "Volume encryption password")
+# {{{1 Perform Void Linux installation
+echo "#########################"
+echo "# Installing Void Linux #"
+echo "#########################"
 
-	# {{{3 Write values
-	dd of="$pillar_cryptsetup_secret_f" << EOF
-cryptsetup:
-  volume_secret: $cryptsetup_volume_secret
-EOF
-	if [[ "$?" != "0" ]]; then
-		echo "Error: Failed to write to cryptsetup secret pillar file" >&2
-		exit 1
-	fi
-else
-	echo "Cryptsetup secrets already present"
-fi
+if ! xbps-install -Sy \
+	-R http://auto.voidlinux.org/current \
+	-r /mnt \
+	base-system lvm2 cryptsetup refind; then
 
-# {{{1 Apply Salt highstate
-echo "#######################"
-echo "# Applying Salt State #"
-echo "#######################"
-
-if [ ! -z "$salt_test" ]; then
-	salt_post_args="test=true"
-fi
-
-if ! salt-call --local state.apply $salt_post_args; then
-	echo "Error: Failed to run Salt" >&2
+	echo "Error: Failed to install Void Linux" >&2
+	mount_cleanup
 	exit 1
 fi
+
+# TODO: Setup refind
+
+# {{{1 Cleanup
+echo "###########"
+echo "# Cleanup #"
+echo "###########"
+
+# {{{2 Cleanup mounts
+mount_cleanup
+
+# {{{2 Close cryptsetup container
+if ! cryptsetup close "$container"; then
+	echo "Error: Failed to close DM-Crypt LUKS container \"$container\"" >&2
+	echo "You will have to manually run \"cryptsetup close $container\"" >&2
+	exit 1
+fi
+
+# {{{1 Done
+echo "########"
+echo "# Done #"
+echo "########"
