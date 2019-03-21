@@ -80,7 +80,7 @@ if [ -z "$container" ]; then
 	container="$default_container"
 fi
 
-if [ -z "$do_unmount" ]; then
+if [ ! -z "$do_unmount" ]; then
 	if [ ! -e "/dev/mapper/$container" ]; then
 		die "-c CONTAINER_NAME does not exist, must exist when -u option provided"
 	fi
