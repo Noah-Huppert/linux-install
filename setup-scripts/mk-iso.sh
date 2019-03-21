@@ -140,15 +140,18 @@ if [ ! -d "$mklive_dir" ]; then
 fi
 
 # {{{1 Make Void ISO
-# {{{2 Check running as sudoer
-echo "Running $mklive_sh as sudo, may prompt for your sudo password"
+mklive_run_args=("cd" "$mklive_dir" "&&")
 
+# {{{2 Check running as sudoer
 if [[ "$EUID" != "0" ]]; then
-	mklive_run_args="sudo"
+	mklive_run_args+=("sudo")
+
+	echo "Running $mklive_sh with \"sudo\", you may be prompted for your password"
 fi
 
-# {{{2 Construct ISO rootfs
+mklive_run_args+=("$mklive_sh")
 
+# {{{2 Construct ISO rootfs
 # {{{3 Make cleanup ISO rootfs directory on exit
 function iso_rootfs_cleanup() {
 	if [ -d "$iso_rootfs_dir" ]; then
@@ -175,8 +178,7 @@ if ! cp -R "$prog_dir/" "$iso_rootfs_repo_dir"; then
 fi
 
 # {{{2 Make ISO
-if ! cd "$mklive_dir" && $mklive_run_args \
-	"$mklive_sh" \
+if ! ${mklive_run_args[@]} \
 	-o "$iso_out" \
 	-p "$iso_pkgs" \
 	-I "$iso_rootfs_dir" \
@@ -185,4 +187,4 @@ if ! cd "$mklive_dir" && $mklive_run_args \
 	die "Failed to build Void Linux ISO"
 fi
 
-echo "DONE"
+echo "Created $iso_out"
