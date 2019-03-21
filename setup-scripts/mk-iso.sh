@@ -174,8 +174,11 @@ if ! cp -R "$(realpath $prog_dir/..)/" "$iso_rootfs_repo_dir"; then
 fi
 
 # {{{2 Make ISO
-if ! cd "$mklive_dir" && ${mklive_run_args[@]} \
-	"$mklive_sh" \
+if ! cd "$mklive_dir"; then
+	die "Failed to change into mklive directory: $mklive_dir"
+fi
+
+if ! ${mklive_run_args[@]} "$mklive_sh" \
 	-o "$iso_out" \
 	-p "$iso_pkgs" \
 	-I "$iso_rootfs_dir" \
