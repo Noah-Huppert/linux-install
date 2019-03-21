@@ -93,8 +93,28 @@ if ! echo -e "$config" >> "$wpa_config"; then
 	die "Failed to write configuration to $wpa_config"
 fi
 
-if ! sv restart dhcpcd; then
-	die "Failed to restart dhcpcd service"
+# {{{1 Enable wpa_supplicant service
+if ! ln -s /etc/sv/wpa_supplicant /var/service; then
+	die "Failed enable wpa_supplicant service"
+fi
+
+# {{{1 Wait for internet connection
+echo "Waiting for internet"
+
+for i in $(seq 20); do
+	if ! ping -c 1 google.com &> /dev/null; then
+		printf "."
+		sleep 1
+	else
+		internet_ok="true"
+		break
+	fi
+done
+
+if [ ! -z "$internet_ok" ]; then
+	echo "Connected to $ssid"
+else
+	die "Failed to connect to $ssid"
 fi
 
 echo "DONE"

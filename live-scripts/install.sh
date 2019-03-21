@@ -157,7 +157,7 @@ if ! sync; then
 	exit 1
 fi
 
-# TODO: Setup refind
+# {{{1 Run setup
 
 # {{{1 Cleanup
 echo "###########"
