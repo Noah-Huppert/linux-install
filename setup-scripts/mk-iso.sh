@@ -32,7 +32,9 @@ mklive_dir="/opt/void-mklive"
 mklive_sh="$mklive_dir/mklive.sh"
 
 iso_pkgs="neovim cryptsetup curl unzip"
-iso_rootfs_repo_dir="/opt/linux-install"
+
+iso_rootfs_dir="/var/tmp/void-mklive-tmp-iso-rootfs"
+iso_rootfs_repo_dir="$iso_rootfs_dir/opt/linux-install"
 
 arch_x86_64_glibc="x86_64"
 arch_x86_64_musl="x86_64-musl"
@@ -146,7 +148,6 @@ if [[ "$EUID" != "0" ]]; then
 fi
 
 # {{{2 Construct ISO rootfs
-iso_rootfs_dir="/var/tmp/void-mklive-tmp-iso-rootfs"
 
 # {{{3 Make cleanup ISO rootfs directory on exit
 function iso_rootfs_cleanup() {
@@ -165,7 +166,11 @@ if ! mkdir -p "$iso_rootfs_dir"; then
 fi
 
 # {{{3 Copy this repository into ISO rootfs
-if ! cp -R "$prog_dir" "$iso_rootfs_dir$iso_rootfs_repo_dir"; then
+if ! mkdir -p "$iso_rootfs_repo_dir"; then
+	die "Failed to create repository directory in ISO root file system"
+fi
+
+if ! cp -R "$prog_dir/" "$iso_rootfs_repo_dir"; then
 	die "Failed to copy repository into ISO root file system"
 fi
 
