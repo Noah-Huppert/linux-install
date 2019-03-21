@@ -52,7 +52,7 @@ fi
 
 # {{{1 Options
 # {{{2 Get
-while getopts "o:a:h" opt; do
+while getopts "o:a:fh" opt; do
 	case "$opt" in
 		o) iso_out="$OPTARG"  ;;
 		a) arch="$OPTARG"  ;;
