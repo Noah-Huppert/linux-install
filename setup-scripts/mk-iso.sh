@@ -169,7 +169,7 @@ if ! mkdir -p "$iso_rootfs_repo_dir"; then
 	die "Failed to create repository directory in ISO root file system"
 fi
 
-if ! cp -R "$prog_dir/" "$iso_rootfs_repo_dir"; then
+if ! cp -R "$(realpath $prog_dir/..)/" "$iso_rootfs_repo_dir"; then
 	die "Failed to copy repository into ISO root file system"
 fi
 
