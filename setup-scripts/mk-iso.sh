@@ -56,7 +56,7 @@ while getopts "o:a:h" opt; do
 		a) arch="$OPTARG"  ;;
 		f) force_iso="true" ;;
 		h)
-			echo "$0 -o ISO_OUT -a ARCH [-h]"
+			echo "$0 -o ISO_OUT -a ARCH [-f,-h]"
 			exit 1
 			;;
 
