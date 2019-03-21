@@ -165,7 +165,7 @@ if ! mkdir -p "$iso_rootfs_dir"; then
 fi
 
 # {{{3 Copy this repository into ISO rootfs
-if ! cp -R "$prog_dir" "$iso_rootfs_repo_dir"; then
+if ! cp -R "$prog_dir" "$iso_rootfs_dir$iso_rootfs_repo_dir"; then
 	die "Failed to copy repository into ISO root file system"
 fi
 
