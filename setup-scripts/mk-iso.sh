@@ -140,16 +140,12 @@ if [ ! -d "$mklive_dir" ]; then
 fi
 
 # {{{1 Make Void ISO
-mklive_run_args=("cd" "$mklive_dir" "&&")
-
 # {{{2 Check running as sudoer
 if [[ "$EUID" != "0" ]]; then
-	mklive_run_args+=("sudo")
+	mklive_run_args="sudo"
 
 	echo "Running $mklive_sh with \"sudo\", you may be prompted for your password"
 fi
-
-mklive_run_args+=("$mklive_sh")
 
 # {{{2 Construct ISO rootfs
 # {{{3 Make cleanup ISO rootfs directory on exit
@@ -178,7 +174,8 @@ if ! cp -R "$prog_dir/" "$iso_rootfs_repo_dir"; then
 fi
 
 # {{{2 Make ISO
-if ! ${mklive_run_args[@]} \
+if ! cd "$mklive_dir" && ${mklive_run_args[@]} \
+	"$mklive_sh" \
 	-o "$iso_out" \
 	-p "$iso_pkgs" \
 	-I "$iso_rootfs_dir" \
