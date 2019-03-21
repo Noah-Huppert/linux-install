@@ -8,7 +8,7 @@
 #
 # OPTIONS
 #
-#	-p ROOT_PARTITION    Root file system partition
+#	-r ROOT_PARTITION    Root file system partition
 #	-b BOOT_PARTITION    Boot partition
 #	-c CONTAINER_NAME    (Optional) Name of Luks container to use 
 #	                     when opening. Defaults to "cryptroot".
@@ -39,9 +39,9 @@ function die() {
 
 # {{{1 Options
 # {{{2 Get
-while getopts "p:b:c:uh" opt; do
+while getopts "r:b:c:uh" opt; do
 	case "$opt" in
-		p) root_partition="$OPTARG" ;;
+		r) root_partition="$OPTARG" ;;
 		b) boot_partition="$OPTARG" ;;
 		c) container="$OPTARG" ;;
 		u) do_unmount="true" ;;
@@ -98,7 +98,7 @@ if [ ! -z "$do_unmount" ]; then
 		die "Failed to close container \"$container\""
 	fi
 else # Otherwise mount
-	if ! cryptsetup "$root_partition" "$container"; then
+	if ! cryptsetup open "$root_partition" "$container"; then
 		die "Failed to open Luks container in partition \"$partition\""
 	fi
 
