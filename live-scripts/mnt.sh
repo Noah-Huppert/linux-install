@@ -29,7 +29,7 @@
 set -e
 
 # {{{1 Configuration
-default_container="cryptroot"
+container="cryptroot"
 
 # {{{1 Helpers
 function die() {
@@ -46,7 +46,7 @@ while getopts "r:b:c:uh" opt; do
 		c) container="$OPTARG" ;;
 		u) do_unmount="true" ;;
 		h)
-			echo "$0 -r ROOT_PARTITION -b BOOT_PARTITION -c CONTAINER_NAME [-u,-h]"
+			echo "$0 -r ROOT_PARTITION -b BOOT_PARTITION [-c CONTAINER_NAME,-u,-h]"
 			exit 1
 			;;
 		'?') die "Unknown option" ;;
@@ -74,7 +74,7 @@ fi
 
 # {{{3 CONTAINER_NAME
 if [ -z "$container" ]; then
-	container="$default_container"
+	die "-c CONTAINER_NAME option required"
 fi
 
 if [ ! -z "$do_unmount" ]; then
