@@ -46,13 +46,10 @@ while getopts "r:b:c:uh" opt; do
 		c) container="$OPTARG" ;;
 		u) do_unmount="true" ;;
 		h)
-			echo "$0 -p ROOT_PARTITION -b BOOT_PARTITION -c CONTAINER_NAME [-u,-h]"
+			echo "$0 -r ROOT_PARTITION -b BOOT_PARTITION -c CONTAINER_NAME [-u,-h]"
 			exit 1
 			;;
-		'?')
-			echo "Error: Unknown option \"$opt\"" >&2
-			exit 1
-			;;
+		'?') die "Unknown option" ;;
 	esac
 done
 
