@@ -21,7 +21,8 @@
 #	Installs a plain Void Linux setup in the specified DM-Crypt 
 #	LUKS container.
 #
-#	Then sets up the Refind boot loader in BOOT_PARTITION.
+#	Does not play nice if run multiple times in a row. Will erase any 
+#	existing Linux installations.
 #
 #?
 
@@ -148,7 +149,7 @@ fi
 if ! xbps-install -Sy \
 	-R http://mirror.clarkson.edu/voidlinux/current \
 	-r /mnt \
-	base-system lvm2 cryptsetup refind; then
+	base-system lvm2 salt; then
 
 	echo "Error: Failed to install Void Linux" >&2
 	mount_cleanup
@@ -161,6 +162,10 @@ if ! sync; then
 fi
 
 # {{{1 Run setup
+echo "#######################################"
+echo "# Running Setup Script In /mnt Chroot #"
+echo "#######################################"
+
 if ! xbps-uchroot /mnt "$prog_dir/setup.sh"; then
 	echo "Error: Failed to run setup script" >&2
 	exit 1
