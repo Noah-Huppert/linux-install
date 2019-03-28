@@ -14,3 +14,4 @@ See [INSTRUCTIONS.md](INSTRUCTIONS.md).
 - **live-scripts**: Scripts for installing Void linux
 - **setup-scripts**: Scripts for setting up the installation process
 - **salt**: Salt states for Void installation
+- **pillar**: Salt pillars for Void installation
