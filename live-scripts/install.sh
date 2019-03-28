@@ -28,6 +28,9 @@
 # {{{1 Exit on any error
 set -e
 
+# {{{1 Configuration
+prog_dir=$(realpath $(dirname "$0")) 
+
 # {{{1 Options
 # {{{2 Get
 while getopts "c:b:" opt; do
@@ -158,6 +161,10 @@ if ! sync; then
 fi
 
 # {{{1 Run setup
+if ! xbps-uchroot /mnt "$prog_dir/setup.sh"; then
+	echo "Error: Failed to run setup script" >&2
+	exit 1
+fi
 
 # {{{1 Cleanup
 echo "###########"
