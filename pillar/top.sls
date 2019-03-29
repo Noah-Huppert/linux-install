@@ -4,3 +4,4 @@ base:
     - kernel
     - initramfs
     - partitions
+    - bootloader
