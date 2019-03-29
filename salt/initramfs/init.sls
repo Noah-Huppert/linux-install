@@ -12,3 +12,4 @@
 {{ pillar.initramfs.dracut_xbps_hook_file }}:
   file.managed:
     - source: salt://initramfs/kernel.d/post-install/20-dracut
+    - template: jinja

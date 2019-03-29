@@ -5,18 +5,18 @@
 # Arguments passed to this script: $1 pkgname, $2 version.
 #
 
-# {{{1 Configuration
-out_file="boot/efi/void-initramfs.img"
+# Configuration
+out_file="{{ pillar.initramfs.initramfs_file_xbps_relpath }}"
 
-# {{{1 Arguments
+# Arguments
 PKGNAME="$1"
 VERSION="$2"
 
-# {{{1 Check for dracut
+# Check for dracut
 if [ ! -x bin/dracut ]; then
         exit 0
 fi
 
-# {{{1 Build initramfs
+# Build initramfs
 dracut -q --force "$out_file" ${VERSION}
 exit $?
