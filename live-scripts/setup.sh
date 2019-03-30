@@ -66,8 +66,9 @@ if [ ! -d "$linux_install_dir" ]; then
 	echo "#############################"
 
 	# {{{2 Configuration
-	linux_install_download_file="/var/tmp/linux-install-master.zip"
-	linux_install_unzipped_dir="/var/tmp/linux-install-master"
+	linux_install_download_dir="/var/tmp"
+	linux_install_download_file="$linux_install_download_dir/linux-install-master.zip"
+	linux_install_unzipped_dir="$linux_install_download_dir/linux-install-master"
 
 	# {{{2 Exit cleanly
 	function download_cleanup() {
@@ -89,6 +90,8 @@ if [ ! -d "$linux_install_dir" ]; then
 	trap download_cleanup EXIT 
 
 	# {{{2 Download
+	cd "$linux_install_download_dir"
+
 	if ! curl -L "$linux_install_download_url" > "$linux_install_download_file"; then
 		die "Failed to download linux-install"
 	fi
