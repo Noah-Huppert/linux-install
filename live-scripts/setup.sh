@@ -4,7 +4,11 @@
 #
 # USAGE
 #
-# 	setup.sh
+# 	setup.sh OPTIONS
+#
+# OPTIONS
+#
+#	-r    (Optional) Redownload linux-install even if it exists
 #
 # BEHAVIOR
 #
@@ -40,6 +44,14 @@ function die() {
 	exit 1
 }
 
+# {{{1 Options
+while getopts "r" opt; do
+	case "$opt" in
+		r) redownload="true" ;;
+		'?') die "Unknown option" ;;
+	esac
+done
+
 # {{{1 Install software dependencies
 install_dependencies=()
 
@@ -63,7 +75,15 @@ if [ ! -z "$install_dependencies" ]; then
 	fi
 fi
 
-# {{{1 Download linux-install repository if not present
+# {{{1 Download linux-install repository 
+# {{{2 If redownload option is set, delete linux-install directory if present
+if [ -d "$linux_install_dir" ] && [ -n "$redownload" ]; then
+	if ! rm -rf "$linux_install_dir"; then
+		die "Failed to delete linux-install directory so it can be re-downloaded"
+	fi
+fi
+
+# {{{2 Download if directory not present
 if [ ! -d "$linux_install_dir" ]; then
 	echo "#############################"
 	echo "# Downloading linux-install #"
