@@ -2,7 +2,7 @@
 
 kernel:
   # Name of linux package without version
-  pkg: linux
+  pkg: linux5.0
 
   # Kernel package version
   version: {{ version }}
