@@ -154,19 +154,35 @@ echo "#######################################"
 echo "# Running Setup Script In /mnt Chroot #"
 echo "#######################################"
 
+# {{{2 Copy setup script
 chroot_setup_script_path="/tmp/setup.sh"
-mnt_setup_script_path="/mnt$chroot_setup_script_path"
+setup_script_path="/mnt$chroot_setup_script_path"
 
-if ! cp "$prog_dir/setup.sh" "$mnt_setup_script_path"; then
+if ! cp "$prog_dir/setup.sh" "$setup_script_path"; then
 	die "Failed to copy setup script to mount directory"
 fi
 
-if ! xbps-uchroot /mnt "$chroot_setup_script_path"; then
-	die "Failed to run setup script"
+function cleanup_setup_script() {
+	if [ -f "$setup_script_path" ]; then
+		if ! rm "$setup_script_path"; then
+			die "Failed to cleanup setup script"
+		fi
+	fi
+}
+
+trap cleanup_setup_script EXIT
+
+# {{{2 Copy DNS resolver configuration
+chroot_resolve_conf_path="/etc/resolv.conf"
+resolve_conf_path="/mnt$chroot_resolve_conf_path"
+
+if ! cp "/etc/resolv.conf" "$resolve_conf_path"; then
+	die "Failed to copy DNS configuration to mount directory"
 fi
 
-if ! rm "$mnt_setup_script_path"; then
-	die "Failed to remove copy of setup script in mount directory"
+# {{{2 Run setup script
+if ! xbps-uchroot /mnt "$chroot_setup_script_path"; then
+	die "Failed to run setup script"
 fi
 
 # {{{1 Cleanup
