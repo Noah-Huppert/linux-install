@@ -33,7 +33,12 @@ set -e
 # {{{1 Configuration
 root_partition="/dev/nvme0n1p5"
 boot_partition="/dev/nvme0n1p1"
+
+root_mountpoint="/mnt"
+boot_mountpoint="/mnt/boot"
+
 container="cryptroot"
+container_mountpoint="/dev/mapper/$container"
 
 # {{{1 Helpers
 function die() {
@@ -82,7 +87,7 @@ if [ -z "$container" ]; then
 fi
 
 if [ ! -z "$do_unmount" ]; then
-	if [ ! -e "/dev/mapper/$container" ]; then
+	if [ ! -e "$container_mountpoint" ]; then
 		die "-c CONTAINER_NAME does not exist, must exist when -u option provided"
 	fi
 fi
@@ -91,8 +96,8 @@ fi
 if [ ! -z "$do_unmount" ]; then
 	echo "Unmounting"
 
-	if ! umount -R /mnt; then
-		die "Failed to recursively unmount /mnt"
+	if ! umount -R "$root_mountpoint"; then
+		die "Failed to recursively unmount $root_mountpoint"
 	fi
 
 	if ! cryptsetup close "$container"; then
@@ -103,15 +108,15 @@ else # Otherwise mount
 		die "Failed to open Luks container in partition \"$partition\""
 	fi
 
-	if ! mount "/dev/mapper/$container" /mnt; then
-		die "Failed to mount $container in /mnt"
+	if ! mount "$container_mountpoint" "$root_mountpoint"; then
+		die "Failed to mount $container in $root_mountpoint"
 	fi
 
-	if ! mkdir -p /mnt/boot/efi; then
-		die "Failed to make /mnt/boot/efi directory"
+	if ! mkdir -p "$boot_mountpoint"; then
+		die "Failed to make $boot_mountpoint directory"
 	fi
 
-	if ! mount "$boot_partition" /mnt/boot/efi; then
+	if ! mount "$boot_partition" "$boot_mountpoint"; then
 		die "Failed to mount boot partition"
 	fi
 fi
