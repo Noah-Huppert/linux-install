@@ -8,6 +8,7 @@
   file.managed:
     - source: salt://bootloader/check-refind-installed.sh
     - template: jinja
+    - makedirs: True
 
 refind-install:
   cmd.run:
