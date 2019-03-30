@@ -25,10 +25,14 @@ dependencies=("curl" "unzip")
 
 linux_install_download_url="https://github.com/Noah-Huppert/linux-install/archive/master.zip"
 linux_install_dir="/etc/linux-install"
+
+salt_parent_dir="/srv"
+
 linux_install_states_dir="$linux_install_dir/salt"
 linux_install_pillars_dir="$linux_install_dir/pillar"
-linux_install_states_link="/srv/salt"
-linux_install_pillars_link="/srv/pillar"
+
+linux_install_states_link="$salt_parent_dir/salt"
+linux_install_pillars_link="$salt_parent_dir/pillar"
 
 # {{{1 Helpers
 function die() {
@@ -104,6 +108,13 @@ if [ ! -d "$linux_install_dir" ]; then
 	# {{{2 Move
 	if ! mv "$linux_install_unzipped_dir" "$linux_install_dir"; then
 		die "Failed to move unzipped linux-install download to $linux_install_dir"
+	fi
+fi
+
+# {{{2 Ensure Salt parent directory exists
+if [ ! -e "$salt_parent_dir" ]; then
+	if ! mkdir -p "$salt_parent_dir"; then
+		die "Failed to make Salt parent directory"
 	fi
 fi
 
