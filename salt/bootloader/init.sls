@@ -15,3 +15,4 @@ refind-install:
     - unless: {{ pillar.bootloader.check_refind_installed_script.file }}
     - require:
       - pkg: {{ pillar.bootloader.refind_pkg }}
+      - file: {{ pillar.bootloader.check_refind_installed_script.file }}
