@@ -19,6 +19,6 @@ refind-install:
   cmd.run:
     - unless: {{ pillar.bootloader.run_check_refind_installed_script.file }}
     - require:
-      - pkg: {{ pillar.bootloader.refind_pkg }}
+      - pkg: {{ pillar.bootloader.refind.pkg }}
       - file: {{ pillar.bootloader.check_refind_installed_script.file }}
       - file: {{ pillar.bootloader.run_check_refind_installed_script.file }}
