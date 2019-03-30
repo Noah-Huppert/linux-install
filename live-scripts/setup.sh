@@ -21,6 +21,8 @@
 set -e
 
 # {{{1 Configuration
+dependencies=("curl" "unzip")
+
 linux_install_download_url="https://github.com/Noah-Huppert/linux-install/archive/master.zip"
 linux_install_dir="/etc/linux-install"
 linux_install_states_dir="$linux_install_dir/salt"
@@ -37,7 +39,7 @@ function die() {
 # {{{1 Install software dependencies
 install_dependencies=()
 
-for dep in curl; do
+for dep in "${dependencies[@]}"; do
 	# {{{2 Check if exists
 	if which "$dep" &> /dev/null; then
 		continue
