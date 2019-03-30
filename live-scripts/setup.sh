@@ -34,6 +34,21 @@ function die() {
 	exit 1
 }
 
+# {{{1 Install software dependencies
+for dep in curl; do
+	# {{{2 Check if exists
+	if which "$dep" &> /dev/null; then
+		continue
+	fi
+
+	# {{{2 Install if doesn't exist
+	echo "Installing $dep"
+
+	if ! xbps-install -Sy "$dep"; then
+		die "Failed to install $dep dependency"
+	fi
+done
+
 # {{{1 Download linux-install repository if not present
 if [ ! -d "$linux_install_dir" ]; then
 	echo "#############################"
