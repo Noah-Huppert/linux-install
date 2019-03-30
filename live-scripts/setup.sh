@@ -35,6 +35,8 @@ function die() {
 }
 
 # {{{1 Install software dependencies
+install_dependencies=()
+
 for dep in curl; do
 	# {{{2 Check if exists
 	if which "$dep" &> /dev/null; then
@@ -42,12 +44,18 @@ for dep in curl; do
 	fi
 
 	# {{{2 Install if doesn't exist
-	echo "Installing $dep"
-
-	if ! xbps-install -Sy "$dep"; then
-		die "Failed to install $dep dependency"
-	fi
+	install_dependencies+=("$dep")
 done
+
+if [ ! -z "$install_dependencies" ]; then
+	echo "###########################"
+	echo "# Installing dependencies #"
+	echo "###########################"
+
+	if ! xbps-install -Sy "${install_dependencies[@]}"; then
+		die "Failed to install dependencies: ${install_dependencies[@]}"
+	fi
+fi
 
 # {{{1 Download linux-install repository if not present
 if [ ! -d "$linux_install_dir" ]; then
@@ -76,7 +84,7 @@ if [ ! -d "$linux_install_dir" ]; then
 		fi
 	}
 
-	trap cleanup EXIT 
+	trap download_cleanup EXIT 
 
 	# {{{2 Download
 	if ! curl -L "$linux_install_download_url" > "$linux_install_download_file"; then
