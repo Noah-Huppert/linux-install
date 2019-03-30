@@ -8,8 +8,10 @@
 #
 # OPTIONS
 #
-#	-r ROOT_PARTITION    Root file system partition
-#	-b BOOT_PARTITION    Boot partition
+#	-r ROOT_PARTITION    (Optional) Root file system partition, defaults
+#	                     to /dev/nvme0n1p5
+#	-b BOOT_PARTITION    (Optional) Boot partition, defaults 
+#	                     to /dev/nvme0n1p1
 #	-c CONTAINER_NAME    (Optional) Name of Luks container to use 
 #	                     when opening. Defaults to "cryptroot".
 #	-u                   Unmount and close Luks container
@@ -29,6 +31,8 @@
 set -e
 
 # {{{1 Configuration
+root_partition="/dev/nvme0n1p5"
+boot_partition="/dev/nvme0n1p1"
 container="cryptroot"
 
 # {{{1 Helpers
@@ -46,7 +50,7 @@ while getopts "r:b:c:uh" opt; do
 		c) container="$OPTARG" ;;
 		u) do_unmount="true" ;;
 		h)
-			echo "$0 -r ROOT_PARTITION -b BOOT_PARTITION [-c CONTAINER_NAME,-u,-h]"
+			echo "$0 [-r ROOT_PARTITION,-b BOOT_PARTITION,-c CONTAINER_NAME,-u,-h]"
 			exit 1
 			;;
 		'?') die "Unknown option" ;;
