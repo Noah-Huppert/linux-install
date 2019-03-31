@@ -24,3 +24,12 @@ refind-install:
       - pkg: {{ pillar.bootloader.refind.pkg }}
       - file: {{ pillar.bootloader.check_refind_installed_script.file }}
       - file: {{ pillar.bootloader.run_check_refind_installed_script.file }}
+
+# Refind configuration
+{{ pillar.bootloader.refind.config_file }}:
+  file.managed:
+    - source: salt://bootloader/refind.conf
+    - template: jinja
+    - mode: 755
+    - require:
+      - cmd: refind-install

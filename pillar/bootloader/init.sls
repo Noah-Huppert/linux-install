@@ -4,12 +4,14 @@
 {% set partitions = pillar_partitions['partitions'] %}
 
 {% set check_refind_installed_dir = '/opt/check-refind-installed' %}
+{% set refind_dir = partitions['boot']['mountpoint'] + '/EFI/refind' %}
 
 bootloader:
   # Name of refind package
   refind:
     pkg: refind
-    directory: {{ partitions['boot']['mountpoint'] }}/EFI/refind
+    directory: {{ refind_dir }}
+    config_file: {{ refind_dir }}/refind.conf
 
 
   # Linux bootloader path inside boot partition
