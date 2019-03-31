@@ -164,11 +164,11 @@ if ! mkdir -p "$iso_rootfs_dir"; then
 fi
 
 # {{{3 Copy this repository into ISO rootfs
-if ! mkdir -p "$iso_rootfs_dir/opt"; then
+if ! mkdir -p "$iso_rootfs_dir/etc"; then
 	die "Failed to create repository directory in ISO root file system"
 fi
 
-if ! cp -R "$(realpath $prog_dir/..)/" "$iso_rootfs_dir/opt"; then
+if ! cp -R "$(realpath $prog_dir/..)/" "$iso_rootfs_dir/etc"; then
 	die "Failed to copy repository into ISO root file system"
 fi
 
