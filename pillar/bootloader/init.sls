@@ -14,8 +14,8 @@ bootloader:
     config_file: {{ refind_dir }}/refind.conf
 
 
-  # Linux bootloader path inside boot partition
-  linux_bootloader_path: /void-vmlinuz-{{ kernel['version'] }}
+  # Linux bootloader path relative to boot loader mount point
+  linux_bootloader_file: /void-vmlinuz-{{ kernel['version'] }}
 
 
   # Check refind installed script
