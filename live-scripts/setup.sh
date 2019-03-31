@@ -154,6 +154,10 @@ if [ ! -e "$linux_install_pillars_link" ]; then
 fi
 
 # {{{1 Apply salt states
+echo "########################"
+echo "# Applying Salt states #"
+echo "########################"
+
 if ! salt-call --local state.apply; then
 	die "Failed to apply Salt states"
 fi
