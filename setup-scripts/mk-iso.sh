@@ -31,7 +31,7 @@ prog_dir=$(realpath $(dirname "$0"))
 mklive_dir="/opt/void-mklive"
 mklive_sh="$mklive_dir/mklive.sh"
 
-iso_pkgs="neovim cryptsetup curl unzip"
+iso_pkgs="neovim cryptsetup curl unzip linux5.0"
 
 iso_rootfs_dir="/var/tmp/void-mklive-tmp-iso-rootfs"
 
