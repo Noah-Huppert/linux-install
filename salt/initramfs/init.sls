@@ -7,3 +7,9 @@
     - source: salt://initramfs/dracut.conf.d
     - dir_mode: 755
     - file_mode: 755
+
+rebuild_cmd:
+  cmd.run:
+    - name: xbps-reconfigure -f {{ pillar.kernel.pkg }}
+    - onchanges:
+      - file: {{ pillar.initramfs.dracut_config_dir }}
