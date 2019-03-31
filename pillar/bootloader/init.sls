@@ -15,7 +15,7 @@ bootloader:
 
 
   # Linux bootloader path relative to boot loader mount point
-  linux_bootloader_file: /void-vmlinuz-{{ kernel['version'] }}
+  linux_bootloader_file: /vmlinuz-{{ kernel['version'] }}
 
 
   # Check refind installed script
