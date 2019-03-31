@@ -20,7 +20,7 @@ set -e
 
 # {{{1 Configuration
 iso_base_path="https://public.funkyboy.zone/noah/void/"
-void_version="20190330"
+void_version="20190331"
 
 void_arch_glibc="x86_64"
 void_arch_musl="x86_64-musl"
