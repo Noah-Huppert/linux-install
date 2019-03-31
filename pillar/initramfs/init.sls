@@ -5,7 +5,7 @@
 
 initramfs:
   # Path to initramfs file relative to boot directory mount point
-  file: initramfs-{{ kernel['version'] }}.img
+  file: /initramfs-{{ kernel['version'] }}.img
 
   # Dracut configuration directory
   dracut_config_dir: /etc/dracut.conf.d
