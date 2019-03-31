@@ -1,8 +1,8 @@
-{% set version = '4.20.17_1' %}
+{% set version = '5.0.5_1' %}
 
 kernel:
   # Name of linux package without version
-  pkg: linux4.20
+  pkg: linux5.0
 
   # Kernel package version
   version: {{ version }}
