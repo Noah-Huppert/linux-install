@@ -38,6 +38,8 @@ iso_rootfs_dir="/var/tmp/void-mklive-tmp-iso-rootfs"
 arch_x86_64_glibc="x86_64"
 arch_x86_64_musl="x86_64-musl"
 
+kernel_version="linux5.0"
+
 # {{{1 Helpers
 function die() {
 	echo "Error: $@" >&2
@@ -181,7 +183,8 @@ if ! ${mklive_run_args[@]} "$mklive_sh" \
 	-o "$iso_out" \
 	-p "$iso_pkgs" \
 	-I "$iso_rootfs_dir" \
-	-a "$arch"; then
+	-a "$arch" \
+	-v "$kernel_version"; then
 
 	die "Failed to build Void Linux ISO"
 fi
