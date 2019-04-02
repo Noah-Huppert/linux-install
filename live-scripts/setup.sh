@@ -90,20 +90,42 @@ if [ ! -d "$repo_dir" ]; then
 	echo "#############################"
 
 	# {{{3 Clone
-	if ! git clone --recurse-submodules "$repo_url" "$repo_dir"; then
+	if ! git clone "$repo_url" "$repo_dir"; then
 		die "Failed to clone linux-install"
+	fi
+
+	# {{{3 Modify submodules to use https
+	cd "$repo_dir"
+
+	tmp_gitmodules="/tmp/gitmodules"
+
+	if ! cat .gitmodules | sed 's/git@github.com:/https:\/\/github.com\//g' > "$tmp_gitmodules"; then
+		die "Failed to update gitmodules to use https"
+	fi
+
+	if ! mv "$tmp_gitmodules" ".gitmodules"; then
+		die "Failed to move updated gitmodules file"
+	fi
+
+	# {{{3 Initialize submodules
+	if ! git submodule update --init --recursive; then
+		die "Failed to initialize linux install Git submodules"
 	fi
 fi
 
 # {{{2 Link
+# {{{3 Ensure salt parent directory exists
+if ! mkdir -p "$salt_parent_dir"; then
+	die "Failed to make salt parent directory"
+fi
+
 for link_info in "${repo_links[@]}"; do
 	original_dir=$(echo "$link_info" | awk -F ':' '{ print $1 }')
 	link_dir=$(echo "$link_info" | awk -F ':' '{ print $2 }')
-	link_parent_dir=$(realpath "$link_dir/..")
 	
-	# {{{3 Ensure parent directory exists
-	if ! mkdir -p "$link_parent_dir"; then
-		die "Failed to make parent directory for link $link_info"
+	# {{{3 Check if link exists
+	if [ -L "$link_dir" ]; then
+		continue
 	fi
 
 	# {{{3 Link
