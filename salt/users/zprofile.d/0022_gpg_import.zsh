@@ -16,17 +16,10 @@ for f in "${import_files[@]}"; do
 done
 
 # Check if key already imported
-if [ -d "$gpg_dir" ] && [ -f "$gpg_dir/pubring.kbx" ] && [ -f "$gpg_dir/trustdb.gpg" ]; then
-	private_keys=$(gpg -K)
+gpg_keys_added_file="{{ pillar.users.added_keys_parent_directory }}/$USER/gpg"
 
-	if [[ "$?" != "0" ]]; then
-		echo "Error: unit: gpg_import: Failed to list GPG private keys" &2
-		return 1
-	fi
-
-	if [ ! -z "$private_keys" ]; then
-		return 0
-	fi
+if [ -f "$gpg_keys_added_file" ]; then
+	return 0
 fi
 
 # Import
@@ -62,3 +55,5 @@ if ! gpg --import-ownertrust < "$import_trust_file"; then
 	echo "Error: unit: gpg_import: Failed to import owner trust" >&2
 	return 1
 fi
+
+echo "OK" > "$gpg_keys_added_file"
