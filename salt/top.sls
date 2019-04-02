@@ -13,3 +13,6 @@ base:
     - system-configuration
     - xbps-configuration
     - ntp
+
+    # User level configuration
+    - users
