@@ -3,5 +3,5 @@
 
 {{ pillar.sudoers.sudo_no_password_file }}:
   file.managed:
-    - source: salt://sudo-no-password/sudoers.d/sudo-no-password
+    - source: salt://sudoers/sudoers.d/sudo-no-password
     - template: jinja
