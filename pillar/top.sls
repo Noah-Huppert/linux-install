@@ -25,5 +25,6 @@ base:
     - linux-install-repo
 
     # Applications and tools
+    - xorg
     - gpg
     - git-secret

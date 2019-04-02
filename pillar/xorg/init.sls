@@ -1,0 +1,2 @@
+xorg:
+  package: xorg
