@@ -59,20 +59,12 @@ echo "#" >> "$zshrc_file"
 echo "# Call zsh unit functions" >> "$zshrc_file"
 echo "#" >> "$zshrc_file"
 
-for profile_name in "${profile_names}"; do
-	# {{{2 Documentation notes
-	echo "" >> "$zshrc_file"
-	echo "# ... $profile_name" >> "$zshrc_file"
-
-	# {{{2 Set zsh_unit meta variable
-	echo "zsh_unit=\"$profile_name\"" >> "$zshrc_file"
-
-	# {{{2 Call function and handle errors
-	echo "if ! $profile_name; then" >> "$zshrc_file"
-	echo "    echo \"Error: failed to run \\\"$profile_name\\\" unit\" >&2" >> "$zshrc_file"
-	echo "    return 1" >> "$zshrc_file"
-	echo "fi" >> "$zshrc_file"
-done
+echo "for profile_name in ${profile_names[@]}; do" >> "$zshrc_file"
+echo '    zsh_unit="$profile_name"' >> "$zshrc_file"
+echo '    if ! $profile_name; then' >> "$zshrc_file"
+echo '        echo "Error: failed to run \"$profile_name\" zsh unit" >&2' >> "$zshrc_file"
+echo "    fi" >> "$zshrc_file"
+echo "done" >> "$zshrc_file"
 
 # {{{1 Set correct permissions
 if ! chmod 600 "$zshrc_file"; then
