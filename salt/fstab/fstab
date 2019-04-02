@@ -6,4 +6,4 @@
 #
 
 # {{ pillar.partitions.boot.name }}
-UUID={{ boot.uuid }} {{ boot.mountpoint }} {{ boot.filesystem_type }} {{ boot['mount_options'] || join(",") }} {{ boot.mount_option_dump }} {{ boot.mount_option_pass }}
+UUID={{ boot.uuid }} {{ boot.mountpoint }} {{ boot.filesystem_type }} {{ boot.mount_options | join(",") }} {{ boot.mount_option_dump }} {{ boot.mount_option_pass }}
