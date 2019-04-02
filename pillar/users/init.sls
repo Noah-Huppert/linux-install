@@ -15,6 +15,9 @@ users:
   # Script to "bake" Zsh profiles
   bake_zsh_profiles_script: /opt/bake-zprofiles/bake-zprofiles.sh
 
+  # Path to Zsh shell
+  zsh_shell: /bin/zsh
+
   # Users
   users:
     noah:

@@ -2,6 +2,7 @@
 {{ pillar.users.bake_zsh_profiles_script }}:
   file.managed:
     - source: salt://users/bake-zprofiles.sh
+    - makedirs: True
     - mode: 755
 
 # Configure users
@@ -12,6 +13,7 @@
 {{ user.name }}:
   user.present:
     - password: {{ user.password_hash }}
+    - shell: {{ pillar.user.zsh_shell }}
 
 # SSH key
 {% if 'ssh_key_name' in user %}
