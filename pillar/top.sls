@@ -23,3 +23,6 @@ base:
 
     - sudoers
     - linux-install-repo
+
+    # Applications and tools
+    - gpg
