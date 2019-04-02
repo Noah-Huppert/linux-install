@@ -32,3 +32,4 @@ base:
     - git-secret
 
     - alacritty
+    - tmux

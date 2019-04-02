@@ -93,8 +93,9 @@ bake_zsh_profiles-{{ user.name }}:
     - name: {{ pillar.users.bake_zsh_profiles_script }}
     - user: {{ user.name }}
     - onchanges:
-      - file: {{ zsh_profiles_dir }}
       - file: {{ pillar.users.bake_zsh_profiles_script }}
+    - watch:
+      - file: {{ zsh_profiles_dir }}
     - require:
       - file: {{ zsh_profiles_dir }}
       - file: {{ pillar.users.bake_zsh_profiles_script }}
