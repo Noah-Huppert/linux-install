@@ -31,7 +31,7 @@ partitions:
     name: /dev/nvme0n1p5
 
     # UUID
-    uuid: dba54434-b184-4e89-800d-299fe57165d4
+    uuid: 1858abc3-e456-4a2e-9843-6d1deefae127
 
     # Mount point
     mountpoint: /
