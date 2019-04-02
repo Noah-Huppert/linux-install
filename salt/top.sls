@@ -26,3 +26,4 @@ base:
 
     # Applications and tools
     - gpg
+    - git

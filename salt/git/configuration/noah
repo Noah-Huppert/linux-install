@@ -1,0 +1,19 @@
+[user]
+	name = Noah Huppert
+	email = {{ pillar.git.emails.noah }}
+	signingkey = {{ pillar.gpg.user_keys.noah }}
+[alias]
+	a = add .
+	s = status
+	d = diff
+	dc = diff --cached
+	c = commit -S -m
+	p = push
+	po = push origin
+	pom = push origin master
+	pu = pull
+	pul = pull origin master
+[push]
+	default = current
+[gpg]
+	program = gpg2
