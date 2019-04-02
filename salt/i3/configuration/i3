@@ -187,7 +187,7 @@ bindsym $mod+r mode "resize"
 #
 #}
 #exec --no-startup-id $HOME/.config/polybar/launch.sh
-exec --no-startup-id feh --bg-scale {{ pillar.rice.background_image_file }}
+exec --no-startup-id feh --fullscreen --zoom fill {{ pillar.rice.background_image_file }}
 exec --no-startup-id compton --config ~/.config/compton/compton.conf
 exec --no-startup-id dunst -config ~/.config/dunst/dunst.conf
 
