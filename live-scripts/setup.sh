@@ -14,8 +14,7 @@
 #
 #	Runs Salt to setup an already installed Linux environment.
 #
-#	Pre-conditions: Connected to wifi, Salt installed. Curl installed. 
-#	Unzip installed.
+#	Pre-conditions: Connected to wifi, Salt installed.
 #
 #	Can be run on multiple times on an existing Linux installation.
 #
@@ -25,9 +24,9 @@
 set -e
 
 # {{{1 Configuration
-dependencies=("curl" "unzip")
+dependencies=("curl" "unzip" "git")
 
-linux_install_download_url="https://github.com/Noah-Huppert/linux-install/archive/master.zip"
+linux_install_repo="https://github.com/Noah-Huppert/linux-install.git"
 linux_install_dir="/etc/linux-install"
 
 salt_parent_dir="/srv"
@@ -89,45 +88,9 @@ if [ ! -d "$linux_install_dir" ]; then
 	echo "# Downloading linux-install #"
 	echo "#############################"
 
-	# {{{2 Configuration
-	linux_install_download_dir="/var/tmp"
-	linux_install_download_file="$linux_install_download_dir/linux-install-master.zip"
-	linux_install_unzipped_dir="$linux_install_download_dir/linux-install-master"
-
-	# {{{2 Exit cleanly
-	function download_cleanup() {
-		# Cleanup download file
-		if [ -f "$linux_install_download_file" ]; then
-			if ! rm "$linux_install_download_file"; then
-				die "Failed to remove $linux_install_download_file file, must be removed manually"
-			fi
-		fi
-
-		# Cleanup unzipped directory if the script failed when moving it
-		if [ -d "$linux_install_unzipped_dir" ]; then
-			if ! rm -rf "$linux_install_unzipped_dir"; then
-				die "Failed to remove $linux_install_unzipped_dir directory, must be removed manually"
-			fi
-		fi
-	}
-
-	trap download_cleanup EXIT 
-
-	# {{{2 Download
-	cd "$linux_install_download_dir"
-
-	if ! curl -L "$linux_install_download_url" > "$linux_install_download_file"; then
-		die "Failed to download linux-install"
-	fi
-
-	# {{{2 Unzip
-	if ! unzip "$linux_install_download_file"; then
-		die "Failed to unzip linux-install download"
-	fi
-
-	# {{{2 Move
-	if ! mv "$linux_install_unzipped_dir" "$linux_install_dir"; then
-		die "Failed to move unzipped linux-install download to $linux_install_dir"
+	# {{{3 Clone
+	if ! git clone --recurse-submodules "$linux_install_repo" "$linux_install_dir"; then
+		die "Failed to clone linux-install"
 	fi
 fi
 
