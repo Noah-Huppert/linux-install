@@ -1,0 +1,2 @@
+fstab:
+  file: /etc/fstab

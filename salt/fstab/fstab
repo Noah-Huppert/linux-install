@@ -1,0 +1,9 @@
+{%- set boot = pillar['partitions']['boot'] %}
+# 
+# /etc/fstab: static file system information
+#
+# <file system>	<dir>	<type>	<options>	<dump>	<pass>
+#
+
+# {{ pillar.partitions.boot.name }}
+UUID={{ boot.uuid }} {{ boot.mountpoint }} {{ boot.filesystem_type }} {{ boot['mount_options'] || join(",") }} {{ boot.mount_option_dump }} {{ boot.mount_option_pass }}
