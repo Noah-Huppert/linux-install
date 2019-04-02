@@ -22,3 +22,4 @@ base:
     - users
 
     - sudoers
+    - linux-install-repo
