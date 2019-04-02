@@ -48,19 +48,20 @@
   file.recurse:
     - source: salt://users/zprofile.d
     - user: {{ user.name }}
-    - group: {{ user.group }}
+    - group: {{ user.name }}
     - dir_mode: 755
     - file_mode: 755
     - require:
-      - user: {{ user.present }}
+      - user: {{ user.name }}
 
 bake_zsh_profiles-{{ user.name }}:
   cmd.run:
     - name: {{ pillar.users.bake_zsh_profiles_script }}
     - user: {{ user.name }}
     - onchanges:
-      - file: {{ zsh_profiles_dir }}/*
+      - file: {{ zsh_profiles_dir }}
     - require:
       - file: {{ zsh_profiles_dir }}
+      - file: {{ pillar.users.bake_zsh_profiles_script }}
 
 {% endfor %}
