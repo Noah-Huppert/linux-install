@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 #?
 # setup.sh - Configure and install programs in Linux environment
 #
@@ -26,16 +26,17 @@ set -e
 # {{{1 Configuration
 dependencies=("curl" "unzip" "git")
 
-linux_install_repo="https://github.com/Noah-Huppert/linux-install.git"
-linux_install_dir="/etc/linux-install"
+repo_url="https://github.com/Noah-Huppert/linux-install.git"
+repo_dir="/etc/linux-install"
 
 salt_parent_dir="/srv"
 
-linux_install_states_dir="$linux_install_dir/salt"
-linux_install_pillars_dir="$linux_install_dir/pillar"
-
-linux_install_states_link="$salt_parent_dir/salt"
-linux_install_pillars_link="$salt_parent_dir/pillar"
+# Array of values in format original_dir:link_dir
+repo_links=()
+repo_links+=("$repo_dir/salt:$salt_parent_dir/salt")
+repo_links+=("$repo_dir/pillar:$salt_parent_dir/pillar")
+repo_links+=("$repo_dir/secrets/salt:$salt_parent_dir/salt-secret")
+repo_links+=("$repo_dir/secrets/pillar:$salt_parent_dir/pillar-secret")
 
 # {{{1 Helpers
 function die() {
@@ -76,51 +77,52 @@ fi
 
 # {{{1 Download linux-install repository 
 # {{{2 If redownload option is set, delete linux-install directory if present
-if [ -d "$linux_install_dir" ] && [ -n "$redownload" ]; then
-	if ! rm -rf "$linux_install_dir"; then
+if [ -d "$repo_dir" ] && [ -n "$redownload" ]; then
+	if ! rm -rf "$repo_dir"; then
 		die "Failed to delete linux-install directory so it can be re-downloaded"
 	fi
 fi
 
 # {{{2 Download if directory not present
-if [ ! -d "$linux_install_dir" ]; then
+if [ ! -d "$repo_dir" ]; then
 	echo "#############################"
 	echo "# Downloading linux-install #"
 	echo "#############################"
 
 	# {{{3 Clone
-	if ! git clone --recurse-submodules "$linux_install_repo" "$linux_install_dir"; then
+	if ! git clone --recurse-submodules "$repo_url" "$repo_dir"; then
 		die "Failed to clone linux-install"
 	fi
 fi
 
-# {{{2 Ensure Salt parent directory exists
-if [ ! -e "$salt_parent_dir" ]; then
-	if ! mkdir -p "$salt_parent_dir"; then
-		die "Failed to make Salt parent directory"
+# {{{2 Link
+for link_info in "${repo_links[@]}"; do
+	original_dir=$(echo "$link_info" | awk -F ':' '{ print $1 }')
+	link_dir=$(echo "$link_info" | awk -F ':' '{ print $2 }')
+	link_parent_dir=$(realpath "$link_dir/..")
+	
+	# {{{3 Ensure parent directory exists
+	if ! mkdir -p "$link_parent_dir"; then
+		die "Failed to make parent directory for link $link_info"
 	fi
-fi
 
-# {{{2 Link Salt states
-if [ ! -e "$linux_install_states_link" ]; then
-	# {{{2 Link
-	if ! ln -s "$linux_install_states_dir" "$linux_install_states_link"; then
-		die "Failed to link Salt states directory"
+	# {{{3 Link
+	if ! ln -s "$original_dir" "$link_dir"; then
+		die "Failed to link $link_info"
 	fi
-fi
-
-# {{{2 Link Salt pillars
-if [ ! -e "$linux_install_pillars_link" ]; then
-	if ! ln -s "$linux_install_pillars_dir" "$linux_install_pillars_link"; then
-		die "Failed to link Salt pillars directory"
-	fi
-fi
+done
 
 # {{{1 Apply salt states
 echo "########################"
 echo "# Applying Salt states #"
 echo "########################"
 
+# {{{2 Configure just Salt minion so we can read all our states
+if ! salt-call --local state.apply salt-configuration; then
+	die "Failed to apply salt-configuration Salt state"
+fi
+
+# {{{2 Run highstate
 if ! salt-call --local state.apply; then
-	die "Failed to apply Salt states"
+	die "Failed to apply Salt high state"
 fi
