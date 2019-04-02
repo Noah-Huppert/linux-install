@@ -9,6 +9,7 @@ base:
 
     # Higher level system configuration
     - system-configuration
+    - hostname
     - xbps-configuration
     - ntp
 
