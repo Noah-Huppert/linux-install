@@ -22,21 +22,22 @@ function die() {
 }
 
 # {{{1 Clear old .zshrc
-if echo "" > "$HOME/.zshrc"; then
+if ! echo "" > "$HOME/.zshrc"; then
 	die "Failed to clear old .zshrc"
 fi
 
 # {{{1 Bake
 while read -r zsh_profile_file; do
+	echo "" >> "$HOME/.zshrc"
 	echo "#" >> "$HOME/.zshrc"
 	echo "# $zsh_profile_file" >> "$HOME/.zshrc"
 	echo "#" >> "$HOME/.zshrc"
 
-	if ! cat "$zsh_profile_file" >> "$HOME/.zshrc"; then
+	if ! cat "$HOME/.zprofile.d/$zsh_profile_file" >> "$HOME/.zshrc"; then
 		die "Failed to bake $zsh_profile_file"
 	fi
 
-done <<< $(ls "$HOME/zprofile.d" | sort)
+done <<< $(ls "$HOME/.zprofile.d" | sort)
 
 # {{{1 Set correct permissions
 if ! chmod 600 "$HOME/.zshrc"; then
