@@ -8,4 +8,5 @@ base:
     - fstab
 
     # Higher level system configuration
+    - system-configuration
     - xbps-configuration
