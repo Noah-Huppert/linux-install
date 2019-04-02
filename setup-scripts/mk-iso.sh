@@ -8,10 +8,11 @@
 #
 # OPTIONS
 #
-#	-o ISO_OUT    Location to write ISO
-#	-a ARCH       Architecture to build ISO of
-#	-f            Force ISO to be rebuilt
-#	-h            Show help text
+#	-o ISO_OUT       Location to write ISO
+#	-a ARCH          Architecture to build ISO of
+#	-m MKLIVE_DIR    (Optional) Alternate directory which contains void-mklive tool
+#	-f               Force ISO to be rebuilt
+#	-h               Show help text
 #
 # BEHAVIOR
 #
@@ -29,7 +30,6 @@ set -e
 prog_dir=$(realpath $(dirname "$0"))
 
 mklive_dir="/opt/void-mklive"
-mklive_sh="$mklive_dir/mklive.sh"
 
 iso_pkgs="neovim cryptsetup curl unzip linux5.0"
 
@@ -53,11 +53,12 @@ fi
 
 # {{{1 Options
 # {{{2 Get
-while getopts "o:a:fh" opt; do
+while getopts "o:a:m:fh" opt; do
 	case "$opt" in
 		o) iso_out="$OPTARG"  ;;
 		a) arch="$OPTARG"  ;;
 		f) force_iso="true" ;;
+		m) mklive_dir="$OPTARG" ;;
 		h)
 			echo "$0 -o ISO_OUT -a ARCH [-f,-h]"
 			exit 1
@@ -83,6 +84,10 @@ fi
 if [[ "$arch" != "$arch_x86_64_glibc" && "$arch" != "$arch_x86_64_musl" ]]; then
 	die "-a ARCH must be one of: $arch_x86_64_glibc, $arch_x86_64_musl"
 fi
+
+# {{{2 Process
+# {{{3 mklive_dir
+mklive_sh="$mklive_dir/mklive.sh"
 
 # {{{1 Check if ISO has already been built
 if [ -f "$iso_out" ]; then
