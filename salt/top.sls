@@ -12,10 +12,11 @@ base:
     # Higher level system configuration
     - system-configuration
     - hostname
+    - internet
     - xbps-configuration
     - ntp
 
-    # User level configuration
+    # User configuration
     - zsh
 
     - users

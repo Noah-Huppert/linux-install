@@ -25,7 +25,9 @@ users:
   #
   #   - name (String): Login
   #   - id (Integer): UID and GID
-  #   - password_hash (String): SHA 512 password hash, generate with `openssl passwd -6`
+  #   - password_hash (String): SHA 512 password hash, generate with 
+  #       the `openssl passwd -6` command. These keys are stored in the 
+  #       users-secret pillar
   #   - ssh_key_name (String, Optional): Name of SSH key in the 
   #       salt://users-secret/keys/NAME/ directory without a file extension
   #   - groups (String list, Optional): List of keys from groups dict in this

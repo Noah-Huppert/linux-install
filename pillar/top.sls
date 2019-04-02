@@ -10,6 +10,8 @@ base:
     # Higher level system configuration
     - system-configuration
     - hostname
+    - internet
+    - internet-secret
     - xbps-configuration
     - ntp
 
