@@ -28,7 +28,7 @@
     - uid: {{ user.id }}
     - gid: {{ user.id }}
     - password: {{ user.password_hash }}
-    - shell: {{ pillar.user.zsh_shell }}
+    - shell: {{ pillar.users.zsh_shell }}
     {%- if 'groups' in user %}
     - groups:
       {%- for group_key in user.groups %}
@@ -49,6 +49,8 @@
   file.directory:
     - makedirs: True
     - dir_mode: 700
+    - user: {{ user.name }}
+    - group: {{ user.name }}
     - require:
       - user: {{ user.name }}
 
@@ -56,6 +58,8 @@
   file.managed:
     - source: salt://users-secret/keys/{{ user.name }}/{{ user.ssh_key_name }}
     - mode: 600
+    - user: {{ user.name }}
+    - group: {{ user.name }}
     - require:
       - file: {{ ssh_dir }}
 
@@ -63,6 +67,8 @@
   file.managed:
     - source: salt://users-secret/keys/{{ user.name }}/{{ user.ssh_key_name }}.pub
     - mode: 644
+    - user: {{ user.name }}
+    - group: {{ user.name }}
     - require:
       - file: {{ ssh_dir }}
 
@@ -98,6 +104,8 @@ bake_zsh_profiles-{{ user.name }}:
   file.directory:
     - makedirs: True
     - dir_mode: 770
+    - user: {{ user.name }}
+    - group: {{ user.name }}
     - require:
       - file: {{ pillar.users.added_keys_parent_directory }}
 
