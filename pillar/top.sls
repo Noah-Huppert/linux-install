@@ -13,4 +13,7 @@ base:
     - ntp
 
     # User level configuration
+    - zsh 
+
     - users
+    - users-secret

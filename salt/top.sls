@@ -15,4 +15,6 @@ base:
     - ntp
 
     # User level configuration
+    - zsh
+
     - users

@@ -1,0 +1,2 @@
+zsh:
+  pkg: zsh
