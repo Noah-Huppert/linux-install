@@ -1,8 +1,10 @@
 # Install and configure i3
 
 # Install
-{{ pillar.i3.pkg }}:
+{% for pkg in pillar['i3']['pkgs'] %}
+{{ pkg }}:
   pkg.installed
+{% endfor %}
 
 # Configuration
 {{ pillar.i3.configuration_file }}:
