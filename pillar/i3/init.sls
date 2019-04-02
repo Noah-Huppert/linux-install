@@ -1,7 +1,7 @@
 i3:
   # i3 related packages
   pkgs: 
-    - i3 
+    - i3-gaps 
     - i3lock
 
   # i3 Configuration file
