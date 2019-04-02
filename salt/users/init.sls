@@ -5,6 +5,13 @@
     - makedirs: True
     - mode: 755
 
+# Configure groups
+{% for _, group in pillar['users']['groups'].items() %}
+{{ group.name }}:
+  group.present:
+    - gid: {{ group.id }}
+{% endfor %}
+
 # Configure users
 {% for _, user in pillar['users']['users'].items() %}
 {% set home_dir = '/home/' + user.name %}
@@ -12,8 +19,20 @@
 # Create user
 {{ user.name }}:
   user.present:
+    - uid: {{ user.id }}
+    - gid: {{ user.id }}
     - password: {{ user.password_hash }}
     - shell: {{ pillar.user.zsh_shell }}
+    {%- if 'groups' in user %}
+    - groups:
+      {%- for group_key in user.groups %}
+      - {{ pillar['users']['groups'][group_key]['name'] }}
+      {%- endfor %}
+    - require:
+      {%- for group_key in user.groups %}
+      - group: {{ pillar['users']['groups'][group_key]['name'] }}
+      {%- endfor %}
+    {%- endif %}
 
 # SSH key
 {% if 'ssh_key_name' in user %}
