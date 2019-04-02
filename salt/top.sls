@@ -18,3 +18,5 @@ base:
     - zsh
 
     - users
+
+    - sudoers

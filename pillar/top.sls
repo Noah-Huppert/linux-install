@@ -17,3 +17,5 @@ base:
 
     - users
     - users-secret
+
+    - sudoers
