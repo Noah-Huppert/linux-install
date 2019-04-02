@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 #?
 # setup.sh - Configure and install programs in Linux environment
 #
