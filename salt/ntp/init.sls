@@ -12,7 +12,7 @@
       - pkg: {{ pillar.ntp.pkg }}
 
 {{ pillar.ntp.service }}-running:
-  service.enabled:
+  service.running:
     - name: {{ pillar.ntp.service }}
     - require:
       - service: {{ pillar.ntp.service }}-enabled
