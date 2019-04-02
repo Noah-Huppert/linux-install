@@ -9,6 +9,11 @@ users:
   # Path to Zsh shell
   zsh_shell: /bin/zsh
 
+  # Directory which keeps track of which keys have been added for a user.
+  # This directory will have a sub-directory for each user where the zsh 
+  # profile can put state files.
+  added_keys_parent_directory: /var/added-user-keys
+
   # Groups configuration, dict of group objects with the keys:
   #
   #   - name (String): Name

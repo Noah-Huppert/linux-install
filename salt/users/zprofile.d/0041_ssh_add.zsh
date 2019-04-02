@@ -12,35 +12,37 @@ if [ -z "$ssh_keys" ]; then # Doesn't exist
 	return 0
 fi
 
-# Get names of keys added to ssh-agent
-added_ssh_keys=$(ssh-add -L 2>&1)
+# File which we record already added keys inside of
+added_ssh_keys_file="{{ pillar.users.added_keys_parent_directory }}/$USER/ssh"
 
-if [[ "$?" != "0" ]]; then
-	if [[ "$added_ssh_keys" == "The agent has no identities." ]]; then
-		added_ssh_keys=""
-	else
-		echo "Error: unit: ssh_add: Failed to get names of SSH private keys added to ssh-agent" >&2
-		return 1
-	fi
-fi
-
-# Check if added to ssh-agent
+# Check if fingerprint of each key is in the file
 while read key_file; do
-	# Get public key 
-	public_key=$(cat "$key_file.pub")
+	# Get fingerprint
+	key_fingerprint=$(ssh-keygen -lf "$key_file" | awk '{ print $2 }' | awk -F ':' '{ print $2 }')
+
 	if [[ "$?" != "0" ]]; then
-		echo "Error: unit: ssh_add: Failed to get public key contents for \"$key_file\"" >&2
+		echo "Error: unit: ssh_add: Failed to get \"$key_file\" SSH key fingerprint" >&2
 		return 1
 	fi
 
-	if echo "$added_ssh_keys" | grep "$public_key" &> /dev/null; then # Already added
-		continue
+	# If added, skip
+	if [ -f "$added_ssh_keys_file" ]; then
+		if ! cat "$added_ssh_keys_file" | grep "$key_fingerprint"; then
+			continue
+		fi
 	fi
 
+	# Add
 	echo "unit: ssh_add: Adding \"$key_file\" SSH private key to ssh-agent (May be prompted for password)"
 
 	if ! ssh-add "$key_file"; then
 		echo "Error: unit: ssh_add: Failed to add \"$key_file\" SSH private key to ssh-agent" >&2
+		return 1
+	fi
+
+	# Record we added it
+	if ! echo "key_fingerprint" >> "$added_ssh_keys_file"; then
+		echo "Error: unit: ssh_add: Failed to record that \"$key_file\" key was added to the SSH agent" >&2
 		return 1
 	fi
 done <<< "$ssh_keys"

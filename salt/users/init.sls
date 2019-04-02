@@ -5,6 +5,12 @@
     - makedirs: True
     - mode: 755
 
+# Create added keys parent directory
+{{ pillar.users.added_keys_parent_directory }}:
+  file.directory:
+    - makedirs: True
+    - dir_mode: 755
+
 # Configure groups
 {% for _, group in pillar['users']['groups'].items() %}
 {{ group.name }}:
@@ -72,6 +78,7 @@
     - group: {{ user.name }}
     - dir_mode: 755
     - file_mode: 755
+    - template: jinja
     - require:
       - user: {{ user.name }}
 
@@ -84,5 +91,13 @@ bake_zsh_profiles-{{ user.name }}:
     - require:
       - file: {{ zsh_profiles_dir }}
       - file: {{ pillar.users.bake_zsh_profiles_script }}
+
+# Create user specific added keys directory
+{{ pillar.users.added_keys_parent_directory }}/{{ user.name }}:
+  file.directory:
+    - makedirs: True
+    - dir_mode: 770
+    - require:
+      - file: {{ pillar.users.added_keys_parent_directory }}
 
 {% endfor %}
