@@ -7,10 +7,15 @@
 {% set refind_dir = partitions['boot']['mountpoint'] + '/EFI/refind' %}
 
 bootloader:
-  # Name of refind package
+  # Refind configuration
   refind:
+    # Package
     pkg: refind
+
+    # Directory in boot partition, relative to root
     directory: {{ refind_dir }}
+
+    # Configuration file in boot partition, relative to root
     config_file: {{ refind_dir }}/refind.conf
 
 
@@ -20,9 +25,13 @@ bootloader:
 
   # Check refind installed script
   check_refind_installed_script: 
+    # Directory to install
     directory: {{ check_refind_installed_dir }}
+
+    # Script
     file: {{ check_refind_installed_dir }}/check-refind-installed.sh
 
   # Run check refind installed script
   run_check_refind_installed_script:
+    # Script
     file: {{ check_refind_installed_dir }}/run-check-refind-installed.sh
