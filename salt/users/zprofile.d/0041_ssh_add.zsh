@@ -27,7 +27,7 @@ while read key_file; do
 
 	# If added, skip
 	if [ -f "$added_ssh_keys_file" ]; then
-		if ! cat "$added_ssh_keys_file" | grep "$key_fingerprint"; then
+		if cat "$added_ssh_keys_file" | grep "$key_fingerprint" &> /dev/null; then
 			continue
 		fi
 	fi
@@ -41,7 +41,7 @@ while read key_file; do
 	fi
 
 	# Record we added it
-	if ! echo "key_fingerprint" >> "$added_ssh_keys_file"; then
+	if ! echo "$key_fingerprint" >> "$added_ssh_keys_file"; then
 		echo "Error: unit: ssh_add: Failed to record that \"$key_file\" key was added to the SSH agent" >&2
 		return 1
 	fi
