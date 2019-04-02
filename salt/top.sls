@@ -26,5 +26,8 @@ base:
 
     # Applications and tools
     - xorg
+
     - gpg
     - git
+
+    - alacritty

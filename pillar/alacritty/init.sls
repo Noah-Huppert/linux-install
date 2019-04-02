@@ -1,0 +1,3 @@
+alacritty:
+  # Package
+  pkg: alacritty
