@@ -11,5 +11,5 @@
 
 /etc/salt/minion:
   file.managed:
-    - source: salt://salt-config/minion
+    - source: salt://salt-configuration/minion
     - mode: 664
