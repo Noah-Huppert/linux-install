@@ -6,7 +6,7 @@
   pkg.installed
 {% endfor %}
 
-# Configuration
+# Configure i3
 {{ pillar.i3.configuration_file }}:
   file.managed:
     - source: salt://i3/configuration/i3

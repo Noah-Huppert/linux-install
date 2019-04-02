@@ -4,5 +4,5 @@ i3:
     - i3 
     - i3lock
 
-  # Configuration file
+  # i3 Configuration file
   configuration_file: /home/noah/.config/i3/config

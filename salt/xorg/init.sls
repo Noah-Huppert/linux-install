@@ -3,3 +3,11 @@
 # Install
 {{ pillar.xorg.package }}:
   pkg.installed
+
+# Configure
+{{ pillar.xorg.configuration_file }}:
+  file.managed:
+    - source: salt://xorg/configuration/xinit
+    - user: noah
+    - group: noah
+    - mode: 744
