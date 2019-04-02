@@ -9,3 +9,4 @@ base:
     # Higher level system configuration
     - system-configuration
     - xbps-configuration
+    - ntp
