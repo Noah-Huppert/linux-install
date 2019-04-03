@@ -18,3 +18,6 @@ xbps_configuration:
 
   # Main XBPS configuration file
   main_configuration_file: /usr/share/xbps.d/xbps.conf
+
+  # Non-free package
+  non_free_pkg: void-repo-nonfree

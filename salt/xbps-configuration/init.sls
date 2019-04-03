@@ -11,3 +11,7 @@
   file.managed:
     - source: salt://xbps-configuration/xbps.conf
     - template: jinja
+
+# Install non-free repository
+{{ pillar.xbps_configuration.non_free_pkg }}:
+  pkg.installed
