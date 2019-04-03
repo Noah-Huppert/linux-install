@@ -27,6 +27,7 @@ base:
     # Applications and tools
     - xorg
     - i3
+    - dunst
 
     - gpg
     - git-secret
