@@ -43,7 +43,7 @@ bindsym XF86AudioMute exec pulseaudio-ctl mute
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec $TERMINAL
+bindsym $mod+Return exec alacritty --persistent-logging
 
 # take a screen shot
 bindsym Shift+$mod+s exec /bin/zsh -c snip >> /tmp/snip.log
@@ -65,7 +65,8 @@ bindsym $mod+Shift+q exec xdo kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+space exec dmenu_run -i -l 6 -nb "#4a138c" -sb "#7c42bd" -nf "#ffffff" -sf "#ffffff" -fn "Source Code Pro"
+#bindsym $mod+space exec dmenu_run -i -l 6 -nb "#4a138c" -sb "#7c42bd" -nf "#ffffff" -sf "#ffffff" -fn "Source Code Pro"
+bindsym $mod+space exec rofi -show run
 
 # change focus
 bindsym $mod+h focus left
@@ -187,7 +188,7 @@ bindsym $mod+r mode "resize"
 #
 #}
 #exec --no-startup-id $HOME/.config/polybar/launch.sh
-exec --no-startup-id feh --fullscreen --zoom fill {{ pillar.rice.background_image_file }}
+exec --no-startup-id feh --bg-fill /home/noah/pictures/dog-flowers.jpg
 exec --no-startup-id compton --config ~/.config/compton/compton.conf
 exec --no-startup-id dunst -config ~/.config/dunst/dunst.conf
 
