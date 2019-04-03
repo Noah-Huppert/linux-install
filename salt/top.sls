@@ -29,6 +29,7 @@ base:
     - i3
     - compton
     - dunst
+    - rice
 
     - gpg
     - git
