@@ -27,6 +27,7 @@ base:
     # Applications and tools
     - xorg
     - i3
+    - compton
     - dunst
 
     - gpg
