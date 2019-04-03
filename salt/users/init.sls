@@ -20,7 +20,11 @@
 
 # Configure users
 {% for _, user in pillar['users']['users'].items() %}
+
 {% set home_dir = '/home/' + user.name %}
+{% if user.name == 'root' %}
+{% set home_dir = '/root' %}
+{% endif %}
 
 # Create user
 {{ user.name }}:
