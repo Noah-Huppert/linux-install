@@ -37,3 +37,4 @@ base:
 
     - alacritty
     - tmux
+    - utilities
