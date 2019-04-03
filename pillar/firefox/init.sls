@@ -1,0 +1,3 @@
+firefox:
+  # Package
+  pkg: firefox

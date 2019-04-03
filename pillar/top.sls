@@ -38,3 +38,5 @@ base:
     - alacritty
     - tmux
     - utilities
+
+    - firefox
