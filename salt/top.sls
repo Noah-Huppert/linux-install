@@ -43,6 +43,7 @@ base:
     - git
     - vsv
     - emacs
+    - scripts-repo
 
     - misc-applications
     - firefox
