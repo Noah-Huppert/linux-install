@@ -41,4 +41,6 @@ base:
     - utilities
 
     - emacs
+
+    - misc-applications
     - firefox
