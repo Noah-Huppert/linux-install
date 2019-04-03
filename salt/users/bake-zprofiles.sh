@@ -50,6 +50,8 @@ while read -r zsh_profile_file; do
 	fi
 
 	echo "}" >> "$zshrc_file"
+
+    	echo "Added \"$zsh_profile_file\" to \"$zshrc_file\""
 done <<< $(ls "$HOME/.zprofile.d" | sort)
 
 # {{{1 Call functions
@@ -70,3 +72,5 @@ echo "done" >> "$zshrc_file"
 if ! chmod 600 "$zshrc_file"; then
 	die "Failed to chmod zsh profile"
 fi
+
+echo "DONE"

@@ -95,10 +95,9 @@
 bake_zsh_profiles-{{ user.name }}:
   cmd.run:
     - name: {{ pillar.users.bake_zsh_profiles_script }}
-    - user: {{ user.name }}
+    - runas: {{ user.name }}
     - onchanges:
       - file: {{ pillar.users.bake_zsh_profiles_script }}
-    - watch:
       - file: {{ zsh_profiles_dir }}
     - require:
       - file: {{ zsh_profiles_dir }}
