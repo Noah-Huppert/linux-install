@@ -8,7 +8,7 @@
 
 {% endfor %}
 
-# Image
+# Images
 {% for img in pillar['rice']['images'] %}
 {{ pillar.rice.images_directory }}/{{ img }}:
   file.managed:

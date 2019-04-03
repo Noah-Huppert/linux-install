@@ -1,3 +1,5 @@
+{% set polybar_dir = '/etc/noah/.config/polybar' %}
+
 rice:
   # Rice tool packages
   pkgs:
@@ -10,6 +12,7 @@ rice:
     # Fonts
     - font-hack-ttf
     - fonts-roboto-ttf
+    - nerd-fonts-ttf
 
   # Image
   images:
