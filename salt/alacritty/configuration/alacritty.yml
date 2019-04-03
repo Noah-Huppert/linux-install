@@ -155,62 +155,33 @@ persistent_logging: false
 draw_bold_text_with_bright_colors: true
 
 # Colors (Monokai Pro)
-#colors:
-#  # Default colors
-#  primary:
-#    #background: '0x2D2A2E'
-#    #foreground: '0xFCFCFA'
-#    background: '0xF4F4F4'
-#    foreground: '0x2D2A2E'
-#
-#  # Normal colors
-#  normal:
-#    black:   '0x403E41'
-#    red:     '0xFF6188'
-#    green:   '0xA9DC76'
-#    yellow:  '0xFFD866'
-#    blue:    '0xFC9867'
-#    magenta: '0xAB9DF2'
-#    cyan:    '0x78DCE8'
-#    white:   '0xFCFCFA'
-#
-#  # Bright colors
-#  bright:
-#    black:   '0x727072'
-#    red:     '0xFF6188'
-#    green:   '0xA9DC76'
-#    yellow:  '0xFFD866'
-#    blue:    '0xFC9867'
-#    magenta: '0xAB9DF2'
-#    cyan:    '0x78DCE8'
-#    white:   '0xFCFCFA'
-
-# Colors (Pencil Light)
 colors:
- # Default Colors
- primary:
-   background: '0xf1f1f1'
-   foreground: '0x424242'
- # Normal colors
- normal:
-   black:   '0x212121'
-   red:     '0xc30771'
-   green:   '0x10a778'
-   yellow:  '0xa89c14'
-   blue:    '0x008ec4'
-   magenta: '0x523c79'
-   cyan:    '0x20a5ba'
-   white:   '0xe0e0e0'
- # Bright colors
- bright:
-   black:   '0x212121'
-   red:     '0xfb007a'
-   green:   '0x5fd7af'
-   yellow:  '0xf3e430'
-   blue:    '0x20bbfc'
-   magenta: '0x6855de'
-   cyan:    '0x4fb8cc'
-   white:   '0xf1f1f1'
+  # Default colors
+  primary:
+    background: '0x2D2A2E'
+    foreground: '0xFCFCFA'
+
+  # Normal colors
+  normal:
+    black:   '0x403E41'
+    red:     '0xFF6188'
+    green:   '0xA9DC76'
+    yellow:  '0xFFD866'
+    blue:    '0xFC9867'
+    magenta: '0xAB9DF2'
+    cyan:    '0x78DCE8'
+    white:   '0xFCFCFA'
+
+  # Bright colors
+  bright:
+    black:   '0x727072'
+    red:     '0xFF6188'
+    green:   '0xA9DC76'
+    yellow:  '0xFFD866'
+    blue:    '0xFC9867'
+    magenta: '0xAB9DF2'
+    cyan:    '0x78DCE8'
+    white:   '0xFCFCFA'
 
 # Colors (Tomorrow Night Bright)
 #colors:
