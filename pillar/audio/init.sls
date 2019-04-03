@@ -4,6 +4,7 @@ audio:
     - alsa-utils
     - pulseaudio
     - ConsoleKit2
+    - pavucontrol
 
   # Audio control services
   services:
