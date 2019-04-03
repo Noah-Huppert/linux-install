@@ -23,6 +23,7 @@ base:
 
     - sudoers
     - linux-install-repo
+    - home-directories
 
     # Applications and tools
     - xorg
