@@ -11,6 +11,7 @@
   file.managed:
     - source: salt://i3/configuration/i3
     - makedirs: True
+    - template: jinja
     - user: noah
     - group: noah
     - mode: 644
