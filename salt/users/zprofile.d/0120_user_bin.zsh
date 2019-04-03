@@ -1,0 +1,8 @@
+# Add directories in $HOME/bin to the PATH
+
+home_bin="$HOME/bin"
+
+# Add all top level directories in bin
+while read -r d; do
+    PATH="$PATH:$d"
+done <<< $(find "$home_bin" -maxdepth 1 ! -path . -type d)
