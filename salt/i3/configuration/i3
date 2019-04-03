@@ -35,9 +35,9 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="^floating$"] floating enable
 
 # Volume control
-bindsym XF86AudioRaiseVolume exec pulseaudio-ctl up
-bindsym XF86AudioLowerVolume exec pulseaudio-ctl down
-bindsym XF86AudioMute exec pulseaudio-ctl mute
+bindsym XF86AudioRaiseVolume exec amixer sset Master unmute 5%+
+bindsym XF86AudioLowerVolume exec amixer sset Master unmute 5%-
+bindsym XF86AudioMute exec amixer sset Master toggle
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
