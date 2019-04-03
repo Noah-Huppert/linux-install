@@ -1,0 +1,45 @@
+[bar/primary]
+width = 100%
+height = 27
+
+module-margin = 2
+
+modules-left = i3
+modules-center = 
+modules-right = filesystem battery date
+
+font-0 = "Roboto:size=12;3"
+font-1 = "RobotoMono Nerd Font:size=12;3"
+
+background = #000000
+foreground = #FFFFFF
+
+[module/i3]
+type = internal/i3
+
+# Only show workspaces on same monitor as bar
+pin-workspaces = true
+
+# Always show workspaces in numerical order rather than creation order
+index-sort = true
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted = "  %free%"
+
+[module/battery]
+type = internal/battery
+
+format-charging =  <label-charging>
+format-discharging =  <label-discharging>
+
+[module/date]
+type = internal/date
+
+interval = 5
+
+date =  %a - %m/%d %I:%M %p

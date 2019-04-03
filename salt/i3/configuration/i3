@@ -187,7 +187,7 @@ bindsym $mod+r mode "resize"
 #	font pango:Roboto 11
 #
 #}
-#exec --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id feh --bg-fill /home/noah/pictures/dog-flowers.jpg
 exec --no-startup-id compton --config ~/.config/compton/compton.conf
 exec --no-startup-id dunst -config ~/.config/dunst/dunst.conf

@@ -32,6 +32,7 @@ base:
     - i3
     - compton
     - dunst
+    - polybar
     - rice
 
     - alacritty
