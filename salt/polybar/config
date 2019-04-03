@@ -42,4 +42,4 @@ type = internal/date
 
 interval = 5
 
-date =  %a - %m/%d %I:%M %p
+date =  %a - %m/%d - %I:%M %p
