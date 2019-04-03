@@ -8,11 +8,13 @@
 
 {% endfor %}
 
-# Background image
-{{ pillar.rice.background_image_file }}:
+# Image
+{% for img in pillar['rice']['images'] %}
+{{ pillar.rice.images_directory }}/{{ img }}:
   file.managed:
-    - source: salt://rice/pictures/dog-flowers.jpg
+    - source: salt://rice/pictures/{{ img }}
     - makedirs: True
     - user: noah
     - group: noah
     - mode: 644
+{% endfor %}

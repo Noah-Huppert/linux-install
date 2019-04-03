@@ -11,5 +11,13 @@ rice:
     - font-hack-ttf
     - fonts-roboto-ttf
 
-  # Background image
-  background_image_file: /home/noah/pictures/dog-flowers.jpg
+  # Image
+  images:
+    # Background image
+    - dog-flowers.jpg
+ 
+    # Lock image
+    - iss.png
+
+  # Directory to store images in
+  images_directory: /home/noah/pictures
