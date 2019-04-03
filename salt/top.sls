@@ -39,4 +39,5 @@ base:
     - tmux
     - utilities
 
+    - emacs
     - firefox
