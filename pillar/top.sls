@@ -40,6 +40,7 @@ base:
     - tmux
     - utilities
 
+    - vsv
     - emacs
 
     - misc-applications

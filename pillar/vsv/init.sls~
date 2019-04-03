@@ -1,0 +1,12 @@
+vsv:
+  # Source repository
+  repository: https://github.com/bahamas10/vsv.git
+
+  # Install directory
+  directory: /home/noah/bin/vsv
+
+  # Path to man file inside of repository
+  man_file: man/vsv.8
+
+  # Path to man directory in system
+  global_man_directory: /usr/local/share/man
