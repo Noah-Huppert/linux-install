@@ -3,3 +3,6 @@ misc_applications:
   pkgs:
     # Signal Desktop
     - Signal-Desktop
+
+    # Spotify
+    - spotify
