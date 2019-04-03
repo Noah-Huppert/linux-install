@@ -34,13 +34,12 @@ base:
     - dunst
     - rice
 
-    - gpg
-    - git-secret
-
     - alacritty
     - tmux
     - utilities
 
+    - gpg
+    - git-secret
     - vsv
     - emacs
 
