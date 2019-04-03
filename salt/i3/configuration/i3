@@ -195,10 +195,10 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunst.conf
 # Colors
 #   #000000
 set $c-text #d1c4e9
-set $c-prmr #4a138c
-set $c-prmd #12005e
-set $c-prml #7c42bd
-set $c-bord #ba002f
+set $c-prmr #000000
+set $c-prmd #000000
+set $c-prml #000000
+set $c-bord #FFFFFF
 
 # class                 border  backgr. text    indicator child_border
 client.focused          $c-bord $c-prml $c-text #2e9ef4   $c-bord
@@ -208,11 +208,6 @@ client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
-
-# Colors
-#colors {
-#	background #4a138c
-#}
 
 # Scratchpad
 # Make the currently focused window a scratchpad
