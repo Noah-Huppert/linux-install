@@ -15,6 +15,7 @@ base:
     - internet
     - xbps-configuration
     - ntp
+    - touchpad
 
     # User configuration
     - zsh

@@ -14,6 +14,7 @@ base:
     - internet-secret
     - xbps-configuration
     - ntp
+    - touchpad
 
     # User level configuration
     - zsh 
