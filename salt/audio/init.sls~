@@ -1,0 +1,5 @@
+# Configure audio
+
+# Install
+{% for pkg in pillar['audio']['pkgs'] %}
+{{ pkg }}

@@ -15,6 +15,7 @@ base:
     - xbps-configuration
     - ntp
     - touchpad
+    - audio
 
     # User level configuration
     - zsh 
