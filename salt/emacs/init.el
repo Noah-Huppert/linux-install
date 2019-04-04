@@ -2,6 +2,9 @@
 ; Emacs Core ;
 ;;;;;;;;;;;;;;
 
+; Local plugins
+(add-to-list 'load-path "{{ pillar.emacs.plugins_load_path }}")
+
 ; Initialize package manager
 (require 'package)
 
@@ -27,7 +30,17 @@
 ; Behavior ;
 ;;;;;;;;;;;;
 
+
+; Show line numbers
+(global-display-line-numbers-mode)
+
+; Max line length
+(require 'column-marker)
+(add-hook 'text-mode-hook (lambda () (interactive) (column-marker-3 80)))
+
 ; Enable VIM keybindings
 (require 'evil)
 (evil-mode t)
 
+; Spell check
+(add-hook 'text-mode-hook 'flyspell-mode)
