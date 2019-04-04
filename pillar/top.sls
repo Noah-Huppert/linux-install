@@ -28,26 +28,29 @@ base:
     - linux-install-repo
     - home-directories
 
-    # Applications and tools
+    # User interface configuration
     - xorg
     - i3
+    - tmux
+    - alacritty
     - compton
     - dunst
     - polybar
     - rice
 
-    - alacritty
-    - tmux
+    # General tools configuration
     - utilities
     - flatpak
-
     - gpg
     - git-secret
     - vsv
+
+    # Development environment configuration
     - emacs
     - scripts-repo
     - salt-apply-script
 
+    # Applications configurtion
     - misc-applications
     - firefox
     - slack
