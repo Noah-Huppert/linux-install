@@ -11,6 +11,7 @@
 #     -p PREFIX    (Optional) Print prefix before any update information text
 #     -n           (Optional) Only show number of package which need updates
 #     -e           (Optional) Do not print any text if there are no updates
+#     -l           (Optional) Show all information on one line
 #
 # BEHAVIOR
 #
@@ -28,11 +29,12 @@ function die() {
 }
 
 # {{{1 Options
-while getopts "p:ne" opt; do
+while getopts "p:nel" opt; do
     case "$opt" in
 	p) print_prefix="$OPTARG" ;;
         n) only_number="true" ;;
 	e) show_empty="true" ;;
+	l) one_line="true" ;;
         '?') die "Unknown option" ;;
     esac
 done
@@ -55,8 +57,30 @@ printf "$print_prefix"
 
 if [ -n "$only_number" ]; then
     # {{{2 Only show number of packages with updates
-    echo "$updates" | wc -l
+    output=$(echo "$updates" | wc -l)
+
+    if [ -n "$one_line" ]; then
+	stdbuf -o 0 printf $(echo "$output" | tr -d '\n')
+    else
+	echo "$output"
+    fi
 else
     # {{{2 Show package names
-    echo "$updates" | awk '{ print $1 }'
+    output=$(echo "$updates" | awk '{ print $1 }')
+
+    if [ -n "$one_line" ]; then
+	output_lines=$(echo "$output" | wc -l)
+	i=0
+	while read -r pkg; do
+	    stdbuf -o 0 printf "$pkg"
+
+	    if (("$i" != $(("$output_lines" - 1)))); then
+		   stdbuf -o 0 printf " "
+	    fi
+
+	    i=$(("$i" + 1))
+	done <<< "$output"
+    else
+	echo "$output"
+    fi
 fi
