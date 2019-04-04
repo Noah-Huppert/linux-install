@@ -1,6 +1,9 @@
 utilities:
   # Utility packages
   pkgs:
+    # XBPS tools
+    - xtools
+    
     # XDG tools
     - xdg-utils
     
