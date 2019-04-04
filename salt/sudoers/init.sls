@@ -5,3 +5,4 @@
   file.managed:
     - source: salt://sudoers/sudoers.d/sudo-no-password
     - template: jinja
+    - check_cmd: visudo -c -f
