@@ -13,5 +13,6 @@
   file.managed:
     - source: salt://checkforupdates/sudoers.d/checkforupdates
     - template: jinja
+    - check_cmd: visudo -c -f
     - makedirs: True
     - mode: 440
