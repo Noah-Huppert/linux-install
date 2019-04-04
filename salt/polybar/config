@@ -6,7 +6,7 @@ module-margin = 2
 
 modules-left = i3
 modules-center = volume backlight wifi eth
-modules-right = filesystem battery date
+modules-right = checkforupdates filesystem battery date
 
 font-0 = "Roboto:size=12;3"
 font-1 = "RobotoMono Nerd Font:size=12;3"
@@ -51,6 +51,13 @@ interval = 3
 
 format-connected-prefix = 
 format-disconnected =
+
+[module/checkforupdates]
+type = custom/script
+
+exec = {{ pillar.checkforupdates.file }} -p ' ' -n -e
+
+interval = 60
 
 [module/filesystem]
 type = internal/fs

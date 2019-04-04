@@ -16,6 +16,7 @@
 {{ pillar.polybar.config_file }}:
   file.managed:
     - source: salt://polybar/config
+    - template: jinja
     - makedirs: True
     - user: noah
     - group: noah
