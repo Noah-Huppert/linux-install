@@ -21,3 +21,7 @@ utilities:
 
     # Spell check
     - aspell
+    - aspell-en
+
+    # Document conversation tool
+    - pandoc
