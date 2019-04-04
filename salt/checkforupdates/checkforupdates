@@ -8,13 +8,18 @@
 #
 # OPTIONS
 #
-#     -n    (Optional) Only show number of package which need updates
+#     -p PREFIX    (Optional) Print prefix before any update information text
+#     -n           (Optional) Only show number of package which need updates
+#     -e           (Optional) Do not print any text if there are no updates
 #
 # BEHAVIOR
 #
 #     Shows names of packages which need an update.
 #
 #?
+
+# {{{1 Configuration
+print_prefix=""
 
 # {{{1 Helpers
 function die() {
@@ -23,9 +28,11 @@ function die() {
 }
 
 # {{{1 Options
-while getopts "n" opt; do
+while getopts "p:ne" opt; do
     case "$opt" in
+	p) print_prefix="$OPTARG" ;;
         n) only_number="true" ;;
+	e) show_empty="true" ;;
         '?') die "Unknown option" ;;
     esac
 done
@@ -38,9 +45,18 @@ if [[ "$?" != "0" ]]; then
 fi
 
 # {{{1 Display
+# {{{2 Exit if no updates and -e option is provided
+if [ -n "$show_empty" ] && [ -z "$updates" ]; then
+    exit 0
+fi
+
+# {{{2 Print -p option value
+printf "$print_prefix"
+
 if [ -n "$only_number" ]; then
     # {{{2 Only show number of packages with updates
     echo "$updates" | wc -l
 else
+    # {{{2 Show package names
     echo "$updates" | awk '{ print $1 }'
 fi
