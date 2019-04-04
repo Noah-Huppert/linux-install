@@ -5,7 +5,7 @@ height = 27
 module-margin = 2
 
 modules-left = i3
-modules-center = 
+modules-center = volume backlight wifi eth
 modules-right = filesystem battery date
 
 font-0 = "Roboto:size=12;3"
@@ -23,8 +23,38 @@ label-unfocused-padding = 2
 
 index-sort = true
 
+[module/volume]
+type = internal/alsa
+
+format-volume =  <label-volume>
+label-muted = 婢
+
+[module/backlight]
+type = internal/backlight
+
+card = intel_backlight
+format =  <label>
+
+[module/wifi]
+type = internal/network
+
+interface = wlp2s0
+interval = 3
+format-connected = 
+format-disconnected = 
+
+[module/eth]
+type = internal/network
+
+interface = enp0s31f6
+interval = 3
+
+format-connected-prefix = 
+format-disconnected =
+
 [module/filesystem]
 type = internal/fs
+
 interval = 25
 
 mount-0 = /
