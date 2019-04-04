@@ -1,0 +1,8 @@
+python:
+  # Packages
+  pkgs:
+    # Python 2
+    - python
+
+    # Python 3
+    - python3

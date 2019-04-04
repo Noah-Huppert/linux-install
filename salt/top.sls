@@ -49,6 +49,7 @@ base:
     - emacs
     - scripts-repo
     - salt-apply-script
+    - python
 
     # Applications configuration
     - misc-applications
