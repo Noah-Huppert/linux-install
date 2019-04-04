@@ -11,7 +11,7 @@ Create a Void Linux live USB which will be used for automated installation.
 Run:
 
 ```
-./setup-scripts/mk-install-media.sh EXTERNAL_DEVICE
+./setup-scripts/mk-install-media.sh -d EXTERNAL_DEVICE
 ```
 
 # Setup
@@ -21,6 +21,13 @@ Follow the instructions in the following sections to install Void linux.
 Secure boot interferes with your computer's ability to boot form a USB.  
 
 Disable it in your computer's BIOS configuration.
+
+## Set Hardware Clock
+Set the computer's hardware clock in the BIOS configuration.
+
+This clock should be set to the current UTC time.
+
+The operating system will translate the clock from UTC to your local timezone.
 
 ## Boot From The Live USB
 The rest of the guide will assume you are running commands on the live USB.  
@@ -42,46 +49,18 @@ following names:
 ## Connect To The Internet
 The rest of this guide requires you be connected to the internet.  
 
-### Password-less Wireless Network
-Open the `/etc/wpa_supplicant/wpa_supplicant.conf` file and add the following:
+### Standard WiFi Network
+Run:
 
 ```
-network={
-	ssid="NETWORK_SSID"
-	key_mgmt=NONE
-}
-```
-
-Then enable the `wpa_supplicant` service:
-
-```
-# ln -s /etc/sv/wpa_supplicant /var/service
-```
-
-### Password Protected Wireless Network
-Run the following
-```
-# wpa_passphrase "NETWORK_SSID" "NETWORK_PASSWORD" >> /etc/wpa_supplicant/wpa_supplicant.conf
-# sv start wpa_supplicant
+# /etc/linux-install/live-scripts/wifi.sh -s SSID [-p PASSWORD]
 ```
 
 ### Eduroam
-Open the `/etc/wpa_supplicant/wpa_supplicant.conf` file and add the following:
-```
-network={
-	ssid="eduroam"
-	key_mgmt=WPA-EAP
-	eap=TTLS
-	phase2="auth=PAP"
-	identity="YOUR_SCHOOL_EMAIL"
-	password="YOU_SCHOOL_NETID_PASSWORD"
-}
-```
-
-Then enable the `wpa_supplicant` service:
+Run:
 
 ```
-# ln -s /etc/sv/wpa_supplicant /var/service
+# /etc/linux-install/live-scripts/eduroam.sh -u USERNAME -p PASSWORD
 ```
 
 ### Debugging A Wireless Connection
@@ -116,26 +95,16 @@ Update the live USB's system by running:
 # xbps-install -Syu
 ```
 
-## Download This Repository
-```
-xbps-install -Sy curl unzip
-curl -L https://github.com/Noah-Huppert/linux-install/archive/master.zip > linux-install-master.zip
-unzip linux-install-master.zip
-cd linux-install-master
-```
-
-The rest of this guide will assume you are in the `linux-install-master` directory.
-
 ## Setup Encrypted Partition
 Run:
 
 ```
-./live-scripts/crypsetup.sh -p ROOT_PARTITION -c cryptroot
+# /etc/linux-install/live-scripts/crypsetup.sh -p ROOT_PARTITION -c cryptroot
 ```
 
 ## Install Void Linux
 Run:
 
 ```
-./live-scripts/install.sh -c cryptroot -b BOOT_PARTITION
+# /etc/linux-install/live-scripts/install.sh -c cryptroot -b BOOT_PARTITION
 ```
