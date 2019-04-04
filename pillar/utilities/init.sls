@@ -18,3 +18,6 @@ utilities:
 
     # Screenshot
     - scrot
+
+    # Spell check
+    - aspell
