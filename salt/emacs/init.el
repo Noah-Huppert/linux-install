@@ -1,3 +1,7 @@
+;;;;;;;;;;;;;;
+; Emacs Core ;
+;;;;;;;;;;;;;;
+
 ; Initialize package manager
 (require 'package)
 
@@ -5,10 +9,6 @@
 
 (setq package-enable-at-startup nil)
 (package-initialize) 
-
-; Enable VIM keybindings
-(require 'evil)
-(evil-mode t)
 
 ; Save all backup files in a dedicated directory
 ; https://stackoverflow.com/a/2680682
@@ -19,3 +19,15 @@
   kept-new-versions 20   ; how many of the newest versions to keep
   kept-old-versions 5    ; and how many of the old
 )
+
+; Enable syntax highlighting
+(global-font-lock-mode t)
+
+;;;;;;;;;;;;
+; Behavior ;
+;;;;;;;;;;;;
+
+; Enable VIM keybindings
+(require 'evil)
+(evil-mode t)
+
