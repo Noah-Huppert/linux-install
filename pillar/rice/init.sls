@@ -20,6 +20,7 @@ rice:
     - dog-flowers.jpg
  
     # Lock image
+    # Credit: https://www.reddit.com/r/space/comments/arer0k/i_took_nearly_50000_images_of_the_night_sky_to/
     - moon-center.png
 
   # Directory to store images in
