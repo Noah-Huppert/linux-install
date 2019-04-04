@@ -19,7 +19,7 @@ function git_prompt() {
 # Sets prompt variable
 function build_prompt() {
 	# HOSTNAME PATH git:BRANCH %#
-	export PROMPT="%{$fg[blue]%}%m%{$reset_color%} %{$fg[red]%}%/%{$reset_color%}$(git_prompt) %# "
+	export PROMPT="%{$fg[blue]%}%m%{$reset_color%} %{$fg[red]%}%~%{$reset_color%}$(git_prompt) %# "
 }
 
 build_prompt
