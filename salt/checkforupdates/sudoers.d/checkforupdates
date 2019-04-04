@@ -1,0 +1,1 @@
+noah ALL=(ALL) NOPASSWD:{{ pillar.checkforupdates.file }}

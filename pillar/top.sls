@@ -44,6 +44,7 @@ base:
     - gpg
     - git-secret
     - vsv
+    - checkforupdates
 
     # Development environment configuration
     - emacs

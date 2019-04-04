@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+#?
+# checkforupdates - Check for XBPS package updates
+#
+# USAGE
+#
+#     checkforupdates OPTIONS
+#
+# OPTIONS
+#
+#     -n    (Optional) Only show number of package which need updates
+#
+# BEHAVIOR
+#
+#     Shows names of packages which need an update.
+#
+#?
+
+# {{{1 Helpers
+function die() {
+    echo "Error: $@" >&2
+    exit 1
+}
+
+# {{{1 Options
+while getopts "n" opt; do
+    case "$opt" in
+        n) only_number="true" ;;
+        '?') die "Unknown option" ;;
+    esac
+done
+
+# {{{1 Get packages with updates
+updates=$(xbps-install -Sun)
+
+if [[ "$?" != "0" ]]; then
+    die "Failed to get packages with updates"
+fi
+
+# {{{1 Display
+if [ -n "$only_number" ]; then
+    # {{{2 Only show number of packages with updates
+    echo "$updates" | wc -l
+else
+    echo "$updates" | awk '{ print $1 }'
+fi
