@@ -25,6 +25,9 @@ users:
     wheel:
       name: wheel
       id: 4
+    video:
+      name: video
+      id: 13
 
   # Users configuration, dict of user objects with the keys:
   #
@@ -45,6 +48,7 @@ users:
       groups:
         - linux_install
         - wheel
+        - video
     root:
       name: root
       id: 0

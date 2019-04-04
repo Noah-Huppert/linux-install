@@ -49,23 +49,14 @@ bindsym $mod+Return exec alacritty --persistent-logging
 bindsym Shift+$mod+s exec /bin/zsh -c snip >> /tmp/snip.log
 
 # backlight
-bindsym XF86MonBrightnessDown exec sudo bklight increment down
-
-bindsym XF86MonBrightnessUp exec sudo bklight increment up
-
-bindsym $mod+XF86MonBrightnessDown exec sudo bklight increment down 33
-
-bindsym $mod+XF86MonBrightnessUp exec sudo bklight increment up 33
+bindsym XF86MonBrightnessUp exec light -A 10
+bindsym XF86MonBrightnessDown exec light -U 10
 
 # kill focused window
 bindsym $mod+w kill
 bindsym $mod+Shift+q exec xdo kill
 
-# start dmenuw(a program launcher)
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-#bindsym $mod+space exec dmenu_run -i -l 6 -nb "#4a138c" -sb "#7c42bd" -nf "#ffffff" -sf "#ffffff" -fn "Source Code Pro"
+# Application launcher
 bindsym $mod+space exec rofi -show run
 
 # change focus

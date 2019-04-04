@@ -17,6 +17,7 @@ base:
     - ntp
     - touchpad
     - audio
+    - backlight
 
     # User configuration
     - zsh
