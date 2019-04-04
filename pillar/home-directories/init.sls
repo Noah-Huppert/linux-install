@@ -3,5 +3,6 @@ home_directories:
   directories:
     - documents
     - pictures
+    - pictures/screenshots
     - bin
     - .config
