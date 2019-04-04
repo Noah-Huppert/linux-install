@@ -183,6 +183,8 @@ exec --no-startup-id feh --bg-fill /home/noah/pictures/dog-flowers.jpg
 exec --no-startup-id compton --config ~/.config/compton/compton.conf
 exec --no-startup-id dunst -config ~/.config/dunst/dunst.conf
 
+bindsym $mod+Shift+b exec --no-startup-id $HOME/.config/polybar/launch.sh
+
 # Colors
 #   #000000
 set $c-text #d1c4e9
