@@ -9,3 +9,9 @@ utilities:
 
     # Image tools
     - ImageMagick
+
+    # System information retrieval
+    - neofetch
+
+    # Screenshot
+    - scrot
