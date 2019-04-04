@@ -50,3 +50,4 @@ base:
 
     - misc-applications
     - firefox
+    - slack

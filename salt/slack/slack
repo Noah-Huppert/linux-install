@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#?
+# slack - Run Slack via flatpak
+#
+# USAGE
+#
+#     slack
+#
+# BEHAVIOR
+#
+#     Start com.slack.Slack flatpak app.
+#
+#?
+
+# Exit on any error
+set -e
+
+# Run
+exec flatpak run {{ pillar.slack.flatpak_app }}
