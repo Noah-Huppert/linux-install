@@ -6,3 +6,6 @@ misc_applications:
 
     # Spotify
     - spotify
+
+    # Gimp
+    - gimp
