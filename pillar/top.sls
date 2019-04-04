@@ -39,6 +39,7 @@ base:
     - alacritty
     - tmux
     - utilities
+    - flatpak
 
     - gpg
     - git-secret

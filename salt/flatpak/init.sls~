@@ -1,0 +1,10 @@
+# Install and configure flatpak
+
+# Install
+{{ pillar.flatpak.pkg }}:
+  pkg.installed
+
+# Configure
+flatpak remote-add --if-not-exists flathub {{ pillar.flatpak.repository }}:
+  cmd.run:
+    - unless: bash -c '[ -z $(flatpak remote-ls) ] && exit 1'
