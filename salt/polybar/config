@@ -11,7 +11,7 @@ modules-right = filesystem battery date
 font-0 = "Roboto:size=12;3"
 font-1 = "RobotoMono Nerd Font:size=12;3"
 
-background = #000000
+background = #BB000000
 foreground = #FFFFFF
 
 [module/i3]
