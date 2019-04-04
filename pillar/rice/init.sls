@@ -20,7 +20,7 @@ rice:
     - dog-flowers.jpg
  
     # Lock image
-    - iss.png
+    - moon-center.png
 
   # Directory to store images in
   images_directory: /home/noah/pictures
