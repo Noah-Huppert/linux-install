@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+#?
+# salt-apply - Run salt-call with customized options
+#
+# USAGE
+#
+#     salt-apply OPTIONS
+#
+# OPTIONS
+#
+#    -t    (Optional) Run states in test mode
+#
+# BEHAVIOR
+#
+#    Runs salt-call in local mode with brief output enabled.
+#
+#?
+
+# {{{1 Exit on any error
+set -e
+
+# {{{1 Configuration
+test="False"
+
+# {{{1 Helpers
+function die() {
+    echo "Error: $@" >&2
+    exit 1
+}
+
+# {{{1 Options
+while getopts "t" opt; do
+    case "$opt" in
+	t) test="True" ;;
+	'?') die "Unknown option" ;;
+    esac
+done
+
+# {{{1 Run
+exec salt-call --local --state-output=changes state.apply test="$test"

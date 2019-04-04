@@ -44,6 +44,7 @@ base:
     - vsv
     - emacs
     - scripts-repo
+    - salt-apply-script
 
     - misc-applications
     - firefox
