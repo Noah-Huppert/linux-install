@@ -29,6 +29,7 @@ base:
     - home-directories
 
     # Development environment configuration
+    - gcc
     - emacs
     - scripts-repo
     - salt-apply-script
