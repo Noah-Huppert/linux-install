@@ -28,16 +28,6 @@ base:
     - linux-install-repo
     - home-directories
 
-    # User interface configuration
-    - xorg
-    - i3
-    - alacritty
-    - tmux
-    - compton
-    - dunst
-    - polybar
-    - rice
-
     # General tools configuration
     - utilities
     - flatpak
@@ -52,6 +42,16 @@ base:
     - salt-apply-script
     - python
 
+    # User interface configuration
+    - xorg
+    - i3
+    - alacritty
+    - tmux
+    - compton
+    - dunst
+    - polybar
+    - rice
+ 
     # Applications configuration
     - misc-applications
     - firefox
