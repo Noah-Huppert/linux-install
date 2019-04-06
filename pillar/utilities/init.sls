@@ -25,3 +25,6 @@ utilities:
 
     # Document conversation tool
     - pandoc
+
+    # Show filesystem tree
+    - tree
