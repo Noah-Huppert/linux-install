@@ -28,6 +28,12 @@ base:
     - linux-install-repo
     - home-directories
 
+    # Development environment configuration
+    - emacs
+    - scripts-repo
+    - salt-apply-script
+    - python
+
     # General tools configuration
     - utilities
     - flatpak
@@ -35,12 +41,6 @@ base:
     - git
     - vsv
     - checkforupdates
-
-    # Development environment configuration
-    - emacs
-    - scripts-repo
-    - salt-apply-script
-    - python
 
     # User interface configuration
     - xorg
