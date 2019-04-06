@@ -57,3 +57,4 @@ base:
     - misc-applications
     - firefox
     - slack
+    - weechat
