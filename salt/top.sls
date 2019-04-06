@@ -33,6 +33,7 @@ base:
     - emacs
     - scripts-repo
     - salt-apply-script
+    - go
     - python
 
     # General tools configuration

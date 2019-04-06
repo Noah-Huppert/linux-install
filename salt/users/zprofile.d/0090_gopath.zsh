@@ -1,4 +1,4 @@
 # Sets GOPATH
 
-export GOPATH="$HOME/go"
+export GOPATH="{{ pillar.go.go_path }}"
 mkdir -p "$GOPATH"
