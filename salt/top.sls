@@ -59,3 +59,4 @@ base:
     - firefox
     - slack
     - weechat
+    - discord
