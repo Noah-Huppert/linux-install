@@ -2,6 +2,6 @@
 
 # Download
 {{ pillar.scripts_repo.repository }}:
-  git.latest:
+  git.cloned:
     - target: {{ pillar.scripts_repo.directory }}
     - user: noah
