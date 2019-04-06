@@ -1,6 +1,6 @@
 utilities:
-  # Utility packages
-  pkgs:
+  # XBPS utility packages
+  xbps_pkgs:
     # XBPS tools
     - xtools
     
@@ -28,3 +28,11 @@ utilities:
 
     # Show filesystem tree
     - tree
+
+    # Chroot for xbps-src
+    - proot
+
+  # Python 3 utility packages
+  python3_pkgs:
+    # Terminal CPU and memory graph
+    - s-tui
