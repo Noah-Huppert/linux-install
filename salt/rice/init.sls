@@ -1,11 +1,18 @@
 # Setup visual look and feel of X resources.
 
-# Install rice packages
-{% for pkg in pillar['rice']['pkgs'] %}
+# Install rice XBPS packages
+{% for pkg in pillar['rice']['xbps_pkgs'] %}
 
 {{ pkg }}:
   pkg.installed
 
+{% endfor %}
+
+# Install rice Python 3 packages
+{% for pkg in pillar['rice']['python3_pkgs'] %}
+{{ pkg }}:
+  pip.installed:
+    - bin_env: {{ pillar.python.pip3_bin }}
 {% endfor %}
 
 # Images

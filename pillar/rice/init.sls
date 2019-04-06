@@ -1,8 +1,8 @@
 {% set polybar_dir = '/etc/noah/.config/polybar' %}
 
 rice:
-  # Rice tool packages
-  pkgs:
+  # Rice tool XBPS packages
+  xbps_pkgs:
     # Set background
     - feh
 
@@ -13,6 +13,11 @@ rice:
     - font-hack-ttf
     - fonts-roboto-ttf
     - nerd-fonts-ttf
+
+  # Rice tool Python 3 packages
+  python3_pkgs:
+    # Theme based on wallpaper colors
+    - pywal
 
   # Image
   images:
