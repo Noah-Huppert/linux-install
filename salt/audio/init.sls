@@ -3,7 +3,7 @@
 # Install
 {% for pkg in pillar['audio']['pkgs'] %}
 {{ pkg }}:
-  pkg.installed
+  pkg.latest
 {% endfor %}
 
 # Enable services
