@@ -2,7 +2,7 @@
 
 # Install
 {{ pillar.alacritty.pkg }}:
-  pkg.installed
+  pkg.latest
 
 # Configuration
 {{ pillar.alacritty.configuration_file }}:
