@@ -2,7 +2,7 @@
 
 # Install
 {{ pillar.backlight.pkg }}:
-  pkg.installed
+  pkg.latest
 
 # Configure
 {{ pillar.backlight.udev_rules_file }}:
