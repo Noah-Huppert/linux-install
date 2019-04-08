@@ -2,7 +2,7 @@
 
 # Install refind
 {{ pillar.bootloader.refind.pkg }}:
-  pkg.installed
+  pkg.latest
 
 {{ pillar.bootloader.check_refind_installed_script.file }}:
   file.managed:
