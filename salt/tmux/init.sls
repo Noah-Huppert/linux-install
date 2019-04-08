@@ -7,7 +7,7 @@
 # Configure
 {{ pillar.tmux.configuration_file }}:
   file.managed:
-    - source: salt://tmux/configuration/tmux.conf
+    - source: salt://tmux/tmux.conf
     - user: noah
     - group: noah
     - mode: 644
