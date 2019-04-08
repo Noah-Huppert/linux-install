@@ -7,7 +7,7 @@
 # Configure
 {{ pillar.xorg.configuration_file }}:
   file.managed:
-    - source: salt://xorg/configuration/xinit
+    - source: salt://xorg/xinit
     - user: noah
     - group: noah
     - mode: 744
