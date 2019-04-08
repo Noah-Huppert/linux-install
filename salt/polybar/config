@@ -55,7 +55,7 @@ format-disconnected =
 [module/checkforupdates]
 type = custom/script
 
-exec = {{ pillar.checkforupdates.file }} -p ' ' -n -e -l
+exec = {{ pillar.checkforupdates.file }} -p ' ' -n -l
 
 interval = 60
 
