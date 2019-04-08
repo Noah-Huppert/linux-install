@@ -1,3 +1,9 @@
+# Manage user's Zsh profiles
+# State combines all the files in the salt://zsh-profile/zprofile.d directory
+# into one file and places this file as a user's Zsh profile.
+#
+# Each of these files in the zprofile.d directory is called a Zsh unit.
+
 # Bake Zsh profiles script
 {{ pillar.zsh_profile.bake_script }}:
   file.managed:
