@@ -1,5 +1,4 @@
 # Install Zsh
 
 {{ pillar.zsh.pkg }}:
-  pkg.installed
-
+  pkg.latest
