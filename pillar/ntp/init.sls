@@ -1,6 +1,6 @@
 ntp:
   # NTP package
-  pkg: ntp
+  pkg: chrony
 
   # NTP service
   service: ntpd
