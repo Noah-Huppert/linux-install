@@ -22,6 +22,7 @@ base:
 
     # User configuration
     - zsh
+    - docker
 
     - users
     - zsh-profile
@@ -34,7 +35,6 @@ base:
     - emacs
     - scripts-repo
     - salt-apply-script
-    - docker
     - c
     - go
     - python

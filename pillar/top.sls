@@ -21,6 +21,7 @@ base:
 
     # User level configuration
     - zsh 
+    - docker
 
     - users
     - users-secret
@@ -34,7 +35,6 @@ base:
     - emacs
     - scripts-repo
     - salt-apply-script
-    - docker
     - c
     - go
     - python

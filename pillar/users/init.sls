@@ -21,6 +21,9 @@ users:
     video:
       name: video
       id: 13
+    docker:
+      name: docker
+      id: 991
 
   # Users configuration, dict of user objects with the keys:
   #
@@ -42,6 +45,7 @@ users:
         - linux_install
         - wheel
         - video
+        - docker
     root:
       name: root
       id: 0
