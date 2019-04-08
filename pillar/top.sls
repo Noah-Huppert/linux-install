@@ -43,6 +43,7 @@ base:
     - flatpak
     - gpg
     - git-secret
+    - ssh
     - vsv
     - checkforupdates
 
