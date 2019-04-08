@@ -46,6 +46,11 @@ if [[ "$?" != "0" ]]; then
     die "Failed to get packages with updates"
 fi
 
+# {{{1 If no updates exit right now
+if [ -z "$updates" ]; then
+    exit 0
+fi
+
 # {{{1 Display
 # {{{2 Exit if no updates and -e option is provided
 if [ -n "$show_empty" ] && [ -z "$updates" ]; then
