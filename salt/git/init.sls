@@ -2,7 +2,7 @@
 
 # Package
 git:
-  pkg.installed
+  pkg.latest
 
 # User configuration
 /home/noah/.gitconfig:
