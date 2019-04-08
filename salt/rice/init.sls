@@ -4,7 +4,7 @@
 {% for pkg in pillar['rice']['xbps_pkgs'] %}
 
 {{ pkg }}:
-  pkg.installed
+  pkg.latest
 
 {% endfor %}
 
