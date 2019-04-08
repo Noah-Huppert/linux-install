@@ -1,4 +1,4 @@
-{% set version = '5.0.5_1' %}
+{% set version = '5.0.7_1' %}
 
 kernel:
   # Name of linux package without version
