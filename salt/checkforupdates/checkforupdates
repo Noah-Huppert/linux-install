@@ -10,7 +10,6 @@
 #
 #     -p PREFIX    (Optional) Print prefix before any update information text
 #     -n           (Optional) Only show number of package which need updates
-#     -e           (Optional) Do not print any text if there are no updates
 #     -l           (Optional) Show all information on one line
 #
 # BEHAVIOR
@@ -29,11 +28,10 @@ function die() {
 }
 
 # {{{1 Options
-while getopts "p:nel" opt; do
+while getopts "p:nl" opt; do
     case "$opt" in
 	p) print_prefix="$OPTARG" ;;
         n) only_number="true" ;;
-	e) show_empty="true" ;;
 	l) one_line="true" ;;
         '?') die "Unknown option" ;;
     esac
@@ -48,15 +46,16 @@ fi
 
 # {{{1 If no updates exit right now
 if [ -z "$updates" ]; then
+    if [ -n "$one_line" ]; then
+	stdbuf -o 0 printf " "
+    else
+	echo
+    fi
+
     exit 0
 fi
 
 # {{{1 Display
-# {{{2 Exit if no updates and -e option is provided
-if [ -n "$show_empty" ] && [ -z "$updates" ]; then
-    exit 0
-fi
-
 # {{{2 Print -p option value
 printf "$print_prefix"
 
