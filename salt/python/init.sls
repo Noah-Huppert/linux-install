@@ -3,5 +3,5 @@
 # Install
 {% for pkg in pillar['python']['pkgs'] %}
 {{ pkg }}:
-  pkg.installed
+  pkg.latest
 {% endfor %}
