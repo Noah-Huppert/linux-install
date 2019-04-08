@@ -186,21 +186,33 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunst.conf
 bindsym $mod+Shift+b exec --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Colors
-#   #000000
-set $c-text #d1c4e9
-set $c-prmr #000000
-set $c-prmd #000000
-set $c-prml #000000
-set $c-bord #FFFFFF
+set $c-black #828282
+set $c-red #cc6666
+set $c-green #81a2be
+set $c-yellow #f0c674
+set $c-blue #81a2be
+set $c-magenta #b294bb
+set $c-cyan #8abeb7
+set $c-white #c5c8c6
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #FFFFFF #000000 $c-text #2e9ef4   $c-bord
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 $c-prmd #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+#client.focused          #A5734E #757E94 #e4cec1 #2e9ef4   #757E94
+#client.focused_inactive #D38B36 #757E94 #ffffff #484e50   #5f676a
+#client.unfocused        #333333 #000000 #888888 #292d2e   #222222
+#client.urgent           #2f343a #900000 #ffffff #900000   #900000
+#client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+#
+#client.background       #ffffff
+
+# class                  border  backgr. text    indicator child_border
+client.focused          #A5734E #8abeb7  #0c0c0c #2e9ef4   #757E94
+client.focused_inactive #A5734E #b294bb  #000000 #484e50   #5f676a
+client.unfocused        #333333 #000000  #888888 #292d2e   #222222
+client.urgent           #2f343a #cc6666  #ffffff #cc6666   #cc6666
+client.placeholder      #000000 #0c0c0c  #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
+
 
 # Scratchpad
 # Make the currently focused window a scratchpad
