@@ -1,4 +1,4 @@
 # Install Go
 
 {{ pillar.go.pkg }}:
-  pkg.installed
+  pkg.latest
