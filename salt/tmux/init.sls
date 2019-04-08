@@ -2,7 +2,7 @@
 
 # Install
 {{ pillar.tmux.pkg }}:
-  pkg.installed
+  pkg.latest
 
 # Configure
 {{ pillar.tmux.configuration_file }}:
