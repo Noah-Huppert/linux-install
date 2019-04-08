@@ -2,7 +2,7 @@
 
 # Install
 {{ pillar.polybar.pkg }}:
-  pkg.installed
+  pkg.latest
 
 # Configure
 {{ pillar.polybar.launch_script_file }}:
