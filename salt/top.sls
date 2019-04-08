@@ -24,6 +24,7 @@ base:
     - zsh
 
     - users
+    - zsh-profile
 
     - sudoers
     - linux-install-repo

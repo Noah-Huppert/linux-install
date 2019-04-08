@@ -1,11 +1,4 @@
-
 users:
-  # Name of directory in which to place Zsh profile files 
-  zsh_profiles_dir: .zprofile.d
-
-  # Script to "bake" Zsh profiles
-  bake_zsh_profiles_script: /opt/bake-zprofiles/bake-zprofiles.sh
-
   # Path to Zsh shell
   zsh_shell: /bin/zsh
 

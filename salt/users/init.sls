@@ -1,10 +1,3 @@
-# Bake Zsh profiles script
-{{ pillar.users.bake_zsh_profiles_script }}:
-  file.managed:
-    - source: salt://users/bake-zprofiles.sh
-    - makedirs: True
-    - mode: 755
-
 # Create added keys parent directory
 {{ pillar.users.added_keys_parent_directory }}:
   file.directory:
@@ -77,31 +70,6 @@
       - file: {{ ssh_dir }}
 
 {% endif %}
-
-# Zsh profiles
-{% set zsh_profiles_dir = home_dir + '/' + pillar['users']['zsh_profiles_dir'] %}
-
-{{ zsh_profiles_dir }}:
-  file.recurse:
-    - source: salt://users/zprofile.d
-    - user: {{ user.name }}
-    - group: {{ user.name }}
-    - dir_mode: 755
-    - file_mode: 755
-    - template: jinja
-    - require:
-      - user: {{ user.name }}
-
-bake_zsh_profiles-{{ user.name }}:
-  cmd.run:
-    - name: {{ pillar.users.bake_zsh_profiles_script }}
-    - runas: {{ user.name }}
-    - onchanges:
-      - file: {{ pillar.users.bake_zsh_profiles_script }}
-      - file: {{ zsh_profiles_dir }}
-    - require:
-      - file: {{ zsh_profiles_dir }}
-      - file: {{ pillar.users.bake_zsh_profiles_script }}
 
 # Create user specific added keys directory
 {{ pillar.users.added_keys_parent_directory }}/{{ user.name }}:
