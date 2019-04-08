@@ -2,7 +2,7 @@
 
 # Install
 {{ pillar.flatpak.pkg }}:
-  pkg.installed
+  pkg.latest
 
 # Configure
 flatpak remote-add --if-not-exists flathub {{ pillar.flatpak.repository }}:
