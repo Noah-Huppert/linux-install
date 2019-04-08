@@ -7,7 +7,7 @@
 # Configure
 {{ pillar.compton.configuration_file }}:
   file.managed:
-    - source: salt://compton/configuration/compton.conf
+    - source: salt://compton/compton.conf
     - makedirs: True
     - user: noah
     - group: noah
