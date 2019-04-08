@@ -2,7 +2,7 @@
 
 # Install
 {{ pillar.compton.pkg }}:
-  pkg.installed
+  pkg.latest
 
 # Configure
 {{ pillar.compton.configuration_file }}:
