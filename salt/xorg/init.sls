@@ -2,7 +2,7 @@
 
 # Install
 {{ pillar.xorg.package }}:
-  pkg.installed
+  pkg.latest
 
 # Configure
 {{ pillar.xorg.configuration_file }}:
