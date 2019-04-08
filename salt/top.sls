@@ -31,10 +31,11 @@ base:
     - home-directories
 
     # Development environment configuration
-    - c
     - emacs
     - scripts-repo
     - salt-apply-script
+    - docker
+    - c
     - go
     - python
 
