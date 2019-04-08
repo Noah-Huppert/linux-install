@@ -6,8 +6,9 @@
 
 # Configure groups
 {% for _, group in pillar['users']['groups'].items() %}
-{{ group.name }}:
+{{ group.name }}-group:
   group.present:
+    - name: {{ group.name }}
     - gid: {{ group.id }}
 {% endfor %}
 
