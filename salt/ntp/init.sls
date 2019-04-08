@@ -2,7 +2,7 @@
 
 # Install
 {{ pillar.ntp.pkg }}:
-  pkg.installed
+  pkg.latest
 
 # Service
 {{ pillar.ntp.service }}-enabled:
