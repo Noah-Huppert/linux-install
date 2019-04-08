@@ -2,7 +2,7 @@
 
 # Install
 {{ pillar.dunst.pkg }}:
-  pkg.installed
+  pkg.latest
 
 # Configure
 {{ pillar.dunst.configuration_file }}:
