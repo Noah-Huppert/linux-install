@@ -8,8 +8,9 @@
 #
 # OPTIONS
 #
-#    -t    (Optional) Run states in test mode
-#    -l    (Optional) Run state.apply with -l trace option
+#    -t          (Optional) Run states in test mode
+#    -l          (Optional) Run state.apply with -l trace option
+#    -s STATE    (Optional) Only state to apply
 #
 # BEHAVIOR
 #
@@ -22,6 +23,7 @@ set -e
 
 # {{{1 Configuration
 post_args=()
+state=""
 
 # {{{1 Helpers
 function die() {
@@ -30,13 +32,14 @@ function die() {
 }
 
 # {{{1 Options
-while getopts "tl" opt; do
+while getopts "tls:" opt; do
     case "$opt" in
 	t) post_args+=("test=True") ;;
 	l) post_args+=("-l trace") ;;
+	s) state="$OPTARG" ;;
 	'?') die "Unknown option" ;;
     esac
 done
 
 # {{{1 Run
-exec salt-call --local --state-output=changes state.apply ${post_args[@]}
+exec salt-call --local --state-output=changes state.apply "$state" ${post_args[@]}
