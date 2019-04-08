@@ -8,6 +8,6 @@
 
 # Install
 {{ pillar.emacs.pkg }}:
-  pkg.installed:
+  pkg.latest:
     - required:
       - git: {{ pillar.emacs.configuration_repo }}
