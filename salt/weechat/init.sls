@@ -9,7 +9,7 @@
 # Install
 {% for pkg in pillar['weechat']['pkgs'] %}
 {{ pkg }}:
-  pkg.installed:
+  pkg.latest:
     - require:
       - git: {{ pillar.weechat.configuration_repo }}
 {% endfor %}
