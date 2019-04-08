@@ -7,7 +7,7 @@
 # Configure
 {{ pillar.dunst.configuration_file }}:
   file.managed:
-    - source: salt://dunst/configuration/dunst.conf
+    - source: salt://dunst/dunst.conf
     - makedirs: True
     - user: noah
     - group: noah
