@@ -5,6 +5,7 @@ base:
 
     # Base system configuration
     - kernel
+    - cleanup-kernel
     - initramfs
     - bootloader
     - fstab
