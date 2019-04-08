@@ -3,7 +3,7 @@
 # Install
 {% for pkg in pillar['i3']['pkgs'] %}
 {{ pkg }}:
-  pkg.installed
+  pkg.latest
 {% endfor %}
 
 # Configure i3
