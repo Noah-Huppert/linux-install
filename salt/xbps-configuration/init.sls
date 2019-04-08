@@ -14,4 +14,4 @@
 
 # Install non-free repository
 {{ pillar.xbps_configuration.non_free_pkg }}:
-  pkg.emacs
+  pkg.latest
