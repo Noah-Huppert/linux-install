@@ -1,7 +1,7 @@
 # Install Firefox
 
 {{ pillar.firefox.pkg }}:
-  pkg.installed
+  pkg.latest
 
 {{ pillar.firefox.mp4_codec_pkg }}:
-  pkg.installed
+  pkg.latest
