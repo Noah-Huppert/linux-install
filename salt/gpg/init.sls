@@ -2,7 +2,7 @@
 
 # Install
 gnupg2:
-  pkg.installed
+  pkg.latest
 
 # Copy users keys
 {% for user, key_id in pillar['gpg']['user_keys'].items() %}
