@@ -41,6 +41,10 @@ utilities:
     # Downloader
     - wget
 
+    # Zip
+    - unzip
+    - zip
+
   # Python 3 utility packages
   python3_pkgs:
     # Terminal CPU and memory graph
