@@ -23,4 +23,5 @@ function build_prompt() {
 }
 
 build_prompt
-add-zsh-hook chpwd build_prompt
+#add-zsh-hook chpwd build_prompt
+add-zsh-hook precmd build_prompt
