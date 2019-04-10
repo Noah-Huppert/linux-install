@@ -23,37 +23,33 @@ if [ -f "$gpg_keys_added_file" ]; then
 fi
 
 # Import
-echo "unit: gpg_import: Importing GPG key (May be prompted for private key password)"
+unit-echo "Importing GPG key (May be prompted for private key password)"
 
-echo "OK? [Y/n] "
+unit-echo "OK? [Y/n] "
 read check_ok
 
 check_ok=$(echo "$check_ok" | tr '[:upper:]' '[:lower:]')
 
 if [[ "$check_ok" != "y" && "$check_ok" != "" ]]; then
-	echo "unit: gpg_import: Won't import"
-	return 1
+	return $(unit-die "Won't import")
 fi
 
-echo "unit: gpg_import: Importing public key"
+unit-echo "Importing public key"
 
 if ! gpg --import < "$import_public_file"; then
-	echo "Error: unit: gpg_import: Failed to import public key" >&2
-	return 1
+	return $(unit-die "Error: unit: gpg_import: Failed to import public key")
 fi
 
-echo "unit: gpg_import: Importing private key"
+unit-echo "Importing private key"
 
 if ! gpg --import < "$import_private_file"; then
-	echo "Error: unit: gpg_import: Failed to import private key" >&2
-	return 1
+	return $(unit-die "Failed to import private key")
 fi
 
-echo "unit: gpg_import: Importing owner trust"
+unit-echo "Importing owner trust"
 
 if ! gpg --import-ownertrust < "$import_trust_file"; then
-	echo "Error: unit: gpg_import: Failed to import owner trust" >&2
-	return 1
+	return $(unit-die "Failed to import owner trust")
 fi
 
 echo "OK" > "$gpg_keys_added_file"
