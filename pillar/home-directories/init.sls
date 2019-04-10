@@ -6,3 +6,4 @@ home_directories:
     - pictures/screenshots
     - bin
     - .config
+    - .run
