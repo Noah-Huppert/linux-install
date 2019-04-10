@@ -4,8 +4,7 @@
 ssh_keys=$(find "$HOME/.ssh" -type f ! -name "*.*" -name "id_*")
 
 if [[ "$?" != "0" ]]; then
-	echo "Error: unit: ssh_add: Failed to find SSH private key files" >&2
-	return 1
+	return $(unit-die "Failed to find SSH private key files")
 fi
 
 if [ -z "$ssh_keys" ]; then # Doesn't exist
@@ -14,9 +13,8 @@ fi
 
 # File which we record already added keys inside of
 added_public_keys=$(ssh-add -L)
-if [[ "$?" != "0" ]]; then
-    echo "Error: unit: ssh_add: Failed to get added keys" >&2
-    return 1
+if [[ "$added_public_keys" != "The agent has no identities." && "$?" != "0" ]]; then
+    return $(unit-die "Failed to get added keys")
 fi
 
 # Check if fingerprint of each key is in the file
@@ -25,8 +23,7 @@ while read key_file; do
 	public_key=$(cat "$key_file.pub")
 
 	if [[ "$?" != "0" ]]; then
-		echo "Error: unit: ssh_add: Failed to get \"$key_file\" public key" >&2
-		return 1
+		return $(unit-die "Failed to get \"$key_file\" public key")
 	fi
 
 	# If added, skip
@@ -35,5 +32,5 @@ while read key_file; do
 	fi
 
 	# Tell to add
-	echo "unit: ssh_add: run ssh-add $key_file"
+	unit-echo "run \`ssh-add $key_file\`"
 done <<< "$ssh_keys"
