@@ -1,7 +1,11 @@
 # Install Linux kernel
 
-# Install current version
-{{ pillar.kernel.pkg }}:
+# Install kernel packages
+{{ pillar.kernel.kernel_pkg }}:
+  pkg.installed:
+    - version: {{ pillar.kernel.version }}
+
+{{ pillar.kernel.kernel_pkg }}-headers:
   pkg.installed:
     - version: {{ pillar.kernel.version }}
 

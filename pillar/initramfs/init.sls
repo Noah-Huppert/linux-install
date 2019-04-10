@@ -9,3 +9,7 @@ initramfs:
 
   # Dracut configuration directory
   dracut_config_dir: /etc/dracut.conf.d
+
+  # Packages required to build initramfs
+  build_pkgs:
+    - cryptsetup
