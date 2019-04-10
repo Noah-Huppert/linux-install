@@ -18,6 +18,7 @@ base:
     - touchpad
     - audio
     - backlight
+    - bluetooth
 
     # User level configuration
     - zsh 
