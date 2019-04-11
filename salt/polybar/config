@@ -5,7 +5,7 @@ height = 27
 module-margin = 2
 
 modules-left = i3
-modules-center = volume backlight wifi eth
+modules-center = volume backlight wifi eth wg
 modules-right = checkforupdates filesystem battery date
 
 font-0 = "Roboto:size=12;3"
@@ -51,6 +51,11 @@ interval = 3
 
 format-connected-prefix = 
 format-disconnected =
+
+[module/wg]
+type = custom/script
+
+exec = {{ pillar.wireguard.check_interface_script }} -i wg0 -u  -d ''
 
 [module/checkforupdates]
 type = custom/script
