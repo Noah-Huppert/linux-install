@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+exec i3lock -i "/home/noah/pictures/moon-center.png"

@@ -49,6 +49,7 @@ base:
     - vsv
     - checkforupdates
     - wireguard
+    - lock-script
 
     # User interface configuration
     - xorg
