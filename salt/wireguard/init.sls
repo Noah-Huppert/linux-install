@@ -17,11 +17,20 @@
     - require:
       - file: {{ pillar.wireguard.directory }}
 
+delete:
+  cmd.run:
+    - name: wg-quick down {{ pillar.wireguard.interface}} || true
+    - require:
+      - file: {{ pillar.wireguard.configuration_file }}
+    - onchanges:
+      - file: {{ pillar.wireguard.configuration_file }}
+
 configure:
   cmd.run:
     - name: wg-quick up {{ pillar.wireguard.interface }}
-    - unless: wg show {{ pillar.wireguard.interface }}
     - require:
+      - cmd: delete
+    - onchanges:
       - file: {{ pillar.wireguard.configuration_file }}
 
 # Check interface script
