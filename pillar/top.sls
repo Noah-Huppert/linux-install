@@ -51,6 +51,7 @@ base:
     - wireguard
     - wireguard-secret
     - lock-script
+    - zzz
 
     # User interface configuration
     - xorg

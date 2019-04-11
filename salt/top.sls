@@ -50,6 +50,7 @@ base:
     - checkforupdates
     - wireguard
     - lock-script
+    - zzz
 
     # User interface configuration
     - xorg
