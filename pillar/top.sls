@@ -48,6 +48,8 @@ base:
     - ssh
     - vsv
     - checkforupdates
+    - wireguard
+    - wireguard-secret
 
     # User interface configuration
     - xorg
