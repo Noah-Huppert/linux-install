@@ -25,6 +25,7 @@
 {{ zsh_profiles_dir }}:
   file.recurse:
     - source: salt://zsh-profile/zprofile.d
+    - clean: True
     - user: {{ user.name }}
     - group: {{ user.name }}
     - dir_mode: 755
