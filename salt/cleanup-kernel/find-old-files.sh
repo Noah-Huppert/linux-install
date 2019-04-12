@@ -45,10 +45,11 @@ fi
 # {{{1 Find old files
 empty="true"
 
-for kernel_file in config initramfs vmlinuz 'System.map'; do
-    current_version_name="$kernel_file-$current_kernel_version"
+for kernel_file_tmpl in 'config-VERSION' 'initramfs-VERSION.img' 'vmlinuz-VERSION' 'System.map-VERSION'; do
+    current_version_name=$(echo "$kernel_file_tmpl" | sed "s/VERSION/$current_kernel_version/g")
+    any_version_name=$(echo "$kernel_file_tmpl" | sed 's/VERSION/\*/g')
 
-    old_files=$(find /boot -name "$kernel_file-*" ! -name "$current_version_name" -printf '%f\n')
+    old_files=$(find /boot -name "$any_version_name" ! -name "$current_version_name" -printf '%f\n')
 
     if [[ "$?" != "0" ]]; then
 	die "Failed to find old Kernel artifacts with name $kernel_file"
