@@ -13,6 +13,7 @@ base:
     # Higher level system configuration
     - system-configuration
     - hostname
+    - syslog
     - internet
     - xbps-configuration
     - ntp

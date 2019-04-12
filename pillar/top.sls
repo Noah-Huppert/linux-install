@@ -11,6 +11,7 @@ base:
     # Higher level system configuration
     - system-configuration
     - hostname
+    - syslog
     - internet
     - internet-secret
     - xbps-configuration
