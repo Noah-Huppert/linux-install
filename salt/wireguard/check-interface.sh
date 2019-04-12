@@ -53,6 +53,17 @@ fi
 
 
 # {{{1 Check interface
+# {{{2 Check exists
+ifaces=$(ip link show)
+if [[ "$?" != "0" ]]; then
+    die "Failed to list interfaces"
+fi
+
+if ! echo "$ifaces" | grep "$interface" &> /dev/null; then
+    echo "$down_txt"
+fi
+
+# {{{2 Check up
 status=$(ip link show "$interface")
 if [[ "$?" != "0" ]]; then
     die "Failed to get interface \"$interface\" status"
