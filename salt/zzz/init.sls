@@ -4,6 +4,7 @@
 {{ pillar.zzz.configuration_directory }}:
   file.recurse:
     - source: salt://zzz/zzz.d
+    - clean: True
     - file_mode: 755
     - dir_mode: 755
 
