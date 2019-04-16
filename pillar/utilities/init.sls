@@ -48,6 +48,9 @@ utilities:
     # Rsync
     - rsync
 
+    # Terraform
+    - terraform
+
   # Python 3 utility packages
   python3_pkgs:
     # Terminal CPU and memory graph
