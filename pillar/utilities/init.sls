@@ -51,6 +51,10 @@ utilities:
     # Terraform
     - terraform
 
+    # X Do Tool
+    - xdotool
+    
+
   # Python 3 utility packages
   python3_pkgs:
     # Terminal CPU and memory graph
