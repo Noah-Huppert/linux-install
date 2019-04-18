@@ -1,2 +1,7 @@
 #!/usr/bin/env bash
-exec i3lock -i "/home/noah/pictures/moon-center.png"
+background_image={{ pillar.lock_script.background_image }}
+
+XSECURELOCK_AUTHPROTO=authproto_pam
+XSECURELOCK_SHOW_DATETIME=1
+
+exec xsecurelock
