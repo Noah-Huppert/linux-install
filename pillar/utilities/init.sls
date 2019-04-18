@@ -54,6 +54,8 @@ utilities:
     # X Do Tool
     - xdotool
     
+    # System call trace
+    - strace
 
   # Python 3 utility packages
   python3_pkgs:
