@@ -6,7 +6,7 @@ module-margin = 2
 
 modules-left = i3
 modules-center = volume backlight wifi eth wg
-modules-right = checkforupdates filesystem battery date
+modules-right = filesystem battery date
 
 font-0 = "Roboto:size=12;3"
 font-1 = "RobotoMono Nerd Font:size=12;3"
