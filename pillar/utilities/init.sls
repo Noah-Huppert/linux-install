@@ -60,6 +60,9 @@ utilities:
     # Provides dig tool
     - bind-utils
 
+    # Keybase
+    - keybase
+
   # Python 3 utility packages
   python3_pkgs:
     # Terminal CPU and memory graph
