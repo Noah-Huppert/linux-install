@@ -57,6 +57,9 @@ utilities:
     # System call trace
     - strace
 
+    # Provides dig tool
+    - bind-utils
+
   # Python 3 utility packages
   python3_pkgs:
     # Terminal CPU and memory graph
