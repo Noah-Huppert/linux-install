@@ -40,6 +40,8 @@ base:
     - c
     - go
     - python
+    - aws-cli
+    - aws-cli-secret
 
     # General tools configuration
     - utilities
