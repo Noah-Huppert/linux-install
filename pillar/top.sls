@@ -20,6 +20,7 @@ base:
     - audio
     - backlight
     - bluetooth
+    - fingerprint-reader
 
     # User level configuration
     - zsh 
