@@ -62,6 +62,7 @@ utilities:
 
     # Keybase
     - keybase
+    - keybase-desktop
 
   # Python 3 utility packages
   python3_pkgs:
