@@ -41,6 +41,7 @@ base:
     - c
     - go
     - python
+    - elixir
     - aws-cli
 
     # General tools configuration
