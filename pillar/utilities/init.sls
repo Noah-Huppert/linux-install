@@ -64,6 +64,12 @@ utilities:
     - keybase
     - keybase-desktop
 
+    # File system change tools
+    - inotify-tools
+
+    # PostgreSQL client
+    - postgresql-client
+
   # Python 3 utility packages
   python3_pkgs:
     # Terminal CPU and memory graph
