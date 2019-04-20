@@ -12,3 +12,6 @@ audio:
     - dbus
     - cgmanager
     - consolekit
+
+  # Volume control script
+  volume_control_script: /usr/bin/volumectl

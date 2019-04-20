@@ -22,3 +22,10 @@
     - require:
       - service: {{ svc }}-enabled
 {% endfor %}
+
+# Volume control script
+{{ pillar.audio.volume_control_script }}:
+  file.managed:
+    - source: salt://audio/volumectl
+    - makdirs: True
+    - mode: 755

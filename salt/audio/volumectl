@@ -1,0 +1,133 @@
+#!/usr/bin/env bash
+#?
+# volumectl - Control volume
+#
+# USAGE
+#
+#     volumectl [-h] CMDS
+#
+# OPTIONS
+#
+#    -h    Show help
+#
+# ARGUMENTS
+#
+#    CMDS    Commands to run, see commands section
+#
+# COMMANDS
+#
+#    togglemute    Toggle mute, note behavior of unmute
+#    unmute        Unmute output, unmutes jack if plugged in, otherwise unmutes speakers
+#    up            Increase volume by 5%
+#    down          Decrease volume by 5%
+#
+#?
+
+# {{{1 Configuration
+device_master=Master
+device_speaker=Speaker
+device_headphone=Headphone
+
+move_amount=5
+
+# {{{1 Helpers
+function die() {
+    echo "Error: $@" >&2
+    exit 1
+}
+
+# {{{1 Options
+while getopts "h" opt; do
+    case "$opt" in
+	h)
+	    show-help "$0"
+	    exit 1
+	    ;;
+
+    esac
+done
+
+# {{{1 Arguments
+if [ -z "$1" ]; then
+    die "CMDS argument required"
+fi
+
+while [ -n "$1" ]; do
+    if [[ "$1" == "togglemute" ]]; then
+	cmd_togglemute="true"
+    elif [[ "$1" == "unmute" ]]; then
+	cmd_unmute="true"
+    elif [[ "$1" == "up" ]]; then
+	cmd_up="true"
+    elif [[ "$1" == "down" ]]; then
+	cmd_down="true"
+    else
+	die "Unknown command $1"
+    fi
+    shift
+done
+
+# {{{1 Commands
+# {{{2 Toggle mute command
+if [ -n "$cmd_togglemute" ]; then
+    # {{{2 Check if muted
+    muted=yes
+    
+    if amixer -c 0 contents | awk "/.*name='Master Playback Switch'/,/.*:/" | grep values=on &>/dev/null; then
+	muted=no
+    fi
+
+    # {{{1 Mute or unmute
+    if [[ "$muted" == "yes" ]]; then
+	"$0" unmute
+    else
+	if ! amixer -c 0 sset "$device_master" mute; then
+	    die "Failed to mute $deice_master"
+	fi
+    fi
+fi
+
+# {{{2 Unmute command
+if [ -n "$cmd_unmute" ]; then
+    # {{{2 Check if headphone jack plugged in
+    unmute_device="$device_speaker"
+    mute_device="$device_headphone"
+    
+    if amixer -c 0 contents | awk "/.*name='Headphone Jack'/,/.*:/" | grep values=on &>/dev/null; then
+	unmute_device="$device_headphone"
+	mute_device="$device_speaker"
+    fi
+
+    # {{{2 Unmute and mute items
+    if ! amixer -c 0 sset "$mute_device" mute; then
+	die "Failed to mute $mute_device"
+    fi
+
+    if ! amixer -c 0 sset "$unmute_device" unmute; then
+	die "Failed to unmute $unmute_device"
+    fi
+
+    if ! amixer -c 0 sset "$device_master" unmute; then
+	die "Failed to unmute $device_master"
+    fi
+     
+    echo "Unmuted $unmute_device"
+fi
+
+# {{{2 Up command
+if [ -n "$cmd_up" ]; then
+    if ! amixer -c 0 sset "$device_master" "$move_amount%+"; then
+	die "Failed to increase $device_master volume by $move_amount%"
+    fi
+
+    echo "Raised volume by $move_amount%"
+fi
+
+# {{{2 Down command
+if [ -n "$cmd_down" ]; then
+    if ! amixer -c 0 sset "$device_master" "$move_amount%-"; then
+	die "Failed to decrease $device_master volume by $move_amount%"
+    fi
+
+    echo "Lowered volume by $move_amount%"
+fi
