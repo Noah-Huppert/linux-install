@@ -42,6 +42,7 @@ base:
     - go
     - python
     - elixir
+    - nodejs
     - aws-cli
     - aws-cli-secret
 
