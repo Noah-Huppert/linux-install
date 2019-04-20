@@ -35,9 +35,9 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="^floating$"] floating enable
 
 # Volume control
-bindsym XF86AudioRaiseVolume exec amixer sset Master unmute 5%+
-bindsym XF86AudioLowerVolume exec amixer sset Master unmute 5%-
-bindsym XF86AudioMute exec amixer sset Master toggle
+bindsym XF86AudioRaiseVolume exec volumectl unmute up
+bindsym XF86AudioLowerVolume exec volumectl unmute down
+bindsym XF86AudioMute exec volumectl togglemute
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -143,7 +143,6 @@ bindsym $mod+Shift+r restart
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 bindsym $mod+Shift+e exit
 bindsym Control+Mod1+l exec lock
-bindsym Control+Mod1+s exec sudo zzz
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
