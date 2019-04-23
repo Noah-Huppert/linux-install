@@ -22,6 +22,7 @@ base:
     - backlight
     - bluetooth
     - fingerprint-reader
+    - local-dns
 
     # User configuration
     - zsh
