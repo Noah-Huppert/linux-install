@@ -70,6 +70,9 @@ utilities:
     # PostgreSQL client
     - postgresql-client
 
+    # HTTPie HTTP CLI
+    - httpie
+
   # Python 3 utility packages
   python3_pkgs:
     # Terminal CPU and memory graph
