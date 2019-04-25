@@ -19,6 +19,9 @@ foreground = #FFFFFF
 [module/i3]
 type = internal/i3
 
+# Only show workspaces on same monitor as bar
+pin-workspaces = true
+
 label-mode-padding = 2
 label-focused-padding = 2
 label-unfocused-padding = 2
