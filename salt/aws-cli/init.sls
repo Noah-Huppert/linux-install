@@ -5,6 +5,11 @@
  pip.installed:
    - pip_bin: {{ pillar.python.pip3_bin }}
 
+{% for pkg in pillar['aws_cli']['xbps_dep_pkgs'] %}
+{{ pkg }}:
+  pkg.latest
+{% endfor %}
+
 # Configure credentials
 {{ pillar.aws_cli.credentials_file }}:
   file.managed:
