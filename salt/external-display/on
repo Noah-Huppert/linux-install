@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+{{ pillar.polybar.launch_script_file }}

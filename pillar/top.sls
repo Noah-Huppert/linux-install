@@ -22,6 +22,7 @@ base:
     - bluetooth
     - fingerprint-reader
     - local-dns
+    - external-display
 
     # User level configuration
     - zsh 
