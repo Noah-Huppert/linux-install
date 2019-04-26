@@ -70,6 +70,7 @@ base:
     - dunst
     - polybar
     - rice
+    - fonts
  
     # Applications configurtion
     - misc-applications
