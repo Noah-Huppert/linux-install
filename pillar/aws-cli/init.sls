@@ -1,6 +1,8 @@
 aws_cli:
-  # AWS CLI package
-  pip_pkg: awscli
+  # AWS CLI PIP packages
+  pip_pkgs:
+    - awscli
+    - boto3
 
   # XBPS dependency packages
   xbps_dep_pkgs:

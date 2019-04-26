@@ -1,9 +1,11 @@
 # Install and configure AWS CLI
 
 # Install
-{{ pillar.aws_cli.pip_pkg }}:
+{% for pkg in pillar['aws_cli']['pip_pkgs'] %}
+{{ pkg }}:
  pip.installed:
    - pip_bin: {{ pillar.python.pip3_bin }}
+{% endfor %}     
 
 {% for pkg in pillar['aws_cli']['xbps_dep_pkgs'] %}
 {{ pkg }}:
