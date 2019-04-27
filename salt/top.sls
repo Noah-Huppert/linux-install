@@ -46,6 +46,7 @@ base:
     - elixir
     - nodejs
     - aws-cli
+    - digitalocean-cli
 
     # General tools configuration
     - utilities

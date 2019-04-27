@@ -47,6 +47,8 @@ base:
     - nodejs
     - aws-cli
     - aws-cli-secret
+    - digitalocean-cli
+    - digitalocean-cli-secret
 
     # General tools configuration
     - utilities
