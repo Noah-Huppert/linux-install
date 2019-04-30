@@ -12,3 +12,9 @@
   pip.installed:
     - pip_bin: {{ pillar.python.pip3_bin }}
 {% endfor %}
+
+# NodeJS 
+{% for pkg in pillar['utilities']['node_pkgs'] %}
+'{{ pkg }}':
+  npm.installed
+{% endfor %}

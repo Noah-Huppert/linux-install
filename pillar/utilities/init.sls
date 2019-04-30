@@ -81,3 +81,8 @@ utilities:
     # Jupyter
     - jupyter
     - jupyterlab
+
+  # NodeJS utility packages
+  node_pkgs:
+    # VueJS CLI
+    - '@vue/cli'
