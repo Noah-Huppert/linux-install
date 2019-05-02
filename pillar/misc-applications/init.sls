@@ -9,3 +9,6 @@ misc_applications:
 
     # Gimp
     - gimp
+
+    # Inkscape
+    - inkscape
