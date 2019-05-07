@@ -22,6 +22,10 @@ internet:
       tyler_wifi:
         ssid: '"Wi so Fi?"'
 
+      # Home
+      home:
+        ssid: '"Katla-5G"'
+
   # DHCPCD configuration
   dhcpcd:
     # Service
