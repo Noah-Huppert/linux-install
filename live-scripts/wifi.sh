@@ -32,6 +32,7 @@ while getopts "s:p:h" opt; do
 		h)
 			echo "$0 -s SSID [-p PASSWORD,-h]"
 			exit 1
+			;;
 		'?')
 			die "Unknown option \"$opt\""
 			;;
