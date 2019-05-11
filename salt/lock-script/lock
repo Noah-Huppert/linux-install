@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 background_image={{ pillar.lock_script.background_image }}
 
-XSECURELOCK_AUTHPROTO=authproto_pam
-XSECURELOCK_SHOW_DATETIME=1
+export XSECURELOCK_AUTHPROTO=authproto_pam
 
 exec xsecurelock
