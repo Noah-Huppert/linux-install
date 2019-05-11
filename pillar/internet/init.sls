@@ -26,6 +26,12 @@ internet:
       home:
         ssid: '"Katla-5G"'
 
+      # "Sleep In" Carlisle
+      hotel_sleep_in:
+        ssid: '"SleepInn_Guest"'
+        key_mgmt: NONE
+    
+
   # DHCPCD configuration
   dhcpcd:
     # Service
