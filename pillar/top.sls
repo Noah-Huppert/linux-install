@@ -23,6 +23,7 @@ base:
     - fingerprint-reader
     - local-dns
     - external-display
+    - power-management
 
     # User level configuration
     - zsh 
@@ -61,7 +62,6 @@ base:
     - wireguard
     - wireguard-secret
     - lock-script
-    - zzz
 
     # User interface configuration
     - xorg
