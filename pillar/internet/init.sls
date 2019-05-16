@@ -26,6 +26,13 @@ internet:
       home:
         ssid: '"Katla-5G"'
 
+      # Cambrio Boston
+      cambrio:
+        ssid: '"WiFi Secure"'
+        key_mgmt: WPA-EAP
+        eap: TTLS
+        phase2: '"auth=PAP"'
+
       # "Sleep In" Carlisle
       hotel_sleep_in:
         ssid: '"SleepInn_Guest"'
