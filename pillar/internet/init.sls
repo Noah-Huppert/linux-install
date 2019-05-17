@@ -26,6 +26,10 @@ internet:
       home:
         ssid: '"Katla-5G"'
 
+      # Chris's House
+      chris:
+        ssid: '"4GMY8"'
+
       # Cambrio Boston
       cambrio:
         ssid: '"WiFi Secure"'
