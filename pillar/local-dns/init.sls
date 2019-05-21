@@ -1,6 +1,9 @@
 {% set named_dir = '/etc/named' %}
 
 local_dns:
+  # Toggles the use of the local DNS server
+  enabled: False
+  
   # BIND 9 configuration
   bind:
     # Package
