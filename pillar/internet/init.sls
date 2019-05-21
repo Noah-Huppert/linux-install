@@ -37,10 +37,9 @@ internet:
         eap: TTLS
         phase2: '"auth=PAP"'
 
-      # "Sleep In" Carlisle
-      hotel_sleep_in:
-        ssid: '"SleepInn_Guest"'
-        key_mgmt: NONE
+      # RedHat Westford
+      redhat:
+        ssid: '"Red Hat Guest"'
     
 
   # DHCPCD configuration
