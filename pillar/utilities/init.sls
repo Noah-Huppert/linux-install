@@ -73,6 +73,12 @@ utilities:
     # HTTPie HTTP CLI
     - httpie
 
+    # Kubernetes CLI
+    - kubectl
+
+    # Local Kubernetes cluster
+    - minikube
+
   # Python 3 utility packages
   python3_pkgs:
     # Terminal CPU and memory graph
