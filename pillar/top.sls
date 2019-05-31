@@ -62,6 +62,7 @@ base:
     - wireguard
     - wireguard-secret
     - lock-script
+    - kube-namespace
 
     # User interface configuration
     - xorg

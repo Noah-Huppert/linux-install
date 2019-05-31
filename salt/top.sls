@@ -59,6 +59,7 @@ base:
     - checkforupdates
     - wireguard
     - lock-script
+    - kube-namespace
 
     # User interface configuration
     - xorg
