@@ -79,6 +79,9 @@ utilities:
     # Local Kubernetes cluster
     - minikube
 
+    # Virtual Box VM
+    - virtualbox-ose
+
   # Python 3 utility packages
   python3_pkgs:
     # Terminal CPU and memory graph
