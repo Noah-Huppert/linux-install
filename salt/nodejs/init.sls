@@ -1,4 +1,6 @@
 # Install Node JS
 
-{{ pillar.nodejs.pkg }}:
+{% for pkg in pillar['nodejs']['pkgs'] %}
+{{ pkg }}:
   pkg.installed
+{% endfor %}

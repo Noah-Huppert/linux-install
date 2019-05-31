@@ -1,3 +1,5 @@
 nodejs:
-  # Node JS package
-  pkg: nodejs
+  # Node JS packages
+  pkgs:
+    - nodejs
+    - yarn
