@@ -48,6 +48,7 @@ base:
     - nodejs
     - aws-cli
     - digitalocean-cli
+    - aws-key-pairs
 
     # General tools configuration
     - utilities
