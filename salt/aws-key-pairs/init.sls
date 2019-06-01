@@ -5,5 +5,5 @@
     - source: salt://aws-key-pairs-secret
     - user: noah
     - group: noah
-    - file_mode: 640
-    - dir_mode: 740
+    - file_mode: 600
+    - dir_mode: 700
