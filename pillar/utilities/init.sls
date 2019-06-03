@@ -91,6 +91,9 @@ utilities:
     - jupyter
     - jupyterlab
 
+    # Virtual environment manager
+    - pipenv
+
   # NodeJS utility packages
   node_pkgs:
     # VueJS CLI
