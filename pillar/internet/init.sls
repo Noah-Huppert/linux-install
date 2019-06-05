@@ -40,7 +40,10 @@ internet:
       # RedHat Westford
       redhat:
         ssid: '"Red Hat Guest"'
-    
+
+      # Jeff Sudbury
+      jeff_sudbury:
+        ssid: '"Fios-XMPR0"'
 
   # DHCPCD configuration
   dhcpcd:
