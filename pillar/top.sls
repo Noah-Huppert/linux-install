@@ -50,6 +50,7 @@ base:
     - aws-cli-secret
     - digitalocean-cli
     - digitalocean-cli-secret
+    - red-hat-vpn
     - aws-key-pairs
 
     # General tools configuration

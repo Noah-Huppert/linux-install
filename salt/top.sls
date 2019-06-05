@@ -48,6 +48,7 @@ base:
     - nodejs
     - aws-cli
     - digitalocean-cli
+    - red-hat-vpn
     - aws-key-pairs
 
     # General tools configuration
