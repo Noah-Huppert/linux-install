@@ -52,6 +52,7 @@ base:
     - digitalocean-cli-secret
     - red-hat-vpn
     - aws-key-pairs
+    - openshift-client
 
     # General tools configuration
     - utilities
