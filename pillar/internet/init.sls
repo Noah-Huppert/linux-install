@@ -45,7 +45,13 @@ internet:
       jeff_sudbury:
         ssid: '"Fios-XMPR0"'
 
+      # Panera
+      panera:
+        ssid: '"PANERA"'
+        key_mgmt: NONE
+
   # DHCPCD configuration
   dhcpcd:
     # Service
     service: dhcpcd
+
