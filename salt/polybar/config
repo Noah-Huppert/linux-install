@@ -43,7 +43,7 @@ format =  <label>
 [module/wifi]
 type = internal/network
 
-interface = wlp2s0
+interface = {{ pillar.polybar.network_interfaces.wireless }}
 interval = 3
 format-connected = 
 format-disconnected = 
@@ -51,10 +51,10 @@ format-disconnected =
 [module/eth]
 type = internal/network
 
-interface = enp0s31f6
+interface = {{ pillar.polybar.network_interfaces.ethernet }}
 interval = 3
 
-format-connected-prefix = 
+format-connected = 
 format-disconnected =
 
 [module/wg]
