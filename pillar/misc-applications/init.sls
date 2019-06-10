@@ -12,3 +12,8 @@ misc_applications:
 
     # Inkscape
     - inkscape
+
+    # Minecraft
+    - minecraft
+    - openjdk-jre
+    - MultiMC
