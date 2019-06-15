@@ -64,7 +64,7 @@ base:
     - checkforupdates
     - wireguard
     - wireguard-secret
-    - lock-script
+#    - lock-script
     - kube-namespace
 
     # User interface configuration

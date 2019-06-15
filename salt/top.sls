@@ -61,7 +61,7 @@ base:
     - vsv
     - checkforupdates
     - wireguard
-    - lock-script
+#    - lock-script
     - kube-namespace
 
     # User interface configuration
