@@ -17,3 +17,9 @@ misc_applications:
     - minecraft
     - openjdk-jre
     - MultiMC
+
+    # Transmission
+    - transmission
+
+    # VLC
+    - vlc
