@@ -30,6 +30,7 @@ function shortcut_path() { # STDIN, ( FIND, REPLACE )
 ## Shows PWD with shortcuts to make shorter
 function pwd_prompt() {
     d="$PWD"
+    d=$(echo "$d" | shortcut_path "$HOME/documents/work/red-hat" "~/[red-hat]")
     d=$(echo "$d" | shortcut_path "$HOME/documents/school" "~/[school]")
     d=$(echo "$d" | shortcut_path "$HOME/documents" "~/[docs]")
     d=$(echo "$d" | shortcut_path "$HOME" "~")
