@@ -4,6 +4,13 @@
 {{ pillar.local_dns.bind.pkg }}:
   pkg.installed
 
+# Toggle script
+{{ pillar.local_dns.toggle_script.install_file }}:
+  file.managed:
+    - source: salt://local-dns/local-dns
+    - template: jinja
+    - mode: 755
+
 # Named configuration
 {{ pillar.local_dns.bind.configuration_file }}:
   file.managed:

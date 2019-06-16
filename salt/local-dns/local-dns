@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+#?
+# local-dns - Toggle local DNS server on and off
+#
+# USAGE
+#
+#    local-dns on|off
+#
+# ARGUMENTS
+#
+#    1.    on|off    Turns the local DNS server on or off
+#
+# BEHAVIOR
+#
+#    Applies the local-dns state with the local_dns.disabled value set to
+#    true (off) or false (on).
+#
+#?
+
+function die() {
+    echo "Error: $@" >&2
+    exit 1
+}
+
+function bold() {
+    echo "$(tput bold)$@$(tput sgr0)"
+}
+
+case "$1" in
+    on)
+	bold "Turning on local DNS"
+	disabled=False
+	;;
+    off)
+	bold "Turning off local DNS"
+	disabled=True
+	;;
+    *) die "First argument must be \"on\" or \"off\"" ;;
+esac
+
+cat <<EOF | tee "{{ pillar.salt_configuration.pillar_dirs.public }}/{{ pillar.local_dns.toggle_script.pillar_file }}"
+local_dns:
+  disabled: $disabled
+EOF
+
+if [[ "$?" != "0" ]]; then
+    die "Failed to set pillar file"
+fi
+
+if ! sudo salt-apply -s local-dns; then
+    die "Failed to apply local-dns state"
+fi
+
+bold "Success"

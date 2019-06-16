@@ -1,8 +1,19 @@
 {% set named_dir = '/etc/named' %}
 
 local_dns:
-  # Toggles the use of the local DNS server
-  enabled: False
+  # Disables local DNS server in favor of DNS IPs provided by DHCP
+  # This value is set automatically in the script.sls file by the
+  # local-dns script 
+  # disabled: True
+
+  # Toggle script configuration
+  toggle_script:
+    # Location of pillar file where the toggle script will set the disabled value.
+    # Relative to the pillar root directory.
+    pillar_file: local-dns/script.sls
+
+    # Install location
+    install_file: /usr/bin/local-dns
   
   # BIND 9 configuration
   bind:
