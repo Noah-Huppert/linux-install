@@ -677,8 +677,8 @@
 #
 file_roots:
   base:
-    - /srv/salt
-    - /srv/salt-secret
+    - {{ pillar.salt_configuration.salt_dirs.public }}
+    - {{ pillar.salt_configuration.salt_dirs.secret }}
 
 # The master_roots setting configures a master-only copy of the file_roots dictionary,
 # used by the state compiler.
@@ -854,9 +854,8 @@ file_roots:
 #  - cmd_yaml: cat /etc/salt/yaml
 pillar_roots:
   base:
-    - /srv/pillar
-    - /srv/pillar-secret
-
+    - {{ pillar.salt_configuration.pillar_dirs.public }}
+    - {{ pillar.salt_configuration.pillar_dirs.secret }}
 
 # A list of paths to be recursively decrypted during pillar compilation.
 # Entries in this list can be formatted either as a simple string, or as a

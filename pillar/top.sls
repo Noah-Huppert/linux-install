@@ -1,5 +1,8 @@
 base:
   '*':
+    # Salt configuration
+    - salt-configuration
+    
     # Base system configuration
     - partitions
     - kernel
