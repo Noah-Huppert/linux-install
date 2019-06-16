@@ -50,6 +50,10 @@ internet:
         ssid: '"PANERA"'
         key_mgmt: NONE
 
+      # Pixel 2 Hotspot
+      noux:
+        ssid: '"noux"'
+
   # DHCPCD configuration
   dhcpcd:
     # Service
