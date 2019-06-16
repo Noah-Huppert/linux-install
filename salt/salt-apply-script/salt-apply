@@ -8,9 +8,10 @@
 #
 # OPTIONS
 #
-#    -t          (Optional) Run states in test mode
-#    -l          (Optional) Run state.apply with -l trace option
-#    -s STATE    (Optional) Only state to apply
+#    -t           (Optional) Run states in test mode
+#    -l           (Optional) Run state.apply with -l trace option
+#    -s STATE     (Optional) Only state to apply
+#    -p PILLAR    (Optional) Set pillar values
 #
 # BEHAVIOR
 #
@@ -32,11 +33,12 @@ function die() {
 }
 
 # {{{1 Options
-while getopts "tls:" opt; do
+while getopts "tls:p:" opt; do
     case "$opt" in
 	t) post_args+=("test=True") ;;
 	l) post_args+=("-l trace") ;;
 	s) state="$OPTARG" ;;
+	p) post_args+=("pillar='$OPTARG'") ;;
 	'?') die "Unknown option" ;;
     esac
 done
