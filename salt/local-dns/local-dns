@@ -26,6 +26,8 @@ function bold() {
     echo "$(tput bold)$@$(tput sgr0)"
 }
 
+pillar_file="{{ pillar.salt_configuration.pillar_dirs.public }}/{{ pillar.local_dns.toggle_script.pillar_file }}"
+
 case "$1" in
     on)
 	bold "Turning on local DNS"
@@ -35,10 +37,17 @@ case "$1" in
 	bold "Turning off local DNS"
 	disabled=True
 	;;
-    *) die "First argument must be \"on\" or \"off\"" ;;
+    *)
+	if [ -f "$pillar_file" ] && cat "$pillar_file" | grep "disabled: True" &> /dev/null; then
+	    bold "Local DNS is off"
+	else
+	    bold "Local DNS is on"
+	fi
+	exit 0
+	;;
 esac
 
-cat <<EOF | tee "{{ pillar.salt_configuration.pillar_dirs.public }}/{{ pillar.local_dns.toggle_script.pillar_file }}"
+cat <<EOF | tee "$pillar_file"
 local_dns:
   disabled: $disabled
 EOF
