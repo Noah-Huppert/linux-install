@@ -41,6 +41,7 @@ base:
     - home-directories
 
     # Development environment configuration
+    - build-deps
     - emacs
     - scripts-repo
     - salt-apply-script
