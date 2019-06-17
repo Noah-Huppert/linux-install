@@ -82,6 +82,13 @@ utilities:
     # Virtual Box VM
     - virtualbox-ose
 
+    # Network scanner
+    - nmap
+
+    # Serial terminal
+    - screen
+    - ppp
+
   # Python 3 utility packages
   python3_pkgs:
     # Terminal CPU and memory graph
