@@ -25,6 +25,7 @@ base:
     - bluetooth
     - fingerprint-reader
     - local-dns
+    - local-dns.script
     - external-display
     - power-management
 
