@@ -25,6 +25,7 @@ internet:
       # Home
       home:
         ssid: '"Katla-5G"'
+        priority: 2
 
       # Chris's House
       chris:
@@ -53,6 +54,11 @@ internet:
       # Pixel 2 Hotspot
       noux:
         ssid: '"noux"'
+
+      # Turris router
+      turris:
+        ssid: '"Turris"'
+        priority: 1
 
   # DHCPCD configuration
   dhcpcd:
