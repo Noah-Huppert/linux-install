@@ -25,7 +25,7 @@ internet:
       # Home
       home:
         ssid: '"Katla-5G"'
-        priority: 2
+        priority: 1
 
       # Chris's House
       chris:
@@ -58,7 +58,7 @@ internet:
       # Turris router
       turris:
         ssid: '"Turris"'
-        priority: 1
+        priority: 2
 
   # DHCPCD configuration
   dhcpcd:
