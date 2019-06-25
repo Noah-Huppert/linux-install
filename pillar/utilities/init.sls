@@ -89,6 +89,9 @@ utilities:
     - screen
     - ppp
 
+    # Helm
+    - helm
+
   # Python 3 utility packages
   python3_pkgs:
     # Terminal CPU and memory graph
