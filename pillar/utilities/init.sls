@@ -105,3 +105,8 @@ utilities:
   node_pkgs:
     # VueJS CLI
     - '@vue/cli'
+
+  # Git repository which will be cloned into ~/bin
+  git_repos:
+    - repo: https://github.com/Noah-Huppert/kiln.git
+      dir: kiln

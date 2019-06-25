@@ -18,3 +18,10 @@
 '{{ pkg }}':
   npm.installed
 {% endfor %}
+
+# Git repositories
+{% for repo in pillar['utilities']['git_repos'] %}
+'{{ repo.repo }}':
+  git.latest:
+    - target: /home/noah/bin/{{ repo.dir }}
+{% endfor %}  
