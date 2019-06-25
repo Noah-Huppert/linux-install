@@ -60,6 +60,11 @@ internet:
         ssid: '"Turris"'
         priority: 2
 
+      # Jeff's Dad's
+      jeff_dad:
+        ssid: '"jeffabbyjulia"'
+
+
   # DHCPCD configuration
   dhcpcd:
     # Service
