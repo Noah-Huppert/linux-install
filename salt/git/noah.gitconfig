@@ -13,6 +13,7 @@
 	pom = push origin master
 	pu = pull
 	pul = pull origin master
+	co = checkout
 [push]
 	default = current
 [gpg]
