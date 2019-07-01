@@ -14,6 +14,7 @@
 	pu = pull
 	pul = pull origin master
 	co = checkout
+	b = branch
 [push]
 	default = current
 [gpg]
