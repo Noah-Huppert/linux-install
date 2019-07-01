@@ -90,7 +90,9 @@ utilities:
     - ppp
 
     # Helm
-    - helm
+    - kubernetes-helm
+
+    - bc
 
   # Python 3 utility packages
   python3_pkgs:
@@ -103,6 +105,9 @@ utilities:
 
     # Virtual environment manager
     - pipenv
+
+    # Pylint
+    - pylint
 
   # NodeJS utility packages
   node_pkgs:
