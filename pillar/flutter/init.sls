@@ -1,5 +1,8 @@
 {% set dir = '/opt/flutter-sdk' %}
 flutter:
+  # Group
+  group: flutter
+  
   # Working directory
   dir: {{ dir }}
   
