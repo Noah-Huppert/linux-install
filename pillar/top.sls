@@ -58,6 +58,7 @@ base:
     - red-hat-vpn
     - aws-key-pairs
     - openshift-client
+    - flutter
 
     # General tools configuration
     - utilities
