@@ -11,6 +11,8 @@
 #     -p PREFIX    (Optional) Print prefix before any update information text
 #     -n           (Optional) Only show number of package which need updates
 #     -l           (Optional) Show all information on one line
+#     -a NUM       (Optional) Do not print anything until # of packages is above
+#                  than NUM
 #
 # BEHAVIOR
 #
@@ -28,11 +30,14 @@ function die() {
 }
 
 # {{{1 Options
-while getopts "p:nl" opt; do
+above=0
+
+while getopts "p:nla:" opt; do
     case "$opt" in
 	p) print_prefix="$OPTARG" ;;
         n) only_number="true" ;;
 	l) one_line="true" ;;
+	a) above="$OPTARG" ;;
         '?') die "Unknown option" ;;
     esac
 done
@@ -45,7 +50,7 @@ if [[ "$?" != "0" ]]; then
 fi
 
 # {{{1 If no updates exit right now
-if [ -z "$updates" ]; then
+if [ -z "$updates" ] || (($(echo "$updates" | wc -l) < "$above")); then
     if [ -n "$one_line" ]; then
 	stdbuf -o 0 printf " "
     else
