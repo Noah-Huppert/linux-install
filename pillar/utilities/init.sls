@@ -118,3 +118,7 @@ utilities:
   git_repos:
     - repo: https://github.com/Noah-Huppert/kiln.git
       dir: kiln
+
+  # Go packages
+  go_pkgs:
+    - github.com/go-delve/delve/cmd/dlv

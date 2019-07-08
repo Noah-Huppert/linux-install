@@ -25,3 +25,10 @@
   git.latest:
     - target: /home/noah/bin/{{ repo.dir }}
 {% endfor %}  
+
+# Go packages
+{% for pkg in pillar['utilities']['go_pkgs'] %}
+go get -u {{ pkg }}:
+  cmd.run:
+    - unless: test -d "$GOPATH/{{ pkg }}"
+{% endfor %}
