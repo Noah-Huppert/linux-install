@@ -63,7 +63,10 @@ internet:
       # Jeff's Dad's
       jeff_dad:
         ssid: '"jeffabbyjulia"'
-
+        
+      # Jeff's Dad's Lake House July 2019
+      jeff_dad_nh_2019:
+        ssid: '"MySpectrumWiFi8f-5G"'
 
   # DHCPCD configuration
   dhcpcd:
