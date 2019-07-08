@@ -59,6 +59,7 @@ base:
     - aws-key-pairs
     - openshift-client
     - flutter
+    - argo
 
     # General tools configuration
     - utilities
