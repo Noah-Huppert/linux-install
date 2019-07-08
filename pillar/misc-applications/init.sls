@@ -1,16 +1,9 @@
 misc_applications:
   # Packages
   pkgs:
-    # Signal Desktop
     - Signal-Desktop
-
-    # Spotify
     - spotify
-
-    # Gimp
     - gimp
-
-    # Inkscape
     - inkscape
 
     # Minecraft
@@ -18,8 +11,6 @@ misc_applications:
     - openjdk-jre
     - MultiMC
 
-    # Transmission
-    - transmission
-
-    # VLC
+    - transmission # Torrent
     - vlc
+    - steam
