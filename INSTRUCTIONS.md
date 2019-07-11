@@ -15,10 +15,10 @@ Run:
 ```
 
 # Setup
-Follow the instructions in the following sections to install Void linux.
+Follow the instructions in the following sections to install Void Linux.
 
 ## Disable Secure Boot
-Secure boot interferes with your computer's ability to boot form a USB.  
+Secure boot interferes with your computer's ability to boot from a USB.  
 
 Disable it in your computer's BIOS configuration.
 
