@@ -24,6 +24,9 @@ users:
     docker:
       name: docker
       id: 991
+    xbuilder:
+      name: xbuilder
+      id: 101
 
   # Users configuration, dict of user objects with the keys:
   #
@@ -46,6 +49,7 @@ users:
         - wheel
         - video
         - docker
+        - xbuilder
     root:
       name: root
       id: 0
