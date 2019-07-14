@@ -52,6 +52,7 @@ base:
     - red-hat-vpn
     - aws-key-pairs
     - openshift-client
+    - android-sdk
     - flutter
     - argo
 
