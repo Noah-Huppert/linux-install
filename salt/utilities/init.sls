@@ -30,5 +30,5 @@
 {% for pkg in pillar['utilities']['go_pkgs'] %}
 go get -u {{ pkg }}:
   cmd.run:
-    - unless: test -d "$GOPATH/{{ pkg }}"
+    - unless: test -d "$GOPATH/src/{{ pkg }}"
 {% endfor %}

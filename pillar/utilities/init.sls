@@ -122,3 +122,4 @@ utilities:
   # Go packages
   go_pkgs:
     - github.com/go-delve/delve/cmd/dlv
+    - golang.org/x/tools/cmd/gorename
