@@ -22,3 +22,4 @@ flutter:
   # Dependency packages
   dep_pkgs:
     - libstdc++
+    - libstdc++-32bit
