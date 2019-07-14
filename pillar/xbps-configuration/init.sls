@@ -6,6 +6,7 @@ xbps_configuration:
 
     # Packages
     pkgs:
+      # 32bit packags for 64bit platforms
       - void-repo-multilib
 
     # Repositories
