@@ -4,6 +4,10 @@ xbps_configuration:
     # Configuration file
     file: /usr/share/xbps.d/00-repository-main.conf
 
+    # Packages
+    pkgs:
+      - void-repo-multilib
+
     # Repositories
     servers:
       # Main repository
