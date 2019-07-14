@@ -24,3 +24,9 @@
     - target: {{ pillar.flutter.install_target }}
     - require:
       - archive: {{ pillar.flutter.dir }}
+
+# Install dependencies
+{% for pkg in pillar['flutter']['dep_pkgs'] %}
+{{ pkg }}:
+  pkg.latest
+{% endfor %}

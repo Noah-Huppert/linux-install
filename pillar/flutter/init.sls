@@ -18,3 +18,7 @@ flutter:
   # Install location
   install_file: /home/noah/bin/flutter
   install_target: {{ dir }}/flutter/bin/flutter
+
+  # Dependency packages
+  dep_pkgs:
+    - libstdc++
