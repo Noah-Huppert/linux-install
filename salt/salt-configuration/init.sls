@@ -4,3 +4,4 @@
     - source: salt://salt-configuration/minion
     - mode: 664
     - template: jinja
+

@@ -583,6 +583,7 @@
 # The renderer to use on the minions to render the state data
 #renderer: yaml_jinja
 
+{% raw %}
 # Default Jinja environment options for all templates except sls templates
 #jinja_env:
 #  block_start_string: '{%'
@@ -612,6 +613,7 @@
 #  lstrip_blocks: False
 #  newline_sequence: '\n'
 #  keep_trailing_newline: False
+{% endraw %}
 
 # The failhard option tells the minions to stop immediately after the first
 # failure detected in the state execution, defaults to False
@@ -677,8 +679,8 @@
 #
 file_roots:
   base:
-    - {{ pillar.salt_configuration.salt_dirs.public }}
-    - {{ pillar.salt_configuration.salt_dirs.secret }}
+    - {{ pillar.salt_configuration.state_dirs.public }}
+    - {{ pillar.salt_configuration.state_dirs.secret }}
 
 # The master_roots setting configures a master-only copy of the file_roots dictionary,
 # used by the state compiler.
