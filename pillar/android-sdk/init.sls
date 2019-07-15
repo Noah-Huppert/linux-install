@@ -20,3 +20,4 @@ android_sdk:
     - platform-tools
     - platforms;android-29
     - platforms;android-28
+    - platforms;android-27
