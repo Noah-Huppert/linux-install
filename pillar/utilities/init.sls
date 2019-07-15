@@ -92,7 +92,11 @@ utilities:
     # Helm
     - kubernetes-helm
 
+    # Calculator
     - bc
+
+    # GitHub CLI
+    - hub
 
   # Python 3 utility packages
   python3_pkgs:
