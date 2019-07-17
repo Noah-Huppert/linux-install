@@ -124,6 +124,8 @@ utilities:
       dir: kiln
 
   # Go packages
+  # Keys are expected bin names, values are go packages
   go_pkgs:
-    - github.com/go-delve/delve/cmd/dlv
-    - golang.org/x/tools/cmd/gorename
+    dlv: github.com/go-delve/delve/cmd/dlv
+    gorename: golang.org/x/tools/cmd/gorename
+    fiximports: golang.org/x/tools/cmd/fiximports

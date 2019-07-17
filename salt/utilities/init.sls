@@ -27,8 +27,9 @@
 {% endfor %}  
 
 # Go packages
-{% for pkg in pillar['utilities']['go_pkgs'] %}
-go get -u {{ pkg }}:
+{% for bin in pillar['utilities']['go_pkgs'] %}
+go get -u {{ pillar['utilities']['go_pkgs'][bin] }}:
   cmd.run:
-    - unless: test -d "$GOPATH/src/{{ pkg }}"
+    - user: noah
+    - unless: test -f "{{ pillar.go.go_path }}/bin/{{ bin }}"
 {% endfor %}
