@@ -61,6 +61,7 @@ base:
     - android-sdk
     - flutter
     - argo
+    - ngrok
 
     # General tools configuration
     - utilities
