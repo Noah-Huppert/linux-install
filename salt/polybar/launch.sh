@@ -7,13 +7,8 @@ killall -q polybar
 while pgrep -x polybar >/dev/null; do sleep 0.01; done
 
 # Launch primary bar
-echo "Launching bar on eDP-1"
+while read -r disp; do
+    echo "Launching bar on $disp"
 
-MONITOR=eDP-1 polybar primary -r & disown 
-
-if ! xrandr -q | grep "HDMI1 connected (" &> /dev/null; then
-    echo "Launching br on HDMI1"
-    
-    MONITOR=HDMI1 polybar primary -r & disown
-fi
-
+    MONITOR="$disp" polybar primary -r & disown 
+done <<<$(polybar -m | awk -F ':' '{ print $1 }')
