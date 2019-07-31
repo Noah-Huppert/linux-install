@@ -31,7 +31,6 @@ base:
 
     # User level configuration
     - zsh 
-    - docker
 
     - users
     - users-secret
@@ -75,6 +74,7 @@ base:
     - wireguard-secret
 #    - lock-script
     - kube-namespace
+    - containers
 
     # User interface configuration
     - xorg

@@ -28,7 +28,6 @@ base:
 
     # User configuration
     - zsh
-    - docker
 
     - users
     - zsh-profile
@@ -68,6 +67,7 @@ base:
     - wireguard
 #    - lock-script
     - kube-namespace
+    - containers
 
     # User interface configuration
     - xorg
