@@ -67,6 +67,7 @@ base:
     - wireguard
 #    - lock-script
     - kube-namespace
+    - vault
     - containers
 
     # User interface configuration
