@@ -61,6 +61,7 @@ base:
     - flutter
     - argo
     - ngrok
+    - operator-sdk
 
     # General tools configuration
     - utilities
