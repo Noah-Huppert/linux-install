@@ -13,8 +13,8 @@
 #
 #?
 function li() {
-    prog_dir=$(realpath $(dirname "$0"))
-    
+    prog_dir={{ pillar.linux_install_repo.directory }}
+
     action="$1"
     shift
     if [ -z "$action" ]; then
@@ -26,11 +26,11 @@ function li() {
 	    cd "$prog_dir"
 
 	    if [[ "$#" != "0" ]]; then
-		cd "$@"
+		cd "$prog_dir/$@"
 	    fi
 	    ;;
 	edit)
-	    path="$1"
+	    path="$@"
 	    shift
 	    if [ -z "$path" ]; then
 		return $(unit-die "PATH argument required")

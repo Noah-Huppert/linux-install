@@ -33,6 +33,8 @@ function pwd_prompt() {
     d=$(echo "$d" | shortcut_path "$HOME/documents/work/red-hat" "~/[red-hat]")
     d=$(echo "$d" | shortcut_path "$HOME/documents/school" "~/[school]")
     d=$(echo "$d" | shortcut_path "$HOME/documents" "~/[docs]")
+    d=$(echo "$d" | shortcut_path "$GOPATH/src/github.com" "~/[go]/[srcgh]")
+    d=$(echo "$d" | shortcut_path "$GOPATH" "~/[go]")
     d=$(echo "$d" | shortcut_path "$HOME" "~")
 
     echo "$d"
