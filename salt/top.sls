@@ -70,6 +70,7 @@ base:
     - wireguard
 #    - lock-script
     - kube-namespace
+    - net-tools
     - vault
     - containers
 
