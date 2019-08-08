@@ -62,6 +62,7 @@ base:
     - argo
     - ngrok
     - operator-sdk
+    - ncdu
 
     # General tools configuration
     - utilities
