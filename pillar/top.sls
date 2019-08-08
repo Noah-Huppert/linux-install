@@ -69,6 +69,7 @@ base:
     - flatpak
     - gpg
     - git-secret
+    - mercurial
     - ssh
     - vsv
     - checkforupdates
