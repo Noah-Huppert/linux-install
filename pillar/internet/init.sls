@@ -68,6 +68,10 @@ internet:
       jeff_dad_nh_2019:
         ssid: '"MySpectrumWiFi8f-5G"'
 
+      # Portland Oregon Maker apartment 2019 summer
+      portland_or_maker_apartment:
+        ssid: '"CenturyLink3710"'
+
   # DHCPCD configuration
   dhcpcd:
     # Service
