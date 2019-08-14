@@ -72,6 +72,10 @@ internet:
       portland_or_maker_apartment:
         ssid: '"CenturyLink3710"'
 
+      # Seattle Washington apartment 2019 summer
+      seattle_wa_apartment:
+        ssid: '"Nick''s Guest"'
+
   # DHCPCD configuration
   dhcpcd:
     # Service
