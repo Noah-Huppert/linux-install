@@ -76,6 +76,10 @@ internet:
       seattle_wa_apartment:
         ssid: '"Nick''s Guest"'
 
+      # North Hampton
+      north_hamptons:
+        ssid: '"LionsPride_5G"'
+
   # DHCPCD configuration
   dhcpcd:
     # Service
