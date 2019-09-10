@@ -2,5 +2,5 @@ go:
   # Package
   pkg: go
   
-  # Go path
+  go_root: /usr/lib/go
   go_path: /home/noah/documents/go
