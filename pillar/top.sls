@@ -99,3 +99,4 @@ base:
     - slack
     - weechat
     - discord
+    - blender
