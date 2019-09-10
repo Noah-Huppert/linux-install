@@ -50,6 +50,7 @@ base:
     - python
     - elixir
     - nodejs
+    - rust
     - aws-cli
     - aws-cli-secret
     - digitalocean-cli

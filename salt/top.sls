@@ -46,6 +46,7 @@ base:
     - python
     - elixir
     - nodejs
+    - rust
     - aws-cli
     - digitalocean-cli
     - red-hat-vpn
