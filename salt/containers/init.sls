@@ -1,7 +1,9 @@
 # Installs and configures podman
 
-{{ pillar.containers.pkg }}:
+{% for pkg in pillar['containers']['pkgs'] %}
+{{ pkg }}:
   pkg.latest
+{% endfor %}
 
 {{ pillar.containers.registries_cfg_file }}:
   file.managed:
