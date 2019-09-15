@@ -83,6 +83,7 @@ base:
     - vault
     - containers
     - freetype
+    - expat
 
     # User interface configuration
     - xorg
