@@ -75,6 +75,7 @@ base:
     - net-tools
     - vault
     - containers
+    - freetype
 
     # User interface configuration
     - xorg
