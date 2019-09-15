@@ -1,2 +1,7 @@
 rust:
-  pkg: rust
+  pkgs:
+    # Compiler
+    - rust
+
+    # Package manager
+    - cargo

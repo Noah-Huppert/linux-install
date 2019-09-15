@@ -1,4 +1,6 @@
 # Installs the Rust language.
 
-{{ pillar.rust.pkg }}:
+{% for pkg in pillar['rust']['pkgs'] %}
+{{ pkg }}:
   pkg.installed
+{% endfor %}  
