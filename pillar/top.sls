@@ -47,6 +47,7 @@ base:
     - salt-apply-script
     - c
     - cmake
+    - pkg-config
     - go
     - python
     - elixir
