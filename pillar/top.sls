@@ -46,6 +46,7 @@ base:
     - scripts-repo
     - salt-apply-script
     - c
+    - cmake
     - go
     - python
     - elixir
