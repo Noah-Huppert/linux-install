@@ -104,3 +104,4 @@ base:
     - weechat
     - discord
     - blender
+    - logisim
