@@ -138,4 +138,3 @@ utilities:
   go_pkgs:
     dlv: github.com/go-delve/delve/cmd/dlv
     gorename: golang.org/x/tools/cmd/gorename
-    fiximports: golang.org/x/tools/cmd/fiximports
