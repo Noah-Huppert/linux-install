@@ -100,6 +100,11 @@ utilities:
 
     - recordmydesktop
 
+    # Needed to develop with the https://amethyst.rs game engine
+    - alsa-lib
+    - alsa-lib-devel
+    - libX11-devel
+
   # Python 3 utility packages
   python3_pkgs:
     # Terminal CPU and memory graph
