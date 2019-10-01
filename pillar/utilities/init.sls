@@ -105,6 +105,9 @@ utilities:
     - alsa-lib-devel
     - libX11-devel
 
+    # File hex tool
+    - xxd
+
   # Python 3 utility packages
   python3_pkgs:
     # Terminal CPU and memory graph
