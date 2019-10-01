@@ -139,3 +139,4 @@ utilities:
     dlv: github.com/go-delve/delve/cmd/dlv
     gorename: golang.org/x/tools/cmd/gorename
     mockgen: github.com/golang/mock/gomock
+    gopls: golang.org/x/tools/cmd/gopls
