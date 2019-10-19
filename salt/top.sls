@@ -98,3 +98,4 @@ base:
     - discord
     - blender
     - logisim
+    - wireshark
