@@ -108,6 +108,9 @@ utilities:
     # File hex tool
     - xxd
 
+    # Whois tool
+    - whois
+
   # Python 3 utility packages
   python3_pkgs:
     # Terminal CPU and memory graph
