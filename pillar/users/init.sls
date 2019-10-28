@@ -21,9 +21,6 @@ users:
     video:
       name: video
       id: 13
-    docker:
-      name: docker
-      id: 991
     xbuilder:
       name: xbuilder
       id: 101
@@ -48,7 +45,6 @@ users:
         - linux_install
         - wheel
         - video
-        - docker
         - xbuilder
     root:
       name: root
