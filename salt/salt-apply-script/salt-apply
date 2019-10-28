@@ -8,10 +8,10 @@
 #
 # OPTIONS
 #
-#    -t           (Optional) Run states in test mode
-#    -l           (Optional) Run state.apply with -l trace option
-#    -s STATE     (Optional) Only state to apply
-#    -p PILLAR    (Optional) Set pillar values
+#    -t           Run states in test mode
+#    -l           Run state.apply with -l trace option
+#    -s STATE     State to run, can only be provided once
+#    -p PILLAR    Set pillar values, can only be provided once
 #
 # BEHAVIOR
 #
