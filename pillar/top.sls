@@ -44,6 +44,7 @@ base:
     - build-deps
     - emacs
     - scripts-repo
+    - scripts-repo-secret
     - salt-apply-script
     - c
     - cmake
