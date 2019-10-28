@@ -106,3 +106,4 @@ base:
     - blender
     - logisim
     - wireshark
+    - tor
