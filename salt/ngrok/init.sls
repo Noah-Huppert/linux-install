@@ -1,5 +1,6 @@
-{{ pillar.ngrok.install_file }}:
-  file.managed:
+# Install Ngrok
+{{ pillar.ngrok.download_dir }}:
+  archive.extracted:
     - source: {{ pillar.ngrok.download_url }}
     - source_hash: {{ pillar.ngrok.download_sha256sum }}
-    - mode: 755
+    - enforce_toplevel: False
