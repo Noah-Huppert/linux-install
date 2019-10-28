@@ -3,7 +3,7 @@
 # XBPS
 {% for pkg in pillar['utilities']['xbps_pkgs'] %}
 {{ pkg }}:
-  pkg.latest
+  pkg.installed
 {% endfor %}
 
 # Python 3
