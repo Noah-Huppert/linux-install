@@ -1,8 +1,8 @@
-{% set version = '5.0.21_1' %}
+{% set version = '5.3.8_2' %}
 
 kernel:
   # Kernel package
-  kernel_pkg: linux5.0
+  kernel_pkg: linux5.3
 
   # Old kernel package versions which should be uninstalled
   old_pkgs:
