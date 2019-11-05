@@ -66,7 +66,6 @@ base:
     - argo
     - ngrok
     - operator-sdk
-    - ncdu
     - mbed
 
     # General tools configuration
@@ -87,6 +86,7 @@ base:
     - containers
     - freetype
     - expat
+    - ncdu    
 
     # User interface configuration
     - xorg
