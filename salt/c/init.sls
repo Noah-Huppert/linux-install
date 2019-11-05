@@ -2,5 +2,5 @@
 
 {% for pkg in pillar['c']['pkgs'] %}
 {{ pkg }}:
-  pkg.latest
+  pkg.installed
 {% endfor %}
