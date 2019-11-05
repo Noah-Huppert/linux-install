@@ -11,5 +11,6 @@ python:
     - python3-pip
     - python3-devel
 
-  # Python 3 Pip bin path
+  # Python Pip bin paths
   pip3_bin: /bin/pip3
+  pip2_bin: /bin/pip2

@@ -60,6 +60,7 @@ base:
     - ngrok
     - operator-sdk
     - ncdu
+    - mbed
 
     # General tools configuration
     - utilities
