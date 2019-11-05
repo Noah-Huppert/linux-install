@@ -13,3 +13,6 @@ c:
 
     # Debugger
     - gdb
+
+    # Arm
+    - cross-arm-none-eabi
