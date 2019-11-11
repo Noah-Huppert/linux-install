@@ -67,6 +67,7 @@ base:
     - ngrok
     - operator-sdk
     - mbed
+    - particle-cli
 
     # General tools configuration
     - utilities
