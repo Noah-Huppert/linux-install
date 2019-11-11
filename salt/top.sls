@@ -61,6 +61,7 @@ base:
     - operator-sdk
     - mbed
     - particle-cli
+    - dfu-util
 
     # General tools configuration
     - utilities
