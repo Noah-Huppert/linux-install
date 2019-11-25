@@ -14,3 +14,7 @@ c:
     # Debugger
     - gdb
 
+    # Man pages
+    - man-pages
+    - man-pages-devel
+    - man-pages-posix
