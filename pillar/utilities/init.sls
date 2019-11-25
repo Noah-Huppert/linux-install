@@ -114,6 +114,9 @@ utilities:
     # Calculator
     - kcalc
 
+    # Telnet
+    - inetutils-telnet
+
     - tcpdump
 
   # Python 3 utility packages
