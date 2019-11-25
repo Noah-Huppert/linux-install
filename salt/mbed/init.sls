@@ -1,5 +1,7 @@
 # Installs ARM MBed CLI
 
-{{ pillar.mbed.pip_pkg }}:
+{% for pkg in pillar['mbed']['pip_pkgs'] %}
+{{ pkg }}:
   pip.installed:
     - pip_bin: {{ pillar.python.pip2_bin }}
+{% endfor %}
