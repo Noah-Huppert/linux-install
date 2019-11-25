@@ -117,6 +117,7 @@ utilities:
     # Telnet
     - inetutils-telnet
 
+    # Packet captures
     - tcpdump
 
   # Python 3 utility packages
