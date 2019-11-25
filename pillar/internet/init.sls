@@ -80,6 +80,10 @@ internet:
       north_hamptons:
         ssid: '"LionsPride_5G"'
 
+      # Hack Holyoke 2019
+      hack_holyoke_2019:
+        ssid: '"LyonNet-Encrypt"'
+
   # DHCPCD configuration
   dhcpcd:
     # Service
