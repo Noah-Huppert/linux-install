@@ -81,6 +81,7 @@ base:
     - freetype
     - expat
     - ncdu
+    - software-defined-radio
 
     # User interface configuration
     - xorg
