@@ -60,7 +60,7 @@ base:
     - ngrok
     - operator-sdk
     - mbed
-    - particle-cli
+    - particle
     - dfu-util
 
     # General tools configuration
