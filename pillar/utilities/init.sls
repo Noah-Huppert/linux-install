@@ -114,6 +114,8 @@ utilities:
     # Calculator
     - kcalc
 
+    - tcpdump
+
   # Python 3 utility packages
   python3_pkgs:
     # Terminal CPU and memory graph
