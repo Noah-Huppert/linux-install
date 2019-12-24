@@ -13,4 +13,3 @@ misc_applications:
 
     - transmission # Torrent
     - vlc
-    - steam

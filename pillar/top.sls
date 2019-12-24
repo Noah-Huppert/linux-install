@@ -112,3 +112,4 @@ base:
     - logisim
     - wireshark
     - tor
+    - steam
