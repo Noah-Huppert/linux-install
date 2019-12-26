@@ -105,3 +105,4 @@ base:
     - wireshark
     - tor
     - steam
+    - chrome
