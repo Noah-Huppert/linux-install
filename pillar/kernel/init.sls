@@ -1,4 +1,4 @@
-{% set version = '5.3.14_1' %}
+{% set version = '5.3.18_1' %}
 
 kernel:
   # Kernel package
