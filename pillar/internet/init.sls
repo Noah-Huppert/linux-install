@@ -84,6 +84,18 @@ internet:
       hack_holyoke_2019:
         ssid: '"LyonNet-Encrypt"'
 
+      # New York hotel
+      nyc_hotel:
+        ssid: '"CITY ROOMS NYC TSQ"'
+
+      # Uncle NYC
+      uncle_nyc:
+        ssid: '"Zorra139-5G"'
+
+      # Portland Airbnb
+      portland_airbnb:
+        ssid: '"SBG6900AC-6B573-5G"'
+
   # DHCPCD configuration
   dhcpcd:
     # Service
