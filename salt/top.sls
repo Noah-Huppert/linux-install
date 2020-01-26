@@ -6,6 +6,7 @@ base:
     # Base system configuration
     - kernel
     - cleanup-kernel
+    - exfat
     - initramfs
     - bootloader
     - fstab

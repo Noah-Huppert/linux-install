@@ -7,6 +7,7 @@ base:
     - partitions
     - kernel
     - cleanup-kernel
+    - exfat
     - initramfs
     - bootloader
     - fstab
