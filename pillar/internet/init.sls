@@ -96,6 +96,14 @@ internet:
       portland_airbnb:
         ssid: '"SBG6900AC-6B573-5G"'
 
+      # Montreal Airbnb
+      montreal_airbnb:
+        ssid: '"BELL400"'
+
+      # Congreve apartment
+      congreve:
+        ssid: '"TP-Link_FAC0"'
+
   # DHCPCD configuration
   dhcpcd:
     # Service
