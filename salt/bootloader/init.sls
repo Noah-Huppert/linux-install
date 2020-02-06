@@ -33,3 +33,14 @@ refind-install:
     - mode: 755
     - require:
       - cmd: refind-install
+
+# Check we will be able to boot
+# Sometimes the clean kernel script removes a file used by the bootloader,
+# which then requires we use an external USB to rebuild these files.
+# Hopefully this Salt check will fail if the boot partition is in a state where
+# this could happen
+{{ pillar.partitions.boot.mountpoint }}/{{ pillar.bootloader.linux_bootloader_file }}:
+  file.exists
+  
+{{ pillar.partitions.boot.mountpoint }}/{{ pillar.initramfs.file }}:
+  file.exists
