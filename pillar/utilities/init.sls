@@ -123,6 +123,9 @@ utilities:
     # System call tracer & filterer
     - sysdig
 
+    # Static site generator
+    - hugo
+
   # Python 3 utility packages
   python3_pkgs:
     # Terminal CPU and memory graph
@@ -142,6 +145,9 @@ utilities:
   node_pkgs:
     # VueJS CLI
     - '@vue/cli'
+
+    # Firefox web extension development tool
+    - web-ext
 
   # Git repository which will be cloned into ~/bin
   git_repos:
