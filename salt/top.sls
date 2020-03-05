@@ -107,3 +107,4 @@ base:
     - tor
     - steam
     - chrome
+    - cool-retro-term
