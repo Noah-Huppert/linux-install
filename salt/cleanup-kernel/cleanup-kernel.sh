@@ -8,8 +8,8 @@
 #
 # OPTIONS
 #
-#    -v CUR_KERNEL_VER    Current kernel version
-#    -d                   (Optional) Run in dry run mode
+#    -d                   Don't delete files, just print files which will be
+#                         deleted. Exits != 0 if files will be deleted.
 #
 # BEHAVIOR
 #
@@ -18,49 +18,98 @@
 #
 #?
 
-# {{{1 Exit on any error
+# Exit on any error
 set -e
 
-# {{{1 Helpers
 function die() {
     echo "Error: $@" >&2
     exit 1
 }
 
-# {{{1 Options
-# {{{2 Get
-while getopts "v:d" opt; do
+# Options
+while getopts "d" opt; do
     case "$opt" in
-	v) current_kernel_version="$OPTARG" ;;
-	d) dry_run="true" ;;
-	'?') die "Uknown option" ;;
+	   d) dry_run="true" ;;
+	   '?') die "Uknown option" ;;
     esac
 done
 
-# {{{2 Verify
-if [ -z "$current_kernel_version" ]; then
-    die "-v CUR_KERNEL_VERSION option required"
-fi
-
-# {{{1 Remove old files
+# Remove old files
 cd /boot
+files_deleted=0
 
 function remove_file() {
+    files_deleted=$(($files_deleted + 1))
+    
     if [ -n "$dry_run" ]; then
-	echo "[dry run] rm $1"
+	   echo "[dry run] rm $1"
     else
-	if ! rm "$1"; then
-	    die "Failed to remove $1 file"
-	fi
+	   echo "rm $1"
+	   if ! rm "$1"; then
+		  die "Failed to remove $1 file"
+	   fi
     fi
 }
 
-for kernel_file in config initramfs vmlinuz 'System.map'; do
-    current_version_name="$kernel_file-$current_kernel_version"
+# Find newest kernel version
+newest_found=false
+newest_major="-1"
+newest_minor="-1"
+newest_patch="-1"
+newest_pkg="-1"
 
-    for file in $(ls $kernel_file-*); do
-	if [[ "$file" != "$current_version_name" ]]; then
-	    remove_file "$file"
-	fi
-    done
+for f in $(ls /boot | grep '\(config\|initramfs\|vmlinuz\|System.map\)-[[:digit:]]\+.[[:digit:]]\+.[[:digit:]]\+_[[:digit:]]\+*'); do
+    version=$(echo "$f" | sed 's/.*-\([[:digit:]]\+.[[:digit:]]\+.[[:digit:]]\+_[[:digit:]]\+\).*/\1/')
+
+    major=$(echo "$f" | sed 's/.*-\([[:digit:]]\+\).\([[:digit:]]\+\).\([[:digit:]]\+\)_\([[:digit:]]\+\).*/\1/')
+    minor=$(echo "$f" | sed 's/.*-\([[:digit:]]\+\).\([[:digit:]]\+\).\([[:digit:]]\+\)_\([[:digit:]]\+\).*/\2/')
+    patch=$(echo "$f" | sed 's/.*-\([[:digit:]]\+\).\([[:digit:]]\+\).\([[:digit:]]\+\)_\([[:digit:]]\+\).*/\3/')
+    pkg=$(echo "$f" | sed 's/.*-\([[:digit:]]\+\).\([[:digit:]]\+\).\([[:digit:]]\+\)_\([[:digit:]]\+\).*/\4/')
+
+    current_newer=false
+    
+    if (( $major > $newest_major )); then
+	   current_newer=true
+    elif (( $major == $newest_major )); then
+	   if (( $minor > $newest_minor )); then
+		  current_newer=true
+	   elif (( $minor == $newest_minor )); then
+		  if (( $patch > $newest_patch )); then
+			 current_newer=true
+		  elif (( $patch == $newest_patch )); then
+			 if (( $pkg > $newest_pkg )); then
+				current_newer=true
+			 fi
+		  fi
+	   fi
+    fi
+
+    if [[ "$current_newer" == "true" ]]; then
+	   newest_found=true
+	   newest_major="$major"
+	   newest_minor="$minor"
+	   newest_patch="$patch"
+	   newest_pkg="$pkg"
+    fi
 done
+
+if [[ "$newest_found" != "true" ]]; then
+    die "Failed to find newest kernel version"
+else
+    echo "Newest kernel package version: $newest_major.$newest_minor.${newest_patch}_$newest_pkg"
+fi
+
+# Delete old files
+for f in $(ls /boot | grep '\(config\|initramfs\|vmlinuz\|System.map\)-[[:digit:]]\+.[[:digit:]]\+.[[:digit:]]\+_[[:digit:]]\+*'); do
+    if ! echo "$f" | grep ".*-$newest_major.$newest_minor.${newest_patch}_$newest_pkg.*" > /dev/null; then
+	   remove_file "$f"
+    fi
+done
+
+# Indicate status of files
+if [[ "$dry_run" == "true" && "$files_deleted" == "0" ]]; then
+    echo "$files_deleted files deleted"
+    exit 1
+elif [[ "$files_deleted" == "0" ]]; then
+    echo "No files deleted"
+fi
