@@ -126,6 +126,10 @@ utilities:
     # Static site generator
     - hugo
 
+    # Audacity with Lame MP3 encoder
+    - audacity
+    - lame
+
   # Python 3 utility packages
   python3_pkgs:
     # Terminal CPU and memory graph
