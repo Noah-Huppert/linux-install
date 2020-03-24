@@ -116,3 +116,6 @@ base:
     - steam
     - chrome
     - cool-retro-term
+
+    # Applications which must be manually built and installed
+    - manual-void-pkgs
