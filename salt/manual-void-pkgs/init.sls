@@ -46,7 +46,7 @@ pkg_{{ pkg }}:
 
 install_{{ pkg }}:
   cmd.run:
-    - name: xbps-install --repository={{ pillar.manual_void_pkgs.clone_dir }}/hostdir/binpkgs/{{ details.repository }} -y zoom
+    - name: xbps-install --repository={{ pillar.manual_void_pkgs.clone_dir }}/hostdir/binpkgs/{{ details.repository }} -y {{ pkg }}
     - cwd: {{ pillar.manual_void_pkgs.clone_dir }}
     - require:
       - cmd: pkg_{{ pkg }}
