@@ -2,6 +2,8 @@ audio:
   # Audio packages to install
   pkgs:
     - alsa-utils
+    - jack
+    - libjack
     - pulseaudio
     - ConsoleKit2
     - pavucontrol
