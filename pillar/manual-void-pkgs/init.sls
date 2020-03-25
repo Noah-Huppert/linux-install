@@ -7,3 +7,5 @@ manual_void_pkgs:
   pkgs:
     zoom:
       repository: nonfree
+    discord:
+      repository: nonfree

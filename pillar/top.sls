@@ -108,7 +108,6 @@ base:
     - firefox
     - slack
     - weechat
-    - discord
     - blender
     - logisim
     - wireshark
