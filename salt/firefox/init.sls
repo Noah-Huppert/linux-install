@@ -1,7 +1,6 @@
 # Install Firefox
 
-{{ pillar.firefox.pkg }}:
+{% for pkg in pillar['firefox']['pkgs'] %}
+{{ pkg }}:
   pkg.latest
-
-{{ pillar.firefox.mp4_codec_pkg }}:
-  pkg.latest
+{% endfor %}
