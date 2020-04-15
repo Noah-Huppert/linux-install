@@ -1,6 +1,11 @@
 # Installs the Rust language.
 
-{% for pkg in pillar['rust']['pkgs'] %}
-{{ pkg }}:
+{{ pillar.rust.rustup.pkg }}:
   pkg.installed
-{% endfor %}  
+
+{{ pillar.rust.rustup.init_cmd }}:
+  cmd.run:
+    - runas: noah
+    - unless: test -f {{ pillar.rust.cargo_bin_substitute_path }}/rustc
+    - require:
+      - pkg: {{ pillar.rust.rustup.pkg }}
