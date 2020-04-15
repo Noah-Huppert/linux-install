@@ -164,3 +164,8 @@ utilities:
     dlv: github.com/go-delve/delve/cmd/dlv
     gorename: golang.org/x/tools/cmd/gorename
     gopls: golang.org/x/tools/cmd/gopls
+
+  # Rust packages
+  # Keys are expected bin names, values are Rust Cargo packages
+  rust_pkgs:
+    wasm-pack: wasm-pack

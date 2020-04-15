@@ -38,3 +38,11 @@ go install {{ pillar['utilities']['go_pkgs'][bin] }}:
     - runas: noah
     - unless: test -f "{{ pillar.go.go_substitute_path }}/bin/{{ bin }}"      
 {% endfor %}
+
+# Rust packages
+{% for bin in pillar['utilities']['rust_pkgs'] %}
+cargo install {{ pillar['utilities']['rust_pkgs'][bin] }}:
+  cmd.run:
+    - runas: noah
+    - unless: test -f {{ pillar.rust.cargo_bin_substitute_path }}/{{ bin }}
+{% endfor %}
