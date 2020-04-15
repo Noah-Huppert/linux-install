@@ -3,4 +3,5 @@ go:
   pkg: go
   
   go_root: /usr/lib/go
-  go_path: /home/noah/documents/go
+  
+  go_substitute_path: "$HOME/documents/go"
