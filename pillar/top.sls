@@ -116,6 +116,7 @@ base:
     - chrome
     - cool-retro-term
     - open-broadcaster-software
+    - libre-office
 
     # Applications which must be manually built and installed
     - manual-void-pkgs
