@@ -70,6 +70,7 @@ base:
     - mbed
     - particle
     - dfu-util
+    - kustomize
 
     # General tools configuration
     - utilities
