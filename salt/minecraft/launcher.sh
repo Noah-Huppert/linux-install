@@ -9,18 +9,16 @@ function die() {
 
 # Ensure directories exist
 MODS_FLAG_DIR="$HOME/.minecraft/.custom-launcher-script-mods-statuses"
-if [ ! -d "$MODS_FLAG_DIR" ]; then
-    if ! mkdir -p "$MODS_FLAG_DIR"; then
-	   die "Failed to create mods flag directory"
-    fi
-fi
-
 MODS_DIR="$HOME/.minecraft/mods"
-if [ ! -d "$MODS_DIR" ]; then
-    if ! mkdir -p "$MODS_DIR"; then
-	   die "Failed to create mods directory"
+SHADERS_DIR="$HOME/.minecraft/shaderpacks"
+
+for dir in "$MODS_FLAG_DIR" "$MODS_DIR" "$SHADERS_DIR"; do
+    if [ ! -d "$dir" ]; then
+	   if ! mkdir -p "$dir"; then
+		  die "Failed to create directory \"$dir\""
+	   fi
     fi
-fi
+done
 
 # Install mods if needed
 {% for mod in pillar['minecraft']['mods'] %}
@@ -32,10 +30,16 @@ if [ ! -f "$MODS_FLAG_DIR/{{ mod['install_flag_file'] }}" ]; then
 
     touch "$MODS_FLAG_DIR/{{ mod['install_flag_file'] }}"
 fi
-{% elif mod['install'] == 'copy' %}
+{% elif mod['install'] == 'copy-mods' %}
 if [ ! -f "$MODS_DIR/{{ mod['dest'] }}" ]; then
     if ! cp "{{ pillar['minecraft']['mods_dir'] }}/{{ mod['dest'] }}" "$MODS_DIR/{{ mod['dest'] }}"; then
 	   die "Failed to copy mod file {{ mod['dest'] }}"
+    fi
+fi
+{% elif mod['install'] == 'copy-shaders' %}
+if [ ! -f "$SHADERS_DIR/{{ mod['dest'] }}" ]; then
+    if ! cp "{{ pillar['minecraft']['mods_dir'] }}/{{ mod['dest'] }}" "$SHADERS_DIR/{{ mod['dest'] }}"; then
+	   die "Failed to copy shaders file {{ mod['dest'] }}"
     fi
 fi
 {% endif %}

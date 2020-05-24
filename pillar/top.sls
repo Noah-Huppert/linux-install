@@ -118,6 +118,7 @@ base:
     - cool-retro-term
     - open-broadcaster-software
     - libre-office
+    - minecraft
 
     # Applications which must be manually built and installed
     - manual-void-pkgs
