@@ -130,6 +130,18 @@ utilities:
     - audacity
     - lame
 
+    # JSON Query
+    - jq
+
+    # Protobuffers
+    - protobuf
+
+    # Kubernetes cluster management
+    - kops
+
+    # Readline but with command history
+    - rlwrap
+
   # Python 3 utility packages
   python3_pkgs:
     # Terminal CPU and memory graph
