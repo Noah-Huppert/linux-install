@@ -29,6 +29,7 @@ base:
     - local-dns.script
     - external-display
     - power-management
+    - printers
 
     # User level configuration
     - zsh 

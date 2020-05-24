@@ -26,6 +26,7 @@ base:
     - local-dns
     - external-display
     - power-management
+    - printers
 
     # User configuration
     - zsh

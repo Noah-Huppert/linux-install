@@ -24,6 +24,9 @@ users:
     xbuilder:
       name: xbuilder
       id: 101
+    lpadmin: # CUPS printer admin group
+      name: lpadmin
+      id: 976
 
   # Users configuration, dict of user objects with the keys:
   #
@@ -46,6 +49,7 @@ users:
         - wheel
         - video
         - xbuilder
+        - lpadmin
     root:
       name: root
       id: 0
