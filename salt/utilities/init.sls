@@ -28,7 +28,7 @@
 
 # Go packages
 {% for bin in pillar['utilities']['go_pkgs'] %}
-go get -u {{ pillar['utilities']['go_pkgs'][bin] }}:
+go get {{ pillar['utilities']['go_pkgs'][bin] }}:
   cmd.run:
     - runas: noah
     - unless: test -f "{{ pillar.go.go_substitute_path }}/bin/{{ bin }}"
