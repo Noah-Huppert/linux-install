@@ -69,7 +69,7 @@ if [ -z "$root_partition" ]; then
 fi
 
 if [ ! -e "$root_partition" ]; then
-	die "-p ROOT_PARTITION does not exist: $root_partition"
+	die "-p ROOT_PARTITION \"$root_partition\" does not exist"
 fi
 
 # {{{3 BOOT_PARTITION

@@ -8,7 +8,8 @@
 #
 # OPTIONS
 #
-#	-r    (Optional) Redownload linux-install even if it exists
+#	-r        (Optional) Redownload linux-install even if it exists
+#    -e ENV    (Optional) Specify salt environment to use. Defaults to "base".
 #
 # BEHAVIOR
 #
@@ -19,9 +20,6 @@
 #	Can be run on multiple times on an existing Linux installation.
 #
 #?
-
-# {{{1 Exit on any error
-set -e
 
 # {{{1 Configuration
 dependencies=("curl" "unzip" "git")
@@ -45,10 +43,12 @@ function die() {
 }
 
 # {{{1 Options
-while getopts "r" opt; do
+salt_env=base
+while getopts "re:" opt; do
 	case "$opt" in
-		r) redownload="true" ;;
-		'?') die "Unknown option" ;;
+	    r) redownload="true" ;;
+	    e) salt_env="$OPTARG" ;;
+	    '?') die "Unknown option" ;;
 	esac
 done
 
@@ -140,11 +140,11 @@ echo "# Applying Salt states #"
 echo "########################"
 
 # {{{2 Configure just Salt minion so we can read all our states
-if ! salt-call --local state.apply salt-configuration; then
+if ! salt-call --local state.apply salt-configuration saltenv="$salt_env" pillarenv="$salt_env"; then
 	die "Failed to apply salt-configuration Salt state"
 fi
 
 # {{{2 Run highstate
-if ! salt-call --local state.apply; then
+if ! salt-call --local state.apply saltenv="$salt_env" pillarenv="$salt_env"; then
 	die "Failed to apply Salt high state"
 fi
