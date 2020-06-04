@@ -11,6 +11,8 @@
 # as the main master config file).
 #default_include: master.d/*.conf
 
+environment: {{ pillar.salt_configuration.environment }}
+
 # The address of the interface to bind to:
 #interface: 0.0.0.0
 

@@ -2,6 +2,9 @@ salt_configuration:
   # Salt minion configuration file:
   minion_config_file: /etc/salt/minion
 
+  # Salt environment
+  environment: base
+
   # State directories
   state_dirs:
     # Base environment
