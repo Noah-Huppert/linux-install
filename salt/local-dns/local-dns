@@ -26,7 +26,7 @@ function bold() {
     echo "$(tput bold)$@$(tput sgr0)"
 }
 
-pillar_file="{{ pillar.salt_configuration.pillar_dirs.public }}/{{ pillar.local_dns.toggle_script.pillar_file }}"
+pillar_file="{{ pillar.salt_configuration.pillar_dirs.base.public }}/{{ pillar.local_dns.toggle_script.pillar_file }}"
 
 case "$1" in
     on)

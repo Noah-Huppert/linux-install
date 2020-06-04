@@ -4,16 +4,28 @@ salt_configuration:
 
   # State directories
   state_dirs:
-    # Public state directory
-    public: /srv/salt
+    # Base environment
+    base:
+      # Public state directory
+      public: /srv/salt
 
-    # Secret state directory
-    secret: /srv/salt-secret
+      # Secret state directory
+      secret: /srv/salt-secret
+
+    # Work environment
+    work:
+      public: /srv/salt/work
 
   # Pillar directories
   pillar_dirs:
-    # Public pillar directory
-    public: /srv/pillar
+    # Base environment
+    base:
+      # Public pillar directory
+      public: /srv/pillar
 
-    # Secret pillar directory
-    secret: /srv/pillar-secret
+      # Secret pillar directory
+      secret: /srv/pillar-secret
+
+    # Work environment
+    work:
+      public: /srv/pillar/work
