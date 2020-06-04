@@ -12,10 +12,14 @@ manual_void_pkgs:
 
   # Custom packages to install.
   # Keys are package names. Values are dicts with the keys:
+  #     - bin (required): Name of binary which will be present if the package
+  #                       is installed.
   #     - repository (required): Name of directory in hostdir/binpkgs which
   #                              contains XBPS file for pkg.
   pkgs:
     zoom:
+      bin: zoom
       repository: nonfree
     discord:
+      bin: Discord
       repository: nonfree
