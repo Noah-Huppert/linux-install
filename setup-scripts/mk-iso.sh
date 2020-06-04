@@ -31,14 +31,14 @@ prog_dir=$(realpath $(dirname "$0"))
 
 mklive_dir="/opt/void-mklive"
 
-iso_pkgs="neovim cryptsetup curl unzip linux5.0"
+iso_pkgs="neovim cryptsetup curl unzip"
 
 iso_rootfs_dir="/var/tmp/void-mklive-tmp-iso-rootfs"
 
 arch_x86_64_glibc="x86_64"
 arch_x86_64_musl="x86_64-musl"
 
-kernel_version="linux5.0"
+kernel_version="linux5.4"
 
 # {{{1 Helpers
 function die() {
