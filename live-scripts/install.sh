@@ -8,15 +8,21 @@
 #
 # OPTIONS
 #
-#	-c CONTAINER_NAME    Name of DM-Crypt LUKS container to use as the root 
-#	                     file system
-#	-b BOOT_PARTITION    Boot partition
+#    -b BOOT_PARTITION    Boot partition
+#    -r ROOT_PARTITION    Root file partition
+#	-c                   (Optional) If provided indicates that ROOT_PARTITION is
+#                         actually the name of a DM-Crypt LUKS container to use
+#                         as the root file system
+#    -s SETUP_ARGS        (Optional) Arguments which will be passed to the setup.sh
+#                         script. Can be specified multiple times.
+#    -g GRAINS_FILE       (Optional) Path to a Salt grains file which will be placed
+#                         in the new installation.
 #
 # BEHAVIOR
 #
-#	Expects to be run directly after the cryptsetup.sh script. This script
-#	leaves CONTAINER_NAME open and accessible 
-#	in /dev/mapper/CONTAINER_NAME.
+#	If -c is provided expects to be run directly after the cryptsetup.sh script.
+#    This script leaves the DM-Crypt LUKS container named ROOT_PARTITION open and
+#    accessible in /dev/mapper/ROOT_PARTITION.
 #
 #	Installs a plain Void Linux setup in the specified DM-Crypt 
 #	LUKS container.
@@ -26,41 +32,49 @@
 #
 #?
 
-# {{{1 Exit on any error
+# Exit on any error
 set -e
 
-# {{{1 Configuration
+# Configuration
 prog_dir=$(realpath $(dirname "$0")) 
 
-# {{{1 Helpers
+# Helpers
 function die() {
 	echo "Error: $@" >&2
 	exit 1
 }
 
-# {{{1 Options
-# {{{2 Get
-while getopts "c:b:" opt; do
-	case "$opt" in
-		c) container="$OPTARG" ;;
-		b) boot_partition="$OPTARG" ;;
-		'?')
-			die "Unknown option \"$opt\""
-			;;
-	esac
+# Options
+setup_script_args=()
+
+while getopts "cr:b:s:g:" opt; do
+    case "$opt" in
+	   c) root_is_container=true ;;
+	   r) root_partition="$OPTARG" ;;
+	   b) boot_partition="$OPTARG" ;;
+	   s) setup_script_args+=("$OPTARG") ;;
+	   g) salt_grains_file="$OPTARG" ;;
+	   '?')
+		  die "Unknown option \"$opt\""
+		  ;;
+    esac
 done
 
-# {{{2 Verify
-# {{{3 CONTAINER_NAME
-if [ -z "$container" ]; then
-	die "-c CONTAINER_NAME option required"
+# CONTAINER_NAME
+if [ -n "$root_is_container" ]; then
+    root_partition="/dev/mapper/$root_partition"
 fi
 
-if [ ! -e "/dev/mapper/$container" ]; then
-	die "-c CONTAINER_NAME does not exist in /dev/mapper"
+# ROOT_PARTITION
+if [ -z "$root_partition" ]; then
+    die "-r ROOT_PARTITION option required"
 fi
 
-# {{{3 BOOT_PARTITION
+if [ ! -e "$root_partition" ]; then
+	die "-r ROOT_PARTITION does not exist"
+fi
+
+# BOOT_PARTITION
 if [ -z "$boot_partition" ]; then
 	die "-b BOOT_PARTITION option required"
 fi
@@ -69,7 +83,12 @@ if [ ! -e "$boot_partition" ]; then
 	die "-b BOOT_PARTITION does not exist"
 fi
 
-# {{{1 Mount devices in preparation for setup
+# GRAINS_FILE
+if [ ! -f "$salt_grains_file" ]; then
+    die "-g GRAINS_FILE does not exist"
+fi
+
+# Mount devices in preparation for setup
 echo "####################"
 echo "# Mounting devices #"
 echo "####################"
@@ -84,12 +103,12 @@ function mount_cleanup() {
 
 trap mount_cleanup EXIT
 
-# {{{2 Root file system
-if ! mount "/dev/mapper/$container" /mnt; then
-	die "Failed to mount /dev/mapper/$container in /mnt"
+# Root file system
+if ! mount "$root_partition" /mnt; then
+	die "Failed to mount $root_partition in /mnt"
 fi
 
-# {{{2 Boot partition
+# Boot partition
 if ! mkdir -p /mnt/boot/efi; then
 	die "Failed to make mount point /mnt/boot/efi"
 fi
@@ -98,26 +117,26 @@ if ! mount "$boot_partition" /mnt/boot/efi; then
 	die "Failed to mount $boot_partition in /mnt/boot/efi"
 fi
 
-# {{{2 Mount system directories
+# Mount system directories
 for dir in dev proc sys run; do
-	# {{{3 Create mount point
+	# Create mount point
 	if ! mkdir -p "/mnt/$dir"; then
 		die "Failed to create mount point /mnt/$dir"
 	fi
 
-	# {{{3 Create recursive bind mount
+	# Create recursive bind mount
 	if ! mount --rbind "/$dir" "/mnt/$dir"; then
 		die "Failed to create a recursive bind mount for /$dir in /mnt/$dir"
 	fi
 done
 
-# {{{1 Perform Void Linux installation
+# Perform Void Linux installation
 echo "#########################"
 echo "# Installing Void Linux #"
 echo "#########################"
 
-# {{{2 Copy repository signing keys
-# {{{3 Configuration files
+# Copy repository signing keys
+# Configuration files
 if ! mkdir -p /mnt/usr/share; then
 	die "Failed to create /mnt/usr/share directory"
 fi
@@ -126,7 +145,7 @@ if ! cp -a /usr/share/xbps.d /mnt/usr/share/; then
 	die "Failed to copy XBPS configuration files to new system"
 fi
 
-# {{{3 Keys
+# Keys
 if ! mkdir -p /mnt/var/db/xbps/keys; then
 	die "Failed to create XBPS keys directory"
 fi
@@ -135,7 +154,7 @@ if ! cp /var/db/xbps/keys/*.plist /mnt/var/db/xbps/keys; then
 	die "Failed to copy XBPS keys"
 fi
 
-# {{{2 Install packages
+# Install packages
 if ! xbps-install -Sy \
 	-R http://mirror.clarkson.edu/voidlinux/current \
 	-r /mnt \
@@ -149,12 +168,12 @@ if ! sync; then
 	die "Failed to sync file system"
 fi
 
-# {{{1 Run setup
+# Run setup
 echo "#######################################"
 echo "# Running Setup Script In /mnt Chroot #"
 echo "#######################################"
 
-# {{{2 Copy setup script
+# Copy setup script
 chroot_setup_script_path="/tmp/setup.sh"
 setup_script_path="/mnt$chroot_setup_script_path"
 
@@ -172,7 +191,7 @@ function cleanup_setup_script() {
 
 trap cleanup_setup_script EXIT
 
-# {{{2 Copy DNS resolver configuration
+# Copy DNS resolver configuration
 chroot_resolve_conf_path="/etc/resolv.conf"
 resolve_conf_path="/mnt$chroot_resolve_conf_path"
 
@@ -180,22 +199,31 @@ if ! cp "/etc/resolv.conf" "$resolve_conf_path"; then
 	die "Failed to copy DNS configuration to mount directory"
 fi
 
-# {{{2 Run setup script
-if ! xbps-uchroot /mnt "$chroot_setup_script_path"; then
+# Copy salt grains file
+if [ -n "$salt_grains_file" ]; then
+    if ! cp "$salt_grains_file" "/mnt/etc/salt/grains"; then
+	   die "Failed to copy Salt grains file \"$salt_grains_file\" into mount directory"
+    fi
+fi
+
+# Run setup script
+if ! xbps-uchroot /mnt "$chroot_setup_script_path ${setup_script_args[@]}"; then
 	die "Failed to run setup script"
 fi
 
-# {{{1 Cleanup
+# Cleanup
 echo "###########"
 echo "# Cleanup #"
 echo "###########"
 
-# {{{2 Close cryptsetup container
-if ! cryptsetup close "$container"; then
-	die "Failed to close DM-Crypt LUKS container \"$container\". Run \"cryptsetup close $container\""
+# Close cryptsetup container
+if [ -n "$root_is_container" ]; then
+    if ! cryptsetup close "$container"; then
+	   die "Failed to close DM-Crypt LUKS container \"$container\". Run \"cryptsetup close $container\""
+    fi
 fi
 
-# {{{1 Done
+# Done
 echo "########"
 echo "# Done #"
 echo "########"
