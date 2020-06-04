@@ -39,8 +39,8 @@ refind-install:
 # which then requires we use an external USB to rebuild these files.
 # Hopefully this Salt check will fail if the boot partition is in a state where
 # this could happen
-{{ pillar.partitions.boot.mountpoint }}/{{ pillar.bootloader.linux_bootloader_file }}:
+{{ pillar.partitions.boot.mountpoint }}{{ pillar.bootloader.linux_bootloader_file }}:
   file.exists
   
-{{ pillar.partitions.boot.mountpoint }}/{{ pillar.initramfs.file }}:
+{{ pillar.partitions.boot.mountpoint }}{{ pillar.initramfs.file }}:
   file.exists
