@@ -106,5 +106,5 @@ Run:
 Run:
 
 ```
-# /etc/linux-install/live-scripts/install.sh -c cryptroot -b BOOT_PARTITION
+# /etc/linux-install/live-scripts/install.sh -c -r cryptroot -b BOOT_PARTITION
 ```
