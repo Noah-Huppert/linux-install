@@ -8,6 +8,7 @@
 {{ pillar.zsh_profile.bake_script }}:
   file.managed:
     - source: salt://zsh-profile/bake-zprofiles.sh
+    - template: jinja
     - makedirs: True
     - mode: 755
 
@@ -34,6 +35,16 @@
     - require:
       - user: {{ user.name }}
 
+{% set units_file = home_dir + '/' + pillar['zsh_profile']['units_file'] %}
+
+{{ units_file }}:
+  file.managed:
+    - source: salt://zsh-profile/zprofile.units
+    - template: jinja
+    - user: {{ user.name }}
+    - group: {{ user.name }}
+    - mode: 650
+
 bake_zsh_profiles-{{ user.name }}:
   cmd.run:
     - name: {{ pillar.zsh_profile.bake_script }}
@@ -41,8 +52,10 @@ bake_zsh_profiles-{{ user.name }}:
     - onchanges:
       - file: {{ pillar.zsh_profile.bake_script }}
       - file: {{ zsh_profiles_dir }}
+      - file: {{ units_file }}
     - require:
       - file: {{ zsh_profiles_dir }}
       - file: {{ pillar.zsh_profile.bake_script }}
+      - file: {{ units_file }}
 
 {% endfor %}

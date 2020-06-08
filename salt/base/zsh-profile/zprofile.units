@@ -1,0 +1,3 @@
+{% for unit in pillar['zsh_profile']['zsh_units'] -%}
+{{ unit }}
+{% endfor -%}

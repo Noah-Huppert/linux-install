@@ -12,32 +12,32 @@
 #
 #?
 
-# {{{1 Exit on any error
+# Exit on any error
 set -e
 
-# {{{1 Configuration
+# Configuration
 zshrc_file="$HOME/.zshrc"
 
-# {{{1 Helpers
+# Helpers
 function die() {
 	echo "Error: $@" >&2
 	exit 1
 }
 
-# {{{1 Clear old .zshrc
+# Clear old .zshrc
 if ! echo "" > "$zshrc_file"; then
 	die "Failed to clear old .zshrc"
 fi
 
-# {{{1 Place zsh profiles into functions
+# Place zsh profiles into functions
 profile_names=()
 
 while read -r zsh_profile_file; do
-	# {{{2 Get name of profile which we can use as a function
+	# Get name of profile which we can use as a function
 	profile_name=$(basename "$zsh_profile_file" | awk -F '.' '{ print $1 }')
 	profile_names+=("$profile_name")
 
-	# {{{2 Place profile into function
+	# Place profile into function
 	echo "" >> "$zshrc_file"
 	echo "#" >> "$zshrc_file"
 	echo "# $zsh_profile_file" >> "$zshrc_file"
@@ -52,10 +52,10 @@ while read -r zsh_profile_file; do
 	echo "}" >> "$zshrc_file"
 
     	echo "Added \"$zsh_profile_file\" to \"$zshrc_file\""
-done <<< $(ls "$HOME/.zprofile.d" | sort)
+done <<< $(cat "$HOME/{{ pillar.zsh_profile.units_file }}")
 
-# {{{1 Call functions
-# {{{2 Documentation notes
+# Call functions
+# Documentation notes
 echo "" >> "$zshrc_file"
 echo "#" >> "$zshrc_file"
 echo "# Call zsh unit functions" >> "$zshrc_file"
@@ -68,7 +68,7 @@ echo '        echo "Error: failed to run \"$profile_name\" zsh unit" >&2' >> "$z
 echo "    fi" >> "$zshrc_file"
 echo "done" >> "$zshrc_file"
 
-# {{{1 Set correct permissions
+# Set correct permissions
 if ! chmod 600 "$zshrc_file"; then
 	die "Failed to chmod zsh profile"
 fi

@@ -1,50 +1,55 @@
 #!/usr/bin/env bash
 #?
-# salt-apply - Run salt-call with customized options
-#
-# USAGE
-#
-#     salt-apply OPTIONS
-#
-# OPTIONS
-#
-#    -t           Run states in test mode
-#    -l           Run state.apply with -l trace option
-#    -s STATE     State to run, can be provided multiple times
-#    -p PILLAR    Set pillar values, can be provided multiple times
-#
-# BEHAVIOR
-#
-#    Runs salt-call in local mode with brief output enabled.
-#
+
 #?
 
-# {{{1 Exit on any error
+# Exit on any error
 set -e
 
-# {{{1 Configuration
+# Configuration
 post_args=()
 states=()
 pillars=()
 
-# {{{1 Helpers
+# Helpers
 function die() {
     echo "Error: $@" >&2
     exit 1
 }
 
-# {{{1 Options
-while getopts "tls:p:" opt; do
+# Options
+while getopts "tls:p:h" opt; do
     case "$opt" in
 	t) post_args+=("test=True") ;;
 	l) post_args+=("-l trace") ;;
 	s) states+=("$OPTARG") ;;
 	p) pillars+=("$OPTARG") ;;
+	h) cat <<EOF
+salt-apply - Run salt-call with customized options
+
+USAGE
+
+    salt-apply OPTIONS
+
+OPTIONS
+
+   -t           Run states in test mode
+   -l           Run state.apply with -l trace option
+   -s STATE     State to run, can be provided multiple times
+   -p PILLAR    Set pillar values, can be provided multiple times
+   -h           Show this help text
+
+BEHAVIOR
+
+   Runs salt-call in local mode with brief output enabled.
+
+EOF
+	   ;;
 	'?') die "Unknown option" ;;
     esac
 done
 
-# {{{1 Run
+# Run
 states_arg=""
 
 for state in "${states[@]}"; do

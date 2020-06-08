@@ -1,5 +1,3 @@
-{% set version = '5.4.44_1' %}
-
 kernel:
   # Kernel package
   kernel_pkg: linux5.4
@@ -10,4 +8,4 @@ kernel:
     - linux4.20-headers
 
   # Kernel package version
-  version: {{ version }}
+  version: 5.4.44_1
