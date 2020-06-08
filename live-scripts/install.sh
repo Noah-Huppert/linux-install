@@ -152,22 +152,14 @@ if ! cp /var/db/xbps/keys/*.plist /mnt/var/db/xbps/keys; then
 fi
 
 # Install packages
-# The python-pip package is required for the next manual salt fix to work.
-# Remove this and the next manual fix command once salt package is no longer broken
 if ! xbps-install -Sy \
 	-R http://mirror.clarkson.edu/voidlinux/current \
 	-r /mnt \
-	base-system lvm2 python-pip python-devel gcc salt; then
+	base-system lvm2; then
 
 	die "Failed to install Void Linux"
 	mount_cleanup
-fi
-
-if ! xbps-uchroot -- /mnt 'pip2 install msgpack==0.6.2 pycrypto futures>=2.0'; then
-    die "Failed to manually install some dependencies for salt, see: https://github.com/Noah-Huppert/linux-install/issues/5#issuecomment-609474103"
-    mount_cleanup
-fi
-	
+fi	
 
 if ! sync; then
 	die "Failed to sync file system"
