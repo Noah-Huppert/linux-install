@@ -30,11 +30,14 @@ repo_dir="/etc/linux-install"
 salt_parent_dir="/srv"
 
 # Array of values in format original_dir:link_dir
-repo_links=()
-repo_links+=("$repo_dir/salt:$salt_parent_dir/salt")
-repo_links+=("$repo_dir/pillar:$salt_parent_dir/pillar")
-repo_links+=("$repo_dir/secrets/salt:$salt_parent_dir/salt-secret")
-repo_links+=("$repo_dir/secrets/pillar:$salt_parent_dir/pillar-secret")
+repo_links=(
+    "$repo_dir/salt/base:$salt_parent_dir/salt/base"
+    "$repo_dir/salt/work:$salt_parent_dir/salt/work"
+    "$repo_dir/secrets/salt/base:$salt_parent_dir/salt/base-secret"
+    "$repo_dir/pillar/base:$salt_parent_dir/pillar/base"
+    "$repo_dir/pillar/work:$salt_parent_dir/pillar/work"
+    "$repo_dir/secrets/pillar/base:$salt_parent_dir/pillar/base-secret"
+)
 
 # {{{1 Helpers
 function die() {
