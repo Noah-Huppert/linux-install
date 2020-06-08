@@ -10,8 +10,8 @@
 #
 #    -t           Run states in test mode
 #    -l           Run state.apply with -l trace option
-#    -s STATE     State to run, can only be provided once
-#    -p PILLAR    Set pillar values, can only be provided once
+#    -s STATE     State to run, can be provided multiple times
+#    -p PILLAR    Set pillar values, can be provided multiple times
 #
 # BEHAVIOR
 #
@@ -24,7 +24,8 @@ set -e
 
 # {{{1 Configuration
 post_args=()
-state=""
+states=()
+pillars=()
 
 # {{{1 Helpers
 function die() {
@@ -37,11 +38,38 @@ while getopts "tls:p:" opt; do
     case "$opt" in
 	t) post_args+=("test=True") ;;
 	l) post_args+=("-l trace") ;;
-	s) state="$OPTARG" ;;
-	p) post_args+=("pillar='$OPTARG'") ;;
+	s) states+=("$OPTARG") ;;
+	p) pillars+=("$OPTARG") ;;
 	'?') die "Unknown option" ;;
     esac
 done
 
 # {{{1 Run
-exec salt-call --local --state-output=changes state.apply "$state" ${post_args[@]}
+states_arg=""
+
+for state in "${states[@]}"; do
+    if [ -n "$states_arg" ]; then
+	   states_arg+=","
+    fi
+    states_arg+="$state"
+done
+
+if [ -n "$states_arg" ]; then
+    post_args+=("$states_arg")
+fi
+
+pillars_arg=""
+
+for pillar in "${pillars[@]}"; do
+    if [ -n "$pillars_arg" ]; then
+	   pillars_arg+=","
+    fi
+    pillars_arg+="$pillar"
+done
+
+if [ -n "$pillars_arg" ]; then
+    post_args+=("pillars=$pillars_arg")
+fi
+
+set -x
+exec salt-call --local --state-output=changes state.apply "${post_args}"
