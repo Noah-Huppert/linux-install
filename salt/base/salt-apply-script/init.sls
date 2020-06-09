@@ -4,6 +4,9 @@
 {{ pillar.salt_apply_script.file }}:
   file.managed:
     - source: salt://salt-apply-script/salt-apply
-    - user: noah
-    - group: noah
+    - user: root
+    - group: root
     - mode: 755
+
+{{ pillar.salt_apply_script.old_file }}:
+  file.absent
