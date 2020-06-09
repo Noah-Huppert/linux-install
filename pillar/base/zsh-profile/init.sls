@@ -27,7 +27,6 @@ zsh_profile:
     - prompt.zsh
     - ls_color.zsh
     - zsh_reload_fn.zsh
-    - tmux.zsh
     - user_bin.zsh
     - scripts_fns.zsh
     - trash.zsh

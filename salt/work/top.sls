@@ -4,6 +4,7 @@ work:
     
     # User configuration
     - zsh
+    - tmux
 
     - users
     - zsh-profile

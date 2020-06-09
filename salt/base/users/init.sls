@@ -26,7 +26,7 @@
     - uid: {{ user.id }}
     - gid: {{ user.id }}
     - password: {{ user.password_hash }}
-    - shell: {{ pillar.users.zsh_shell }}
+    - shell: {{ pillar.users.shell }}
     {%- if 'groups' in user %}
     - groups:
       {%- for group_key in user.groups %}

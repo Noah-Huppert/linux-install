@@ -1,6 +1,6 @@
 users:
-  # Path to Zsh shell
-  zsh_shell: /bin/zsh
+  # Path to user's shell
+  shell: /usr/bin/tmux
 
   # Directory which keeps track of which keys have been added for a user.
   # This directory will have a sub-directory for each user where the zsh 
