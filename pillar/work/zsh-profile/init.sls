@@ -1,5 +1,31 @@
 zsh_profile:
+  # Same as base except removed the following units: kube_namespace.zsh, autostart.zsh
   zsh_units:
-    - __: remove
-    - kube_namespace.zsh
-    - autostart.zsh
+    - __: overwrite
+    - meta_fns.zsh
+    - editor.zsh
+    - terminal.zsh
+    - pager.zsh
+    - screenshot_dir.zsh
+    - gpg_tty.zsh
+    - gpg2_alias.zsh
+    - gpg_import.zsh
+    - xdg_config_home.zsh
+    - ssh_agent.zsh
+    - emacs_keys.zsh
+    - history.zsh
+    - go.zsh
+    - rust.zsh
+    - prompt.zsh
+    - ls_color.zsh
+    - zsh_reload_fn.zsh
+    - user_bin.zsh
+    - scripts_fns.zsh
+    - trash.zsh
+    - edit_alias.zsh
+    - salt_apply_alias.zsh
+    - autocd.zsh
+    - kubectl_alias.zsh
+    - git_alias.zsh
+    - android_sdk.zsh
+    - linux_install_edit.zsh
