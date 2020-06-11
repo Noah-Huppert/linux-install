@@ -22,22 +22,14 @@
 #?
 
 # {{{1 Configuration
+prog_dir=$(realpath $(dirname "$0"))
+
 dependencies=("curl" "unzip" "git")
 
 repo_url="https://github.com/Noah-Huppert/linux-install.git"
 repo_dir="/etc/linux-install"
 
 salt_parent_dir="/srv"
-
-# Array of values in format original_dir:link_dir
-repo_links=(
-    "$repo_dir/salt/base:$salt_parent_dir/salt/base"
-    "$repo_dir/salt/work:$salt_parent_dir/salt/work"
-    "$repo_dir/secrets/salt/base:$salt_parent_dir/salt/base-secret"
-    "$repo_dir/pillar/base:$salt_parent_dir/pillar/base"
-    "$repo_dir/pillar/work:$salt_parent_dir/pillar/work"
-    "$repo_dir/secrets/pillar/base:$salt_parent_dir/pillar/base-secret"
-)
 
 # {{{1 Helpers
 function die() {
@@ -117,25 +109,9 @@ if [ ! -d "$repo_dir" ]; then
 fi
 
 # {{{2 Link
-# {{{3 Ensure salt parent directory exists
-if ! mkdir -p "$salt_parent_dir"; then
-	die "Failed to make salt parent directory"
+if ! "$prog_dir/link-salt-dirs.sh"; then
+    die "Failed to link Salt directories"
 fi
-
-for link_info in "${repo_links[@]}"; do
-	original_dir=$(echo "$link_info" | awk -F ':' '{ print $1 }')
-	link_dir=$(echo "$link_info" | awk -F ':' '{ print $2 }')
-	
-	# {{{3 Check if link exists
-	if [ -L "$link_dir" ]; then
-		continue
-	fi
-
-	# {{{3 Link
-	if ! ln -s "$original_dir" "$link_dir"; then
-		die "Failed to link $link_info"
-	fi
-done
 
 # {{{1 Apply salt states
 echo "########################"
