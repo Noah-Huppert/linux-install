@@ -29,3 +29,4 @@ zsh_profile:
     - git_alias.zsh
     - android_sdk.zsh
     - linux_install_edit.zsh
+    - pyenv.zsh

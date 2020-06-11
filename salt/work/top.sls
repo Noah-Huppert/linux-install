@@ -23,6 +23,7 @@ work:
     - scripts-repo
     - salt-apply-script
     - python
+    - pyenv
     #- rust
 
     # General tools configuration
