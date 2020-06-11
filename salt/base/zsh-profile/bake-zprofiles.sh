@@ -43,7 +43,7 @@ while read -r zsh_profile_file; do
 	echo "# $zsh_profile_file" >> "$zshrc_file"
 	echo "#" >> "$zshrc_file"
 
-	echo "function $profile_name() {" >> "$zshrc_file"
+	echo "function zsh_unit_$profile_name() {" >> "$zshrc_file"
 
 	if ! cat "$HOME/.zprofile.d/$zsh_profile_file" | sed 's/^/    /g' >> "$zshrc_file"; then
 		die "Failed to bake $zsh_profile_file"
@@ -63,7 +63,7 @@ echo "#" >> "$zshrc_file"
 
 echo "for profile_name in ${profile_names[@]}; do" >> "$zshrc_file"
 echo '    zsh_unit="$profile_name"' >> "$zshrc_file"
-echo '    if ! $profile_name; then' >> "$zshrc_file"
+echo '    if ! zsh_unit_$profile_name; then' >> "$zshrc_file"
 echo '        echo "Error: failed to run \"$profile_name\" zsh unit" >&2' >> "$zshrc_file"
 echo "    fi" >> "$zshrc_file"
 echo "done" >> "$zshrc_file"
