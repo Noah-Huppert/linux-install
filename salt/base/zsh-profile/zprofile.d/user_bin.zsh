@@ -1,4 +1,4 @@
-# Add directories in $HOME/bin to the PATH
+# Add directories in $HOME/bin and $HOME/.local/bin to the PATH
 
 home_bin="$HOME/bin"
 
@@ -6,3 +6,5 @@ home_bin="$HOME/bin"
 while read -r d; do
     PATH="$PATH:$d"
 done <<< $(find "$home_bin" -maxdepth 1 ! -path . -type d)
+
+PATH="$PATH:$HOME/.local/bin"
