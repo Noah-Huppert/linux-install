@@ -15,17 +15,13 @@
 # Configure users
 {% for _, user in pillar['users']['users'].items() %}
 
-{% set home_dir = '/home/' + user.name %}
-{% if user.name == 'root' %}
-{% set home_dir = '/root' %}
-{% endif %}
-
 # Create user
 {{ user.name }}:
   user.present:
     - uid: {{ user.id }}
     - gid: {{ user.id }}
     - password: {{ user.password_hash }}
+    - home: {{ user.home }}
     - shell: {{ pillar.users.shell }}
     {%- if 'groups' in user %}
     - groups:
@@ -40,7 +36,7 @@
 
 # SSH key
 {% if 'ssh_key_name' in user %}
-{% set ssh_dir = home_dir + '/.ssh' %}
+{% set ssh_dir = user.home + '/.ssh' %}
 {% set key_name = ssh_dir + '/' + user.ssh_key_name %}
 
 {{ ssh_dir }}:
