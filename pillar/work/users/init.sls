@@ -2,11 +2,6 @@ users:
   # Path to Zsh shell
   zsh_shell: /bin/zsh
 
-  # Directory which keeps track of which keys have been added for a user.
-  # This directory will have a sub-directory for each user where the zsh 
-  # profile can put state files.
-  added_keys_parent_directory: /var/added-user-keys
-
   # Groups configuration, dict of group objects with the keys:
   #
   #   - name (String): Name
@@ -19,6 +14,9 @@ users:
     wheel:
       name: wheel
       id: 10001
+    vboxsf:
+      name: vboxsf
+      id: 998
 
   # Users configuration, dict of user objects with the keys:
   #
@@ -35,11 +33,14 @@ users:
     noah:
       name: noah
       id: 1000
+      home: /home/noah
       ssh_key_name: id_ed25519
       groups:
         - __: overwrite
         - linux_install
         - wheel
+        - vboxsf
     root:
       name: root
       id: 0
+      home: /root
