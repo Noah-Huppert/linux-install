@@ -112,6 +112,7 @@ base:
     - open-broadcaster-software
     - libre-office
     - minecraft
+    - pirate-get
 
     # Applications which must be manually built and installed
     - manual-void-pkgs
