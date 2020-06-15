@@ -1,9 +1,14 @@
 work:
   '*':
+    # Salt configuration
     - salt-configuration
+
+    # Base system configuration
+    - apt-repositories
     
     # User configuration
     - zsh
+    - tmux
 
     - users
     - zsh-profile
@@ -14,10 +19,17 @@ work:
 
     # Development environment configuration
     - emacs
+    - tmux
     - scripts-repo
     - salt-apply-script
+    - python
+    - pyenv
+    #- rust
 
     # General tools configuration
     - gpg
     - git
     - ssh
+
+    # User interface configuration
+    #- alacritty

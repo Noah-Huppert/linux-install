@@ -1,6 +1,6 @@
 users:
-  # Path to Zsh shell
-  zsh_shell: /bin/zsh
+  # Path to user's shell
+  shell: /usr/bin/tmux
 
   # Directory which keeps track of which keys have been added for a user.
   # This directory will have a sub-directory for each user where the zsh 
@@ -32,6 +32,7 @@ users:
   #
   #   - name (String): Login
   #   - id (Integer): UID and GID
+  #   - home (String): Home directory
   #   - password_hash (String): SHA 512 password hash, generate with 
   #       the `openssl passwd -6` command. These keys are stored in the 
   #       users-secret pillar
@@ -43,6 +44,7 @@ users:
     noah:
       name: noah
       id: 1000
+      home: /home/noah
       ssh_key_name: id_ed25519
       groups:
         - linux_install
@@ -53,3 +55,4 @@ users:
     root:
       name: root
       id: 0
+      home: /root

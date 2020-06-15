@@ -41,6 +41,7 @@ base:
     # Development environment configuration
     - build-deps
     - emacs
+    - tmux
     - scripts-repo
     - salt-apply-script
     - c
@@ -90,7 +91,6 @@ base:
     - xorg
     - i3
     - alacritty
-    - tmux
     - compton
     - dunst
     - polybar

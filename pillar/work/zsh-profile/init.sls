@@ -1,15 +1,7 @@
 zsh_profile:
-  # Script to assemble all zsh units into one file
-  bake_script: /opt/bake-zprofiles/bake-zprofiles.sh
-
-  # Directory in user's home directory to store raw zsh units
-  zsh_profiles_dir: .zprofile.d
-
-  # File which indicates which zsh units to include
-  units_file: .zprofile.units
-
-  # Zsh units to include in the units_file
+  # Same as base except removed the following units: kube_namespace.zsh, autostart.zsh
   zsh_units:
+    - __: overwrite
     - meta_fns.zsh
     - editor.zsh
     - terminal.zsh
@@ -34,8 +26,7 @@ zsh_profile:
     - salt_apply_alias.zsh
     - autocd.zsh
     - kubectl_alias.zsh
-    - kube_namespace.zsh
     - git_alias.zsh
     - android_sdk.zsh
-    - autostart.zsh
     - linux_install_edit.zsh
+    - pyenv.zsh

@@ -1,3 +1,5 @@
+# The following line is used to detect if the salt-configuration state has been run
+# STATE_SALT_CONFIGURATION_RUN_ENV_{{ pillar.environment }}
 ##### Primary configuration settings #####
 ##########################################
 # This configuration file is used to manage the behavior of the Salt Master.

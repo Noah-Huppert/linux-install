@@ -44,6 +44,7 @@ BEHAVIOR
    Runs salt-call in local mode with brief output enabled.
 
 EOF
+	   exit 0
 	   ;;
 	'?') die "Unknown option" ;;
     esac
