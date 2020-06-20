@@ -50,7 +50,10 @@ EOF
     esac
 done
 
-# Run
+# Setup run arguments
+run_args=()
+
+# Add states to run args
 states_arg=""
 
 for state in "${states[@]}"; do
@@ -61,9 +64,10 @@ for state in "${states[@]}"; do
 done
 
 if [ -n "$states_arg" ]; then
-    post_args+=("$states_arg")
+    run_args+=("$states_arg")
 fi
 
+# Add pillars to run args
 pillars_arg=""
 
 for pillar in "${pillars[@]}"; do
@@ -74,8 +78,14 @@ for pillar in "${pillars[@]}"; do
 done
 
 if [ -n "$pillars_arg" ]; then
-    post_args+=("pillars=$pillars_arg")
+    run_args+=("pillars=$pillars_arg")
 fi
 
+# Add post arguments
+for arg in "${post_args[@]}"; do
+    run_args+=("$arg")
+done
+
+# Run
 set -x
-exec salt-call --local --state-output=changes state.apply "${post_args}"
+exec salt-call --local --state-output=changes state.apply "${run_args[@]}"
