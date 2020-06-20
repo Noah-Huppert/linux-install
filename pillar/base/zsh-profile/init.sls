@@ -40,3 +40,4 @@ zsh_profile:
     - autostart.zsh
     - linux_install_edit.zsh
     - tmux.zsh
+    - startx.zsh

@@ -30,3 +30,4 @@ zsh_profile:
     - android_sdk.zsh
     - linux_install_edit.zsh
     - pyenv.zsh
+    - startx.zsh
