@@ -39,3 +39,4 @@ zsh_profile:
     - android_sdk.zsh
     - autostart.zsh
     - linux_install_edit.zsh
+    - tmux.zsh
