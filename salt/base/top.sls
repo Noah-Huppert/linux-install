@@ -66,6 +66,7 @@ base:
     - particle
     - dfu-util
     - kustomize
+    - gatsby-cli
 
     # General tools configuration
     - utilities
