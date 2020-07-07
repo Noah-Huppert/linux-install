@@ -36,7 +36,7 @@ OPTIONS
 
 ARGUMENTS
 
-    SRC    Source of package. Can be "python3" or "xbps".
+    SRC    Source of package. Can be "python3", "xbps", or "npm".
     PKG    Name of package to install.
 
 BEHAVIOR
@@ -119,11 +119,10 @@ if [ -z "$PKG" ]; then
 fi
 
 case "$SRC" in
-    python3) ;;
-    xbps) ;;
+    python3|xbps|npm) ;;
     *)
 	   show_help
-	   die "SRC cannot be \"$SRC\". Must be \"python3\" or \"xbps\"."
+	   die "SRC cannot be \"$SRC\". Must be \"python3\", \"xbps\", \"npm\"."
 	   ;;
 esac
 
@@ -182,6 +181,12 @@ EOF
   pkg.installed
 EOF
 	   check "Failed to create state file \"$state_file\""
+	   ;;
+    npm)
+	   cat <<EOF > "$state_file"
+{{ pillar.$SAFE_PKG.pkg }}:
+  npm.installed
+EOF
 	   ;;
 esac
 
