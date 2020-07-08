@@ -29,6 +29,7 @@ zsh_profile:
     - zsh_reload_fn.zsh
     - user_bin.zsh
     - scripts_fns.zsh
+    - org_mode.zsh
     - trash.zsh
     - edit_alias.zsh
     - salt_apply_alias.zsh
