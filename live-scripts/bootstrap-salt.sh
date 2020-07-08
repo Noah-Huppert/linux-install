@@ -70,7 +70,8 @@ BEHAVIOR
     Installs Salt either from source of from a package.
 
     Installing from source clones down the Salt repository and uses the setup.py script.
-    Installing from a package is only supported for Ubuntu 20.04 right now.
+    Installing from a package is only supported for Ubuntu 20.04 and Void Linux 
+    right now.
 
     After Salt is installed symbolic links are made for Salt directories.
     
@@ -178,42 +179,59 @@ fi
 
 # Install Salt from package
 if [ -n "$opt_install_salt_pkg" ]; then
-    # Check if this is Ubuntu
-    if ! uname -a | grep "Ubuntu" &> /dev/null; then
-	die "Sorry, there is no package based installation method for your OS right now"
+    # Check if this is Ubuntu or Void linux
+    pkg_manager=""
+    if uname -a | grep "Ubuntu" &> /dev/null; then
+	   pkg_manager=apt
+    elif which xbps-install &> /dev/null; then
+	   pkg_manager=xbps
     fi
-    
-    # Check add-apt-repository is installed
-    if ! which add-apt-repository &> /dev/null; then
-	bold "Installing dependencies"
-	apt install -y software-properties-common
-	check "Failed to install the add-apt-repository tool"
+
+    if [ -z "$pkg_manager" ]; then
+	   die "Package installation mode is only supported on Ubuntu and Void linux"
     fi
 
     # Check that Salt isn't already installed
     if which salt-call &> /dev/null && [ -z "$opt_force" ]; then
-	bold "Salt already installed: $(which salt-call)"
+	   bold "Salt already installed: $(which salt-call)"
     else
-	   # Ensure that the Salt PPA is configured
-        if ! cat "$ubuntu_repos_file" | grep "$salt_ubuntu_repo" &> /dev/null; then
-		  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys "$salt_ubuntu_repo_key_sig"
-		  check "Failed to retrieve the APT Salt repository's signing key"
+	   case "$pkg_manager" in
+		  ubuntu)
+			 # Install custom apt repository manager
+			 if ! which add-apt-repository &> /dev/null; then
+				bold "Installing dependencies"
+				apt install -y software-properties-common
+				check "Failed to install the add-apt-repository tool"
+			 fi
 
-		  apt update
-		  check "Failed to update APT after adding the Salt repository"
-	   fi
-
-	   # Install Salt
-	   apt install -y salt-minion
-	   check "Failed to install Salt"
-
-	   # Check Salt installation worked
-	   if ! which salt-call &> /dev/null; then
-		  die "Salt installed but cannot find the salt-call binary"
-	   fi
-
-	   bold "Salt installed"
+			 # Ensure that the Salt PPA is configured
+			 if ! cat "$ubuntu_repos_file" | grep "$salt_ubuntu_repo" &> /dev/null; then
+				apt-key adv --keyserver keyserver.ubuntu.com --recv-keys "$salt_ubuntu_repo_key_sig"
+				check "Failed to retrieve the APT Salt repository's signing key"
+				
+				apt update
+				check "Failed to update APT after adding the Salt repository"
+			 fi
+			 
+			 # Install Salt
+			 apt install -y salt-minion
+			 check "Failed to install Salt"
+			 ;;
+		  xbps)
+			 # Install Salt
+			 xbps-install -Syu salt
+			 check "Failed to install Salt"
+			 ;;
+	   esac
     fi
+    
+
+    # Check Salt installation worked
+    if ! which salt-call &> /dev/null; then
+	   die "Salt installed but cannot find the salt-call binary"
+    fi
+
+    bold "Salt installed"
 fi
 
 # Make links
