@@ -96,7 +96,7 @@ fi
 
 # Check environment exists
 test -d "$repo_dir/pillar/$opt_env"
-check "Environment \"$opt_env\" specified by the -e option does not exist"
+check "The \"$opt_env\" environment which was specified by the -e option does not exist"
 
 # Check if root
 if [[ "$EUID" != "0" ]]; then
@@ -195,6 +195,8 @@ if [ -n "$opt_install_salt_pkg" ]; then
     if which salt-call &> /dev/null && [ -z "$opt_force" ]; then
 	   bold "Salt already installed: $(which salt-call)"
     else
+	   bold "Installing Salt via the $pkg_manager package manager"
+	   
 	   case "$pkg_manager" in
 		  ubuntu)
 			 # Install custom apt repository manager

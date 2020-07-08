@@ -104,7 +104,7 @@ for link_info in "${salt_state_links[@]}" "${salt_pillar_links[@]}"; do
 	fi
 
 	# Link
-	'ln -s "$original_dir" "$link_dir"
+	ln -s "$original_dir" "$link_dir"
 	check "Failed to link \"$link_dir\" -> \"$original_dir\""
 	echo "Linked \"$link_dir\" -> \"$original_dir\""
 done
