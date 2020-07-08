@@ -231,9 +231,9 @@ if [ -n "$opt_install_salt_pkg" ]; then
     # Check Salt installation worked
     if ! which salt-call &> /dev/null; then
 	   die "Salt installed but cannot find the salt-call binary"
+    else
+	   bold "Salt installed: $(which salt-call)"
     fi
-
-    bold "Salt installed"
 fi
 
 # Make links
