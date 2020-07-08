@@ -4,6 +4,13 @@
 autoload -U colors && colors
 autoload -U add-zsh-hook
 
+# Prints a check or an x depending on the exit status of the last command
+function exit_status_prompt() {
+    if [ "$?" -ne 0 ]; then
+	   echo "%{$fg[red]%}❌%{$reset_color%}"
+    fi
+}
+
 # Prints git:BRANCH to prompt if in git directory
 function git_prompt() {
 	# Get current branch
@@ -37,13 +44,13 @@ function pwd_prompt() {
     d=$(echo "$d" | shortcut_path "$GOPATH" "~/[go]")
     d=$(echo "$d" | shortcut_path "$HOME" "~")
 
-    echo "$d"
+    echo "%{$fg[red]%}$d%{$reset_color%}"
 }
 
 # Sets prompt variable
 function build_prompt() {
 	# HOSTNAME PATH git:BRANCH %#
-	export PROMPT="%{$fg[red]%}$(pwd_prompt)%{$reset_color%}$(git_prompt) %# "
+	export PROMPT="$(exit_status_prompt)$(pwd_prompt)$(git_prompt) %# "
 }
 
 build_prompt
