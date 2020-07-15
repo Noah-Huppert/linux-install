@@ -32,8 +32,6 @@
     - dir_mode: 755
     - file_mode: 755
     - template: jinja
-    - require:
-      - user: {{ user.name }}
 
 {% set units_file = home_dir + '/' + pillar['zsh_profile']['units_file'] %}
 
