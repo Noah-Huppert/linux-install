@@ -4,10 +4,14 @@
 autoload -U colors && colors
 autoload -U add-zsh-hook
 
-# Prints a check or an x depending on the exit status of the last command
-function exit_status_prompt() {
-    if [ "$?" -ne 0 ]; then
-	   echo "%{$fg[red]%}❌%{$reset_color%}"
+# Prints a check or an x depending on the exit status of the last command.
+# Takes an exist status as an argument and outputs a prompt for that status. It is
+# required as an argument bc the exit status for the last command the user runs
+# will be overriden by the exit status's of other internal prompt building functions
+# like this one.
+function exit_status_prompt() { # ( Exit status )
+    if [ "$1" -ne "0" ]; then
+	   echo "%{$bg[red]%}$1%{$reset_color%} "
     fi
 }
 
@@ -38,6 +42,7 @@ function shortcut_path() { # STDIN, ( FIND, REPLACE )
 function pwd_prompt() {
     d="$PWD"
     d=$(echo "$d" | shortcut_path "$HOME/documents/work/red-hat" "~/[red-hat]")
+    d=$(echo "$d" | shortcut_path "$HOME/documents/work/cambrio" "~/[cambrio]")
     d=$(echo "$d" | shortcut_path "$HOME/documents/school" "~/[school]")
     d=$(echo "$d" | shortcut_path "$HOME/documents" "~/[docs]")
     d=$(echo "$d" | shortcut_path "$GOPATH/src/github.com" "~/[go]/[srcgh]")
@@ -49,8 +54,13 @@ function pwd_prompt() {
 
 # Sets prompt variable
 function build_prompt() {
-	# HOSTNAME PATH git:BRANCH %#
-	export PROMPT="$(exit_status_prompt)$(pwd_prompt)$(git_prompt) %# "
+    # Capture the last cmd's exit status before we run internal prompt building
+    # functions. This will be passed to exit_status_prompt()
+    last_cmd_exit_status="$?"
+    
+    # [EXIT_STATUS] HOSTNAME PATH git:BRANCH %#
+    export PROMPT="$(pwd_prompt)$(git_prompt) %# "
+    export RPROMPT="$(exit_status_prompt $last_cmd_exit_status)"
 }
 
 build_prompt
