@@ -38,7 +38,10 @@ function shortcut_path() { # STDIN, ( FIND, REPLACE )
     cat - | sed "$sed_str"
 }
 
-## Shows PWD with shortcuts to make shorter
+## Shows PWD with shortcuts to make shorter.
+# Ensures the prompt is never longer than MAX_PROMPT_PWD_LEN. If the PWD does have
+# to be trimmed then the first 2 root directories are shown and then the 
+# current directory.
 function pwd_prompt() {
     d="$PWD"
     d=$(echo "$d" | shortcut_path "$HOME/documents/work/red-hat" "~/[red-hat]")

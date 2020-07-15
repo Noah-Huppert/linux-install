@@ -11,6 +11,8 @@ salt_configuration:
       secret: {{ content_root }}/salt/base-secret
     work:
       public: {{ content_root }}/salt/work
+    wsl:
+      public: {{ content_root }}/salt/wsl
 
   # Pillar directories
   pillar_dirs:
@@ -19,6 +21,8 @@ salt_configuration:
       secret: {{ content_root }}/pillar/base-secret
     work:
       public: {{ content_root }}/pillar/work
+    wsl:
+      public: {{ content_root }}/pillar/work
 
   # Pillar stack configuration files
   pillar_stack:
@@ -26,4 +30,6 @@ salt_configuration:
       public: {{ content_root }}/pillar/base/pillar-stack.cfg
       secret: {{ content_root }}/pillar/base-secret/pillar-stack.cfg
     work:
+      public: {{ content_root }}/pillar/work/pillar-stack.cfg
+    wsl:
       public: {{ content_root }}/pillar/work/pillar-stack.cfg
