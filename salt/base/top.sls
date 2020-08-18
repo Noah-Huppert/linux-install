@@ -68,6 +68,7 @@ base:
     - dfu-util
     - kustomize
     - gatsby-cli
+    - xlibs
 
     # General tools configuration
     - utilities
