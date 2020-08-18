@@ -54,6 +54,7 @@ base:
     - rust
     - aws-cli
     - digitalocean-cli
+    - google-cloud-sdk
     - red-hat-vpn
     - aws-key-pairs
     - openshift-client
