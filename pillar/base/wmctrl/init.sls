@@ -1,0 +1,2 @@
+wmctrl:
+  pkg: wmctrl

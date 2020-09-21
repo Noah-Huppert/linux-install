@@ -100,6 +100,7 @@ base:
     - polybar
     - rice
     - fonts
+    - wmctrl
  
     # Applications configuration
     - misc-applications
