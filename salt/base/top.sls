@@ -69,6 +69,7 @@ base:
     - kustomize
     - gatsby-cli
     - xlibs
+    - typescript
 
     # General tools configuration
     - utilities
