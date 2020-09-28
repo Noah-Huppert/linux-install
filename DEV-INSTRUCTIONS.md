@@ -143,8 +143,8 @@ Follow the instructions below:
 		   # ...
 		   REPLACE_ME_ENV:
 		     - {{ pillar.salt_configuration.pillar_stack.base.public }}
-			 - {{ pillar.salt_configuration.pillar_stack.base.secret }}
-			 - {{ pillar.salt_configuration.pillar_stack.REPLACE_ME_ENV.public }}
+             - {{ pillar.salt_configuration.pillar_stack.base.secret }}
+             - {{ pillar.salt_configuration.pillar_stack.REPLACE_ME_ENV.public }}
    ```
 7. Add the environment to the `live-scripts/link-salt-dirs.sh` script by adding:
    ```bash
