@@ -90,6 +90,7 @@ base:
     - expat
     - ncdu
     - software-defined-radio
+    - sl
 
     # User interface configuration
     - xorg
