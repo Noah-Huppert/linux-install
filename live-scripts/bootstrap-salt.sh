@@ -69,7 +69,9 @@ BEHAVIOR
 
     Installs Salt either from source of from a package.
 
-    Installing from source clones down the Salt repository and uses the setup.py script.
+    Installing from source clones down the Salt repository and uses the
+    setup.py script.
+
     Installing from a package is only supported for Ubuntu 20.04 and Void Linux 
     right now.
 
