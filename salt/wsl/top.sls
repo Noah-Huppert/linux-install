@@ -1,4 +1,4 @@
-work:
+wsl:
   '*':
     # Salt configuration
     - salt-configuration
