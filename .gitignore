@@ -2,4 +2,4 @@
 iso-rootfs/srv/pillar/*-secret/
 
 # Local DNS pillar file which is managed by a script
-pillar/local-dns/script.sls
+pillar/base/local-dns/script.sls
