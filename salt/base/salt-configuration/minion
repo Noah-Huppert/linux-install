@@ -692,6 +692,8 @@ file_roots:
     - {{ pillar.salt_configuration.state_dirs.base.secret }}
   wsl:
     - {{ pillar.salt_configuration.state_dirs.wsl.public }}
+    - {{ pillar.salt_configuration.state_dirs.base.public }}
+    - {{ pillar.salt_configuration.state_dirs.base.secret }}
 
 # The master_roots setting configures a master-only copy of the file_roots dictionary,
 # used by the state compiler.
