@@ -125,24 +125,24 @@ Follow the instructions below:
    # ...
    file_roots:
      # ...
-	 REPLACE_ME_ENV:
-	   - {{ pillar.salt_configuration.state_dirs.REPLACE_ME_ENV.public }}
+     REPLACE_ME_ENV:
+       - {{ pillar.salt_configuration.state_dirs.REPLACE_ME_ENV.public }}
        - {{ pillar.salt_configuration.state_dirs.base.public }}
        - {{ pillar.salt_configuration.state_dirs.base.secret }}
 	   
    # ...
    pillar_roots:
      # ...
-	 REPLACE_ME_ENV:
-	   - {{ pillar.salt_configuration.pillar_dirs.REPLACE_ME_ENV.public }}
+     REPLACE_ME_ENV:
+       - {{ pillar.salt_configuration.pillar_dirs.REPLACE_ME_ENV.public }}
 	   
    # ...
    ext_pillar:
      - stack:
-	     pillar:environment:
-		   # ...
-		   REPLACE_ME_ENV:
-		     - {{ pillar.salt_configuration.pillar_stack.base.public }}
+         pillar:environment:
+           # ...
+           REPLACE_ME_ENV:
+             - {{ pillar.salt_configuration.pillar_stack.base.public }}
              - {{ pillar.salt_configuration.pillar_stack.base.secret }}
              - {{ pillar.salt_configuration.pillar_stack.REPLACE_ME_ENV.public }}
    ```
