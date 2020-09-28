@@ -4,6 +4,7 @@ Documentation aimed at developers of this repository.
 # Table Of Contents
 - [Overview](#overview)
 - [Directories](#directories)
+- [Bootstrap Process](#bootstrap-process)
 - [Salt Environments](#salt-environments)
 
 # Overview
@@ -23,6 +24,37 @@ pieces of configuration are setup on each system.
 - **salt**: Salt states for Void installation
 - **pillar**: Salt pillars for Void installation
 - **screenshots**
+
+# Bootstrap Process
+The configuration of my Linux environment is almost entirely automated using
+Salt. This is with the exception of the base Linux installation. A set of 
+special Bash scripts are used to install Linux onto the system from a Live USB
+and then invoke Salt to do the rest.
+
+At a high level the process works like so:
+
+- The `setup-scripts/mk-iso.sh` script is used to create a special ISO.
+  - The ISO has this Git repository included in the `/etc/linux-install` path. 
+  - A few tools like Git and Salt are also installed to aid in the 
+    setup process.
+- The `setup-scripts/mk-install-media.sh` script is used to create an boot-able
+  live USB from the ISO.
+- The user boots from this USB drive.
+- The user runs `live-scripts/cryptsetup.sh` to setup full disk encryption.
+- The user runs `live-scripts/install.sh` which configures and then runs Salt.
+  - This script installs the `base-system` XBPS package onto the root file 
+	partition. Additionally it copies a few essential configuration files over
+	from the live USB.
+  - The `live-scripts/setup.sh` script is automatically invoked in a chroot jail
+	in the root file partition.
+    - This script automatically runs `live-scripts/link-salt-dirs.sh` which 
+	  creates symbolic links for the Salt state and pillar files to the `/srv/`
+	  directory where Salt excepts them.
+	- Then a Salt minion configuration file is setup on the root file partition.
+	- Finally the Salt high state is run on the root file partition.
+	
+The above process is almost entirely automated, and completely installs Linux
+and configures it with Salt.
 
 # Salt Environments
 Salt provides environments for the purpose of using the same configuration files
