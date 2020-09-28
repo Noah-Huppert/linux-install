@@ -4,7 +4,7 @@
 #
 # USAGE
 #
-#	install.sh OPTIONS
+#	install.sh -b BOOT_PARTITION -r ROOT_PARTITION [-c,-s SETUP_ARGS,-g GRAINS_FILE]
 #
 # OPTIONS
 #
