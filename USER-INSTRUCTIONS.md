@@ -1,5 +1,5 @@
-# Instructions
-Linux installation instructions.
+# User Instructions
+Linux installation instructions for end users.
 
 # Table Of Contents
 - [Live USB](#live-usb)

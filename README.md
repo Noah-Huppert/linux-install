@@ -8,7 +8,7 @@ Linux installation.
 # Overview
 Instructions for how to setup my current Linux environment.  
 
-See [INSTRUCTIONS.md](INSTRUCTIONS.md).
+See [USER-INSTRUCTIONS.md](USER-INSTRUCTIONS.md).
 
 ![Clean screenshot with neofetch](/screenshots/neofetch-clean.png)
 
