@@ -8,7 +8,7 @@
 #
 # OPTIONS
 #
-#	-r        (Optional) Redownload linux-install even if it exists
+#    -r        (Optional) Redownload linux-install even if it exists
 #    -e ENV    (Optional) Specify salt environment to use. Defaults to "base".
 #
 # BEHAVIOR
@@ -119,7 +119,8 @@ echo "# Applying Salt states #"
 echo "########################"
 
 # Configure just Salt minion so we can read all our states
-if ! salt-call --local state.apply salt-configuration saltenv="$salt_env" pillarenv="$salt_env"; then
+# Runs under the base salt environment initially.
+if ! salt-call --local state.apply salt-configuration; then
 	die "Failed to apply salt-configuration Salt state"
 fi
 
