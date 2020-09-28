@@ -10,7 +10,7 @@
 #
 #    -b BOOT_PARTITION    Boot partition
 #    -r ROOT_PARTITION    Root file partition
-#	-c                   (Optional) If provided indicates that ROOT_PARTITION is
+#    -c                   (Optional) If provided indicates that ROOT_PARTITION is
 #                         actually the name of a DM-Crypt LUKS container to use
 #                         as the root file system
 #    -s SETUP_ARGS        (Optional) Arguments which will be passed to the setup.sh
@@ -20,15 +20,15 @@
 #
 # BEHAVIOR
 #
-#	If -c is provided expects to be run directly after the cryptsetup.sh script.
+#    If -c is provided expects to be run directly after the cryptsetup.sh script.
 #    This script leaves the DM-Crypt LUKS container named ROOT_PARTITION open and
 #    accessible in /dev/mapper/ROOT_PARTITION.
 #
-#	Installs a plain Void Linux setup in the specified DM-Crypt 
-#	LUKS container.
+#    Installs a plain Void Linux setup in the specified DM-Crypt 
+#    LUKS container.
 #
-#	Does not play nice if run multiple times in a row. Will erase any 
-#	existing Linux installations.
+#    Does not play nice if run multiple times in a row. Will erase any 
+#    existing Linux installations.
 #
 #?
 
