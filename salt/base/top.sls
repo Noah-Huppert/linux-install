@@ -91,6 +91,7 @@ base:
     - ncdu
     - software-defined-radio
     - sl
+    - libguestfs
 
     # User interface configuration
     - xorg
