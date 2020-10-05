@@ -14,7 +14,7 @@
     - makedirs: True
     - user: {{ user.name }}
     - group: {{ user.name }}
-    - mode: 755
+    - mode: 700
 
 {% endfor %}
 {% endfor %}
