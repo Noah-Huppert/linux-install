@@ -44,11 +44,20 @@ function die() {
 # Options
 setup_script_args=()
 
-while getopts "cr:b:s:g:" opt; do
+while getopts "b:r:ce:s:g:" opt; do
     case "$opt" in
-	   c) root_is_container=true ;;
-	   r) root_partition="$OPTARG" ;;
 	   b) boot_partition="$OPTARG" ;;
+	   r) root_partition="$OPTARG" ;;
+	   c) root_is_container=true ;;
+	   e)
+		  # Record the environment's name so we can create the environment flag
+		  # file later.
+		  setup_environment="$OPTARG"
+
+		  # Put it in the args var so the setup.sh script will know what
+		  # environment to use.
+		  setup_script_args+=("-e $OPTARG")
+		  ;;
 	   s) setup_script_args+=("$OPTARG") ;;
 	   g) salt_grains_file="$OPTARG" ;;
 	   '?')

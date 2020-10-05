@@ -64,6 +64,15 @@ be tweaked from environment to environment.
 The `base` environment contains all the main configuration files. All other 
 environments simply extend this `base` environment.
 
+## Salt Environment Flag File
+The `/etc/linux-install/environment-flag` file indicates what environment is 
+currently being used. This is created by the `install.sh` file.
+
+This flag file will only be used by scripts the user may run **after** the 
+bootstrap process has been completed. Never by any scripts in the
+`live-scripts/` and `setup-scripts/` directories. Currently this is only the
+`salt-apply` script.
+
 ## Creating a Salt Environment
 Salt environments are made up of the following:
 
