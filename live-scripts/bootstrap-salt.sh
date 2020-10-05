@@ -51,7 +51,7 @@ while getopts "spe:hf" opt; do
 	    ;;
 	e) opt_env="$OPTARG" ;;
         h) cat <<EOF
-bootstrap-salt.sh - Sets up Salt on the current system
+bootstrap-salt.sh - Sets up Salt on the current system.
 
 USAGE
 
@@ -59,11 +59,11 @@ USAGE
     
 OPTIONS
 
-    -s        Install Salt from source
-    -p        Install Salt from a package
-    -e ENV    Salt environment to setup, defaults to "base"
-    -h        Show this help text
-    -f        Force installation even if Salt is already installed
+    -s        Install Salt from source,
+    -p        Install Salt from a package,
+    -e ENV    Salt environment to setup, defaults to "base".
+    -h        Show this help text.
+    -f        Force installation even if Salt is already installed.
     
 BEHAVIOR
 
@@ -81,6 +81,7 @@ BEHAVIOR
     in the ../INSTRUCTIONS.md file. However it can be useful when one wants
     to use Salt with this repository but not use the prescibed automated 
     setup flow.
+
 EOF
         exit 0;
     ;;

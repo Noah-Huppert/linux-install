@@ -48,9 +48,9 @@ USAGE
 OPTIONS
 
     -h    Show this help text
-    -s    Print space seperated list of link information for Salt state directories
-    -p    Print space seperated list of link information for Salt pillar directories
-    -a    Print space seperated list of link information for Salt state and pillar directories
+    -s    Print list of link information on Salt state directories.
+    -p    Print list of link information on Salt pillar directories.
+    -a    Print all list with all link information (Equivalent to -s and -p combined).
 
 BEHAVIOR
 

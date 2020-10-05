@@ -1,36 +1,4 @@
 #!/usr/bin/env bash
-#?
-# install.sh - Install Void Linux
-#
-# USAGE
-#
-#	install.sh -b BOOT_PARTITION -r ROOT_PARTITION [-c,-s SETUP_ARGS,-g GRAINS_FILE]
-#
-# OPTIONS
-#
-#    -b BOOT_PARTITION    Boot partition
-#    -r ROOT_PARTITION    Root file partition
-#    -c                   (Optional) If provided indicates that ROOT_PARTITION is
-#                         actually the name of a DM-Crypt LUKS container to use
-#                         as the root file system
-#    -s SETUP_ARGS        (Optional) Arguments which will be passed to the setup.sh
-#                         script. Can be specified multiple times.
-#    -g GRAINS_FILE       (Optional) Path to a Salt grains file which will be placed
-#                         in the new installation.
-#
-# BEHAVIOR
-#
-#    If -c is provided expects to be run directly after the cryptsetup.sh script.
-#    This script leaves the DM-Crypt LUKS container named ROOT_PARTITION open and
-#    accessible in /dev/mapper/ROOT_PARTITION.
-#
-#    Installs a plain Void Linux setup in the specified DM-Crypt 
-#    LUKS container.
-#
-#    Does not play nice if run multiple times in a row. Will erase any 
-#    existing Linux installations.
-#
-#?
 
 # Configuration
 prog_dir=$(realpath $(dirname "$0")) 
@@ -44,7 +12,7 @@ function die() {
 # Options
 setup_script_args=()
 
-while getopts "b:r:ce:s:g:" opt; do
+while getopts "b:r:ce:s:g:h" opt; do
     case "$opt" in
 	   b) boot_partition="$OPTARG" ;;
 	   r) root_partition="$OPTARG" ;;
@@ -60,9 +28,43 @@ while getopts "b:r:ce:s:g:" opt; do
 		  ;;
 	   s) setup_script_args+=("$OPTARG") ;;
 	   g) salt_grains_file="$OPTARG" ;;
-	   '?')
-		  die "Unknown option \"$opt\""
+	   h)
+		  cat <<EOF
+install.sh - Install Void Linux.
+
+USAGE
+
+	install.sh -b BOOT_PARTITION -r ROOT_PARTITION [-c,-e ENV,-s SETUP_ARGS,-g GRAINS_FILE]
+
+OPTIONS
+
+   -b BOOT_PARTITION    Boot partition.
+   -r ROOT_PARTITION    Root file partition.
+   -c                   (Optional) If provided indicates that ROOT_PARTITION is
+                        actually the name of a DM-Crypt LUKS container to use
+                        as the root file system.
+   -e ENV               (Optional) The environment to setup. Defaults to "base".
+   -s SETUP_ARGS        (Optional) Arguments which will be passed to the setup.sh
+                        script. Can be specified multiple times.
+   -g GRAINS_FILE       (Optional) Path to a Salt grains file which will be placed
+                        in the new installation.
+
+BEHAVIOR
+
+   If -c is provided expects to be run directly after the cryptsetup.sh script.
+   This script leaves the DM-Crypt LUKS container named ROOT_PARTITION open and
+   accessible in /dev/mapper/ROOT_PARTITION.
+
+   Installs a plain Void Linux setup in the specified DM-Crypt 
+   LUKS container.
+
+   Does not play nice if run multiple times in a row. Will erase any 
+   existing Linux installations.
+
+EOF
+		  exit 0
 		  ;;
+	   '?') die "Unknown option \"$opt\"" ;;
     esac
 done
 

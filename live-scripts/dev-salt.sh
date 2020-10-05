@@ -1,31 +1,41 @@
 #!/usr/bin/env bash
-#?
-# dev-salt.sh - Source Salt files from the boot partition
-#
-# USAGE
-#
-#	dev-salt.sh
-#
-# CONFIGURATION
-#
-#	The following environment variables can be set to configure the script:
-#
-#		BOOT_PART_LABEL    Label of boot partition, defaults 
-#		                   to /dev/sda1
-#
-# BEHAVIOR
-#
-#	Replaces files in the /srv/{salt,pillar} directories with files on 
-#	the boot partition located
-#	in linux-install/iso-rootfs/srv/{salt,pillar}
-#
-#	This allows for a quicker development cycle of the tools in 
-#	this repository.
-#
-#?
 
-# Exit on any error
-set -e
+# Show help with -h
+while getopts "h" opt; do
+    case "$opt" in
+	   h)
+		  cat <<EOF
+dev-salt.sh - Source Salt files from the boot partition.
+
+USAGE
+
+	dev-salt.sh
+
+CONFIGURATION
+
+	The following environment variables can be set to configure the script:
+
+		BOOT_PART_LABEL    Label of boot partition, defaults 
+		                   to /dev/sda1
+
+BEHAVIOR
+
+	Replaces files in the /srv/{salt,pillar} directories with files on 
+	the boot partition located
+	in linux-install/iso-rootfs/srv/{salt,pillar}
+
+	This allows for a quicker development cycle of the tools in 
+	this repository.
+
+EOF
+		  exit 0
+		  ;;
+	   '?')
+		  echo "Error: Unknown option" >&2
+		  exit 0
+		  ;;
+    esac
+done
 
 # Configuration
 if [ -z "$BOOT_PART_LABEL" ]; then

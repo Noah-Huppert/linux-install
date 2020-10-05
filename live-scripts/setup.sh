@@ -1,25 +1,4 @@
 #!/usr/bin/env bash
-#?
-# setup.sh - Configure and install programs in Linux environment
-#
-# USAGE
-#
-# 	setup.sh OPTIONS
-#
-# OPTIONS
-#
-#    -r        (Optional) Redownload linux-install even if it exists
-#    -e ENV    (Optional) Specify salt environment to use. Defaults to "base".
-#
-# BEHAVIOR
-#
-#	Runs Salt to setup an already installed Linux environment.
-#
-#	Pre-conditions: Connected to wifi, Salt installed.
-#
-#	Can be run on multiple times on an existing Linux installation.
-#
-#?
 
 # Configuration
 prog_dir=$(realpath $(dirname "$0"))
@@ -39,10 +18,34 @@ function die() {
 
 # Options
 salt_env=base
-while getopts "re:" opt; do
+while getopts "re:h" opt; do
 	case "$opt" in
 	    r) redownload="true" ;;
 	    e) salt_env="$OPTARG" ;;
+	    h)
+		   cat <<EOF
+setup.sh - Configure and install programs in Linux environment.
+
+USAGE
+
+	setup.sh OPTIONS
+
+OPTIONS
+
+   -r        (Optional) Redownload linux-install even if it exists
+   -e ENV    (Optional) Specify salt environment to use. Defaults to "base".
+
+BEHAVIOR
+
+	Runs Salt to setup an already installed Linux environment.
+
+	Pre-conditions: Connected to wifi, Salt installed.
+
+	Can be run on multiple times on an existing Linux installation.
+
+EOF
+		   exit 0
+		   ;;
 	    '?') die "Unknown option" ;;
 	esac
 done
