@@ -5,7 +5,7 @@ prog_dir=$(dirname $(realpath "$0"))
 
 die () {
     echo "Error: $@" >&2
-    exit 0
+    exit 1
 }
 
 check() {
