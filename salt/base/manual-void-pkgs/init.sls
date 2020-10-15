@@ -43,7 +43,7 @@ pkg_{{ pkg }}:
     - name: ./xbps-src pkg {{ pkg }}
     - runas: noah
     - cwd: {{ pillar.manual_void_pkgs.clone_dir }}
-    - unless: which {{ details.bin }}
+    - unless: xbps-query {{ pkg }}-{{ details.latest_version }}
     - require:
       - cmd: binary_bootstrap
 
@@ -51,7 +51,7 @@ install_{{ pkg }}:
   cmd.run:
     - name: xbps-install --repository={{ pillar.manual_void_pkgs.clone_dir }}/hostdir/binpkgs/{{ details.repository }} -y {{ pkg }}
     - cwd: {{ pillar.manual_void_pkgs.clone_dir }}
-    - unless: which {{ details.bin }}
+    - unless: xbps-query {{ pkg }}-{{ details.latest_version }}
     - require:
       - cmd: pkg_{{ pkg }}
 {% endfor %}
