@@ -70,6 +70,7 @@ base:
     - gatsby-cli
     - xlibs
     - typescript
+    - eclipse
 
     # General tools configuration
     - utilities
