@@ -71,6 +71,7 @@ base:
     - xlibs
     - typescript
     - eclipse
+    - deno
 
     # General tools configuration
     - utilities
