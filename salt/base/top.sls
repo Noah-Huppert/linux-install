@@ -58,7 +58,7 @@ base:
     - red-hat-vpn
     - aws-key-pairs
     - openshift-client
-    - android-sdk
+    #- android-sdk # Has redundant updates rn, takes too long, disabled for now (issue 12)
     - flutter
     - argo
     - ngrok
