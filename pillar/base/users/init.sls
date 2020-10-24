@@ -27,6 +27,12 @@ users:
     lpadmin: # CUPS printer admin group
       name: lpadmin
       id: 976
+    vboxusers:
+      name: vboxusers
+      id: 987
+    bluetooth:
+      name: bluetooth
+      id: 990
 
   # Users configuration, dict of user objects with the keys:
   #
@@ -52,6 +58,8 @@ users:
         - video
         - xbuilder
         - lpadmin
+        - vboxusers
+        - bluetooth
     root:
       name: root
       id: 0
