@@ -11,8 +11,10 @@
 	p = push
 	po = push origin
 	pom = push origin master
+	poma = push origin main
 	pu = pull
 	pul = pull origin master
+	pula = pull origin main
 	co = checkout
 	b = branch
 [push]
