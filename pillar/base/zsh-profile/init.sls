@@ -24,6 +24,7 @@ zsh_profile:
     - history.zsh
     - go.zsh
     - rust.zsh
+    - deno.zsh
     - prompt.zsh
     - ls_color.zsh
     - zsh_reload_fn.zsh
