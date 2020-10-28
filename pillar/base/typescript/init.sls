@@ -1,2 +1,4 @@
 typescript:
-  pkg: typescript
+  pkgs:
+    - typescript
+    - ts-interface-builder
