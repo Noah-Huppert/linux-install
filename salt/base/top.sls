@@ -72,6 +72,7 @@ base:
     - typescript
     - eclipse
     - deno
+    - heroku
 
     # General tools configuration
     - utilities
