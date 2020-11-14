@@ -7,7 +7,9 @@
     - user: noah
 
 # Install
-{{ pillar.emacs.pkg }}:
+{% for pkg in pillar['emacs']['pkgs'] %}
+{{ pkg }}:
   pkg.latest:
     - required:
       - git: {{ pillar.emacs.configuration_repo }}
+{% endfor %}

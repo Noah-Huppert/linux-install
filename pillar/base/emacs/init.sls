@@ -1,6 +1,8 @@
 emacs:
-  # Package
-  pkg: emacs
+  # Packages
+  pkgs:
+    - emacs
+    - emacs-gtk3
 
   # Configuration directory
   configuration_directory: /home/noah/.emacs.d
