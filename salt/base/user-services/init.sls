@@ -26,15 +26,18 @@
         user_home: {{ user.home }}
         user_svc_dir: {{ user_svc_dir }}
 
-{{ runit_svc_var_dir }}:
-  file.symlink:
-    - target: {{ runit_svc_dir }}
+# This was initially needed bc the symlink was not being created. However I
+# cannot reproduce this behavior anymore, and service.enabled seems to be
+# creating the symlink now.
+#{{ runit_svc_var_dir }}:
+#  file.symlink:
+#    - target: {{ runit_svc_dir }}
 
 {{ runit_svc_name }}-enabled:
   service.enabled:
     - name: {{ runit_svc_name }}
     - require:
-      - file: {{ runit_svc_var_dir }}
+      #- file: {{ runit_svc_var_dir }}
       - file: {{ runit_svc_run_file }}
 
 {{ runit_svc_name }}-running:
