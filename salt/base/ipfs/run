@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-exec chpst -U noah:noah ipfs daemon
+exec {{ pillar.ipfs.bin.link_dir }}/{{ pillar.ipfs.bin.file}} daemon 1>&2
