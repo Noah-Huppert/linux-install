@@ -37,6 +37,7 @@ base:
     - sudoers
     - linux-install-repo
     - home-directories
+    - user-services
 
     # Development environment configuration
     - build-deps

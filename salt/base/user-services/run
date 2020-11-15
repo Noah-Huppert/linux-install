@@ -1,0 +1,10 @@
+#!/bin/sh
+# From: https://docs.voidlinux.org/config/services/user-services.html
+
+export USER="{{ user_name }}"
+export HOME="{{ user_home }}"
+
+groups="$(id -Gn "$USER" | tr ' ' ':')"
+svdir="{{ user_svc_dir }}"
+
+exec chpst -u "$USER:$groups" runsvdir "$svdir"
