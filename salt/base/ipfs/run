@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+exec chpst -U noah:noah ipfs daemon
