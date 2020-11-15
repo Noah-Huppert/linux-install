@@ -36,4 +36,13 @@
     - group: {{ user.name }}
     - mode: 755
     - makedirs: True
+    - defaults:
+      user_name: {{ user.name }}
+
+# Right now we don't want root to run ipfs at all
+{% if user.name == 'root' %}
+{{ svc_dir }}/down:
+  file.touch:
+    - makedirs: True
+{% endif %}
 {% endfor %}

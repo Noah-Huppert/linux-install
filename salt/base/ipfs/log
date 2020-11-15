@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+exec vlogger -t ipfs-{{ user_name }}
