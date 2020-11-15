@@ -1,5 +1,6 @@
 # Configures runit to run services for specific users.
 
+# Configure runsvdir service to run as each user
 {% for _, user in pillar['users']['users'].items() %}
 {% set user_svc_dir = user.home + '/' + pillar.user_services.home_dir %}
 
@@ -46,3 +47,10 @@
     - require:
       - service: {{ runit_svc_name }}-enabled
 {% endfor %}
+
+# Add a helper script to manage user services
+{{ pillar.user_services.helper_install }}:
+  file.managed:
+    - source: salt://user-services/usv
+    - template: jinja
+    - mode: 755
