@@ -9,4 +9,4 @@ kernel:
     - linux4.20-headers
 
   # Kernel package version
-  version: 5.8.16_1
+  version: 5.8.18_1
