@@ -16,9 +16,8 @@
 
 {{ units_file }}:
   file.absent
-
-{{ user.home }}/.zshrc:
-  file.absent
+#{{ user.home }}/.zshrc:
+#  file.absent
 
 {% endfor %}
 
@@ -41,7 +40,7 @@
 
 {{ shell_profiles_dir }}:
   file.recurse:
-    - source: salt://shell-profile/profile.d
+    - source: salt://shell-profile/units
     - clean: True
     - user: {{ user.name }}
     - group: {{ user.name }}

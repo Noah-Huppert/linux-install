@@ -12,7 +12,7 @@ shell_profile:
   shell_units:
     - meta_fns.sh
     - editor.sh
-    - terminal.sh
+    # - terminal.sh # Not needed for ansi-term bash
     - pager.sh
     - screenshot_dir.sh
     - gpg_tty.sh
@@ -20,8 +20,7 @@ shell_profile:
     - gpg_import.sh
     - xdg_config_home.sh
     - ssh_agent.sh
-    - emacs_keys.sh
-    - history.sh
+    # - history.sh # Not need for ansi-term bash
     - go.sh
     - rust.sh
     - deno.sh
@@ -41,5 +40,4 @@ shell_profile:
     - android_sdk.sh
     - autostart.sh
     - linux_install_edit.sh
-    #- tmux.sh # Commented out, now using emacs
     - startx.sh
