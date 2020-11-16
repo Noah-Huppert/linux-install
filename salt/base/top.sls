@@ -29,10 +29,11 @@ base:
     - printers
 
     # User configuration
+    - bash
     - zsh
 
     - users
-    - zsh-profile
+    - shell-profile
 
     - sudoers
     - linux-install-repo

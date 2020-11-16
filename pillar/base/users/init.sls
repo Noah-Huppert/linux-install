@@ -1,9 +1,9 @@
 users:
   # Path to user's shell
-  shell: /usr/bin/zsh
+  shell: /usr/bin/bash
 
   # Directory which keeps track of which keys have been added for a user.
-  # This directory will have a sub-directory for each user where the zsh 
+  # This directory will have a sub-directory for each user where the shell 
   # profile can put state files.
   added_keys_parent_directory: /var/added-user-keys
 
