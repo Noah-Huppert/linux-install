@@ -29,6 +29,7 @@ base:
     - printers
 
     # User configuration
+    - bash
     - zsh
 
     - users
