@@ -32,7 +32,7 @@ base:
     - zsh
 
     - users
-    - zsh-profile
+    - shell-profile
 
     - sudoers
     - linux-install-repo
