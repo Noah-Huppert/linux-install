@@ -12,14 +12,16 @@ manual_void_pkgs:
 
   # Custom packages to install.
   # Keys are package names. Values are dicts with the keys:
-  #     - bin (required): Name of binary which will be present if the package
-  #                       is installed.
+  #     - latest_version (required): Newest XBPS package version to expected for
+  #                                  package. Cannot be used to specify an older
+  #                                  version, just to ensure the newest
+  #                                  is installed.
   #     - repository (required): Name of directory in hostdir/binpkgs which
   #                              contains XBPS file for pkg.
   pkgs:
     zoom:
-      bin: zoom
+      latest_version: 5.3.469451.0927_1
       repository: nonfree
     discord:
-      bin: Discord
+      latest_version: 0.0.12_2
       repository: nonfree

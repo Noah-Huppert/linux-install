@@ -1,5 +1,5 @@
-# Instructions
-Linux installation instructions.
+# User Instructions
+Linux installation instructions for end users.
 
 # Table Of Contents
 - [Live USB](#live-usb)
@@ -108,3 +108,5 @@ Run:
 ```
 # /etc/linux-install/live-scripts/install.sh -c -r cryptroot -b BOOT_PARTITION
 ```
+
+Pass the `-e ENV` option to set the Salt environment to setup.

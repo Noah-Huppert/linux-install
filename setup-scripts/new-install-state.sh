@@ -36,7 +36,7 @@ OPTIONS
 
 ARGUMENTS
 
-    SRC    Source of package. Can be "python3", "xbps", or "npm".
+    SRC    Source of package. Can be "python3", "xbps", "npm", or "cargo".
     PKG    Name of package to install.
 
 BEHAVIOR
@@ -119,10 +119,10 @@ if [ -z "$PKG" ]; then
 fi
 
 case "$SRC" in
-    python3|xbps|npm) ;;
+    python3|xbps|npm|cargo) ;;
     *)
 	   show_help
-	   die "SRC cannot be \"$SRC\". Must be \"python3\", \"xbps\", \"npm\"."
+	   die "SRC cannot be \"$SRC\". Must be \"python3\", \"xbps\", \"npm\", or \"cargo\"."
 	   ;;
 esac
 
@@ -168,7 +168,7 @@ check "Failed to add header to state file \"$state_file\""
 
 case "$SRC" in
     python3)
-	   cat <<EOF > "$state_file"
+	   cat <<EOF >> "$state_file"
 {{ pillar.$SAFE_PKG.pkg }}:
   pip.installed:
     - pip_bin: {{ pillar.python.pip3_bin }}
@@ -176,16 +176,28 @@ EOF
 	   check "Failed to create state file \"$state_file\""
 	   ;;
     xbps)
-	   cat <<EOF > "$state_file"
+	   cat <<EOF >> "$state_file"
 {{ pillar.$SAFE_PKG.pkg }}:
   pkg.installed
 EOF
 	   check "Failed to create state file \"$state_file\""
 	   ;;
     npm)
-	   cat <<EOF > "$state_file"
+	   cat <<EOF >> "$state_file"
 {{ pillar.$SAFE_PKG.pkg }}:
   npm.installed
+EOF
+	   ;;
+    cargo)
+	   cat <<EOF >> "$state_file"
+# Install for all users
+{% for _, user in pillar['users']['users'].items() %}
+install_cargo_${PKG}_for_{{ user.name }}:
+  cmd.run:
+    - name: {{ pillar.rust.cargo_bin_substitute_path }}/cargo install {{ pillar.$SAFE_PKG.pkg }}
+    - runas: {{ user.name }}
+    - unless: test -f {{ pillar.rust.cargo_bin_substitute_path }}/$PKG
+{% endfor %}
 EOF
 	   ;;
 esac

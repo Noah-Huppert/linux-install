@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+exec {{ pillar.ipfs.bin.link_dir }}/{{ pillar.ipfs.bin.file}} daemon

@@ -1,0 +1,2 @@
+libguestfs:
+  pkg: libguestfs

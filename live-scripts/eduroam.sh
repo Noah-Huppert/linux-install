@@ -1,44 +1,43 @@
 #!/usr/bin/env bash
-#?
-# eduroam.sh - Configures a connection to eduroam
-#
-# USAGE
-#
-# 	eduroam.sh OPTIONS
-#
-# OPTIONS
-#
-#	-u USERNAME    Eduroam username including `@school.edu`
-#	-p PASSWORD    Password
-#	-c WPA_CONF    WPA Supplicant configuration file
-#	-h             Show help text
-#
-# BEHAVIOR
-#
-#	Configures wpa_supplicant to connect to eduroam.#
-#
-#?
 
-# {{{1 Configuration
+# Configuration
 ssid="eduroam"
 default_wpa_config="/etc/wpa_supplicant/wpa_supplicant.conf"
 
-# {{{1 Helpers
+# Helpers
 function die() {
 	echo "Error: $@" >&2
 	exit 1
 }
 
-# {{{1 Options
-# {{{2 Get
+# Options
+# Get
 while getopts "u:p:c:h" opt; do
 	case "$opt" in 
 		u) user="$OPTARG"  ;;
 		p) password="$OPTARG"  ;;
 		c) wpa_config="$OPTARG"  ;;
 		h)
-			echo "$0 -u USERNAME -p PASSWORD [-c WPA_CONF -h]"
-			exit 1
+		    cat <<EOF
+eduroam.sh - Configures a connection to eduroam.
+
+USAGE
+
+	eduroam.sh OPTIONS
+
+OPTIONS
+
+	-u USERNAME    Eduroam username including \`@school.edu\`.
+	-p PASSWORD    Password.
+	-c WPA_CONF    WPA Supplicant configuration file.
+	-h             Show help text.
+
+BEHAVIOR
+
+	Configures wpa_supplicant to connect to eduroam.
+
+EOF
+			exit 0
 			;;
 		'?')
 			die "Unknown option \"$opt\""
@@ -46,8 +45,8 @@ while getopts "u:p:c:h" opt; do
 	esac
 done
 
-# {{{2 Verify
-# {{{3 user
+# Verify
+# user
 if [ -z "$user" ]; then
 	die "-u USER option required"
 fi
@@ -56,12 +55,12 @@ if [[ ! "$user" =~ .*@.* ]]; then
 	die "-u USER option must be in format user@host.tld"
 fi
 
-# {{{3 password
+# password
 if [ -z "$password" ]; then
 	die "-p PASSWORD option required"
 fi
 
-# {{{3 wpa_config
+# wpa_config
 if [ -z "$wpa_config" ]; then
 	wpa_config="$default_wpa_config"
 fi
@@ -70,12 +69,12 @@ if [ ! -f "$wpa_config" ]; then
 	die "-w WPA_CONF configuration file does not exist: $wpa_config"
 fi
 
-# {{{1 Check if already configured
+# Check if already configured
 if cat "$wpa_config" | grep "ssid=\"$ssid\"" &> /dev/null; then
 	die "Entry for $ssid already in $wpa_config"
 fi
 
-# {{{1 Write configuration
+# Write configuration
 config="network={\n"
 config+="        ssid=\"$ssid\"\n"
 config+="        key_mgmt=WPA-EAP\n"
@@ -93,12 +92,12 @@ if ! echo -e "$config" >> "$wpa_config"; then
 	die "Failed to write configuration to $wpa_config"
 fi
 
-# {{{1 Enable wpa_supplicant service
+# Enable wpa_supplicant service
 if ! ln -s /etc/sv/wpa_supplicant /var/service; then
 	die "Failed enable wpa_supplicant service"
 fi
 
-# {{{1 Wait for internet connection
+# Wait for internet connection
 echo "Waiting for internet"
 
 for i in $(seq 20); do

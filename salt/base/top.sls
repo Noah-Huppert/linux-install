@@ -29,14 +29,16 @@ base:
     - printers
 
     # User configuration
+    - bash
     - zsh
 
     - users
-    - zsh-profile
+    - shell-profile
 
     - sudoers
     - linux-install-repo
     - home-directories
+    - user-services
 
     # Development environment configuration
     - build-deps
@@ -58,7 +60,7 @@ base:
     - red-hat-vpn
     - aws-key-pairs
     - openshift-client
-    - android-sdk
+    #- android-sdk # Has redundant updates rn, takes too long, disabled for now (issue 12)
     - flutter
     - argo
     - ngrok
@@ -68,6 +70,11 @@ base:
     - dfu-util
     - kustomize
     - gatsby-cli
+    - xlibs
+    - typescript
+    - eclipse
+    - deno
+    - heroku
 
     # General tools configuration
     - utilities
@@ -88,6 +95,8 @@ base:
     - expat
     - ncdu
     - software-defined-radio
+    - sl
+    - libguestfs
 
     # User interface configuration
     - xorg
@@ -98,6 +107,7 @@ base:
     - polybar
     - rice
     - fonts
+    - wmctrl
  
     # Applications configuration
     - misc-applications

@@ -1,8 +1,14 @@
 # Customizes the Zsh prompt
 
-# Load colors module
-autoload -U colors && colors
-autoload -U add-zsh-hook
+# Colors
+# From: https://stackoverflow.com/a/20983251
+COLOR_RESET=$(tput sgr0)
+
+COLOR_BG_RED=$(tput setab 1)
+
+COLOR_FG_GREEN=$(tput setaf 2)
+COLOR_FG_MAGENTA=$(tput setaf 5)
+COLOR_FG_RED=$(tput setaf 1)
 
 # Prints a check or an x depending on the exit status of the last command.
 # Takes an exist status as an argument and outputs a prompt for that status. It is
@@ -11,7 +17,7 @@ autoload -U add-zsh-hook
 # like this one.
 function exit_status_prompt() { # ( Exit status )
     if [ "$1" -ne "0" ]; then
-	   echo "%{$bg[red]%}$1%{$reset_color%} "
+	   echo "${COLOR_BG_RED}$1${COLOR_RESET} "
     fi
 }
 
@@ -24,7 +30,7 @@ function git_prompt() {
 		return 0
 	fi
 
-	echo " %{$fg[green]%}git%{$reset_color%}:%{$fg[magenta]%}$branch%{$reset_color%}"
+	echo " ${COLOR_FG_GREEN}git${COLOR_RESET}:${COLOR_FG_MAGENTA}$branch${COLOR_RESET}"
 }
 
 ## Escapes paths for use in sed
@@ -44,6 +50,7 @@ function shortcut_path() { # STDIN, ( FIND, REPLACE )
 # current directory.
 function pwd_prompt() {
     d="$PWD"
+    d=$(echo "$d" | shortcut_path "/etc/linux-install" "[li]")
     d=$(echo "$d" | shortcut_path "$HOME/documents/work/red-hat" "~/[red-hat]")
     d=$(echo "$d" | shortcut_path "$HOME/documents/work/cambrio" "~/[cambrio]")
     d=$(echo "$d" | shortcut_path "$HOME/documents/school" "~/[school]")
@@ -52,19 +59,34 @@ function pwd_prompt() {
     d=$(echo "$d" | shortcut_path "$GOPATH" "~/[go]")
     d=$(echo "$d" | shortcut_path "$HOME" "~")
 
-    echo "%{$fg[red]%}$d%{$reset_color%}"
+    echo "${COLOR_FG_RED}$d${COLOR_RESET}"
+}
+
+function user_symbol() {
+    if [ "$UID" -eq 0 ]; then
+	   echo "#"
+    else
+	   echo "%"
+    fi
 }
 
 # Sets prompt variable
 function build_prompt() {
     # Capture the last cmd's exit status before we run internal prompt building
     # functions. This will be passed to exit_status_prompt()
-    last_cmd_exit_status="$?"
+    #last_cmd_exit_status="$?"
     
     # [EXIT_STATUS] HOSTNAME PATH git:BRANCH %#
-    export PROMPT="$(pwd_prompt)$(git_prompt) %# "
-    export RPROMPT="$(exit_status_prompt $last_cmd_exit_status)"
+    export PS1="$(pwd_prompt)$(git_prompt) $(user_symbol) "
+    #export RPROMPT="$(exit_status_prompt $last_cmd_exit_status)"
 }
 
+source {{ pillar.bash.preexec.file }}
+preexec () {
+    # Do nothing
+    :;
+}
+precmd() {
+    build_prompt
+}
 build_prompt
-add-zsh-hook precmd build_prompt

@@ -1,54 +1,57 @@
 #!/usr/bin/env bash
-#?
-# crypsetup.sh - Sets up a DM-Crypt LUKS encrypted partition
-#
-# USAGE
-#
-#	cryptset.sh OPTIONS
-#
-# OPTIONS
-#
-#	-p PARTITION         Partition to initialize DM-Crypt LUKS container
-#	-c CONTAINER_NAME    Name of DM-Crypt LUKS container to leave 
-#	                     open after script exits
-#
-# BEHAVIOR
-#
-#	Securely erases all data in PARTITION. Then creates a DM-Crypt LUKS 
-#	container. Finally an ext4 file system is created inside the container.
-#
-# 	If this script exits successfully the container will be opened and 
-#	accessible under the path: /dev/mapper/CONTAINER_NAME
-#
-#?
 
-# {{{1 Options
-# {{{2 Get
-while getopts "p:c:" opt; do
+# Options
+# Get
+while getopts "p:c:h" opt; do
 	case "$opt" in
 		p) partition="$OPTARG" ;;
 		c) container="$OPTARG" ;;
+		h)
+		    cat <<EOF
+crypsetup.sh - Sets up a DM-Crypt LUKS encrypted partition.
+
+USAGE
+
+	cryptset.sh OPTIONS
+
+OPTIONS
+
+	-p PARTITION         Partition to initialize DM-Crypt LUKS container.
+	-c CONTAINER_NAME    Name of DM-Crypt LUKS container to leave
+	                     open after script exits.
+
+BEHAVIOR
+
+	Securely erases all data in PARTITION. Then creates a DM-Crypt LUKS 
+	container. Finally an ext4 file system is created inside the container.
+
+	If this script exits successfully the container will be opened and 
+	accessible under the path: /dev/mapper/CONTAINER_NAME
+
+EOF
+		    exit 0
+		    ;;
 		'?')
-			echo "Error: Unknown option \"$opt\"" >&2
-			exit 1
-			;;
+		    echo "Error: Unknown option \"$opt\"" >&2
+		    exit 1
+		    ;;
 	esac
 done
 
-# {{{2 Verify
-# {{{3 PARTITION
+# Verify
+# PARTITION
 if [ -z "$partition" ]; then
 	echo "Error: -p PARTITION option required" >&2
 	exit 1
 fi
 
-# {{{3 CONTAINER_NAME
+# CONTAINER_NAME
 if [ -z "$container" ]; then
 	echo "Error: -c CONTAINER_NAME option required" >&2
 	exit 1
 fi
 
-# {{{1 Ensure cryptsetup is installed
+# Ensure cryptsetup is installed
 echo "#########################"
 echo "# Checking dependencies #"
 echo "#########################"
@@ -64,12 +67,12 @@ else
 	echo "Cryptsetup already installed"
 fi
 
-# {{{1 Erase partition
+# Erase partition
 echo "##############################"
 echo "# Securely erasing partition #"
 echo "##############################"
 
-# {{{2 Confirm user wishes to erase partition
+# Confirm user wishes to erase partition
 echo "lsblk:"
 
 if ! lsblk; then
@@ -86,7 +89,7 @@ if [[ "$erase_confirm" != "y" ]]; then
 	exit 1
 fi
 
-# {{{2 Create temporary container so we can erase
+# Create temporary container so we can erase
 erase_container="container"
 
 function erase_cleanup() {
@@ -107,8 +110,8 @@ if ! cryptsetup open --type plain "$partition" "$erase_container" --key-file /de
 	exit 1
 fi
 
-# {{{2 Erase
-# {{{3 Get size of partition
+# Erase
+# Get size of partition
 erase_size_bytes=$(blockdev --getsize64 "$partition")
 if [[ "$?" != "0" ]]; then
 	echo "Error: Failed to get size of \"$partition\"" >&2
@@ -133,33 +136,33 @@ if ! sync; then
 	exit 1
 fi
 
-# {{{2 Close temporary container
+# Close temporary container
 erase_cleanup
 
-# {{{1 Create DM-Crypt LUKS container
+# Create DM-Crypt LUKS container
 echo "####################################"
 echo "# Creating DM-Crypt LUKS container #"
 echo "####################################"
 
-# {{{2 Create container
+# Create container
 if ! cryptsetup -y -v luksFormat "$partition"; then
 	echo "Error: Failed to create DM-Crypt LUKS container for partition \"$partition\"" >&2
 	exit 1
 fi
 
-# {{{2 Open container
+# Open container
 if ! cryptsetup open "$partition" "$container"; then
 	echo "Error: Failed to open DM-Crypt LUKS container for partition \"$partition\"" >&2
 	exit 1
 fi
 
-# {{{2 Create filesystem in container
+# Create filesystem in container
 if ! mkfs.ext4 "/dev/mapper/$container"; then
 	echo "Error: Failed to create an ext4 file system in the DM-Crypt LUKS container for partition \"$partition\"" >&2
 	exit 1
 fi
 
-# {{{1 Done
+# Done
 echo "########"
 echo "# Done #"
 echo "########"

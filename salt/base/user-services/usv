@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+# Helpers
+die() {
+    echo "Error: $@" >&2
+    exit 1
+}
+
+# Configure
+export SVDIR="$HOME/{{ pillar.user_services.home_dir }}"
+
+# Options
+while getopts "h" opt; do
+    case "$opt" in
+	   h)
+		  cat <<EOF
+usv - User service manager
+
+USAGE
+
+    usv ...
+
+ARGUMENTS
+
+    ...    All arguments passed to vsv
+
+BEHAVIOR
+
+    Calls the vsv tool with SVDIR set to the user's service directory ($SVDIR). This 
+    allows users to administer services which run as their user instead of root.
+
+The following is the help for the vsv tool:
+EOF
+		  vsv -h
+		  exit 0
+		  ;;
+	   '?') die "Unknown option" ;;
+    esac
+done
+
+# Run
+exec vsv "$@"

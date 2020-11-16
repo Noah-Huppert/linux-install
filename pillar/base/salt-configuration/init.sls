@@ -22,7 +22,7 @@ salt_configuration:
     work:
       public: {{ content_root }}/pillar/work
     wsl:
-      public: {{ content_root }}/pillar/work
+      public: {{ content_root }}/pillar/wsl
 
   # Pillar stack configuration files
   pillar_stack:
@@ -32,4 +32,4 @@ salt_configuration:
     work:
       public: {{ content_root }}/pillar/work/pillar-stack.cfg
     wsl:
-      public: {{ content_root }}/pillar/work/pillar-stack.cfg
+      public: {{ content_root }}/pillar/wsl/pillar-stack.cfg

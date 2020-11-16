@@ -2,10 +2,13 @@
 
 {{ pillar.rust.rustup.pkg }}:
   pkg.installed
-
-{{ pillar.rust.rustup.init_cmd }}:
+  
+{% for _, user in pillar['users']['users'].items() %}
+rustup_for_{{ user.name }}:
   cmd.run:
-    - runas: noah
-    - unless: test -f {{ pillar.rust.cargo_bin_substitute_path }}/rustc
+    - name: {{ pillar.rust.rustup.init_cmd }}
+    - runas: {{ user.name }}
+    - unless: {{ pillar.rust.cargo_bin_substitute_path }}/rustc --version | grep {{ pillar.rust.version }}
     - require:
       - pkg: {{ pillar.rust.rustup.pkg }}
+{% endfor %}

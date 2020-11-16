@@ -1,10 +1,4 @@
 #!/usr/bin/env bash
-#?
-
-#?
-
-# Exit on any error
-set -e
 
 # Configuration
 post_args=()
@@ -12,20 +6,34 @@ states=()
 pillars=()
 
 # Helpers
-function die() {
+die() {
     echo "Error: $@" >&2
     exit 1
 }
 
+check() {
+    if [ "$?" -ne 0 ]; then
+	   die "$@"
+    fi
+}
+
 # Options
-while getopts "tls:p:h" opt; do
+env_flag_file="{{ pillar.linux_install_repo.directory }}/environment-flag"
+setup_environment=base
+if [ -f "$env_flag_file" ]; then
+    setup_environment=$(cat "$env_flag_file")
+    check "Failed to read default environment option flag file"
+fi
+
+while getopts "tls:p:e:h" opt; do
     case "$opt" in
 	t) post_args+=("test=True") ;;
 	l) post_args+=("-l trace") ;;
 	s) states+=("$OPTARG") ;;
 	p) pillars+=("$OPTARG") ;;
+	e) setup_environment="$OPTARG" ;;
 	h) cat <<EOF
-salt-apply - Run salt-call with customized options
+salt-apply - Run salt-call with customized options.
 
 USAGE
 
@@ -33,15 +41,21 @@ USAGE
 
 OPTIONS
 
-   -t           Run states in test mode
-   -l           Run state.apply with -l trace option
-   -s STATE     State to run, can be provided multiple times
-   -p PILLAR    Set pillar values, can be provided multiple times
-   -h           Show this help text
+   -t           Run states in test mode.
+   -l           Run state.apply with -l trace option.
+   -s STATE     State to run, can be provided multiple times.
+   -p PILLAR    Set pillar values, can be provided multiple times.
+   -e ENV       Salt environment to use. See below for details on the
+                default value.
+   -h           Show this help text.
 
 BEHAVIOR
 
    Runs salt-call in local mode with brief output enabled.
+
+   Looks at the "$env_flag_file" file to determine the salt and pillar 
+   environment if the -e option is not provided. If this flag file is 
+   not present defaults to "base".
 
 EOF
 	   exit 0
@@ -80,6 +94,10 @@ done
 if [ -n "$pillars_arg" ]; then
     run_args+=("pillars=$pillars_arg")
 fi
+
+# Add environment args
+post_args+=("saltenv=$setup_environment")
+post_args+=("pillarenv=$setup_environment")
 
 # Add post arguments
 for arg in "${post_args[@]}"; do

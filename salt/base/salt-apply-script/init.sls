@@ -7,6 +7,7 @@
     - user: root
     - group: root
     - mode: 755
+    - template: jinja
 
 {{ pillar.salt_apply_script.old_file }}:
   file.absent
