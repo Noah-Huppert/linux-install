@@ -3,6 +3,7 @@ emacs:
   pkgs:
     - emacs
     - emacs-gtk3
+    - ncurses-term # Required so M-x ansi-term works
 
   # Configuration directory
   configuration_directory: /home/noah/.emacs.d
