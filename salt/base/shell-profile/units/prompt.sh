@@ -18,9 +18,7 @@ COLOR_FG_RED="" #$(tput setaf 1)
 # like this one.
 function exit_status_prompt() { # ( Exit status )
     if [[ "$1" != "0" ]]; then
-	   echo "${COLOR_BG_RED}$1${COLOR_RESET}"
-    else
-	   echo " "
+	   echo "${COLOR_BG_RED}$1${COLOR_RESET} "
     fi
 }
 
@@ -80,7 +78,7 @@ function build_prompt() {
     last_cmd_exit_status="$?"
     
     # EXIT_STATUS HOSTNAME PATH git:BRANCH %#
-    export PS1="$(exit_status_prompt $last_cmd_exit_status) $(pwd_prompt)$(git_prompt) $(user_symbol) "
+    export PS1="$(exit_status_prompt $last_cmd_exit_status)$(pwd_prompt)$(git_prompt) $(user_symbol) "
 }
 
 source {{ pillar.bash.preexec.file }}
