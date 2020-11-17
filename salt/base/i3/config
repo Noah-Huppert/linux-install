@@ -43,7 +43,7 @@ bindsym XF86AudioMute exec volumectl togglemute
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec emacs --eval '(ansi-term "/usr/bin/bash")'
+bindsym $mod+Return exec emacsclient --create-frame --alternate-editor="" --eval '(my-term)'
 
 # take a screen shot
 bindsym Print exec zsh -c 'scrot ~/pictures/screenshots/%Y-%m-%d-%H:%M:%S.png'

@@ -2,13 +2,14 @@
 
 # Colors
 # From: https://stackoverflow.com/a/20983251
-COLOR_RESET=$(tput sgr0)
+# Colors are disabled rn bc they cause issues with emacs line wrapping
+COLOR_RESET="" #$(tput sgr0)
 
-COLOR_BG_RED=$(tput setab 1)
+COLOR_BG_RED="" #$(tput setab 1)
 
-COLOR_FG_GREEN=$(tput setaf 2)
-COLOR_FG_MAGENTA=$(tput setaf 5)
-COLOR_FG_RED=$(tput setaf 1)
+COLOR_FG_GREEN="" #$(tput setaf 2)
+COLOR_FG_MAGENTA="" #$(tput setaf 5)
+COLOR_FG_RED="" #$(tput setaf 1)
 
 # Prints a check or an x depending on the exit status of the last command.
 # Takes an exist status as an argument and outputs a prompt for that status. It is
@@ -16,7 +17,7 @@ COLOR_FG_RED=$(tput setaf 1)
 # will be overriden by the exit status's of other internal prompt building functions
 # like this one.
 function exit_status_prompt() { # ( Exit status )
-    if [ "$1" -ne "0" ]; then
+    if [[ "$1" != "0" ]]; then
 	   echo "${COLOR_BG_RED}$1${COLOR_RESET} "
     fi
 }
@@ -74,15 +75,14 @@ function user_symbol() {
 function build_prompt() {
     # Capture the last cmd's exit status before we run internal prompt building
     # functions. This will be passed to exit_status_prompt()
-    #last_cmd_exit_status="$?"
+    last_cmd_exit_status="$?"
     
-    # [EXIT_STATUS] HOSTNAME PATH git:BRANCH %#
-    export PS1="$(pwd_prompt)$(git_prompt) $(user_symbol) "
-    #export RPROMPT="$(exit_status_prompt $last_cmd_exit_status)"
+    # EXIT_STATUS HOSTNAME PATH git:BRANCH %#
+    export PS1="$(exit_status_prompt $last_cmd_exit_status)$(pwd_prompt)$(git_prompt) $(user_symbol) "
 }
 
 source {{ pillar.bash.preexec.file }}
-preexec () {
+npreexec () {
     # Do nothing
     :;
 }
