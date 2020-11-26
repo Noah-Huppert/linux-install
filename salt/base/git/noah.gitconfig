@@ -7,7 +7,7 @@
 	s = status
 	d = diff
 	dc = diff --cached
-	c = commit -S -m
+	c = commit -S
 	p = push
 	po = push origin
 	pom = push origin master
