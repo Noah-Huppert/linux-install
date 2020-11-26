@@ -3,13 +3,21 @@
 # Colors
 # From: https://stackoverflow.com/a/20983251
 # Colors are disabled rn bc they cause issues with emacs line wrapping
-COLOR_RESET="" #$(tput sgr0)
+COLOR_RESET=""
 
-COLOR_BG_RED="" #$(tput setab 1)
+COLOR_BG_RED=""
 
-COLOR_FG_GREEN="" #$(tput setaf 2)
-COLOR_FG_MAGENTA="" #$(tput setaf 5)
-COLOR_FG_RED="" #$(tput setaf 1)
+COLOR_FG_GREEN=""
+COLOR_FG_MAGENTA=""
+COLOR_FG_RED=""
+
+#COLOR_RESET=$(tput sgr0)
+
+#COLOR_BG_RED=$(tput setab 1)
+
+#COLOR_FG_GREEN=$(tput setaf 2)
+#COLOR_FG_MAGENTA=$(tput setaf 5)
+#COLOR_FG_RED=$(tput setaf 1)
 
 # Prints a check or an x depending on the exit status of the last command.
 # Takes an exist status as an argument and outputs a prompt for that status. It is
