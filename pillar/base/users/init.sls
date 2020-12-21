@@ -18,6 +18,9 @@ users:
     wheel:
       name: wheel
       id: 4
+    audio:
+      name: audio
+      id: 12
     video:
       name: video
       id: 13
@@ -55,6 +58,7 @@ users:
       groups:
         - linux_install
         - wheel
+        - audio
         - video
         - xbuilder
         - lpadmin
