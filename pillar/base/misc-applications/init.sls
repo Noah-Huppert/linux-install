@@ -12,4 +12,5 @@ misc_applications:
     - MultiMC
 
     - transmission # Torrent
+    - transmission-qt
     - vlc
