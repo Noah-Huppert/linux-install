@@ -36,6 +36,9 @@ users:
     bluetooth:
       name: bluetooth
       id: 990
+    docker:
+      name: docker
+      id: 991
 
   # Users configuration, dict of user objects with the keys:
   #
@@ -64,6 +67,7 @@ users:
         - lpadmin
         - vboxusers
         - bluetooth
+        - docker
     root:
       name: root
       id: 0
