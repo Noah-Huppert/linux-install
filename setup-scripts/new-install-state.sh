@@ -45,11 +45,13 @@ ARGUMENTS
 BEHAVIOR
 
     Creates a new Salt state which installs the specified packages. The state will
-    be placed in ../{salt,pillar}/\$ENV/\$NAME/init.sls. In the pillar file a new object
+    be placed in ../{salt,pillar}/\$ENV/\$NAME/init.sls.
+
+    The state file will have a simple Jinja loop which installs all the packages listed
+    in the pillar which are marked for the \$SRC. In the pillar file a new object
     will be defined who's name is an underscore only version of \$NAME. Inside sub-keys 
     will be lists of packages to install. Sub-keys will follow the format 
-    \$SRC_\$NAME where name is underscored only. The state file will have a simple Jinja
-    loop which installs all the packages from the pillar using \$SRC. 
+    \$SRC_\$NAME_pkgs where name is underscored only. 
 
     If the state's directory already exists the script will fail unless the -f option is
     provided. In which case the tool will append its work onto the existing files. Be
@@ -82,8 +84,7 @@ NAME="$1"
 shift
 SRC="$1"
 shift
-PKGS=($1)
-shift
+PKGS=("$@")
 
 if [ -z "$NAME" ]; then
     show_help
@@ -94,7 +95,7 @@ if [[ !("$NAME" =~ [a-zA-Z0-9-]+) ]]; then
     die "NAME argument must only include alphanumeric characters or dashes"
 fi
 
-NAME_UNDERSCORED=$(echo "$NAME" | sed 's/_/-/g')
+UNDERSCORED_NAME=$(echo "$NAME" | sed 's/_/-/g')
 check "Failed to compute safe version name argument for later use (no dashes)"
 
 if [ -z "$SRC" ]; then
@@ -102,7 +103,7 @@ if [ -z "$SRC" ]; then
     die "SRC argument required"
 fi
 
-if [ -z "${PKGS[@]}" ]; then
+if [ -z "$PKGS" ]; then
     show_help
     die "PKG arguments required"
 fi
@@ -116,20 +117,17 @@ if [ -n "$opt_test" ]; then
     bold "[[Test mode active]]"
 fi
 
-# Make comma seperated version of packages for use later
-pkgs_commasep=""
-for pkg in ${PKGS[@]}; do
-    if [ -n "$pkgs_commasep" ]; then
-	   pkgs_commasep+=","
-    fi
-    pkgs_commasep+="$pkg"
-done
-
 # Check if state exists
 state_dir="$prog_dir/../salt/$opt_env/$NAME"
 state_file="$state_dir/init.sls"
+
 pretty_state_file="salt/${opt_env}/${NAME}/init.sls"
-if grep "src=${SRC}" "$state_file" ; then
+
+verb_state_file="created"
+if [ -f "$state_file" ]; then
+    verb_state_file="appended"
+fi
+if [ -f "$state_file" ] && grep "src=${SRC}" "$state_file" ; then
     state_exists=true
 elif [ -f "$state_file" ]; then
     die "Sate file \"$state_file\" for state \"$NAME\" exists but doesn't follow the format this tool expects. Any actions past this point may be unreliable, exiting."
@@ -137,8 +135,14 @@ fi
 
 pillar_dir="$prog_dir/../pillar/$opt_env/$NAME"
 pillar_file="$pillar_dir/init.sls"
+
 pretty_pillar_file="pillar/${opt_env}/${NAME}/init.sls"
-if grep "${SRC}_${NAME_UNDERSCORED}:" "$pillar_file"; then
+
+verb_pillar_file="created"
+if [ -f "$pillar_file" ]; then
+    verb_pillar_file="appended"
+fi
+if [ -f "$pillar_file" ] && grep "${SRC}_${UNDERSCORED_NAME}:" "$pillar_file"; then
     state_exists=true
 elif [ -f "$pillar_file" ]; then
     die "Pillar file \"$pillar_file\" for state \"$NAME\" exists but doesn't follow the format this tool expects. Any actions past this point may be unreliable, exiting."
@@ -151,11 +155,13 @@ fi
 
 # If in test mode change state and pillar file variables so we don't actually write
 # to any files
-state_file=/dev/fd/1
-pretty_state_file+=" [[no changes made, in test mode]]"
+if [ -n "$opt_test" ]; then
+    state_file=/dev/fd/1
+    verb_state_file+=" [[no changes made, in test mode]]"
 
-pillar_file=/dev/fd/1
-pretty_pillar_file+=" [[no changes made, in test mode]]"
+    pillar_file=/dev/fd/1
+    verb_pillar_file+=" [[no changes made, in test mode]]"
+fi
 
 # Create state
 for dir in "$state_dir" "$pillar_dir"; do
@@ -163,32 +169,42 @@ for dir in "$state_dir" "$pillar_dir"; do
     check "Failed to make directory \"$dir\""
 done
 
-echo "# Installs $pkgs_commasep from $SRC." >> "$state_file"
+pretty_pkgs=""
+for pkg in ${PKGS[@]}; do
+    if [ -n "$pretty_pkgs" ]; then
+	   pretty_pkgs+=", "
+    fi
+    pretty_pkgs+="$pkg"
+done
+
+echo "# Installs $pretty_pkgs from $SRC." >> "$state_file"
 check "Failed to add header to state file \"$state_file\""
+
+src_pillar_key="${SRC}_${UNDERSCORED_NAME}_pkgs"
 
 case "$SRC" in
     python3)
 	   cat <<EOF >> "$state_file"
-{% for pkg in pillar['$NAME_UNDERSCORED']['pkgs'] %}
+{% for pkg in pillar['$UNDERSCORED_NAME']['$src_pillar_key'] %}
 {{ pkg }}:
   pip.installed:
     - pip_bin: {{ pillar.python.pip3_bin }}
 {% endfor %}
 EOF
-	   check "Failed to create state file \"$state_file\""
+	   check "Failed to $verb_state_file state file \"$state_file\""
 	   ;;
     xbps)
 	   cat <<EOF >> "$state_file"
-{% for pkg in pillar['$NAME_UNDERSCORED']['pkgs'] %}
+{% for pkg in pillar['$UNDERSCORED_NAME']['$src_pillar_key'] %}
 {{ pkg }}:
   pkg.installed
 {% endfor %}
 EOF
-	   check "Failed to create state file \"$state_file\""
+	   check "Failed to $verb_state_file state file \"$state_file\""
 	   ;;
     npm)
 	   cat <<EOF >> "$state_file"
-{% for pkg in pillar['$NAME_UNDERSCORED']['pkgs'] %}
+{% for pkg in pillar['$UNDERSCORED_NAME']['$src_pillar_key'] %}
 {{ pkg }}:
   npm.installed
 {% endfor %}
@@ -198,7 +214,7 @@ EOF
 	   cat <<EOF >> "$state_file"
 # Install for all users
 {% for _, user in pillar['users']['users'].items() %}
-  {% for pkg in pillar['$NAME_UNDERSCORED']['pkgs'] %}
+  {% for pkg in pillar['$UNDERSCORED_NAME']['$src_pillar_key'] %}
     install_cargo_${pkg}_for_{{ user.name }}:
 	 cmd.run:
 	   - name: {{ pillar.rust.cargo_bin_substitute_path }}/cargo install {{ pkg }}
@@ -210,21 +226,19 @@ EOF
 	   ;;
 esac
 
-bold "Created state file \"$pretty_state_file\""
+bold "${verb_state_file^} state file \"$pretty_state_file\""
 
 if [ -z "$state_exists" ]; then # Only start new object if we don't see an existing state.
-    echo "$NAME_UNDERSCORED:" >> "$pillar_file"
-    check "Failed to create pillar file \"$pillar_file\""
+    echo "$UNDERSCORED_NAME:" >> "$pillar_file"
+    check "Failed to $verb_pillar_file pillar file \"$pillar_file\""
 fi
 
-echo "pkgs:" >> "$pillar_file"
-check "Failed to create pillar file \"$pillar_file\""
+echo "  $src_pillar_key:" >> "$pillar_file"
+check "Failed to $verb_pillar_file pillar file \"$pillar_file\""
 
 for pkg in ${PKGS[@]}; do
     echo "    - $pkg" >> "$pillar_file"
-    check "Failed to create pillar file \"$pillar_file\""
+    check "Failed to $verb_pillar_file pillar file \"$pillar_file\""
 done
 
-bold "Created pillar file \"$pretty_pillar_file\""
-
-bold "Created state \"$NAME\" which installs \"${PKG[@]}\" from \"$SRC\""
+bold "${verb_pillar_file^} pillar file \"$pretty_pillar_file\""
