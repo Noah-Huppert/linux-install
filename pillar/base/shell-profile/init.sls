@@ -27,7 +27,7 @@ shell_profile:
     - deno.sh
     - prompt.sh
     - ls_color.sh
-    - zsh_reload_fn.sh
+    - shell_reload_fn.sh
     - user_bin.sh
     - scripts_fns.sh
     - org_mode.sh
