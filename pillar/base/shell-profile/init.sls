@@ -11,6 +11,7 @@ shell_profile:
   # Shell units to include in the units_file
   shell_units:
     - meta_fns.sh
+    - usr_local_bin.sh
     - editor.sh
     # - terminal.sh # Not needed for ansi-term bash
     - pager.sh
