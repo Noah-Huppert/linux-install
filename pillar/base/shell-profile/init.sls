@@ -13,7 +13,7 @@ shell_profile:
     - meta_fns.sh
     - usr_local_bin.sh
     - editor.sh
-    # - terminal.sh # Not needed for ansi-term bash
+    #- terminal.sh
     - pager.sh
     - screenshot_dir.sh
     - gpg_tty.sh
