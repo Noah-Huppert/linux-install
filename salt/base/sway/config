@@ -14,7 +14,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term emacsclient --create-frame --alternate-editor="" --eval '(my-term)'
+set $term alacritty
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -26,8 +26,15 @@ set $menu bemenu-run | xargs swaymsg exec --
 # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
 output * bg /home/noah/pictures/dog-flowers.jpg fill
 
-# Disable borders
-default_border none
+# Disable titles but have borders
+default_border pixel 2
+
+# Gaps between windows
+gaps outer 4
+gaps inner 4
+
+# Enable X11 compatibility
+xwayland enable
 
 #
 # Example configuration:
@@ -52,6 +59,7 @@ default_border none
 ### Input configuration
 input "1739:0:Synaptics_TM3289-021" {
 	 tap enabled
+	 scroll_factor 0.3
 }
 #
 # Example configuration:
@@ -100,6 +108,7 @@ input "1739:0:Synaptics_TM3289-021" {
     bindsym XF86AudioRaiseVolume exec volumectl unmute up
     bindsym XF86AudioLowerVolume exec volumectl unmute down
     bindsym XF86AudioMute exec volumectl togglemute
+    bindsym XF86AudioMicMute exec pactl set-source-mute 1 toggle
 #
 # Moving around:
 #
