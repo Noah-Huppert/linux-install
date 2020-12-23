@@ -100,6 +100,7 @@ base:
 
     # User interface configuration
     - xorg
+    - wayland
     - i3
     - alacritty
     - compton
