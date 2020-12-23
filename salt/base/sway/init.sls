@@ -5,6 +5,7 @@
 {% endfor %}
 
 {% for _, user in pillar['users']['users'].items() %}
+# Sway
 {{ user.home }}/{{ pillar.sway.sway_config_file }}-{{ user.name }}:
   file.managed:
     - name: {{ user.home }}/{{ pillar.sway.sway_config_file }}
@@ -12,6 +13,7 @@
     - mode: 644
     - makedirs: True
 
+# Waybar
 {{ user.home }}/{{ pillar.sway.waybar_config_file }}-{{ user.name }}:
   file.managed:
     - name: {{ user.home }}/{{ pillar.sway.waybar_config_file }}
@@ -25,9 +27,22 @@
     - source: salt://sway/waybar-style.css
     - mode: 644
     - makedirs: True
+
+# Swaynag
+{{ user.home }}/{{ pillar.sway.swaynag_config_file }}-{{ user.name }}:
+  file.managed:
+    - name: {{ user.home }}/{{ pillar.sway.swaynag_config_file }}
+    - source: salt://sway/swaynag-config.ini
+    - mode: 644
+    - makedirs: True
 {% endfor %}
 
 {{ pillar.sway.swayexit_file }}:
   file.managed:
     - source: salt://sway/swayexit
+    - mode: 755
+
+{{ pillar.sway.wl_snip_file }}:
+  file.managed:
+    - source: salt://sway/wl-snip
     - mode: 755

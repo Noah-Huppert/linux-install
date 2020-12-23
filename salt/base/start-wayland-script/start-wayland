@@ -24,7 +24,8 @@ OPTIONS
 BEHAVIOR
 
     Starts my choosen Wayland compositor. Redirects the output to a log file, which can be
-    viewed by invoking "start-wayland -- -l".
+    viewed by invoking "start-wayland -- -l". Sets the RUNNING_WAYLAND env var so child
+    processes can know they are in wayland.
 
 EOF
 			 exit 0
@@ -42,5 +43,6 @@ EOF
 fi
 
 echo "$(date) [start-wayland] !!!!!!!!!! NEW INVOCATION !!!!!!!!!!" >> "$log_f"
+export RUNNING_WAYLAND=true
 sway >> "$log_f" 2>&1
 echo "$(date) [start-wayland] !!!!!!!!!! END INVOCATION !!!!!!!!!!" >> "$log_f"

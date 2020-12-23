@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+die() {
+    echo "Error: $@" >&2
+    exit 1
+}
+
+check() {
+    if [[ "$?" != 0 ]]; then
+	   die "$@"
+    fi
+}
+
+while getopts "hn" opt; do
+    case "$opt" in
+	   h) cat <<EOF
+wl-snip - Grab a screenshot from Wayland.
+
+USAGE
+
+    wl-snip [-h,-n] [OUT]
+
+OPTIONS
+
+    -h    Show this help text.
+    -n    Show a swaynag message which the screenshot's path.
+
+ARGUMENTS
+
+    OUT    Output file. Defaults to a file named %Y-%m-%d-%k-%M-%S.png saved in the
+           \$HOME/pictures/screenshots/ if the directory exists otherwise saved in the 
+           current directory.
+
+EOF
+		 exit 0
+		 ;;
+	   n) opt_nag=true ;;
+	   *) die "Unknown option" ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
+OUT="$1"
+shift
+if [ -z "$OUT" ]; then
+    file_name="$(date +'%Y-%m-%d-%H-%M-%S').png"
+    def_dir="$HOME/pictures/screenshots"
+    if [ -d "$def_dir" ]; then
+	   OUT="$def_dir/$file_name"
+    else
+	   OUT="$PWD/$file_name"
+    fi
+fi
+
+grim -g "$(slurp)" "$OUT"
+check "Failed to take screenshot"
+echo "$OUT"
+if [ -n "$opt_nag" ]; then
+    swaynag -m "Screenshot saved in $OUT" -t ok -z "View" "ristretto $OUT"
+fi
