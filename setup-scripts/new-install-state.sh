@@ -180,6 +180,9 @@ done
 echo "# Installs $pretty_pkgs from $SRC." >> "$state_file"
 check "Failed to add header to state file \"$state_file\""
 
+echo "# src=SRC" >> "$state_file"
+check "Failed to add header to state file \"$state_file\""
+
 src_pillar_key="${SRC}_${UNDERSCORED_NAME}_pkgs"
 
 case "$SRC" in
@@ -242,3 +245,7 @@ for pkg in ${PKGS[@]}; do
 done
 
 bold "${verb_pillar_file^} pillar file \"$pretty_pillar_file\""
+
+if ! grep "$NAME" "$prog_dir/../salt/*/top.sls" &> /dev/null; then
+    echo "Warning: State $NAME not in any top files"
+fi
