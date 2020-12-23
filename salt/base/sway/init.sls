@@ -8,14 +8,14 @@
 {{ user.home }}/{{ pillar.sway.sway_config_file }}-{{ user.name }}:
   file.managed:
     - name: {{ user.home }}/{{ pillar.sway.sway_config_file }}
-    - source: salt://sway/config
+    - source: salt://sway/sway-config.conf
     - mode: 644
     - makedirs: True
 
 {{ user.home }}/{{ pillar.sway.waybar_config_file }}-{{ user.name }}:
   file.managed:
     - name: {{ user.home }}/{{ pillar.sway.waybar_config_file }}
-    - source: salt://sway/waybar
+    - source: salt://sway/waybar-config.json
     - mode: 644
     - makedirs: True
 
