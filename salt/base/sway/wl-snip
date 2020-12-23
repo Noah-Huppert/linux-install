@@ -56,5 +56,9 @@ grim -g "$(slurp)" "$OUT"
 check "Failed to take screenshot"
 echo "$OUT"
 if [ -n "$opt_nag" ]; then
-    swaynag -m "Screenshot saved in $OUT" -t ok -z "View" "ristretto $OUT"
+    swaynag \
+	   -m "Screenshot saved in $OUT" \
+	   -t ok \
+	   -z "Copy path" "echo -n $OUT | wl-copy"  \
+	   -z "View" "ristretto $OUT"
 fi
