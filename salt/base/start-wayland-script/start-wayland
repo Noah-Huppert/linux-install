@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+log_f=/tmp/sway.log
+
+if [[ "$1" == "--" ]]; then
+    shift
+    
+    while getopts "hl" opt; do
+	   case "$opt" in
+		  h)
+			 cat <<EOF
+start-wayland - Start my choosen Wayland compositor
+
+USAGE
+
+    start-wayland [-- -h,-l]
+
+OPTIONS
+
+    Options can only be provided to this helper script if you place them after 2 dashes.
+
+    -l    Open the log file with \$PAGER.
+    -h    Show this help text.
+
+BEHAVIOR
+
+    Starts my choosen Wayland compositor. Redirects the output to a log file, which can be
+    viewed by invoking "start-wayland -- -l".
+
+EOF
+			 exit 0
+			 ;;
+		  l)
+			 $PAGER "$log_f"
+			 exit 0
+			 ;;
+		  *)
+			 echo "Error: Unknown options for start-wayland helper script" >&2
+			 exit 1
+			 ;;
+	   esac
+    done
+fi
+
+echo "$(date) [start-wayland] !!!!!!!!!! NEW INVOCATION !!!!!!!!!!" >> "$log_f"
+sway >> "$log_f" 2>&1
+echo "$(date) [start-wayland] !!!!!!!!!! END INVOCATION !!!!!!!!!!" >> "$log_f"

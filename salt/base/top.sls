@@ -101,6 +101,7 @@ base:
     # User interface configuration
     - xorg
     - wayland
+    - start-wayland-script
     - sway
     - i3
     - alacritty
