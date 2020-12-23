@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# Confirms that the user wants to exit Sway. If they run the script again it exists
+# without configuration.
+
+prog_dir=$(dirname $(realpath "$0"))
+prog_file=$(realpath "$0")
+
+function die() {
+    echo "Error: $@" >&2
+    exit 1
+}
+
+function check() {
+    if [[ "$?" != 0 ]]; then
+	   die "$@"
+    fi
+}
+
+function doexit() {
+    swaymsg exit
+    check "Failed to exit Sway"
+}
+
+signal_f=/tmp/swayexit.lock
+function clean_signal() {
+    if [ -f "$signal_f" ]; then
+	   rm "$signal_f"
+	   check "Failed to cleanup exit signal file \"$signal_f\""
+    fi
+}
+trap clean_signal EXIT
+
+if [ -f "$signal_f" ]; then
+    # Exit if user runs this script a second time while the first one is already running
+    doexit
+else
+    touch "$signal_f"
+    swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' "$prog_file"
+fi
