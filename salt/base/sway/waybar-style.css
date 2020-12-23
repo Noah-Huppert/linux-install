@@ -140,11 +140,13 @@ label:focus {
 }
 
 #cpu {
+    margin-right: 0;
     background-color: #2ecc71;
     color: #000000;
 }
 
 #memory {
+    margin-left: 0;
     background-color: #9b59b6;
 }
 
@@ -185,6 +187,8 @@ label:focus {
 }
 
 #temperature {
+    margin-right: 0;
+    margin-left: 0;
     background-color: #f0932b;
 }
 
