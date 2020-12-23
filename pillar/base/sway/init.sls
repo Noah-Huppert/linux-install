@@ -21,3 +21,4 @@ sway:
 
     # Menu bar
     - Waybar
+    #- font-awesome
