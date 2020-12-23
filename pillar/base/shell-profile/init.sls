@@ -41,4 +41,5 @@ shell_profile:
     - android_sdk.sh
     - autostart.sh
     - linux_install_edit.sh
-    - startx.sh
+    #- startx.sh
+    - start_wayland.sh
