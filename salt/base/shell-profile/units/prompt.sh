@@ -11,13 +11,13 @@
 # COLOR_FG_MAGENTA=""
 # COLOR_FG_RED=""
 
-COLOR_RESET=$(tput sgr0)
+COLOR_RESET="\001$(tput sgr0)\002"
 
-COLOR_BG_RED=$(tput setab 1)
+COLOR_BG_RED="\001$(tput setab 1)\002"
 
-COLOR_FG_GREEN=$(tput setaf 2)
-COLOR_FG_MAGENTA=$(tput setaf 5)
-COLOR_FG_RED=$(tput setaf 1)
+COLOR_FG_GREEN="\001$(tput setaf 2)\002"
+COLOR_FG_MAGENTA="\001$(tput setaf 5)\002"
+COLOR_FG_RED="\001$(tput setaf 1)\002"
 
 # Prints a check or an x depending on the exit status of the last command.
 # Takes an exist status as an argument and outputs a prompt for that status. It is
