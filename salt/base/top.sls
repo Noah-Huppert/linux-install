@@ -103,6 +103,7 @@ base:
     - wayland
     - start-wayland-script
     - sway
+    - sway-launcher-desktop
     - i3
     - alacritty
     - compton
