@@ -3,7 +3,7 @@
 # Shortcut
 alias sw=start-wayland
 
-if [ -z "$RUNNING_WAYLAND" ]; then
+if [ -z "$SWAYSOCK" ]; then
     if ! start-wayland; then
     	   return $(unit-die "Failed to start a wayland")
     fi
