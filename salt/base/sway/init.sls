@@ -10,6 +10,7 @@
   file.managed:
     - name: {{ user.home }}/{{ pillar.sway.sway_config_file }}
     - source: salt://sway/sway-config.conf
+    - template: jinja
     - mode: 644
     - makedirs: True
 
