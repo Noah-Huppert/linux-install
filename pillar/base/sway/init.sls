@@ -20,7 +20,7 @@ sway:
     - sway
 
     # Launch menu
-    - bemenu
+    # - bemenu # Now using sway-launcher-desktop
 
     # Locker
     - swaylock
