@@ -30,12 +30,12 @@
 {% for bin in pillar['utilities']['go_pkgs'] %}
 go get {{ pillar['utilities']['go_pkgs'][bin] }}:
   cmd.run:
-    - runas: noah
+    - runas: {{ user.name }}
     - unless: test -f "{{ pillar.go.go_substitute_path }}/bin/{{ bin }}"
       
 go install {{ pillar['utilities']['go_pkgs'][bin] }}:
   cmd.run:
-    - runas: noah
+    - runas: {{ user.name }}
     - unless: test -f "{{ pillar.go.go_substitute_path }}/bin/{{ bin }}"      
 {% endfor %}
 
