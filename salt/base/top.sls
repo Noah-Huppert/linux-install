@@ -97,6 +97,7 @@ base:
     - software-defined-radio
     - sl
     - libguestfs
+    - gohls
 
     # User interface configuration
     - xorg
