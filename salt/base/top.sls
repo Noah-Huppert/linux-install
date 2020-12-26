@@ -75,6 +75,7 @@ base:
     - eclipse
     - deno
     - heroku
+    - velociraptor
 
     # General tools configuration
     - utilities
