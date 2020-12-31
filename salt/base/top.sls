@@ -76,6 +76,8 @@ base:
     - deno
     - heroku
     - velociraptor
+    - denopack
+    - denon
 
     # General tools configuration
     - utilities

@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+deno run --allow-net --allow-run --allow-read --allow-write --unstable {{ pillar.denon.url }} "$@"
