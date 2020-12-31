@@ -13,6 +13,8 @@
     - template: jinja
     - mode: 644
     - makedirs: True
+    - user: {{ user.name }}
+    - group: {{ user.name }}
 
 # Waybar
 {{ user.home }}/{{ pillar.sway.waybar_config_file }}-{{ user.name }}:
@@ -21,6 +23,8 @@
     - source: salt://sway/waybar-config.json
     - mode: 644
     - makedirs: True
+    - user: {{ user.name }}
+    - group: {{ user.name }}
 
 {{ user.home }}/{{ pillar.sway.waybar_style_file }}-{{ user.name }}:
   file.managed:
@@ -28,6 +32,8 @@
     - source: salt://sway/waybar-style.css
     - mode: 644
     - makedirs: True
+    - user: {{ user.name }}
+    - group: {{ user.name }}
 
 # Swaynag
 {{ user.home }}/{{ pillar.sway.swaynag_config_file }}-{{ user.name }}:
@@ -36,6 +42,8 @@
     - source: salt://sway/swaynag-config.ini
     - mode: 644
     - makedirs: True
+    - user: {{ user.name }}
+    - group: {{ user.name }}
 {% endfor %}
 
 {{ pillar.sway.swayexit_file }}:
