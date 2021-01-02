@@ -1,4 +1,7 @@
 firefox:
+  # Desktop file entry for Wayland
+  wayland_desktop_file: /usr/local/share/applications/firefox-wayland.desktop
+  
   # Packages
   pkgs:
     - firefox
