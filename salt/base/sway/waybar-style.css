@@ -1,3 +1,4 @@
+/* Global styles */
 * {
     border: none;
     border-radius: 0;
@@ -37,6 +38,22 @@ window#waybar.chromium {
     border: none;
 }
 
+/* Unused defaults */
+#custom-media {
+    background-color: #66cc99;
+    color: #2a5c45;
+    min-width: 100px;
+}
+
+#custom-media.custom-spotify {
+    background-color: #66cc99;
+}
+
+#custom-media.custom-vlc {
+    background-color: #ffa000;
+}
+
+/* Used widgets in order from left to right */
 #workspaces button {
     padding: 0 5px;
     background-color: transparent;
@@ -99,59 +116,37 @@ window#waybar.chromium {
     margin-right: 0;
 }
 
-#clock {
-    background-color: #64727D;
-}
-
-#disk {
-    background-color: #64727D;
-}
-
-
-#battery {
-    background-color: #ffffff;
-    color: #000000;
-}
-
-#battery.charging {
-    color: #ffffff;
-    background-color: #26A65B;
-}
-
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
-}
-
-#battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
 label:focus {
     background-color: #000000;
 }
 
 #cpu {
     margin-right: 0;
-    background-color: #2ecc71;
-    color: #000000;
+    padding-right: 0;
+    /* background-color: #2ecc71; */
+    /* color: #000000; */
+}
+
+#temperature {
+    margin-right: 0;
+    margin-left: 0;
+    padding-left: 0;
+    padding-right: 5px;
+    /* background-color: #f0932b; */
 }
 
 #memory {
     margin-left: 0;
-    background-color: #9b59b6;
+    margin-right: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    /* background-color: #9b59b6; */
 }
 
-#backlight {
-    background-color: #90b1b1;
+#disk {
+    margin-left: 0;
+    padding-left: 5px;
+    /* background-color: #64727D; */
 }
 
 #network {
@@ -163,7 +158,8 @@ label:focus {
 }
 
 #pulseaudio {
-    background-color: #f1c40f;
+    /* background-color: #f1c40f; */
+    background-color: #58d68d;
     color: #000000;
 }
 
@@ -172,24 +168,8 @@ label:focus {
     color: #2a5c45;
 }
 
-#custom-media {
-    background-color: #66cc99;
-    color: #2a5c45;
-    min-width: 100px;
-}
-
-#custom-media.custom-spotify {
-    background-color: #66cc99;
-}
-
-#custom-media.custom-vlc {
-    background-color: #ffa000;
-}
-
-#temperature {
-    margin-right: 0;
-    margin-left: 0;
-    background-color: #f0932b;
+#backlight {
+    background-color: #90b1b1;
 }
 
 #temperature.critical {
@@ -232,4 +212,37 @@ label:focus {
     padding: 0 5px;
     margin: 0 5px;
     min-width: 16px;
+}
+
+#battery {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+#battery.charging {
+    color: #ffffff;
+    background-color: #26A65B;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#clock {
+    /* background-color: #64727D; */
+    background-color: #fb7dfa;
+    color: #000000;
 }
