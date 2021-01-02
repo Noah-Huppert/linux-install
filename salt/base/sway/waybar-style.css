@@ -122,7 +122,7 @@ label:focus {
 
 #cpu {
     margin-right: 0;
-    padding-right: 0;
+    padding-right: 5px;
     /* background-color: #2ecc71; */
     /* color: #000000; */
 }
@@ -130,7 +130,7 @@ label:focus {
 #temperature {
     margin-right: 0;
     margin-left: 0;
-    padding-left: 0;
+    padding-left: 5px;
     padding-right: 5px;
     /* background-color: #f0932b; */
 }
@@ -159,7 +159,7 @@ label:focus {
 
 #pulseaudio {
     /* background-color: #f1c40f; */
-    background-color: #58d68d;
+    background-color: #64cccc;
     color: #000000;
 }
 
@@ -243,6 +243,6 @@ label:focus {
 
 #clock {
     /* background-color: #64727D; */
-    background-color: #fb7dfa;
+    background-color: #58d68d;
     color: #000000;
 }
