@@ -1,9 +1,6 @@
 utilities:
   # XBPS utility packages
   xbps_pkgs:
-    # XBPS tools
-    - xtools
-    
     # XDG tools
     - xdg-utils
     

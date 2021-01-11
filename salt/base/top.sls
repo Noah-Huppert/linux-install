@@ -81,6 +81,7 @@ base:
 
     # General tools configuration
     - utilities
+    - xtools
     - flatpak
     - gpg
     - git
