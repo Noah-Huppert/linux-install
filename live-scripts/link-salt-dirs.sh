@@ -25,6 +25,7 @@ salt_state_links=(
     "$repo_dir/salt/base:$salt_content_dir/salt/base"
     "$repo_dir/salt/work:$salt_content_dir/salt/work"
     "$repo_dir/salt/wsl:$salt_content_dir/salt/wsl"
+    "$repo_dir/salt/wsl:$salt_content_dir/salt/funkyboy"
     "$repo_dir/secrets/salt/base:$salt_content_dir/salt/base-secret"
 )
 
@@ -32,6 +33,7 @@ salt_pillar_links=(
     "$repo_dir/pillar/base:$salt_content_dir/pillar/base"
     "$repo_dir/pillar/work:$salt_content_dir/pillar/work"
     "$repo_dir/pillar/wsl:$salt_content_dir/pillar/wsl"
+    "$repo_dir/pillar/wsl:$salt_content_dir/pillar/funkyboy"
     "$repo_dir/secrets/pillar/base:$salt_content_dir/pillar/base-secret"
 )
 

@@ -13,6 +13,8 @@ salt_configuration:
       public: {{ content_root }}/salt/work
     wsl:
       public: {{ content_root }}/salt/wsl
+    funkyboy:
+      public: {{ content_root }}/salt/funkyboy
 
   # Pillar directories
   pillar_dirs:
@@ -23,6 +25,8 @@ salt_configuration:
       public: {{ content_root }}/pillar/work
     wsl:
       public: {{ content_root }}/pillar/wsl
+    funkyboy:
+      public: {{ content_root }}/pillar/funkyboy
 
   # Pillar stack configuration files
   pillar_stack:
@@ -33,3 +37,5 @@ salt_configuration:
       public: {{ content_root }}/pillar/work/pillar-stack.cfg
     wsl:
       public: {{ content_root }}/pillar/wsl/pillar-stack.cfg
+    funkyboy:
+      public: {{ content_root }}/pillar/funkyboy/pillar-stack.cfg

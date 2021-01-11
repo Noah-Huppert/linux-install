@@ -694,6 +694,10 @@ file_roots:
     - {{ pillar.salt_configuration.state_dirs.wsl.public }}
     - {{ pillar.salt_configuration.state_dirs.base.public }}
     - {{ pillar.salt_configuration.state_dirs.base.secret }}
+  funkyboy:
+    - {{ pillar.salt_configuration.state_dirs.funkyboy.public }}
+    - {{ pillar.salt_configuration.state_dirs.base.public }}
+    - {{ pillar.salt_configuration.state_dirs.base.secret }}
 
 # The master_roots setting configures a master-only copy of the file_roots dictionary,
 # used by the state compiler.
@@ -878,6 +882,8 @@ pillar_roots:
     - {{ pillar.salt_configuration.pillar_dirs.work.public }}
   wsl:
     - {{ pillar.salt_configuration.pillar_dirs.wsl.public }}
+  funkyboy:
+    - {{ pillar.salt_configuration.pillar_dirs.funkyboy.public }}
 
 # The ext_pillar.stack extension merges multiple pillars together in a patch like fashion. Depending on the value of
 # pillars.environemnt different pillar files are loaded.
@@ -895,6 +901,10 @@ ext_pillar:
           - {{ pillar.salt_configuration.pillar_stack.base.public }}
           - {{ pillar.salt_configuration.pillar_stack.base.secret }}
           - {{ pillar.salt_configuration.pillar_stack.wsl.public }}
+        funkyboy:
+          - {{ pillar.salt_configuration.pillar_stack.base.public }}
+          - {{ pillar.salt_configuration.pillar_stack.base.secret }}
+          - {{ pillar.salt_configuration.pillar_stack.funkyboy.public }}
 
 # A list of paths to be recursively decrypted during pillar compilation.
 # Entries in this list can be formatted either as a simple string, or as a
