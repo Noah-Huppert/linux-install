@@ -39,8 +39,10 @@ OPTIONS
 ARGUMENTS
 
     NAME    Name of the Salt state to create. Must be alphanumeric or dashes.
-    SRC     Source of package. Can be "python3", "xbps", "npm", or "cargo".
-    PKG     Name of package to install. Can be provided multiple times.
+    SRC     Source of package. Can be "python3", "xbps", "npm", "cargo", "deno".
+    PKG     Name of package to install. Can be provided multiple times. Package names which
+            which are different from the binary they install must indicate the binary's 
+		  name by starting the PKG argument with "binary=<name of binary>:".
 
 BEHAVIOR
 
@@ -108,9 +110,9 @@ if [ -z "$PKGS" ]; then
     die "PKG arguments required"
 fi
 
-if [[ !("$SRC" =~ ^python3|xbps|npm|cargo$) ]]; then
+if [[ !("$SRC" =~ ^python3|xbps|npm|cargo|deno$) ]]; then
     show_help
-    die "SRC cannot be \"$SRC\". Must be \"python3\", \"xbps\", \"npm\", or \"cargo\"."
+    die "SRC cannot be \"$SRC\". Must be \"python3\", \"xbps\", \"npm\", \"cargo\", \"deno\"."
 fi
 
 if [ -n "$opt_test" ]; then
@@ -224,6 +226,18 @@ EOF
 	   - runas: {{ user.name }}
 	   - unless: test -f {{ pillar.rust.cargo_bin_substitute_path }}/{{ pkg }}
   {% endfor %}
+{% endfor %}
+EOF
+	   ;;
+    deno)
+	   cat <<EOF >> "$state_file"
+{% for _, user in pillar['users']['users'].items() %}
+  {% for pkg in pillar['$USERSCORED_NAME']['$src_pillar_key'] %}
+    install_deno_{{ pkg }}_{{ user.name }}:
+      cmd.run:
+        - name: deno install {{ pkg }}
+        - runas: {{ user.name }}
+        - unless: test -f {{ user.home }}/{{ pillar.deno.user_bin_dir }}/{{ pkg }}
 {% endfor %}
 EOF
 	   ;;
