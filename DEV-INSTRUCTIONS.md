@@ -179,3 +179,8 @@ Follow the instructions below:
      
 	   - Now put a list of every salt state you want here
    ```
+9. Add the following file changes to Git:
+   - `{salt,pillar}/REPLACE_ME_ENV`
+   - `pillar/base/salt-configuration/init.sls`
+   - `salt/base/salt-configuration/minion`
+   - `live-scripts/link-salt-dirs.sh`
