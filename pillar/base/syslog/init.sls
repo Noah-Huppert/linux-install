@@ -8,4 +8,4 @@ syslog:
     - socklog-unix
 
     # Kernel log service
-    -  nanoklogd
+    - nanoklogd
