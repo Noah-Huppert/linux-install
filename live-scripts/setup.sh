@@ -39,7 +39,7 @@ BEHAVIOR
 
 	Runs Salt to setup an already installed Linux environment.
 
-	Pre-conditions: Connected to wifi, Salt installed.
+	Pre-conditions: Connected to the internet, Salt installed.
 
 	Can be run on multiple times on an existing Linux installation.
 
