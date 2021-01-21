@@ -1,15 +1,19 @@
 # Install bluetooth service
 
 # Install
-{{ pillar.bluetooth.pkg }}:
+{% for pkg in pillar['bluetooth']['pkgs'] %}
+{{ pkg }}:
   pkg.latest
+{% endfor %}
 
 # Service
 {{ pillar.bluetooth.service }}-enabled:
   service.enabled:
     - name: {{ pillar.bluetooth.service }}
     - require:
-      - pkg: {{ pillar.bluetooth.pkg }}
+      {% for pkg in pillar['bluetooth']['pkgs'] %}
+      - pkg: {{ pkg }}
+      {% endfor %}
 
 {{ pillar.bluetooth.service }}-running:
   service.running:
