@@ -23,5 +23,8 @@ manual_void_pkgs:
       latest_version: 5.3.469451.0927_1
       repository: nonfree
     discord:
-      latest_version: 0.0.12_2
+      latest_version: 0.0.13_1
+      repository: nonfree
+    spotify:
+      latest_version: 1.1.42_2
       repository: nonfree
