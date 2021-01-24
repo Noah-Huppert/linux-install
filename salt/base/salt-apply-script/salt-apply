@@ -20,42 +20,69 @@ check() {
 # Options
 env_flag_file="{{ pillar.linux_install_repo.directory }}/environment-flag"
 setup_environment=base
-if [ -f "$env_flag_file" ]; then
-    setup_environment=$(cat "$env_flag_file")
-    check "Failed to read default environment option flag file"
-fi
 
-while getopts "tls:p:e:h" opt; do
+while getopts "tls:p:e:r:h" opt; do
     case "$opt" in
 	t) post_args+=("test=True") ;;
 	l) post_args+=("-l trace") ;;
 	s) states+=("$OPTARG") ;;
 	p) pillars+=("$OPTARG") ;;
-	e) setup_environment="$OPTARG" ;;
+	e)
+	    setup_environment="$OPTARG"
+	    opt_setup_environment_manual=true
+	    ;;
+	r)
+	    remote="$OPTARG"
+
+	    remote_id=$(echo "$remote" | sed 's/^\(.*\):\(.*\)$/\1/g')
+	    remote_dir=$(echo "$remote" | sed 's/^\(.*\):\(.*\)$/\2/g')
+	    check "Failed to determine remote upload directory"
+
+	    if [[ "$remote" == "$remote_dir" ]]; then
+		   # If we matched the entire remote option then
+		   # this means the regex failed and the user
+		   # didn't explicitly specify a upload directory.
+		   # So we will set it to the default.
+		   remote="$remote:{{ pillar.linux_install_repo.directory }}"
+	    fi
+	    ;;	
 	h) cat <<EOF
 salt-apply - Run salt-call with customized options.
 
 USAGE
 
-    salt-apply OPTIONS
+    salt-apply [-t,-l,-s STATE,-p PILLAR,-e ENV,-r REMOTE,-h]
 
 OPTIONS
 
-   -t           Run states in test mode.
-   -l           Run state.apply with -l trace option.
-   -s STATE     State to run, can be provided multiple times.
-   -p PILLAR    Set pillar values, can be provided multiple times.
-   -e ENV       Salt environment to use. See below for details on the
-                default value.
-   -h           Show this help text.
+    -t           Run states in test mode.
+    -l           Run state.apply with -l trace option.
+    -s STATE     State to run, can be provided 
+                 multiple times.
+    -p PILLAR    Set pillar values, can be provided
+                 multiple times.
+    -e ENV       Salt environment to use. See below for
+                 details on the default value.
+    -r REMOTE    Upload Salt states and run salt-apply
+                 on the specified remote server. REMOTE
+                 should be an rsync style server address
+                 optionally with the directory to
+                 upload Salt states on the server.
+                 If no directory is specified defaults
+                 to "{{ pillar.linux_install_repo.directory }}"
+                 on the remote server.
+    -h           Show this help text.
 
 BEHAVIOR
 
-   Runs salt-call in local mode with brief output enabled.
+    Runs salt-call in local mode with brief
+    output enabled. Optionally on a remote server.
 
-   Looks at the "$env_flag_file" file to determine the salt and pillar 
-   environment if the -e option is not provided. If this flag file is 
-   not present defaults to "base".
+    Looks at the "$env_flag_file"
+    file to determine the salt and pillar environment
+    if the -e option is not provided. If this flag file
+    is not present defaults to "base". If the -r option
+    is used this file on the server is read.
 
 EOF
 	   exit 0
@@ -64,8 +91,27 @@ EOF
     esac
 done
 
+# Default environment
+if [ -z "$opt_setup_environment_manual" ]; then
+    # If remote look at server's file
+    if [ -n "$remote" ]; then
+	   # Read env file on server if exists, if it
+	   # doesn't exist then just echo whatever the
+	   # env is set to right now.
+	   # TODO: This is hanging, not asking for pw
+	   read_remote_env_file_cmd="ssh \"$remote_id\" \"(test -f $env_flag_file && cat $env_flag_file) || echo $setup_environment\""
+	   echo "$read_remote_env_file_cmd"
+	   setup_environment=$(eval "$read_remote_env_file_cmd")
+	   check "Failed to read default environment option flag file on remote server"
+    elif [ -f "$env_flag_file" ]; then
+	   setup_environment=$(cat "$env_flag_file")
+	   check "Failed to read default environment option flag file"
+    fi
+fi
+
+
 # Setup run arguments
-run_args=()
+ run_args=()
 
 # Add states to run args
 states_arg=""
@@ -104,6 +150,31 @@ for arg in "${post_args[@]}"; do
     run_args+=("$arg")
 done
 
-# Run
-set -x
-exec salt-call --local --state-output=changes state.apply "${run_args[@]}"
+# Build salt call command
+salt_call_cmd="salt-call --local --state-output=changes state.apply ${run_args[@]}"
+
+# Upload remotely if requested
+if [ -n "$remote" ]; then
+    # Ensure rsync is installed on the remote
+    ensure_rsync_cmd="ssh \"$remote_id\" \"which rsync || xbps-install -Sy rsync\""
+    echo "$ensure_rsync_cmd"
+
+    eval "$ensure_rsync_cmd"
+    check "Failed to ensure rsync is installed on \"$remote_id\""
+
+    # Upload
+    upload_cmd="rsync -r {{ pillar.linux_install_repo.directory }} \"$remote\""
+    echo "$upload_cmd"
+
+    eval "$upload_cmd"
+    check "Failed to upload repository to \"$remote\""
+
+    # Modify salt call command to run remotely
+    salt_call_cmd="ssh $remote_id \"$salt_call_cmd\""
+fi
+
+# Run salt call
+echo "$salt_call_cmd"
+
+eval "$salt_call_cmd"
+check "Failed to apply states"
