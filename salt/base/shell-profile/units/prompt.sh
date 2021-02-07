@@ -14,7 +14,9 @@
 COLOR_RESET="\001$(tput sgr0)\002"
 
 COLOR_BG_RED="\001$(tput setab 1)\002"
+COLOR_BG_DEFAULT="\001$(tput setab 245)\002"
 
+COLOR_FG_WHITE="\001$(tput setaf 255)\002"
 COLOR_FG_GREEN="\001$(tput setaf 2)\002"
 COLOR_FG_MAGENTA="\001$(tput setaf 5)\002"
 COLOR_FG_RED="\001$(tput setaf 1)\002"
@@ -26,7 +28,7 @@ COLOR_FG_RED="\001$(tput setaf 1)\002"
 # like this one.
 function exit_status_prompt() { # ( Exit status )
     if [[ "$1" != "0" ]]; then
-	   echo "${COLOR_BG_RED}$1${COLOR_RESET} "
+	   echo "${COLOR_BG_RED}$1${COLOR_BG_DEFAULT} "
     fi
 }
 
@@ -39,7 +41,7 @@ function git_prompt() {
 		return 0
 	fi
 
-	echo " ${COLOR_FG_GREEN}git${COLOR_RESET}:${COLOR_FG_MAGENTA}$branch${COLOR_RESET}"
+	echo " ${COLOR_FG_GREEN}git:${COLOR_FG_MAGENTA}$branch"
 }
 
 ## Escapes paths for use in sed
@@ -68,7 +70,7 @@ function pwd_prompt() {
     d=$(echo "$d" | shortcut_path "$GOPATH" "~/[go]")
     d=$(echo "$d" | shortcut_path "$HOME" "~")
 
-    echo "${COLOR_FG_RED}$d${COLOR_RESET}"
+    echo "${COLOR_FG_RED}$d"
 }
 
 function user_symbol() {
@@ -86,7 +88,7 @@ function build_prompt() {
     last_cmd_exit_status="$?"
     
     # EXIT_STATUS HOSTNAME PATH git:BRANCH %#
-    export PS1="$(exit_status_prompt $last_cmd_exit_status)$(pwd_prompt)$(git_prompt) $(user_symbol) "
+    export PS1="$(exit_status_prompt $last_cmd_exit_status)$(pwd_prompt)$(git_prompt) ${COLOR_FG_WHITE}$(user_symbol) "
 }
 
 source {{ pillar.bash.preexec.file }}
