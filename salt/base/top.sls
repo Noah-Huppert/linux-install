@@ -133,6 +133,7 @@ base:
     - libre-office
     - minecraft
     - pirate-get
+    - kodi
 
     # Applications which must be manually built and installed
     - manual-void-pkgs
