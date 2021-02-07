@@ -98,8 +98,7 @@ if [ -z "$opt_setup_environment_manual" ]; then
 	   # Read env file on server if exists, if it
 	   # doesn't exist then just echo whatever the
 	   # env is set to right now.
-	   # TODO: This is hanging, not asking for pw
-	   read_remote_env_file_cmd="ssh \"$remote_id\" \"(test -f $env_flag_file && cat $env_flag_file) || echo $setup_environment\""
+	   read_remote_env_file_cmd="ssh $remote_id \"(test -f $env_flag_file && cat $env_flag_file || echo $setup_environment)\""
 	   echo "$read_remote_env_file_cmd"
 	   setup_environment=$(eval "$read_remote_env_file_cmd")
 	   check "Failed to read default environment option flag file on remote server"
@@ -156,7 +155,7 @@ salt_call_cmd="salt-call --local --state-output=changes state.apply ${run_args[@
 # Upload remotely if requested
 if [ -n "$remote" ]; then
     # Ensure rsync is installed on the remote
-    ensure_rsync_cmd="ssh \"$remote_id\" \"which rsync || xbps-install -Sy rsync\""
+    ensure_rsync_cmd="ssh $remote_id \"which rsync || xbps-install -Sy rsync\""
     echo "$ensure_rsync_cmd"
 
     eval "$ensure_rsync_cmd"
