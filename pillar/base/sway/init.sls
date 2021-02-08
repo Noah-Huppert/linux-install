@@ -6,6 +6,9 @@ sway:
   waybar_config_file: .config/waybar/config
   waybar_style_file: .config/waybar/style.css
 
+  waybar_org_clock_script: .config/waybar/custom-org-clock.sh
+    
+
   # Swaynag configuration file
   swaynag_config_file: .config/swaynag/config
 

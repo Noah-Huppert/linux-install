@@ -4,7 +4,7 @@
     "height": 23, // Waybar height (originally 30, to be removed for auto height);
     // "width": 1280, // Waybar width
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/org-clock"],
     "modules-center": ["pulseaudio", "backlight", "network"],
     "modules-right": ["cpu", "temperature", "memory", "disk", "battery", "clock"],
     // Modules configuration
@@ -25,6 +25,29 @@
     // },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
+    },
+    "custom/media": {
+        "format": "{icon} {}",
+        "return-type": "json",
+        "max-length": 40,
+        "format-icons": {
+            "spotify": "",
+            "default": "🎜"
+        },
+        "escape": true,
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    },
+    "custom/org-clock": {
+	   "format": "{icon}{}",
+	   "exec": "$HOME/{{ pillar.sway.waybar_org_clock_script }}",
+	   "return-type": "json",
+	   "interval": 20,
+	   "tooltip": true,
+	   "format-icons": {
+		  "clock": "⏰",
+		  "nil": ""
+	   }
     },
     // "mpd": {
     //     "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ",
@@ -141,17 +164,5 @@
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
-    },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     }
 }

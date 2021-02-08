@@ -120,6 +120,11 @@ label:focus {
     background-color: #000000;
 }
 
+
+#custom-org-clock {
+    margin-left: 200px;
+}
+
 #cpu {
     margin-right: 0;
     padding-right: 5px;

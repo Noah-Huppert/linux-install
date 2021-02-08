@@ -21,6 +21,7 @@
   file.managed:
     - name: {{ user.home }}/{{ pillar.sway.waybar_config_file }}
     - source: salt://sway/waybar-config.json
+    - template: jinja
     - mode: 644
     - makedirs: True
     - user: {{ user.name }}
@@ -31,6 +32,15 @@
     - name: {{ user.home }}/{{ pillar.sway.waybar_style_file }}
     - source: salt://sway/waybar-style.css
     - mode: 644
+    - makedirs: True
+    - user: {{ user.name }}
+    - group: {{ user.name }}
+
+{{ user.home }}/{{ pillar.sway.waybar_org_clock_script }}-{{ user.name }}:
+  file.managed:
+    - name: {{ user.home }}/{{ pillar.sway.waybar_org_clock_script }}
+    - source: salt://sway/custom-org-clock.sh
+    - mode: 755
     - makedirs: True
     - user: {{ user.name }}
     - group: {{ user.name }}
