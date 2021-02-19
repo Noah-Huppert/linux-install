@@ -13,7 +13,7 @@ shell_profile:
     - meta_fns.sh
     - usr_local_bin.sh
     - editor.sh
-    - terminal.sh
+    #- terminal.sh
     - pager.sh
     - browser.sh
     - screenshot_dir.sh
