@@ -54,6 +54,7 @@ base:
     - elixir
     - nodejs
     - rust
+    - wasmtime
     - aws-cli
     - digitalocean-cli
     - google-cloud-sdk
