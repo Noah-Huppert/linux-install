@@ -110,7 +110,7 @@ if ! xbps-install -Sy \
 	gcc \
 	salt; then
     die "Failed to install required software into ISO"
-done
+fi
 
 if ! pip2 install 'msgpack==0.6.2' pycrypto 'futures>=2.0'; then
     die "Failed to install dependencies of the software Salt into the ISO"
@@ -119,13 +119,13 @@ fi
 # Libraries
 for lib in liblz4 libreadline; do
     if ! ls /usr/lib | grep "$lib" &> /dev/null; then
-	case "$lib" in
-	    liblz4) pkg_name="liblz4"  ;;
-	    libreadline) pkg_name="readline-devel"  ;;
-	esac
+	   case "$lib" in
+		  liblz4) pkg_name="liblz4"  ;;
+		  libreadline) pkg_name="readline-devel"  ;;
+	   esac
 
-	echo "$lib library not found, will install $pkg_name"
-	pkgs_to_install+=("$pkg_name")
+	   echo "$lib library not found, will install $pkg_name"
+	   pkgs_to_install+=("$pkg_name")
     fi
 done
 
