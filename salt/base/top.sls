@@ -48,6 +48,7 @@ base:
     - scripts-repo
     - salt-apply-script
     - c
+    - lldb
     - cmake
     - pkg-config
     - go
