@@ -174,8 +174,8 @@ utilities:
   # Keys are expected bin names, values are go packages
   go_pkgs:
     dlv: github.com/go-delve/delve/cmd/dlv
-    gorename: golang.org/x/tools/cmd/gorename
-    gopls: golang.org/x/tools/cmd/gopls
+    gorename: golang.org/x/tools/refactor/rename
+    gopls: golang.org/x/tools/gopls
 
   # Rust packages
   # Keys are expected bin names, values are Rust Cargo packages
