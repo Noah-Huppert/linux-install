@@ -40,12 +40,27 @@ The rest of the guide will assume you are running commands on the live USB.
 Use `lsblk` to list devices.  
 
 Use `cfdisk DEVICE` to partition your disk.
+Using a GPT partition scheme partition your boot and root partitions
+accordingly. 
 
 The rest of this guide will refer to partitions specific to your device by the 
 following names:
 
 - `ROOT_PARTITION`: Linux root file system partition
 - `BOOT_PARTITION`: Partition with boot data
+
+Then create a VFAT file system for the boot partition:
+
+```
+mkfs.vfat BOOT_PARTITION
+```
+
+As well as an EXT4 file system for the root partition:
+
+```
+mkfs.ext4 ROOT_PARTITION
+```
+
 ## Connect To The Internet
 The rest of this guide requires you be connected to the internet.  
 
