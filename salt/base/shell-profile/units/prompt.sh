@@ -45,7 +45,7 @@ git_prompt() {
 		   return 0
 	    fi
 
-	    	echo "${COLOR_FG_GREEN}git:${COLOR_FG_MAGENTA}$branch"
+	    echo "${COLOR_FG_GREEN}git:${COLOR_FG_MAGENTA}$branch"
 	fi
 }
 
@@ -100,9 +100,14 @@ build_prompt() {
     # Capture the last cmd's exit status before we run internal prompt building
     # functions. This will be passed to exit_status_prompt()
     last_cmd_exit_status="$?"
+
+    newline_end=""
+    if [ -n "$SHELL_PROFILE_PROMPT_SUPERSHORT" ]; then
+	   newline_end="\n"
+    fi
     
     # EXIT_STATUS HOSTNAME PATH git:BRANCH %#
-    export PS1="$(exit_status_prompt $last_cmd_exit_status)$(pwd_prompt)$(git_prompt) ${COLOR_FG_WHITE}$(user_symbol) "
+    export PS1="$(exit_status_prompt $last_cmd_exit_status)$(pwd_prompt) $(git_prompt) ${COLOR_FG_WHITE}${newline_end}$(user_symbol) "
 }
 
 source {{ pillar.bash.preexec.file }}
