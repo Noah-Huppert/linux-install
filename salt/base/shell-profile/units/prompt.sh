@@ -33,22 +33,20 @@ exit_status_prompt() { # ( Exit status )
 }
 
 # Prints git:BRANCH to prompt if in git directory.
-# If SHELL_PROFILE_PROMPT_SUPERSHORT is set the git:
-# prefix will be left out.
+# If SHELL_PROFILE_PROMPT_SUPERSHORT is set nothing
+# will show.
 git_prompt() {
-	# Get current branch
-	branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
-
-	if [[ "$?" != "0" ]]; then # Probably not in Git repository
-		return 0
-	fi
-
 	label_txt="git:"
-	if [ -n "$SHELL_PROFILE_PROMPT_SUPERSHORT" ]; then
-	    label_text=""
-	fi
+	if [ -z "$SHELL_PROFILE_PROMPT_SUPERSHORT" ]; then
+	    # Get current branch
+	    branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
 
-	echo " ${COLOR_FG_GREEN}${label_txt}${COLOR_FG_MAGENTA}$branch"
+	    if [[ "$?" != "0" ]]; then # Probably not in Git repository
+		   return 0
+	    fi
+
+	    	echo "${COLOR_FG_GREEN}git:${COLOR_FG_MAGENTA}$branch"
+	fi
 }
 
 ## Escapes paths for use in sed
