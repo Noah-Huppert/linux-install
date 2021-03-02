@@ -26,14 +26,16 @@ COLOR_FG_RED="\001$(tput setaf 1)\002"
 # required as an argument bc the exit status for the last command the user runs
 # will be overriden by the exit status's of other internal prompt building functions
 # like this one.
-function exit_status_prompt() { # ( Exit status )
+exit_status_prompt() { # ( Exit status )
     if [[ "$1" != "0" ]]; then
 	   echo "${COLOR_BG_RED}$1${COLOR_BG_DEFAULT} "
     fi
 }
 
-# Prints git:BRANCH to prompt if in git directory
-function git_prompt() {
+# Prints git:BRANCH to prompt if in git directory.
+# If SHELL_PROFILE_PROMPT_SUPERSHORT is set the git:
+# prefix will be left out.
+git_prompt() {
 	# Get current branch
 	branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
 
@@ -41,16 +43,21 @@ function git_prompt() {
 		return 0
 	fi
 
-	echo " ${COLOR_FG_GREEN}git:${COLOR_FG_MAGENTA}$branch"
+	label_txt="git:"
+	if [ -n "$SHELL_PROFILE_PROMPT_SUPERSHORT" ]; then
+	    label_text=""
+	fi
+
+	echo " ${COLOR_FG_GREEN}${label_txt}${COLOR_FG_MAGENTA}$branch"
 }
 
 ## Escapes paths for use in sed
-function escape_path() { # ( PATH )
+escape_path() { # ( PATH )
     echo "$1" | sed 's/\//\\\//g'
 }
 
 ## Replaces pieces of path with shortcut name
-function shortcut_path() { # STDIN, ( FIND, REPLACE )
+shortcut_path() { # STDIN, ( FIND, REPLACE )
     sed_str="s/$(escape_path $1)/$(escape_path $2)/g"
     cat - | sed "$sed_str"
 }
@@ -58,22 +65,31 @@ function shortcut_path() { # STDIN, ( FIND, REPLACE )
 ## Shows PWD with shortcuts to make shorter.
 # Ensures the prompt is never longer than MAX_PROMPT_PWD_LEN. If the PWD does have
 # to be trimmed then the first 2 root directories are shown and then the 
-# current directory.
-function pwd_prompt() {
-    d="$PWD"
-    d=$(echo "$d" | shortcut_path "/etc/linux-install" "[li]")
-    d=$(echo "$d" | shortcut_path "$HOME/documents/work/red-hat" "~/[red-hat]")
-    d=$(echo "$d" | shortcut_path "$HOME/documents/work/cambrio" "~/[cambrio]")
-    d=$(echo "$d" | shortcut_path "$HOME/documents/school" "~/[school]")
-    d=$(echo "$d" | shortcut_path "$HOME/documents" "~/[docs]")
-    d=$(echo "$d" | shortcut_path "$GOPATH/src/github.com" "~/[go]/[srcgh]")
-    d=$(echo "$d" | shortcut_path "$GOPATH" "~/[go]")
-    d=$(echo "$d" | shortcut_path "$HOME" "~")
-
+# current directory. If SHELL_PROFILE_PROMPT_SUPERSHORT is set only the exit status,
+# current directory, and git branch are shown.
+pwd_prompt() {
+    d=""
+    
+    # Shorten if in supershort mode
+    if [ -n "$SHELL_PROFILE_PROMPT_SUPERSHORT" ]; then
+	   d="${PWD##*/}"
+    else # Normal prompt mode
+	   # Apply nicknames to the path
+	   d="$PWD"
+	   d=$(echo "$d" | shortcut_path "/etc/linux-install" "[li]")
+	   d=$(echo "$d" | shortcut_path "$HOME/documents/work/red-hat" "~/[red-hat]")
+	   d=$(echo "$d" | shortcut_path "$HOME/documents/work/cambrio" "~/[cambrio]")
+	   d=$(echo "$d" | shortcut_path "$HOME/documents/school" "~/[school]")
+	   d=$(echo "$d" | shortcut_path "$HOME/documents" "~/[docs]")
+	   d=$(echo "$d" | shortcut_path "$GOPATH/src/github.com" "~/[go]/[srcgh]")
+	   d=$(echo "$d" | shortcut_path "$GOPATH" "~/[go]")
+	   d=$(echo "$d" | shortcut_path "$HOME" "~")
+    fi
+    
     echo "${COLOR_FG_RED}$d"
 }
 
-function user_symbol() {
+user_symbol() {
     if [ "$UID" -eq 0 ]; then
 	   echo "#"
     else
@@ -82,7 +98,7 @@ function user_symbol() {
 }
 
 # Sets prompt variable
-function build_prompt() {
+build_prompt() {
     # Capture the last cmd's exit status before we run internal prompt building
     # functions. This will be passed to exit_status_prompt()
     last_cmd_exit_status="$?"
@@ -100,3 +116,16 @@ precmd() {
     build_prompt
 }
 build_prompt
+
+# Toggle SHELL_PROFILE_PROMPT_SUPERSHORT and rebuild the
+# prompt. So that the prompt is way shorter.
+supershort() {
+    if [ -z "$SHELL_PROFILE_PROMPT_SUPERSHORT" ]; then
+	   SHELL_PROFILE_PROMPT_SUPERSHORT=true
+    else
+	   SHELL_PROFILE_PROMPT_SUPERSHORT=""
+    fi
+
+    build_prompt
+    echo "SHELL_PROFILE_PROMPT_SUPERSHORT=${SHELL_PROFILE_PROMPT_SUPERSHORT}"
+}
