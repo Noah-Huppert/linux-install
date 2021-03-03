@@ -41,4 +41,4 @@ kernel:
     - linux4.19-headers
 
   # Kernel package version
-  version: 5.10.17_1
+  version: 5.10.19_1
