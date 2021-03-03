@@ -34,12 +34,13 @@ install.sh - Install Void Linux.
 
 USAGE
 
-	install.sh -b BOOT_PARTITION -r ROOT_PARTITION [-c,-e ENV,-s SETUP_ARGS,-g GRAINS_FILE]
+	install.sh -r ROOT_PARTITION [-b BOOT_PARTITION,-c,-e ENV,-s SETUP_ARGS,-g GRAINS_FILE]
 
 OPTIONS
 
-   -b BOOT_PARTITION    Boot partition.
    -r ROOT_PARTITION    Root file partition.
+   -b BOOT_PARTITION    (Optional) Boot partition. If not provided assumes the
+                        root partition holds the boot directory.
    -c                   (Optional) If provided indicates that ROOT_PARTITION is
                         actually the name of a DM-Crypt LUKS container to use
                         as the root file system.
@@ -83,11 +84,7 @@ if [ ! -e "$root_partition" ]; then
 fi
 
 # BOOT_PARTITION
-if [ -z "$boot_partition" ]; then
-	die "-b BOOT_PARTITION option required"
-fi
-
-if [ ! -e "$boot_partition" ]; then
+if [ -n "$boot_partition" ] && [ ! -e "$boot_partition" ]; then
 	die "-b BOOT_PARTITION \"$boot_partition\" does not exist"
 fi
 
@@ -121,8 +118,10 @@ if ! mkdir -p /mnt/boot/efi; then
 	die "Failed to make mount point /mnt/boot/efi"
 fi
 
-if ! mount "$boot_partition" /mnt/boot/efi; then
-	die "Failed to mount $boot_partition in /mnt/boot/efi"
+if [ -n "$boot_partition" ]; then
+    if ! mount "$boot_partition" /mnt/boot/efi; then
+	   die "Failed to mount $boot_partition in /mnt/boot/efi"
+    fi
 fi
 
 # Mount system directories
