@@ -50,6 +50,7 @@ base:
     - c
     - lldb
     - cmake
+    - automake
     - pkg-config
     - go
     - python
