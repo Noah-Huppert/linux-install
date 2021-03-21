@@ -88,6 +88,7 @@ base:
     - flatpak
     - gpg
     - git
+    - subversion
     - mercurial
     - ssh
     - vsv
