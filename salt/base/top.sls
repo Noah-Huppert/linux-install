@@ -106,6 +106,7 @@ base:
     - sl
     - libguestfs
     - gohls
+    - ffmpeg
 
     # User interface configuration
     - xorg
