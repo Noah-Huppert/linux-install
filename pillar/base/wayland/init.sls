@@ -9,3 +9,5 @@
       # Clipboard command line utilities
       - wl-clipboard
       
+      # Screen sharing
+      - xdg-desktop-portal-wlr
