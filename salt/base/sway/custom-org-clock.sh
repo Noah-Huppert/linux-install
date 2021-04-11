@@ -13,7 +13,7 @@ resp_alt=clock
 resp_tooltip=""
 
 update_org_clock() {
-        clock_str=$(emacsclient --eval "(if (and (not (boundp 'org-clock-current-task)) (org-clock-current-task)) (substring-no-properties (org-clock-get-clock-string)))" 2> "$err_file")
+        clock_str=$(emacsclient --eval "(if (and (boundp 'org-clock-current-task) (org-clock-current-task)) (substring-no-properties (org-clock-get-clock-string)))" 2> "$err_file")
     if [[ "$?" != "0" ]]; then
 	   resp_text="org clock error"
 	   resp_tooltip=$(cat "$err_file")
