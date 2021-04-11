@@ -4,6 +4,12 @@
 {{ pillar.bluetooth.pkg }}:
   pkg.latest
 
+# Configure
+{{ pillar.bluetooth.main_config }}:
+  file.managed:
+    - source: salt://bluetooth/main.conf
+    - mode: 644
+
 # Service
 {{ pillar.bluetooth.service }}-enabled:
   service.enabled:
