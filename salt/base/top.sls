@@ -83,6 +83,7 @@ base:
     - denopack
     - denon
     - asar
+    - p7zip
 
     # General tools configuration
     - utilities
