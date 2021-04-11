@@ -82,6 +82,7 @@ base:
     - velociraptor
     - denopack
     - denon
+    - asar
 
     # General tools configuration
     - utilities
