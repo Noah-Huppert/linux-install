@@ -18,3 +18,6 @@ c:
     - man-pages
     - man-pages-devel
     - man-pages-posix
+
+    # Target 32-bits on 64-bit machine
+    - gcc-multilib
