@@ -84,6 +84,7 @@ base:
     - denon
     - asar
     - p7zip
+    - perf-tool
 
     # General tools configuration
     - utilities
