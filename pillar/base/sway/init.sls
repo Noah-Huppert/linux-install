@@ -13,6 +13,7 @@ sway:
   waybar_style_file: {{ waybar_dir }}/style.css
 
   waybar_org_clock_script: {{ waybar_dir }}/custom-org-clock.sh
+  waybar_xkb_script: {{ waybar_dir }}/custom-xkb.sh
     
 
   # Swaynag configuration file
@@ -24,7 +25,7 @@ sway:
 
   # Screenshot script
   wl_snip_file: /usr/local/bin/wl-snip
-  
+
   xbps_sway_pkgs:
     # Compositor
     - sway
@@ -32,6 +33,9 @@ sway:
     # Launch menu
     # - bemenu # Now using sway-launcher-desktop
 
+    # Keyboard
+    - xkb-switch
+    
     # Locker
     - swaylock
 

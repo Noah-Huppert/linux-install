@@ -59,6 +59,16 @@
     - requires:
       - file: {{ user.home }}/{{ pillar.sway.waybar_dir }}
 
+{{ user.home }}/{{ pillar.sway.waybar_xkb_script }}-{{ user.name }}:
+  file.managed:
+    - name: {{ user.home }}/{{ pillar.sway.waybar_xkb_script }}
+    - source: salt://sway/custom-xkb.sh
+    - mode: 755
+    - user: {{ user.name }}
+    - group: {{ user.name }}
+    - requires:
+      - file: {{ user.home }}/{{ pillar.sway.waybar_dir }}
+
 # Swaynag
 {{ user.home }}/{{ pillar.sway.swaynag_dir }}:
   file.directory:

@@ -5,7 +5,7 @@
     // "width": 1280, // Waybar width
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "custom/org-clock"],
-    "modules-center": ["pulseaudio", "backlight", "network"],
+    "modules-center": ["pulseaudio", "backlight", "network", "custom/xkb"],
     "modules-right": ["disk", "battery", "clock"],
     // Modules configuration
     // "sway/workspaces": {
@@ -145,6 +145,11 @@
 	   "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}",
 	   "tooltip-format-wifi": "{essid} ({signalStrength}%)",
 	   "tooltip-format-disconnected": "Disconnected"
+    },
+    "custom/xkb": {
+	   "format": "{} ",
+	   "exec": "{{ pillar.sway.waybar_xkb_script }}",
+	   "interval": "1"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
