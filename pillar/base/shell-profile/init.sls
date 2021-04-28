@@ -12,6 +12,7 @@ shell_profile:
   shell_units:
     - meta_fns.sh
     - usr_local_bin.sh
+    - keyboard.sh
     - editor.sh
     #- terminal.sh
     - pager.sh
