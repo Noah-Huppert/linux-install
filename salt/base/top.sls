@@ -85,6 +85,7 @@ base:
     - asar
     - p7zip
     - perf-tool
+    - firebase
 
     # General tools configuration
     - utilities
