@@ -132,6 +132,7 @@ base:
     - slack
     - weechat
     - blender
+    - godot
     - logisim
     - wireshark
     - tor
