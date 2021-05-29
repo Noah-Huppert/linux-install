@@ -145,6 +145,7 @@ base:
     - minecraft
     - pirate-get
     - kodi
+    - pv
 
     # Applications which must be manually built and installed
     - manual-void-pkgs
