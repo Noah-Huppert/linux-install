@@ -145,6 +145,7 @@ base:
     - minecraft
     - pirate-get
     - kodi
+    - graphviz
     - pv
 
     # Applications which must be manually built and installed
