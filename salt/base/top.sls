@@ -57,6 +57,7 @@ base:
     - elixir
     - nodejs
     - rust
+    - haskell
     - wasmtime
     - aws-cli
     - digitalocean-cli
