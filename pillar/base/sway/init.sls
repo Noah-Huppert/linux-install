@@ -30,6 +30,9 @@ sway:
     # Compositor
     - sway
 
+    # DBus session manager, sets XDG_RUNTIME_DIR for sway
+    - elogind
+
     # Launch menu
     # - bemenu # Now using sway-launcher-desktop
 
