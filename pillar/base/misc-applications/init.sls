@@ -11,6 +11,4 @@ misc_applications:
     - openjdk-jre
     - MultiMC
 
-    - transmission # Torrent
-    - transmission-qt
     - vlc

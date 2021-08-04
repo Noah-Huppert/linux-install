@@ -112,6 +112,7 @@ base:
     - libguestfs
     - gohls
     - ffmpeg
+    - torrent
 
     # User interface configuration
     - xorg
