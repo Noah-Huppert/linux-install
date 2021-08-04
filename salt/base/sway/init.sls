@@ -95,3 +95,10 @@
   file.managed:
     - source: salt://sway/wl-snip
     - mode: 755
+{{ pillar.sway.elogind_svc }}-enabled:
+  service.enabled:
+    - name: {{ pillar.sway.elogind_svc }}
+
+{{ pillar.sway.elogind_svc }}-running:
+  service.running:
+    - name: {{ pillar.sway.elogind_svc }}
