@@ -87,6 +87,8 @@ base:
     - p7zip
     - perf-tool
     - firebase
+    - nestjs-cli
+    - typeorm
 
     # General tools configuration
     - utilities
