@@ -4,7 +4,7 @@ flutter:
   dir: {{ dir }}
   
   # Download URL
-  download_url: https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_v1.5.4-hotfix.2-stable.tar.xz
+  download_url: https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_2.2.3-stable.tar.xz
 
   # Download file sha256
   download_sha: 04e063b01e7087eeeccfc5f7a585ed6adcc521bc44f754e194cb3c98a57c19cd
