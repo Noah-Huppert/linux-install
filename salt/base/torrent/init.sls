@@ -20,12 +20,10 @@ transmission-config-{{ user.name }}:
       - pkg: {{ pillar.torrent.transmission_core_pkg }}
 {% endfor %}
 
-{{ pillar.torrent.transmission_svc }}-enabled:
-  service.enabled:
+{{ pillar.torrent.transmission_svc }}-disabled:
+  service.disabled:
     - name: {{ pillar.torrent.transmission_svc }}
 
-{{ pillar.torrent.transmission_svc }}-running:
-  service.running:
+{{ pillar.torrent.transmission_svc }}-dead:
+  service.dead:
     - name: {{ pillar.torrent.transmission_svc }}
-    - require:
-      - service: {{ pillar.torrent.transmission_svc }}-enabled

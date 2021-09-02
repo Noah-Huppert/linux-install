@@ -4,6 +4,7 @@ torrent:
   xbps_torrent_pkgs:
     - {{ transmission_core_pkg }}
     - transmission-qt
+    - transmission-gtk
 
   transmission_core_pkg: {{ transmission_core_pkg }}
   transmission_file: .config/transmission/settings.json
