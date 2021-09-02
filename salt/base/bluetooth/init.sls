@@ -4,6 +4,9 @@
 {{ pillar.bluetooth.pkg }}:
   pkg.latest
 
+{{ pillar.bluetooth.blueman_pkg }}:
+  pkg.latest
+
 # Configure
 {{ pillar.bluetooth.main_config }}:
   file.managed:

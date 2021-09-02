@@ -7,3 +7,6 @@ bluetooth:
 
   # Main configuration file
   main_config: /etc/bluetooth/main.conf
+
+  # Blueman
+  blueman_pkg: blueman
