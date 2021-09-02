@@ -26,9 +26,6 @@
 {% set user_svc_file = user_svc_dir + '/run' %}
 {% set user_svc_log_file = user_svc_dir + '/log/run' %}
 
-# Global system service directory
-{% set svc_link_dest = '/etc/sv/' + user_svc %}
-
 {{ user_svc_file }}:
   file.managed:
     - makedirs: True
