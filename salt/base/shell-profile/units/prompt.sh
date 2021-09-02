@@ -2,34 +2,42 @@
 
 # Colors
 # From: https://stackoverflow.com/a/20983251
-color_vars() {
+color_tput() { # ( args... )
     if [ -z "$SHELL_UNIT_PROMPT_NO_COLOR" ]; then
-	COLOR_RESET="\001$(tput sgr0)\002"
-
-	COLOR_BG_RED="\001$(tput setab 1)\002"
-	COLOR_BG_DEFAULT="\001$(tput setab 245)\002"
-
-	COLOR_FG_WHITE="\001$(tput setaf 255)\002"
-	COLOR_FG_GREEN="\001$(tput setaf 2)\002"
-	COLOR_FG_MAGENTA="\001$(tput setaf 5)\002"
-	COLOR_FG_RED="\001$(tput setaf 1)\002"
-    else
-	COLOR_RESET=""
-
-	COLOR_BG_RED=""
-	COLOR_BG_DEFAULT=""
-
-	COLOR_FG_WHITE=""
-	COLOR_FG_GREEN=""
-	COLOR_FG_MAGENTA=""
-	COLOR_FG_RED=""
+	   tput "$@"
     fi
 }
 
-color_vars
+color_reset() {
+    color_tput sgr0
+}
+
+color_bg_red() {
+    color_tput setab 1
+}
+
+color_bg_default() {
+    color_tput setab 245
+}
+
+color_fg_white() {
+    color_tput setaf 255
+}
+
+color_fg_green() {
+    color_tput setaf 2
+}
+
+color_fg_magenta() {
+    color_tput setaf 5
+}
+
+color_fg_red() {
+    color_tput setaf 1
+}
 
 shell-no-color() {
-    echo "\001$(tput sgr0)\002" # reset
+    color_reset
     
     if [ -z "$SHELL_UNIT_PROMPT_NO_COLOR" ]; then
 	SHELL_UNIT_PROMPT_NO_COLOR=true
@@ -50,7 +58,7 @@ shell-no-color() {
 # like this one.
 exit_status_prompt() { # ( Exit status )
     if [[ "$1" != "0" ]]; then
-	   echo "${COLOR_BG_RED}$1${COLOR_BG_DEFAULT} "
+	   echo "$(color_bg_red)$1$(color_bg_default) "
     fi
 }
 
@@ -67,7 +75,7 @@ git_prompt() {
 		   return 0
 	    fi
 
-	    echo "${COLOR_FG_GREEN}git:${COLOR_FG_MAGENTA}$branch"
+	    echo "$(color_fg_green)git:$(color_fg_magenta)$branch"
 	fi
 }
 
@@ -106,7 +114,7 @@ pwd_prompt() {
 	   d=$(echo "$d" | shortcut_path "$HOME" "~")
     fi
     
-    echo "${COLOR_FG_RED}$d"
+    echo "$(color_fg_red)$d"
 }
 
 user_symbol() {
@@ -129,7 +137,7 @@ build_prompt() {
     fi
     
     # EXIT_STATUS HOSTNAME PATH git:BRANCH %#
-    export PS1="$(exit_status_prompt $last_cmd_exit_status)$(pwd_prompt) $(git_prompt) ${COLOR_FG_WHITE}${newline_end}$(user_symbol) "
+    export PS1="$(exit_status_prompt $last_cmd_exit_status)$(pwd_prompt) $(git_prompt) $(color_fg_white)${newline_end}$(user_symbol) "
 }
 
 source {{ pillar.bash.preexec.file }}
