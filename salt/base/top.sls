@@ -89,6 +89,7 @@ base:
     - firebase
     - nestjs-cli
     - typeorm
+    - arduino
 
     # General tools configuration
     - utilities
