@@ -1,12 +1,14 @@
 # Install and configure GPG
 
 # Install
-gnupg2:
+{% for pkg in pillar['gpg']['pkgs'] %}
+{{ pkg }}:
   pkg.latest
+{% endfor %}
 
 # Copy users keys
 {% for user, key_id in pillar['gpg']['user_keys'].items() %}
-{% set dir = '/home/' + user + '/.gnupg' %}
+{% set dir = '/home/' + user + '/' + pillar['gpg']['gpg_home_dir'] %}
 
 # Make Gnupg directory
 {{ dir }}:
@@ -27,4 +29,11 @@ gnupg2:
     - require:
       - file: {{ dir }}
 {% endfor %}
+
+# GPG Agent Configuration
+{{ dir }}/{{ pillar.gpg.agent_config }}:
+  file.managed:
+    - source: salt://gpg/gpg-agent.conf
+    - require:
+      - file: {{ dir }}
 {% endfor %}
