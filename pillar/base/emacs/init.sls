@@ -5,6 +5,7 @@ emacs:
     - emacs-gtk3
     - ncurses-term # Required so M-x ansi-term works
     - libtool # So vterm can compile itself
+    - avfs # dired-avfs - seamless archive browsing
 
   # Configuration directory
   configuration_directory: /home/noah/.emacs.d
