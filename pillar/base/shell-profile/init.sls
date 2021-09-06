@@ -16,6 +16,7 @@ shell_profile:
     - editor.sh
     #- terminal.sh
     - pager.sh
+    - java.sh
     - browser.sh
     - screenshot_dir.sh
     - gpg_tty.sh
