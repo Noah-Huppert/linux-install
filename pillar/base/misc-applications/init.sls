@@ -8,7 +8,6 @@ misc_applications:
 
     # Minecraft
     - minecraft
-    - openjdk-jre
     - MultiMC
 
     - vlc
