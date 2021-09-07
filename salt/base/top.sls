@@ -153,6 +153,7 @@ base:
     - kodi
     - graphviz
     - pv
+    - signal
 
     # Applications which must be manually built and installed
     - manual-void-pkgs
