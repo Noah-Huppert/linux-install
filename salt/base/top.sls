@@ -117,6 +117,7 @@ base:
     - gohls
     - ffmpeg
     - torrent
+    - the-silver-searcher
 
     # User interface configuration
     - xorg
