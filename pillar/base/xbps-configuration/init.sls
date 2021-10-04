@@ -12,11 +12,11 @@ xbps_configuration:
     # Repositories
     servers:
       # Main repository
-      - 'http://mirror.clarkson.edu/voidlinux/current' # New York
+      - 'http://repo-us.voidlinux.org/current'
       
       # Alternate tier 1 repositories
+      - 'http://mirror.clarkson.edu/voidlinux/current' # New York
       - 'http://mirrors.servercentral.com/voidlinux/current' # Chicago
-      - 'http://alpha.us.repo.voidlinux.org/current' # Kansas City
 
       # Alternate tier 2 repositories
       - 'http://www.gtlib.gatech.edu/pub/VoidLinux/current' # Atlanta
