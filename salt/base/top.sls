@@ -118,6 +118,7 @@ base:
     - ffmpeg
     - torrent
     - the-silver-searcher
+    - dhcp-server
 
     # User interface configuration
     - xorg
