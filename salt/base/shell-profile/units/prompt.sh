@@ -1,9 +1,25 @@
 # Customizes the Zsh prompt
 
+is_dumb() {
+    if [[ "$TERM" == "dumb" ]]; then
+	   return $(true)
+    fi
+
+    return $(false)
+}
+
+is_no_color() {
+    if is_dumb || [[ -n "$SHELL_UNIT_PROMPT_NO_COLOR" ]]; then
+	   return $(true)
+    fi
+
+    return $(false)
+}
+
 # Colors
 # From: https://stackoverflow.com/a/20983251
 color_tput() { # ( args... )
-    if [ -z "$SHELL_UNIT_PROMPT_NO_COLOR" ]; then
+    if ! is_no_color; then
 	   tput "$@"
     fi
 }
@@ -47,7 +63,6 @@ shell-no-color() {
 
     echo "SHELL_UNIT_PROMPT_NO_COLOR=$SHELL_UNIT_PROMPT_NO_COLOR"
 
-    color_vars
     build_prompt
 }
 
@@ -127,6 +142,12 @@ user_symbol() {
 
 # Sets prompt variable
 build_prompt() {
+    # If a dumb terminal (ex., Emacs TRAMP) then don't do anyhting fancy
+    if is_dumb; then
+	   export PS1="%# "
+	   return
+    fi
+    
     # Capture the last cmd's exit status before we run internal prompt building
     # functions. This will be passed to exit_status_prompt()
     last_cmd_exit_status="$?"
