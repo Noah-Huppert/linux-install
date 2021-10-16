@@ -91,6 +91,7 @@ base:
     - nestjs-cli
     - typeorm
     - arduino
+    - mdns
 
     # General tools configuration
     - utilities
