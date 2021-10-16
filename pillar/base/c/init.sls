@@ -21,3 +21,6 @@ c:
 
     # Target 32-bits on 64-bit machine
     - gcc-multilib
+
+    # Cross compile for Raspberry Pi's
+    - cross-arm-linux-gnueabihf
