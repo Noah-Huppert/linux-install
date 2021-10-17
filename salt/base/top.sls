@@ -92,6 +92,7 @@ base:
     - typeorm
     - arduino
     - mdns
+    - shellcheck
 
     # General tools configuration
     - utilities
