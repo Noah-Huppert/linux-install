@@ -5,7 +5,7 @@
     // "width": 1280, // Waybar width
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "custom/org-clock"],
-    "modules-center": ["pulseaudio", "backlight", "network", "custom/xkb"],
+    "modules-center": ["pulseaudio", "backlight", "network"],
     "modules-right": ["disk", "battery", "clock"],
     // Modules configuration
     // "sway/workspaces": {
@@ -148,7 +148,7 @@
     },
     "custom/xkb": {
 	   "format": "{} ",
-	   "exec": "{{ pillar.sway.waybar_xkb_script }}",
+	   "exec": "~/{{ pillar.sway.waybar_xkb_script }}",
 	   "interval": "1"
     },
     "pulseaudio": {
