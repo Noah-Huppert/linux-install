@@ -9,7 +9,9 @@
 {{ group.name }}-group:
   group.present:
     - name: {{ group.name }}
+    {%- if 'id' in group %}
     - gid: {{ group.id }}
+    {% endif %}
 {% endfor %}
 
 # Configure users
