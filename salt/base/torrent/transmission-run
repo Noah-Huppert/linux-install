@@ -1,0 +1,2 @@
+#!/bin/sh
+exec chpst -u transmission:transmission:{{ pillar['users']['groups']['movies']['name'] }} transmission-daemon -f --log-error

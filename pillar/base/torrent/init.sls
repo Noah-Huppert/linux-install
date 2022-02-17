@@ -11,3 +11,6 @@ torrent:
   transmission_svc: transmission-daemon
   
   home_movies_dir: movies
+
+  transmission_user: transmission
+  svc_file: /etc/sv/transmission-daemon/run

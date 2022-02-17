@@ -18,12 +18,29 @@ transmission-config-{{ user.name }}:
         template_user_home: {{ user.home }}
     - require:
       - pkg: {{ pillar.torrent.transmission_core_pkg }}
+
+{{ user.home }}/{{ pillar['torrent']['home_movies_dir'] }}:
+  file.directory:
+    - user: {{ user.name }}
+    - group: {{ pillar['users']['groups']['movies']['name'] }}
+    - dir_mode: 760
 {% endfor %}
 
-{{ pillar.torrent.transmission_svc }}-disabled:
-  service.disabled:
-    - name: {{ pillar.torrent.transmission_svc }}
+{{ pillar['users']['groups']['movies']['name'] }}:
+  group.present:
+    - addusers:
+      - {{ pillar.torrent.transmission_user }}
 
-{{ pillar.torrent.transmission_svc }}-dead:
-  service.dead:
-    - name: {{ pillar.torrent.transmission_svc }}
+{{ pillar.torrent.svc_file }}:
+  file.managed:
+    - source: salt://torrent/transmission-run
+    - template: jinja
+    - chmod: 760
+
+# {{ pillar.torrent.transmission_svc }}-disabled:
+#   service.disabled:
+#     - name: {{ pillar.torrent.transmission_svc }}
+
+# {{ pillar.torrent.transmission_svc }}-dead:
+#   service.dead:
+#     - name: {{ pillar.torrent.transmission_svc }}
