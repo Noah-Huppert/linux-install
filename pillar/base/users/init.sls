@@ -10,7 +10,7 @@ users:
   # Groups configuration, dict of group objects with the keys:
   #
   #   - name (String): Name
-  #   - id (Integer): ID
+  #   - id (Integer, Optional): ID
   groups:
     linux_install:
       name: linux-install
@@ -39,6 +39,8 @@ users:
     docker:
       name: docker
       id: 991
+    movies: # Torrent destination directories
+      name: movies
 
   # Users configuration, dict of user objects with the keys:
   #
