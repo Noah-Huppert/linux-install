@@ -23,6 +23,7 @@ base:
     - audio
     - backlight
     - bluetooth
+    - paprefs
     - fingerprint-reader
     - local-dns
     - external-display
