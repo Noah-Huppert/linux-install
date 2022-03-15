@@ -125,3 +125,6 @@ Run:
 ```
 
 Pass the `-e ENV` option to set the Salt environment to setup.
+
+## Manual Hacks
+Some user guide information about manual settings which might need to be changed can be found in [`USER-PROGRAMS-HELP.md`][./USER-PROGRAMS-HELP.md].
