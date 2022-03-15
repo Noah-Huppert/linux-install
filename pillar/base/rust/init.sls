@@ -17,7 +17,7 @@ rust:
       - armv7-unknown-linux-gnueabihf # Raspberry Pi 2+
 
   # Latest version, used to ensure rust upgrades if not newest
-  version: 1.47.0
+  version: 1.59.0
 
   # Packages to install
   pkgs:
