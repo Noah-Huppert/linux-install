@@ -24,14 +24,12 @@
     - require:
       - service: {{ pillar.power_management.tlp.svc }}-enabled
 
-# Enable acpid service to suspend on laptop close
-{{ pillar.power_management.suspend_svc }}-enabled:
-  service.enabled:
+# # Disable the laptop power management service acpid. Instead elogind from the sway service will handle thing.
+{{ pillar.power_management.suspend_svc }}-disabled:
+  service.disabled:
     - name: {{ pillar.power_management.suspend_svc }}
 
-{{ pillar.power_management.suspend_svc }}-running:
-  service.enabled:
+{{ pillar.power_management.suspend_svc }}-dead:
+  service.dead:
     - name: {{ pillar.power_management.suspend_svc }}
-    - require:
-      - service: {{ pillar.power_management.suspend_svc }}-enabled
 
