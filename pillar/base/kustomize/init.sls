@@ -1,4 +1,4 @@
 kustomize:
-  download_url: https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv3.5.5/kustomize_v3.5.5_linux_amd64.tar.gz
-  download_hash: 23306e0c0fb24f5a9fea4c3b794bef39211c580e4cbaee9e21b9891cb52e73e7
+  download_url: https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv4.5.5/kustomize_v4.5.5_linux_amd64.tar.gz
+  download_hash: bba81aa61dba057db1d5abeddf1e522b568b2d906ab67a5c80935e97302c8773
   install_dir: /usr/local/bin
