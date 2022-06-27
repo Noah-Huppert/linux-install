@@ -50,4 +50,4 @@ kernel:
     - linux4.19-headers
 
   # Kernel package version
-  version: 5.15.22_1
+  version: 5.15.30_1
