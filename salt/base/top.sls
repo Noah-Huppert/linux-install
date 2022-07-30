@@ -145,6 +145,7 @@ base:
     - weechat
     - blender
     - godot
+    - omnisharp
     - logisim
     - wireshark
     - tor
