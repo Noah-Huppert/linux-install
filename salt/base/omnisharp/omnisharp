@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+cd {{ pillar.omnisharp.install_dir }}
+{{ pillar.omnisharp.run_file.target }}

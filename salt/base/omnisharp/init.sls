@@ -3,8 +3,8 @@
     - source: {{ pillar.omnisharp.download.url }}
     - source_hash: {{ pillar.omnisharp.download.sha256sum }}
 
-{{ pillar.omnisharp.symlink.create }}:
-  file.symlink:
-    - target: {{ pillar.omnisharp.symlink.target }}
-    - require:
-        - archive: {{ pillar.omnisharp.install_dir }}
+{{ pillar.omnisharp.run_file.create }}:
+  file.managed:
+    - source: salt://omnisharp/omnisharp
+    - template: jinja
+    - mode: 775
