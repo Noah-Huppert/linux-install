@@ -1,6 +1,6 @@
 kernel:
   # Kernel package
-  kernel_pkg: linux5.15
+  kernel_pkg: linux5.18
 
   # Old kernel package versions which should be uninstalled
   old_pkgs:
@@ -50,4 +50,4 @@ kernel:
     - linux4.19-headers
 
   # Kernel package version
-  version: 5.15.30_1
+  version: 5.18.11_1
