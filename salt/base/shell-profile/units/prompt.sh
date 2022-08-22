@@ -1,5 +1,8 @@
 # Customizes the Zsh prompt
 
+# Default to supershort being enabled
+SHELL_PROFILE_PROMPT_SUPERSHORT=true
+
 is_dumb() {
     if [[ "$TERM" == "dumb" ]]; then
 	   return $(true)
