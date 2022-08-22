@@ -137,6 +137,7 @@ base:
     - rice
     - fonts
     - wmctrl
+    - sshfs
  
     # Applications configuration
     - misc-applications
