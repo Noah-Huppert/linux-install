@@ -161,6 +161,7 @@ base:
     - graphviz
     - pv
     - signal
+    - dolphin-emu
 
     # Applications which must be manually built and installed
     - manual-void-pkgs
