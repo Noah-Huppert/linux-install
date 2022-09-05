@@ -1,3 +1,5 @@
+{% set version = '3.5' %}
+
 godot:
   xbps_godot_pkgs:
     - mono
@@ -5,11 +7,11 @@ godot:
     - msbuild-bin
 
   godot_dl:
-    url: https://downloads.tuxfamily.org/godotengine/3.4.4/mono/Godot_v3.4.4-stable_mono_x11_64.zip
-    sha256sum: ec622859b5ab70fcf1f9781c34e30d55a5d7bdc37926f1334c2cd0a3e4d4a776
+    url: https://downloads.tuxfamily.org/godotengine/{{ version }}/mono/Godot_v{{ version }}-stable_mono_x11_64.zip
+    sha256sum: ad0ca1bdf822a9af353f17f8373dbfd32862e55ca9f8230dc752b7840656b89e
 
   install_dir: /opt/godot
 
   bin:
-    target: /opt/godot/Godot_v3.4.4-stable_mono_x11_64/Godot_v3.4.4-stable_mono_x11.64
+    target: /opt/godot/Godot_v{{ version }}-stable_mono_x11_64/Godot_v{{ version }}-stable_mono_x11.64
     desktop: /usr/local/share/applications/godot.desktop
