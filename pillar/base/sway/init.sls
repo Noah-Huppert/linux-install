@@ -60,3 +60,6 @@ sway:
     # Image viewers
     - imv
     - ristretto
+
+    # Polkit agent
+    - polkit-gnome
