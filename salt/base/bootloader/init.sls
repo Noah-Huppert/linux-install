@@ -33,6 +33,8 @@ refind-install:
     - mode: 755
     - require:
       - cmd: refind-install
+      - file: {{ pillar.partitions.boot.mountpoint }}{{ pillar.bootloader.linux_bootloader_file }}
+      - file: {{ pillar.partitions.boot.mountpoint }}{{ pillar.initramfs.file }}
 
 # Check we will be able to boot
 # Sometimes the clean kernel script removes a file used by the bootloader,
