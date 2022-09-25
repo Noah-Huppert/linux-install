@@ -162,6 +162,7 @@ base:
     - pv
     - signal
     - dolphin-emu
+    - vscode
 
     # Applications which must be manually built and installed
     - manual-void-pkgs
