@@ -1,7 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
-Version=1.0
+Version=4.0beta3
 Type=Application
 Terminal=false
-Exec={{ pillar.godot.bin.target }}
+Exec=env PATH="$PATH:{{ pillar.dotnet.bin_path}}" {{ pillar.godot.bin.target }}
 Name=Godot

@@ -3,10 +3,10 @@
 {% set channel_path_prefix = '/beta3'%}
 
 godot:
-  xbps_godot_pkgs:
-    - mono
+  xbps_godot_pkgs: []
+    {# - mono
     - mono-devel
-    - msbuild-bin
+    - msbuild-bin #}
 
   godot_dl:
     url: https://downloads.tuxfamily.org/godotengine/{{ version }}{{ channel_path_prefix }}/mono/Godot_v{{ version }}-{{ channel }}_mono_linux_x86_64.zip
