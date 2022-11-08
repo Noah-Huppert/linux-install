@@ -28,6 +28,7 @@ base:
     - local-dns
     - external-display
     - power-management
+    - dbus
     - printers
     - vulkan
 

@@ -1,0 +1,3 @@
+dbus:
+  pkgs:
+    - dbus-libs
