@@ -96,6 +96,7 @@ base:
     - arduino
     - mdns
     - shellcheck
+    - dotnet
 
     # General tools configuration
     - utilities
