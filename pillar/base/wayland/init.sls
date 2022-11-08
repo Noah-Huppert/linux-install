@@ -12,3 +12,6 @@
       # Screen sharing
       - xdg-desktop-portal-wlr
       - pipewire
+
+      # Debug
+      - xeyes
