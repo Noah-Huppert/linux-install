@@ -29,6 +29,7 @@ base:
     - external-display
     - power-management
     - printers
+    - vulkan
 
     # User configuration
     - bash
