@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-mono {{ pillar.omnisharp.run_file.target }}  "$@"
+dotnet {{ pillar.omnisharp.run_file.target }}  "$@"

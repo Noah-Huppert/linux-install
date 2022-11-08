@@ -1,8 +1,9 @@
 omnisharp:
   download:
-    url: https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.39.1/omnisharp-mono.tar.gz
-    sha256sum: 5a25633aea34058c70ae6aa95431f2fae487ae45a93d5955118169c2ed212e83
+    url: https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.39.2/omnisharp-linux-x64-net6.0.tar.gz
+    sha256sum: 90738d0dfe42aa4bb1222d576fa4b14804ac403bd682275336d0d55398d82a4d
   install_dir: /opt/omnisharp
-  run_file:
-    create: /usr/local/bin/omnisharp
-    target: /opt/omnisharp/OmniSharp.exe
+
+  link:
+    source: /opt/omnisharp/OmniSharp
+    destination: /usr/local/bin/omnisharp
