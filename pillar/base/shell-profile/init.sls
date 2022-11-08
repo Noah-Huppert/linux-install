@@ -12,7 +12,6 @@ shell_profile:
   shell_units:
     - meta_fns.sh
     - usr_local_bin.sh
-    - dotnet_path.sh
     - keyboard.sh
     - editor.sh
     #- terminal.sh

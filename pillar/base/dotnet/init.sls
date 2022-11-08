@@ -6,4 +6,6 @@ dotnet:
   sdk_sha: 779b3e24a889dbb517e5ff5359dab45dd3296160e4cb5592e6e41ea15cbf87279f08405febf07517aa02351f953b603e59648550a096eefcb0a20fdaf03fadde
 
   sdk_dir: /usr/share/dotnet
-  bin_path: /usr/share/dotnet/
+  link:
+    source: /usr/share/dotnet/dotnet
+    destination: /usr/local/bin/dotnet

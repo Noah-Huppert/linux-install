@@ -3,5 +3,5 @@ Encoding=UTF-8
 Version=4.0beta3
 Type=Application
 Terminal=false
-Exec=env PATH="$PATH:{{ pillar.dotnet.bin_path}}" {{ pillar.godot.bin.target }}
+Exec={{ pillar.godot.bin.target }}
 Name=Godot
