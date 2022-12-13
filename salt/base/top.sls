@@ -168,6 +168,7 @@ base:
     - signal
     - dolphin-emu
     - vscode
+    - raspberry-pi-imager
 
     # Applications which must be manually built and installed
     - manual-void-pkgs
