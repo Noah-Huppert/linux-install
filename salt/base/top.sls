@@ -11,6 +11,7 @@ base:
     - initramfs
     - bootloader
     - fstab
+    - pam
 
     # Higher level system configuration
     - system-configuration
@@ -125,6 +126,7 @@ base:
     - torrent
     - the-silver-searcher
     - dhcp-server
+    - gnome-keyring
 
     # User interface configuration
     - xorg
