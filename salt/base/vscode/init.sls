@@ -4,3 +4,7 @@
 {{ pkg }}:
   pkg.installed
 {% endfor %}
+
+{{ pillar.vscode.desktop_file }}:
+  file.managed:
+    - source: salt://vscode/code-oss.desktop
