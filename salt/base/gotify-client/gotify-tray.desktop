@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Gotify Tray
+Comment=Tray App For Gotify
+Terminal=false
+Exec=/bin/gotify-tray
