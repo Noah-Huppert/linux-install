@@ -169,6 +169,7 @@ base:
     - dolphin-emu
     - vscode
     - raspberry-pi-imager
+    - gotify-client
 
     # Applications which must be manually built and installed
     - manual-void-pkgs
