@@ -180,7 +180,7 @@ done
 echo "# Installs $pretty_pkgs from $SRC." >> "$state_file"
 check "Failed to add header to state file \"$state_file\""
 
-echo "# src=SRC" >> "$state_file"
+echo "# src=${SRC}" >> "$state_file"
 check "Failed to add header to state file \"$state_file\""
 
 src_pillar_key="${SRC}_${UNDERSCORED_NAME}_pkgs"
