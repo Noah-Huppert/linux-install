@@ -1,6 +1,6 @@
 python:
   # Packages
-  pkgs:
+  xbps_pkgs:
     # Python 2
     - python
     - python-pip
@@ -10,6 +10,9 @@ python:
     - python3
     - python3-pip
     - python3-devel
+
+  pip_pkgs:
+    - pyright
 
   # Python Pip bin paths
   pip3_bin: /bin/pip3
