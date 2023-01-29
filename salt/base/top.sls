@@ -170,6 +170,7 @@ base:
     - vscode
     - raspberry-pi-imager
     - gotify-client
+    - qmk
 
     # Applications which must be manually built and installed
     - manual-void-pkgs

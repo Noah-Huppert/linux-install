@@ -3,6 +3,7 @@ c:
   pkgs:
     # Compiler
     - gcc
+    - clang
 
     # Auto configure
     - autoconf
