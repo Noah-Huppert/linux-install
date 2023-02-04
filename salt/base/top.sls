@@ -127,6 +127,7 @@ base:
     - the-silver-searcher
     - dhcp-server
     - gnome-keyring
+    - atop
 
     # User interface configuration
     - xorg
