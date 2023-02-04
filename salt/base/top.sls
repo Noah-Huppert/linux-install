@@ -129,6 +129,7 @@ base:
     - gnome-keyring
     - ps-tools
     - atop
+    - go-wails
 
     # User interface configuration
     - xorg
