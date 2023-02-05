@@ -9,3 +9,8 @@ install_{{ user['name'] }}:
     - unless: which {{ pkg['bin'] }}
 {% endfor %}
 {% endfor %}
+
+{% for pkg in pillar['go-wails']['xbps_go-wails_pkgs'] %}
+{{ pkg }}:
+  pkg.installed
+{% endfor %}
