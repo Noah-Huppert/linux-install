@@ -1,6 +1,6 @@
 kernel:
   # Kernel package
-  kernel_pkg: linux6.0
+  kernel_pkg: linux6.1
 
   # Old kernel package versions which should be uninstalled
   old_pkgs:
@@ -59,4 +59,4 @@ kernel:
     - linux4.19-headers
 
   # Kernel package version
-  version: 6.0.12_1
+  version: 6.1.9_1
