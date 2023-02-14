@@ -21,6 +21,7 @@
     - require:
         - service: {{ pillar.internet.wpa_supplicant.service }}-enabled
 
+{% if pillar['internet']['dhcpcd'] is not none %}
 # Configure DHCPCD
 {{ pillar.internet.dhcpcd.service }}-enabled:
   service.enabled:
@@ -31,3 +32,4 @@
     - name: {{ pillar.internet.dhcpcd.service }}
     - require:
       - service: {{ pillar.internet.dhcpcd.service }}-enabled
+{% endif %}
