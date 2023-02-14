@@ -10,8 +10,9 @@ import_files=("$import_public_file" "$import_private_file" "$import_trust_file")
 
 # Check if user has GPG keys
 for f in "${import_files[@]}"; do
-	if [ ! -f "$f" ]; then
-		return 0
+        if [ ! -f "$f" ]; then
+                unit-echo "No file '$f'"
+                return 0
 	fi
 done
 

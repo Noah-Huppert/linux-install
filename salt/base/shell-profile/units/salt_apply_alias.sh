@@ -1,3 +1,7 @@
 # Create alias for salt-apply command
 
-alias sa='sudo salt-apply'
+if (( $UID != 0 )); then
+    alias sa='sudo salt-apply'
+else
+    alias sa='salt-apply'
+fi

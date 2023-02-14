@@ -1,14 +1,4 @@
 shell_profile:
-  # Script to assemble all shell units into one file
-  bake_script: /opt/bake-profiles/bake-profiles.sh
-
-  # Directory in user's home directory to store raw shell units
-  shell_profiles_dir: .profile.d
-
-  # File which indicates which shell units to include
-  units_file: .profile.units
-
-  # Shell units to include in the units_file
   shell_units:
     meta_fns: True
     usr_local_bin: True
@@ -16,7 +6,7 @@ shell_profile:
     editor: True
     terminal: False
     pager: True
-    java: True
+    java: False
     browser: True
     screenshot_dir: True
     gpg_tty: True
@@ -25,24 +15,24 @@ shell_profile:
     xdg_config_home: True
     ssh_agent: True
     history: False # Not need for ansi-term bash
-    go: True
-    rust: True
-    deno: True
+    go: False
+    rust: False
+    deno: False
     prompt: True
     ls_color: True
     shell_reload_fn: True
     user_bin: True
     scripts_fns: True
-    org_mode: True
+    org_mode: False
     trash: True
     edit_alias: True
     salt_apply_alias: True
     autocd: True
-    kubectl_alias: True
-    kube_namespace: True
+    kubectl_alias: False
+    kube_namespace: False
     git_alias: True
-    android_sdk: True
-    autostart: True
+    android_sdk: False
+    autostart: False
     linux_install_edit: True
     startx: False
     start_wayland: True
