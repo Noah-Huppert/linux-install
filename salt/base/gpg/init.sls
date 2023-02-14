@@ -34,6 +34,7 @@
 {{ dir }}/{{ pillar.gpg.agent_config }}:
   file.managed:
     - source: salt://gpg/gpg-agent.conf
+    - template: jinja
     - require:
       - file: {{ dir }}
 {% endfor %}

@@ -1,8 +1,10 @@
 {% set script_dir = '/opt/gpg-import' %}
 gpg:
-  pkgs:
-    - gnupg2
-    - pinentry-qt
+  # User GPG agent configuration options
+  # Value of null means its a simple flag option and just the key will appear in the config file
+  agent_config_opts: {}
+  # Packages to install for GPG
+  pkgs: []
   
   # Names of GPG import files
   import_files:
