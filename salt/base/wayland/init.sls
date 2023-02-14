@@ -1,5 +1,5 @@
 # Installs wayland, sway, kde from xbps.
-{% for pkg in pillar['wayland']['xbps_wayland_pkgs'] %}
+{% for pkg in pillar['wayland']['pkgs'] %}
 {{ pkg }}:
   pkg.installed
 {% endfor %}
