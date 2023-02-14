@@ -1,0 +1,4 @@
+gentoo:
+  '*':    
+    # Salt configuration
+    - environment
