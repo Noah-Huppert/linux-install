@@ -22,18 +22,42 @@ repo_dir=/etc/linux-install
 salt_content_dir=/srv
 
 salt_state_links=(
-    "$repo_dir/salt/base:$salt_content_dir/salt/base"
-    "$repo_dir/salt/work:$salt_content_dir/salt/work"
-    "$repo_dir/salt/wsl:$salt_content_dir/salt/wsl"
     "$repo_dir/secrets/salt/base:$salt_content_dir/salt/base-secret"
 )
 
 salt_pillar_links=(
-    "$repo_dir/pillar/base:$salt_content_dir/pillar/base"
-    "$repo_dir/pillar/work:$salt_content_dir/pillar/work"
-    "$repo_dir/pillar/wsl:$salt_content_dir/pillar/wsl"
     "$repo_dir/secrets/pillar/base:$salt_content_dir/pillar/base-secret"
+    "$repo_dir/secrets/pillar/gentoo:$salt_content_dir/pillar/gentoo-secret"
 )
+
+# Explore the salt directory to find environments and add those links to salt_state_links
+discover_salt_state_links() {
+    find_out=$(find "$repo_dir/salt" -maxdepth 1 -mindepth 1 -type d)
+    check "Failed to search salt directory for environments"
+
+    while IFS= read -r dir; do
+	env_name=$(basename "$dir")
+	check "Failed to convert directory into environment name"
+
+	salt_state_links+=("$repo_dir/salt/$env_name:$salt_content_dir/salt/$env_name")
+    done <<< "$find_out"
+}
+
+# Explore the pillar directory to find environments and add those links to salt_pillar_links
+discover_salt_pillar_links() {
+    find_out=$(find "$repo_dir/pillar" -maxdepth 1 -mindepth 1 -type d)
+    check "Failed to search pillar directory for environments"
+
+    while IFS= read -r dir; do
+	env_name=$(basename "$dir")
+	check "Failed to convert directory into environment name"
+
+	salt_pillar_links+=("$repo_dir/pillar/$env_name:$salt_content_dir/pillar/$env_name")
+    done <<< "$find_out"
+}
+
+discover_salt_state_links
+discover_salt_pillar_links
 
 # Parse options
 while getopts "hspa" opt; do
