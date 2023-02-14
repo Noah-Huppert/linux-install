@@ -686,6 +686,14 @@ file_roots:
   base:
     - {{ pillar.salt_configuration.state_dirs.base.public }}
     - {{ pillar.salt_configuration.state_dirs.base.secret }}
+  void:
+    - {{ pillar.salt_configuration.state_dirs.void.public }}
+    - {{ pillar.salt_configuration.state_dirs.base.public }}
+    - {{ pillar.salt_configuration.state_dirs.base.secret }}
+  gentoo:
+    - {{ pillar.salt_configuration.state_dirs.gentoo.public }}
+    - {{ pillar.salt_configuration.state_dirs.base.public }}
+    - {{ pillar.salt_configuration.state_dirs.base.secret }}
   work:
     - {{ pillar.salt_configuration.state_dirs.work.public }}
     - {{ pillar.salt_configuration.state_dirs.base.public }}
@@ -874,6 +882,10 @@ top_file_merging_strategy: same
 pillar_roots:
   base:
     - {{ pillar.salt_configuration.pillar_dirs.base.public }}
+  void:
+    - {{ pillar.salt_configuration.pillar_dirs.void.public }}
+  gentoo:
+    - {{ pillar.salt_configuration.pillar_dirs.gentoo.public }}
   work:
     - {{ pillar.salt_configuration.pillar_dirs.work.public }}
   wsl:
@@ -887,6 +899,15 @@ ext_pillar:
         base:
           - {{ pillar.salt_configuration.pillar_stack.base.public }}
           - {{ pillar.salt_configuration.pillar_stack.base.secret }}
+        void:
+          - {{ pillar.salt_configuration.pillar_stack.base.public }}
+          - {{ pillar.salt_configuration.pillar_stack.base.secret }}
+          - {{ pillar.salt_configuration.pillar_stack.void.public }}
+        gentoo:
+          - {{ pillar.salt_configuration.pillar_stack.base.public }}
+          - {{ pillar.salt_configuration.pillar_stack.base.secret }}
+          - {{ pillar.salt_configuration.pillar_stack.gentoo.public }}
+          - {{ pillar.salt_configuration.pillar_stack.gentoo.secret }}
         work:
           - {{ pillar.salt_configuration.pillar_stack.base.public }}
           - {{ pillar.salt_configuration.pillar_stack.base.secret }}

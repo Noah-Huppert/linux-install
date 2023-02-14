@@ -9,6 +9,10 @@ salt_configuration:
     base:
       public: {{ content_root }}/salt/base
       secret: {{ content_root }}/salt/base-secret
+    void:
+      public: {{ content_root }}/salt/void
+    gentoo:
+      public: {{ content_root }}/salt/gentoo
     work:
       public: {{ content_root }}/salt/work
     wsl:
@@ -19,6 +23,10 @@ salt_configuration:
     base:
       public: {{ content_root }}/pillar/base
       secret: {{ content_root }}/pillar/base-secret
+    void:
+      public: {{ content_root }}/pillar/void
+    gentoo:
+      public: {{ content_root }}/pillar/gentoo
     work:
       public: {{ content_root }}/pillar/work
     wsl:
@@ -29,6 +37,11 @@ salt_configuration:
     base:
       public: {{ content_root }}/pillar/base/pillar-stack.cfg
       secret: {{ content_root }}/pillar/base-secret/pillar-stack.cfg
+    void:
+      public: {{ content_root }}/pillar/void/pillar-stack.cfg
+    gentoo:
+      public: {{ content_root }}/pillar/gentoo/pillar-stack.cfg
+      secret: {{ content_root }}/pillar/gentoo-secret/pillar-stack.cfg
     work:
       public: {{ content_root }}/pillar/work/pillar-stack.cfg
     wsl:
