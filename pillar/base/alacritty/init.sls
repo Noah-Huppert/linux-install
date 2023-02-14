@@ -1,6 +1,6 @@
 alacritty:
   # Package
-  pkg: alacritty
+  pkg: null
 
   # Configuration file
   configuration_file: /home/noah/.config/alacritty/alacritty.yml

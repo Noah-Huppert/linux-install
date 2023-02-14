@@ -1,0 +1,2 @@
+alacritty:
+  pkg: alacritty
