@@ -61,15 +61,15 @@ users:
       home: /home/noah
       ssh_key_name: id_ed25519
       groups:
-        - linux_install
-        - wheel
-        - audio
-        - video
-        - xbuilder
-        - lpadmin
-        - vboxusers
-        - bluetooth
-        - docker
+        linux_install: True
+        wheel: True
+        audio: True
+        video: True
+        xbuilder: True
+        lpadmin: True
+        vboxusers: True
+        bluetooth: True
+        docker: True
     root:
       name: root
       id: 0

@@ -6,18 +6,25 @@
 
 # Configure groups
 {% for _, group in pillar['users']['groups'].items() %}
+{% if group is not none %}
 {{ group.name }}-group:
   group.present:
     - name: {{ group.name }}
-    {%- if 'id' in group %}
+    {%- if 'id' in group and group.id is not none %}
     - gid: {{ group.id }}
     {% endif %}
+{% endif %}
 {% endfor %}
 
 # Configure users
 {% for _, user in pillar['users']['users'].items() %}
 
 # Create user
+{{ user.name }}-group:
+  group.present:
+    - name: {{ user.name }}
+    - gid: {{ user.id }}
+
 {{ user.name }}:
   user.present:
     - uid: {{ user.id }}
@@ -27,12 +34,17 @@
     - shell: {{ pillar.users.shell }}
     {%- if 'groups' in user %}
     - groups:
-      {%- for group_key in user.groups %}
+      {%- for group_key, enabled in user.groups.items() %}
+      {%- if enabled %}
       - {{ pillar['users']['groups'][group_key]['name'] }}
+      {%- endif %}
       {%- endfor %}
     - require:
-      {%- for group_key in user.groups %}
+      - group: {{ user.name }}-group
+      {%- for group_key, group in user.groups.items() %}
+      {%- if group %}
       - group: {{ pillar['users']['groups'][group_key]['name'] }}
+      {%- endif %}
       {%- endfor %}
     {%- endif %}
 
