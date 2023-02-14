@@ -1,20 +1,20 @@
 partitions:
   # Boot partition
-  boot: 
+  boot:
     # Device name
     name: /dev/nvme0n1p1
 
     # UUID
-    uuid: EE06-934C
+    uuid: A2DA-6768
 
-    # Mount point
+    # Mountpoint
     mountpoint: /boot
 
     # File system type
     filesystem_type: vfat
 
     # Device mount options
-    mount_options: rw,relatime,codepage=437
+    mount_options: rw,relatime
 
     # Dump mount option
     mount_option_dump: 0
@@ -25,13 +25,22 @@ partitions:
   # Root partition
   root:
     # Device name
-    name: /dev/nvme0n1p5
+    name: /dev/nvme0n1p12
 
     # UUID
-    uuid: 1858abc3-e456-4a2e-9843-6d1deefae127
+    uuid: c5e825f1-b504-4f3d-80bd-16445bdd3f7b
 
-    # Mount point
+    # Mountpoint
     mountpoint: /
 
     # File system type
     filesystem_type: ext4
+
+    # Device mount options
+    mount_options: defaults
+
+    # Dump mount option
+    mount_option_dump: 0
+
+    # Pass mount option
+    mount_option_pass: 0
