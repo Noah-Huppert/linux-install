@@ -35,9 +35,6 @@ utilities:
     # Process monitor
     - htop
 
-    # Trash can
-    - trash-cli
-
     # Downloader
     - wget
 
