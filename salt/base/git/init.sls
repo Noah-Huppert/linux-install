@@ -1,7 +1,7 @@
 # Install and configure Git.
 
 # Package
-git:
+{{ pillar.git.pkg }}:
   pkg.latest
 
 # User configuration
