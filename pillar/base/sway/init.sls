@@ -8,7 +8,7 @@ sway:
   sway_config_file: {{ sway_dir }}/config
 
   # Elogind
-  elogind_svc: elogind
+  elogind_svc: null
 
   # Waybar configuration file
   waybar_dir: {{ waybar_dir }}
@@ -28,38 +28,4 @@ sway:
   # Screenshot script
   wl_snip_file: /usr/local/bin/wl-snip
 
-  xbps_sway_pkgs:
-    # Compositor
-    - sway
-
-    # DBus session manager, sets XDG_RUNTIME_DIR for sway
-    - elogind
-    - seatd
-    - libdri2-git
-
-    # Launch menu
-    # - bemenu # Now using sway-launcher-desktop
-
-    # Keyboard
-    - xkb-switch
-    
-    # Locker
-    - swaylock
-
-    # Menu bar
-    - Waybar
-    #- font-awesome
-
-    # To take screenshots
-    - slurp
-    - grim
-
-    # File browser
-    - Thunar
-
-    # Image viewers
-    - imv
-    - ristretto
-
-    # Polkit agent
-    - polkit-gnome
+  pkgs: []

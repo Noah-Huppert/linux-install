@@ -1,5 +1,5 @@
 # Installs sway from xbps.
-{% for pkg in pillar['sway']['xbps_sway_pkgs'] %}
+{% for pkg in pillar['sway']['pkgs'] %}
 {{ pkg }}:
   pkg.installed
 {% endfor %}
@@ -95,6 +95,8 @@
   file.managed:
     - source: salt://sway/wl-snip
     - mode: 755
+
+{% if pillar['sway']['elogind_svc'] is not none %}
 {{ pillar.sway.elogind_svc }}-enabled:
   service.enabled:
     - name: {{ pillar.sway.elogind_svc }}
@@ -102,3 +104,4 @@
 {{ pillar.sway.elogind_svc }}-running:
   service.running:
     - name: {{ pillar.sway.elogind_svc }}
+{% endif %}
