@@ -1,5 +1,5 @@
 bash:
   preexec:
     file: /opt/bash-preexec/bash-preexec.sh
-    source: https://raw.githubusercontent.com/rcaloras/bash-preexec/master/bash-preexec.sh
-    source_hash: 00334e7bdd3ce1bd73807e15bdcacc4583e09cb364fc7fc52c56e8c0aa3cfaee
+    source: https://raw.githubusercontent.com/rcaloras/bash-preexec/0.5.0/bash-preexec.sh
+    source_hash: 6ef95f16012bdfec0ab6ee853e8892d51eee295c8639944f9b983b3d40e0e9f7
