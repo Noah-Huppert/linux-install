@@ -28,7 +28,8 @@ partitions:
     name: /dev/nvme0n1p12
 
     # UUID
-    uuid: c5e825f1-b504-4f3d-80bd-16445bdd3f7b
+    part_uuid: 0468ea76-879d-435e-bd78-bc34ad71db91
+    luks_uuid: c5e825f1-b504-4f3d-80bd-16445bdd3f7b
 
     # Mountpoint
     mountpoint: /
