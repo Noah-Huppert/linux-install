@@ -18,6 +18,7 @@ gentoo:
     - internet
     - ntfs
     - exfat
+    - audio
     
     # User configuration
     - users
