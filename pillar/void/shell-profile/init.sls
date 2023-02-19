@@ -1,4 +1,5 @@
 shell_profile:
+  # Shell units to include in the units_file
   shell_units:
     - meta_fns
     - usr_local_bin
@@ -6,7 +7,7 @@ shell_profile:
     - editor
     # - terminal
     - pager
-    # - java
+    - java
     - browser
     - screenshot_dir
     - gpg_tty
@@ -14,25 +15,25 @@ shell_profile:
     - gpg_import
     - xdg_config_home
     - ssh_agent
-    # - history # Not need for ans
-    # - go
-    # - rust
-    # - deno
+    # - history # Not need for ansi-term bash
+    - go
+    - rust
+    - deno
     - prompt
     - ls_color
     - shell_reload_fn
     - user_bin
     - scripts_fns
-    # - org_mode
+    - org_mode
     - trash
     - edit_alias
     - salt_apply_alias
     - autocd
-    # - kubectl_alias
-    # - kube_namespace
+    - kubectl_alias
+    - kube_namespace
     - git_alias
-    # - android_sdk
-    # - autostart
+    - android_sdk
+    - autostart
     - linux_install_edit
     # - startx
     - start_wayland

@@ -1,5 +1,3 @@
-{% for unit, enabled in pillar['shell_profile']['shell_units'].items() -%}
-{% if enabled -%}
+{% for unit in pillar['shell_profile']['shell_units'] -%}
 {{ unit }}.sh
-{% endif -%}
 {% endfor -%}

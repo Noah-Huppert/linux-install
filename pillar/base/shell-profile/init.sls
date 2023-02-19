@@ -9,40 +9,4 @@ shell_profile:
   units_file: .profile.units
 
   # Shell units to include in the units_file
-  shell_units:
-    meta_fns: True
-    usr_local_bin: True
-    keyboard: True
-    editor: True
-    terminal: False
-    pager: True
-    java: True
-    browser: True
-    screenshot_dir: True
-    gpg_tty: True
-    gpg2_alias: True
-    gpg_import: True
-    xdg_config_home: True
-    ssh_agent: True
-    history: False # Not need for ansi-term bash
-    go: True
-    rust: True
-    deno: True
-    prompt: True
-    ls_color: True
-    shell_reload_fn: True
-    user_bin: True
-    scripts_fns: True
-    org_mode: True
-    trash: True
-    edit_alias: True
-    salt_apply_alias: True
-    autocd: True
-    kubectl_alias: True
-    kube_namespace: True
-    git_alias: True
-    android_sdk: True
-    autostart: True
-    linux_install_edit: True
-    startx: False
-    start_wayland: True
+  shell_units: []
