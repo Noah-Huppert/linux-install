@@ -36,6 +36,14 @@ refind-install:
       - file: {{ pillar.partitions.boot.mountpoint }}{{ pillar.bootloader.linux_bootloader_file }}
       - file: {{ pillar.partitions.boot.mountpoint }}{{ pillar.initramfs.file }}
 
+{{ pillar.bootloader.refind.kernel_opts_file }}:
+  file.managed:
+    - source: salt://bootloader/refind_linux.conf
+    - template: jinja
+    - mode: 755
+    - require:
+      - cmd: refind-install
+
 # Check we will be able to boot
 # Sometimes the clean kernel script removes a file used by the bootloader,
 # which then requires we use an external USB to rebuild these files.

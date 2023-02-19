@@ -10,7 +10,7 @@ bootloader:
   # Refind configuration
   refind:
     # Package
-    pkg: refind
+    pkg: ""
 
     # Directory in boot partition, relative to root
     directory: {{ refind_dir }}
@@ -18,9 +18,12 @@ bootloader:
     # Configuration file in boot partition, relative to root
     config_file: {{ refind_dir }}/refind.conf
 
+    # Kernel options file
+    kernel_opts_file: /boot/refind_linux.conf
+
 
   # Linux bootloader path relative to boot loader mount point
-  linux_bootloader_file: /vmlinuz-{{ kernel['version'] }}
+  linux_bootloader_file: ""
 
 
   # Check refind installed script
