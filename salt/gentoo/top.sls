@@ -2,6 +2,7 @@ gentoo:
   '*':
     # Salt configuration
     - salt-configuration
+    - salt-systemd-user-service-script
 
     # Base system configuration
     - kernel
