@@ -1,2 +1,2 @@
 ncdu:
-  pkg: ncdu
+  pkg: null
