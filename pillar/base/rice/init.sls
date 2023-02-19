@@ -1,32 +1,22 @@
-{% set polybar_dir = '/etc/noah/.config/polybar' %}
+{% set background_img = 'dog-flowers.jpg' %}
 
 rice:
-  # Rice tool XBPS packages
-  xbps_pkgs:
-    # Set background
-    - feh
-
-    # Application launcher
-    - rofi
-
-    # Fonts
-    - font-hack-ttf
-    - fonts-roboto-ttf
-    - nerd-fonts-ttf
+  # Rice packages
+  os_pkgs: []
 
   # Rice tool Python 3 packages
-  python3_pkgs:
-    # Theme based on wallpaper colors
-    - pywal
+  python3_pkgs: []
 
   # Image
   images:
     # Background image
-    - dog-flowers.jpg
+    - {{ background_img }}
  
     # Lock image
     # Credit: https://www.reddit.com/r/space/comments/arer0k/i_took_nearly_50000_images_of_the_night_sky_to/
     - moon-center.png
 
+  background_img: {{ background_img }}
+
   # Directory to store images in
-  images_directory: /home/noah/pictures
+  images_directory: /usr/share/pictures

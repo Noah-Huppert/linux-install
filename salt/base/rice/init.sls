@@ -1,7 +1,7 @@
 # Setup visual look and feel of X resources.
 
 # Install rice XBPS packages
-{% for pkg in pillar['rice']['xbps_pkgs'] %}
+{% for pkg in pillar['rice']['os_pkgs'] %}
 
 {{ pkg }}:
   pkg.latest
@@ -21,7 +21,5 @@
   file.managed:
     - source: salt://rice/pictures/{{ img }}
     - makedirs: True
-    - user: noah
-    - group: noah
     - mode: 644
 {% endfor %}
