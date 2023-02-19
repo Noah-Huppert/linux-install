@@ -13,7 +13,10 @@ gentoo:
     - hostname
     - portage
     - ntp
+    - timezone
     - internet
+    - ntfs
+    - exfat
     
     # User configuration
     - users
@@ -26,17 +29,20 @@ gentoo:
     - git
     - salt-apply-script
     - alacritty
+    - ncdu
 
     # General tools configuration
     - gpg
     - trash-cli
+    - htop
     
     # User interface configuration
     - vulkan
     - wayland
     - start-wayland-script
+    - x11
     - sway
-    - sway-launcher-desktop
+    - rice
 
     # Applications configuration
     - links
