@@ -1,4 +1,6 @@
 internet:
+  pkgs: []
+  
   # WPA supplicant configuration
   wpa_supplicant:
     # Configuration file
