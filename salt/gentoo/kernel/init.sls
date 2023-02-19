@@ -11,8 +11,10 @@
     - require:
       - pkg: {{ pillar.kernel.src_pkg }}
 
-{{ pillar.kernel.make_config_path }}:
+{% for config_path in pillar['kernel']['make_config_paths'] %}
+{{ config_path }}:
   file.managed:
     - source: salt://kernel/make-config
     - require:
       - file: {{ pillar.kernel.main_dir }}
+{% endfor %}
