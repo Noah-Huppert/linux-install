@@ -1,19 +1,12 @@
 audio:
   # Audio packages to install
-  pkgs:
-    - alsa-utils
-    - jack
-    - libjack
-    - pulseaudio
-    - ConsoleKit2
-    - pavucontrol
+  pkgs: []
 
   # Audio control services
-  services:
-    - alsa
-    - dbus
-    - cgmanager
-    - consolekit
+  services: []
 
+  # Audio control services which are enabled as user services
+  user_services: []
+  
   # Volume control script
   volume_control_script: /usr/bin/volumectl
