@@ -8,3 +8,6 @@ wayland:
 
     # Clipboard CLI
     - gui-apps/wl-clipboard
+
+    # Used to test what is running in XWayland
+    - x11-apps/xeyes
