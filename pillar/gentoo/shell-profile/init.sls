@@ -33,6 +33,7 @@ shell_profile:
     - git_alias
     # - android_sdk
     # - autostart
+    - salt-systemd-user-service-control
     - linux_install_edit
     # - startx
     - start_wayland
