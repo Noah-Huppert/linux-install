@@ -26,9 +26,9 @@
 # Enable user services
 {% for _, user in pillar['users']['users'].items() %}
 {% for svc in pillar['audio']['user_services'] %}
-{{ user.home }}/{{ pillar.salt_systemd_user_service_control.user_config_dir }}/{{ svc }}:
+{{ user.home }}/{{ pillar.user_service_manager.services_config_dir }}/{{ svc }}:
   file.managed:
-    - content: "-e -n"
+    - content: ""
     - user: {{ user.name }}
     - group: {{ user.name }}
 {% endfor %}
