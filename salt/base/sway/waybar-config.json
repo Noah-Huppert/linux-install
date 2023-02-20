@@ -5,7 +5,7 @@
     // "width": 1280, // Waybar width
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "custom/org-clock"],
-    "modules-center": ["pulseaudio", "backlight", "network"],
+    "modules-center": ["wireplumber", "backlight", "network"],
     "modules-right": ["disk", "battery", "clock"],
     // Modules configuration
     // "sway/workspaces": {
@@ -151,23 +151,8 @@
 	   "exec": "~/{{ pillar.sway.waybar_xkb_script }}",
 	   "interval": "1"
     },
-    "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon}  {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "",
-	   "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
+    "wireplumber": {
+        "format": "{volume}% {icon}",
+        "format-muted": ""
     }
 }
