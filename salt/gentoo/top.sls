@@ -2,7 +2,6 @@ gentoo:
   '*':
     # Salt configuration
     - salt-configuration
-    - salt-systemd-user-service-script
 
     # Base system configuration
     - kernel
@@ -26,6 +25,8 @@ gentoo:
     
     - bash
     - shell-profile
+
+    - user-service-manager
 
     # Development environment configuration
     - git
