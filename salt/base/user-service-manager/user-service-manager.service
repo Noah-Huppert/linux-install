@@ -1,0 +1,9 @@
+[Unit]
+Description=User Service Manager, starts services listed by file names in ~/{{ pillar.user_service_manager.services_config_dir }}
+
+[Service]
+Type=oneshot
+ExecStart={{ pillar.user_service_manager.script_path }}
+
+[Install]
+WantedBy=default.target
