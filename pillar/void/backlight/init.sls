@@ -1,0 +1,2 @@
+backlight:
+  pkg: light

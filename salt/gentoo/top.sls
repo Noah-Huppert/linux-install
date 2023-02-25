@@ -18,6 +18,7 @@ gentoo:
     - ntfs
     - exfat
     - audio
+    - backlight
     
     # User configuration
     - users
