@@ -1,6 +1,22 @@
 sway:
   elogind_svc: elogind
 
+  waybar_modules:
+    left:
+      - sway/workspaces
+      - sway/mode
+      - custom/org-clock
+
+    center:
+      - wireplumber
+      - backlight
+      - network
+
+    right:
+      - disk
+      - battery
+      - clock
+
   pkgs:
     # Compositor
     - sway

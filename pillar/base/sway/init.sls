@@ -16,7 +16,12 @@ sway:
   waybar_style_file: {{ waybar_dir }}/style.css
 
   waybar_org_clock_script: {{ waybar_dir }}/custom-org-clock.sh
-  waybar_xkb_script: {{ waybar_dir }}/custom-xkb.sh  
+  waybar_xkb_script: {{ waybar_dir }}/custom-xkb.sh
+
+  waybar_modules:
+    left: []
+    center: []
+    right: []
   
   # Swaynag configuration file
   swaynag_dir: {{ swaynag_dir }}

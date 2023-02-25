@@ -4,9 +4,9 @@
     "height": 23, // Waybar height (originally 30, to be removed for auto height);
     // "width": 1280, // Waybar width
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "custom/org-clock"],
-    "modules-center": ["wireplumber", "backlight", "network"],
-    "modules-right": ["disk", "battery", "clock"],
+    "modules-left": {{ pillar.sway.waybar_modules.left | tojson }},
+    "modules-center": {{ pillar.sway.waybar_modules.center | tojson }},
+    "modules-right": {{ pillar.sway.waybar_modules.right | tojson }},
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
