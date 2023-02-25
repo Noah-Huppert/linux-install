@@ -10,6 +10,9 @@ audio:
     # Required by wireplumber to alter scheduling priority
     - sys-auth/rtkit
 
+    # Settings GUI
+    - media-sound/pavucontrol
+
   # Audio control services
   services: []
 
