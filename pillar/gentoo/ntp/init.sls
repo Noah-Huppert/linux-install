@@ -1,3 +1,3 @@
 ntp:
   pkg: net-misc/ntp
-  service: ntpdate
+  service: ntpd
