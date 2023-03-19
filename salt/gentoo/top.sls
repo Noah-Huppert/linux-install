@@ -51,3 +51,4 @@ gentoo:
     # Applications configuration
     - links
     - firefox
+    - syncthing
