@@ -1,2 +1,0 @@
-media-plugins/alsa-plugins pulseaudio
-media-sound/pulseaudio -daemon
