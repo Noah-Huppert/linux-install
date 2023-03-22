@@ -46,7 +46,7 @@ partitions:
     # Pass mount option
     mount_option_pass: 0
 
-  # Sway partition
+  # Swap partition
   swap:
     name: /dev/nvme0n1p4
     uuid: dc81488a-cae7-40ef-9dd4-d9586ef14419
