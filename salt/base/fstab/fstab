@@ -23,7 +23,8 @@
 #       documentation for details on setting a label. To obtain the UUID, use
 #       the blkid(8) command.
 
-{% for partition in pillar['partitions'].values() %}
+{% for fstab_line in pillar['fstab']['fstab_lines'] %}
+{%- set partition = pillar['partitions'][fstab_line.name] %}
 # {{ partition.name }}
-UUID="{{ partition.uuid }}" {{ partition.mountpoint }} {{ partition.filesystem_type }} {{ partition.mount_options }} {{ partition.mount_option_dump }} {{ partition.mount_option_pass }}
+UUID="{{ partition[fstab_line.uuid_key] }}" {{ partition.mountpoint }} {{ partition.filesystem_type }} {{ partition.mount_options }} {{ partition.mount_option_dump }} {{ partition.mount_option_pass }}
 {% endfor %}
