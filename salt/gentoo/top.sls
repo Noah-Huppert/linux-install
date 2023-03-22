@@ -52,3 +52,5 @@ gentoo:
     - links
     - firefox
     - syncthing
+    - blender
+    - vscode
