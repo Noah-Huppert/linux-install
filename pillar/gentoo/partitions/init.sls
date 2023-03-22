@@ -25,7 +25,7 @@ partitions:
   # Root partition
   root:
     # Device name
-    name: /dev/nvme0n1p12
+    name: /dev/nvme0n1p2
 
     # UUID
     part_uuid: 0468ea76-879d-435e-bd78-bc34ad71db91
@@ -45,3 +45,8 @@ partitions:
 
     # Pass mount option
     mount_option_pass: 0
+
+  # Sway partition
+  swap:
+    name: /dev/nvme0n1p4
+    uuid: dc81488a-cae7-40ef-9dd4-d9586ef14419
