@@ -1,2 +1,2 @@
 blender:
-  pkg: blender
+  pkg: ""
