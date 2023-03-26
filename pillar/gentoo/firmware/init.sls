@@ -3,7 +3,6 @@ firmware:
     # Firmware
     - sys-kernel/linux-firmware
     - x11-drivers/xf86-input-synaptics
-    - x11-base/xorg-drivers
 
     # Utilities
     - sys-apps/usbutils
