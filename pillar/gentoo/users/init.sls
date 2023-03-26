@@ -8,6 +8,9 @@ users:
       id: null
     video:
       id: null
+    pipewire:
+      name: pipewire
+      id: null
     xbuilder: null
     lpadmin: null
     vboxusers: null
@@ -20,7 +23,8 @@ users:
       groups:
         linux_install: True
         wheel: True
-        audio: True
+        pipewire: True
+        audio: False
         video: True
         xbuilder: False
         lpadmin: False
