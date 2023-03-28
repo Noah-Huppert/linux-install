@@ -19,6 +19,7 @@ gentoo:
     - exfat
     - audio
     - backlight
+    - thunderbolt
     
     # User configuration
     - users

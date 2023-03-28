@@ -1,0 +1,4 @@
+# Configures thunderbolt support
+
+{{ pillar.thunderbolt.pkg }}:
+   pkg.installed
