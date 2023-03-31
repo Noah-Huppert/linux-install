@@ -35,6 +35,7 @@ gentoo:
     - salt-apply-script
     - alacritty
     - ncdu
+    - containers
 
     # General tools configuration
     - gpg
