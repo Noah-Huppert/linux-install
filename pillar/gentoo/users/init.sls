@@ -15,7 +15,9 @@ users:
     lpadmin: null
     vboxusers: null
     bluetooth: null
-    docker: null
+    docker:
+      name: docker
+      id: null
     movies: null
     
   users:
@@ -30,4 +32,4 @@ users:
         lpadmin: False
         vboxusers: False
         bluetooth: False
-        docker: False
+        docker: True
