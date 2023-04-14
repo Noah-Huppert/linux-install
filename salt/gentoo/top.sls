@@ -49,6 +49,7 @@ gentoo:
     - x11
     - sway
     - rice
+    - gnome-keyring
 
     # Applications configuration
     - links
