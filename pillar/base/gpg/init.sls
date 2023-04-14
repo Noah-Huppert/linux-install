@@ -3,6 +3,7 @@ gpg:
   # User GPG agent configuration options
   # Value of null means its a simple flag option and just the key will appear in the config file
   agent_config_opts: {}
+  
   # Packages to install for GPG
   pkgs: []
   
