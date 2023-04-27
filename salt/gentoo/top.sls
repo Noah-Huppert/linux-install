@@ -21,6 +21,7 @@ gentoo:
     - backlight
     - thunderbolt
     - pam
+    - polkit
     
     # User configuration
     - users
