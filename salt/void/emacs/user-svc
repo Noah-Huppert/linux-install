@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+exec emacs --fg-daemon &> /tmp/emacs-{{ user_name }}.log
