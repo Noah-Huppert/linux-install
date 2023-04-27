@@ -1,50 +1,36 @@
 # Install and configure Emacs.
 
 # Configuration directory
-{{ pillar.emacs.configuration_repo }}:
+{% for user_name in pillar['emacs']['users'] %}
+{% set user = pillar['users']['users'][user_name] %}
+
+{{ user.name }}-{{ pillar.emacs.configuration_repo }}:
   git.cloned:
-    - target: {{ pillar.emacs.configuration_directory }}
-    - user: noah
+    - name: {{ pillar.emacs.configuration_repo }}
+    - target: {{ user.home }}/{{ pillar.emacs.configuration_directory }}
+    - user: {{ user.name }}
+{% endfor %}
 
 # Install
 {% for pkg in pillar['emacs']['pkgs'] %}
 {{ pkg }}:
-  pkg.latest:
-    - required:
-      - git: {{ pillar.emacs.configuration_repo }}
-
+  pkg.installed
 {% endfor %}
 
 # Service
 {% for _, user in pillar['users']['users'].items() %}
-
-# Name of user specific emacs service
-{% set user_svc = pillar['emacs']['base_svc_name'] + '-' + user.name %}
-
-# User's emacs service file
-{% set user_svc_dir = user.home + '/' + pillar['user_services']['home_dir'] + '/' + pillar['emacs']['base_svc_name'] %}
-{% set user_svc_file = user_svc_dir + '/run' %}
-{% set user_svc_log_file = user_svc_dir + '/log/run' %}
-
-{{ user_svc_file }}:
+{{ user.home }}/{{ pillar.emacs.svc.file }}:
   file.managed:
+    - source: salt://emacs/user-svc
     - makedirs: True
     - template: jinja
-    - contents: |
-        #!/usr/bin/env bash
-        exec emacs --fg-daemon &> /tmp/emacs-noah.log
+    - context:
+        user_name: {{ user.name }}
     - user: {{ user.name }}
     - group: {{ user.name }}
     - mode: 755
 
-{{ user_svc_log_file }}:
+{{ user.home }}/{{ pillar.user_service_manager.services_config_dir }}/{{ pillar.emacs.svc.name }}:
   file.managed:
-    - makedirs: True
-    - template: jinja
-    - contents: |
-        #!/usr/bin/env bash
-        exec logger -t {{ user_svc }}
-    - user: {{ user.name }}
-    - group: {{ user.name }}
-    - mode: 755
+    - contents: ""
 {% endfor %}
