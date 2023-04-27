@@ -20,6 +20,7 @@ gentoo:
     - audio
     - backlight
     - thunderbolt
+    - pam
     
     # User configuration
     - users
