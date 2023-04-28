@@ -31,6 +31,7 @@ gentoo:
     - shell-profile
 
     - user-service-manager
+    - xdg-autostart
 
     # Development environment configuration
     - git
