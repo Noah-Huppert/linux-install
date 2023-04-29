@@ -1,4 +1,8 @@
 portage:
+  # Module packages
+  pkgs:
+    - app-eselect/eselect-repository
+    
   # Directory in which portage config files are located
   base_dir: /etc/portage
 
@@ -10,3 +14,6 @@ portage:
 
   # Path to package licenses file
   pkg_license_file: package.license
+
+  # Extra repositories configuration
+  repos_dir: repos.conf
