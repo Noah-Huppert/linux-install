@@ -62,3 +62,4 @@ gentoo:
     - vscode
     - signal
     - gimp
+    - discord
