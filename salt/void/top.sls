@@ -150,6 +150,7 @@ base:
  
     # Applications configuration
     - misc-applications
+    - gimp
     - firefox
     - slack
     - weechat
