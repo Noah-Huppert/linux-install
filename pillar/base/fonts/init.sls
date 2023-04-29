@@ -1,11 +1,16 @@
 fonts:
   # Font packages
-  font_pkgs:
-    # Noto Emoji
-    - noto-fonts-emoji
+  font_pkgs: []
 
-  # Fonts configuration file
-  fonts_conf_file: /etc/fonts/local.conf
+  # Global fonts configuration file
+  fonts_conf_file: null
+
+  # Font unit files to symlink from conf.avail to conf.d
+  linked_avail_units: []
+  unlinked_avail_units: []
+
+  fonts_avail_dir: /etc/fonts/conf.avail
+  fonts_enabled_dir: /etc/fonts/conf.d
   
   # TTF install directory
   ttf_install_directory: /usr/share/fonts/TTF

@@ -22,6 +22,7 @@ gentoo:
     - thunderbolt
     - pam
     - polkit
+    - fonts
     
     # User configuration
     - users
