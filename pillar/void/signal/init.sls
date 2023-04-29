@@ -1,0 +1,3 @@
+signal:
+  pkgs:
+    - Signal-Desktop

@@ -1,6 +1,5 @@
-# Installs Signal-Desktop from xbps.
-# src=SRC
-{% for pkg in pillar['signal']['xbps_signal_pkgs'] %}
+# Installs Signal desktop.
+{% for pkg in pillar['signal']['pkgs'] %}
 {{ pkg }}:
   pkg.installed
 {% endfor %}
