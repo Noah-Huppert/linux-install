@@ -60,3 +60,5 @@ gentoo:
     - syncthing
     - blender
     - vscode
+    - signal
+    - gimp
