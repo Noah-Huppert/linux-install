@@ -10,6 +10,8 @@ fonts:
     - media-fonts/fontawesome
     - media-fonts/symbola
 
+    - media-fonts/hack
+
   # Fonts configuration file
   linked_avail_units:
     - 75-noto-color-emoji.conf    
