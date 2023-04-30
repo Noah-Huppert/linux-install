@@ -1,6 +1,6 @@
 go:
   # Package
-  pkg: go
+  pkgs: []
   
   go_root: /usr/lib/go
   
