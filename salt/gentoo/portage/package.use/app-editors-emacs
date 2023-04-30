@@ -1,1 +1,1 @@
-app-editors/emacs gui X dbus gtk inotify systemd threads dynamic-loading
+app-editors/emacs gui X dbus gtk inotify systemd threads dynamic-loading acl alsa xft
