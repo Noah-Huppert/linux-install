@@ -40,6 +40,7 @@ gentoo:
     - alacritty
     - ncdu
     - containers
+    - go
 
     # General tools configuration
     - gpg
