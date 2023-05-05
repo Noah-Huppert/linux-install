@@ -1,29 +1,24 @@
 # Install Flutter SDK
 
-# Download
-{{ pillar.flutter.download_file }}:
-  file.managed:
-    - source: {{ pillar.flutter.download_url }}
-    - source_hash: {{ pillar.flutter.download_sha }}
-    - user: noah
-    - group: noah
-    - makedirs: True
-
+{% for user in pillar['users']['users'].values() %}
 # Extract tar.gz        
-{{ pillar.flutter.dir }}:
+{{ user.home }}/{{ pillar.flutter.parent_dir }}:
   archive.extracted:
-    - source: {{ pillar.flutter.download_file }}
-    - user: noah
-    - group: noah
-    - require:
-      - file: {{ pillar.flutter.download_file }}
+    - source: {{ pillar.flutter.download_url }}
+    - source_hash: {{ pillar.flutter.download_sha }}      
+    - user: {{ user.name }}
+    - group: {{ user.name }}
 
 # Install
-{{ pillar.flutter.install_file }}:
+{% for install_target in pillar['flutter']['install_targets'] %}
+{{ user.home }}/{{ pillar.flutter.install_dir }}/{{ install_target }}:
   file.symlink:
-    - target: {{ pillar.flutter.install_target }}
+    - target: {{ user.home }}/{{ pillar.flutter.install_targets_dir }}/{{ install_target }}
+    - makedirs: True
     - require:
-      - archive: {{ pillar.flutter.dir }}
+      - archive: {{ user.home }}/{{ pillar.flutter.parent_dir }}
+{% endfor %}
+{% endfor %}
 
 # Install dependencies
 {% for pkg in pillar['flutter']['dep_pkgs'] %}

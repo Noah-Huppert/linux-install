@@ -41,6 +41,7 @@ gentoo:
     - ncdu
     - containers
     - go
+    - flutter
 
     # General tools configuration
     - gpg

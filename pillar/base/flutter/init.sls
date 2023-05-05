@@ -1,25 +1,28 @@
-{% set dir = '/home/noah/install/flutter' %}
+{% set parent_dir = '.local/share' %}
+{% set dir = parent_dir + '/flutter' %}
 flutter:
   # Working directory
+  parent_dir: {{ parent_dir }}
   dir: {{ dir }}
   
   # Download URL
-  download_url: https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_2.2.3-stable.tar.xz
+  download_url: https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.7.12-stable.tar.xz
 
   # Download file sha256
-  download_sha: 66a271aa9f4286596841f5c89fd5d22e4ae0042127459e88d5650ca989ba948d
+  download_sha: 898f7f34dcf19353060dfa33ef20e9d674c2c04dc8cc5ddae9d5ff16042dbc2e
 
   # Download file
   download_file: {{ dir }}/flutter.tar.gz
 
   # Extract directory
-  extract_dir: {{ dir }}/flutter
+  extract_dir: {{ dir }}
 
   # Install location
-  install_file: /home/noah/bin/flutter
-  install_target: {{ dir }}/flutter/bin/flutter
+  install_dir: .local/bin
+  install_targets_dir: {{ dir }}/bin
+  install_targets:
+    - flutter
+    - dart
 
   # Dependency packages
-  dep_pkgs:
-    - libstdc++
-    - libstdc++-32bit
+  dep_pkgs: []
