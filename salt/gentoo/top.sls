@@ -67,3 +67,4 @@ gentoo:
     - gimp
     - discord
     - openvpn
+    - qbittorrent
