@@ -90,6 +90,7 @@ window#waybar.chromium {
 #temperature,
 #backlight,
 #network,
+#custom-vpn,
 #pulseaudio,
 #custom-media,
 #tray,
@@ -160,6 +161,10 @@ label:focus {
 
 #network.disconnected {
     background-color: #f53c3c;
+}
+
+#custom-vpn {
+    background-color: #4ca243;
 }
 
 #pulseaudio {

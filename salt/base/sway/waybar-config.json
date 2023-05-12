@@ -49,6 +49,13 @@
 		  "nil": ""
 	   }
     },
+    "custom/vpn": {
+        "format": "VPN ",
+	   "exec": "echo '{\"class\": \"connected\"}'",
+ 	   "exec-if": "systemctl list-units --type=service --state=active | grep openvpn &> /dev/null",
+	   "return-type": "json",
+	   "interval": 5
+    },
     // "mpd": {
     //     "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ",
     //     "format-disconnected": "Disconnected ",

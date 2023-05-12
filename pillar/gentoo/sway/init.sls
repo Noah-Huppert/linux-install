@@ -8,6 +8,7 @@ sway:
       - wireplumber
       - backlight
       - network
+      - custom/vpn
 
     right:
       - disk
