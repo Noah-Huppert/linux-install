@@ -1,6 +1,6 @@
 {% set transmission_core_pkg = 'transmission' %}
 
-torrent:
+transmission_torrent:
   xbps_torrent_pkgs:
     - {{ transmission_core_pkg }}
     - transmission-qt

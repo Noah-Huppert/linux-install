@@ -124,7 +124,7 @@ base:
     - libguestfs
     - gohls
     - ffmpeg
-    - torrent
+    - transmission-torrent
     - the-silver-searcher
     - dhcp-server
     - gnome-keyring
