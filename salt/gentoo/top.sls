@@ -23,6 +23,7 @@ gentoo:
     - pam
     - polkit
     - fonts
+    - firewall
     
     # User configuration
     - users
