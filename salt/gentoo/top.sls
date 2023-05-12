@@ -66,3 +66,4 @@ gentoo:
     - signal
     - gimp
     - discord
+    - openvpn
