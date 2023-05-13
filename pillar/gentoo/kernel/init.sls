@@ -1,4 +1,4 @@
-{% set version = "6.1.11" %}
+{% set version = "6.3.2" %}
 
 kernel:
   # Directory where source code lives

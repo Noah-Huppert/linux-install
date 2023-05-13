@@ -8,6 +8,7 @@
 {{ pillar.kernel.main_dir }}:
   file.symlink:
     - target: {{ pillar.kernel.src_dir }}/{{ kernel_name }}
+    - force: True
     - require:
       - pkg: {{ pillar.kernel.src_pkg }}
 
