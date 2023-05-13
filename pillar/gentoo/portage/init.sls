@@ -2,6 +2,9 @@ portage:
   # Module packages
   pkgs:
     - app-eselect/eselect-repository
+
+    # cpuid2cpuflags reads your CPU arch and prints CPU_FLAGS_... USE values
+    - app-portage/cpuid2cpuflags
     
   # Directory in which portage config files are located
   base_dir: /etc/portage
