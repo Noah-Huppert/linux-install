@@ -69,3 +69,4 @@ gentoo:
     - discord
     - openvpn
     - qbittorrent
+    - k3s

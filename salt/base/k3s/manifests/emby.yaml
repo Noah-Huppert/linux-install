@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: emby
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emby
+  namespace: emby
+  labels:
+    app: emby
+    component: server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emby
+      component: server
+  template:
+    metadata:
+      labels:
+        app: emby
+        component: server
+    spec:
+      containers:
+      - name: emby
+        image: emby/embyserver:4.8.0.34
+        ports:
+        - name: http
+          containerPort: 8096
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: emby
+  namespace: emby
+  labels:
+    app: emby
+    component: server
+spec:
+  selector:
+    app: emby
+    component: server
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: http
+---
+apiVersion: networking.k3s.io/v1
+kind: Ingress
+metadata:
+  name: emby
+  namespace: emby
+  labels:
+    app: emby
+    component: server
+spec:
+  ingressClassName: traefik
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: emby
+            port:
+              name: http
+              
