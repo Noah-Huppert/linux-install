@@ -5,6 +5,15 @@
   pkg.installed
 {% endfor %}
 
+{{ pillar.k3s.svc.install }}:
+  file.managed:
+    - source: salt://k3s/{{ pillar.k3s.svc.source }}
+    - makedirs: True
+    - requires:
+      {% for pkg in pillar['k3s']['pkgs'] %}
+      - pkg: {{ pkg }}
+      {% endfor %}        
+
 {{ pillar.k3s.auto_deploy_manifests_dir }}:
   file.recurse:
     - source: salt://k3s/manifests

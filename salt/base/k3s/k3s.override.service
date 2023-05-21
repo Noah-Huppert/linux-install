@@ -1,0 +1,2 @@
+[Service]
+ExecStop=/usr/bin/k3s-killall
