@@ -24,6 +24,7 @@ gentoo:
     - polkit
     - fonts
     - firewall
+    - power-management
     
     # User configuration
     - users
@@ -43,6 +44,7 @@ gentoo:
     - containers
     - go
     - flutter
+    - terraform
 
     # General tools configuration
     - gpg
