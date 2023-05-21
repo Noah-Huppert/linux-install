@@ -7,8 +7,8 @@ fonts:
     - media-fonts/noto-emoji
     - media-fonts/noto-cjk
 
-    - media-fonts/fontawesome
-    - media-fonts/symbola
+    # - media-fonts/fontawesome
+    # - media-fonts/symbola
 
     - media-fonts/hack
 
