@@ -45,6 +45,7 @@ gentoo:
     - go
     - flutter
     - terraform
+    - software-defined-radio
 
     # General tools configuration
     - gpg
