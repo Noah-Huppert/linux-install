@@ -73,3 +73,4 @@ gentoo:
     - openvpn
     - qbittorrent
     - k3s
+    - gnucash

@@ -1,0 +1,2 @@
+gnucash:
+  pkgs: []

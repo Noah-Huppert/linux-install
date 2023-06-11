@@ -1,1 +1,1 @@
-dev-libs/boost python # net-wireless/gnu-radio
+dev-libs/boost python icu # net-wireless/gnu-radio: python, app-office/gnucash: icu
