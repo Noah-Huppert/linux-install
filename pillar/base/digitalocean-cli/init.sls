@@ -1,6 +1,6 @@
 digitalocean_cli:
   # Package
-  pkg: doctl
+  pkg: null
 
   # Configuration file
   configuration_file: /home/noah/.config/doctl/config.yaml

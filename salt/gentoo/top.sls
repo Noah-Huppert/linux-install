@@ -46,6 +46,7 @@ gentoo:
     - flutter
     - terraform
     - software-defined-radio
+    - digitalocean-cli
 
     # General tools configuration
     - gpg
