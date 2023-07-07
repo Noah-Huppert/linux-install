@@ -75,3 +75,4 @@ gentoo:
     - qbittorrent
     - k3s
     - gnucash
+    - youtube-dl
