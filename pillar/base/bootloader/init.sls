@@ -1,6 +1,4 @@
-{% import_yaml 'kernel/init.sls' as pillar_kernel %}
 {% import_yaml 'partitions/init.sls' as pillar_partitions %}
-{% set kernel = pillar_kernel['kernel'] %}
 {% set partitions = pillar_partitions['partitions'] %}
 
 {% set check_refind_installed_dir = '/opt/check-refind-installed' %}
