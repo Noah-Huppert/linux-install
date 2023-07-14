@@ -48,6 +48,7 @@ gentoo:
     - software-defined-radio
     - digitalocean-cli
     - godot
+    - dotnet
 
     # General tools configuration
     - gpg
