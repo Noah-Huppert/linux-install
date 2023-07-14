@@ -16,5 +16,9 @@ kernel:
   # The source package name
   src_pkg: sys-kernel/gentoo-sources
 
+  # Tool packages
+  tool_pkgs:
+    - app-admin/eclean-kernel
+
   # Current version
   version: {{ version }}

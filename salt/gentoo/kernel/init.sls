@@ -5,6 +5,10 @@
   pkg.installed:
     - version: {{ pillar.kernel.version }}
 
+kernel_tool_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.kernel.tool_pkgs }}
+
 {{ pillar.kernel.main_dir }}:
   file.symlink:
     - target: {{ pillar.kernel.src_dir }}/{{ kernel_name }}
