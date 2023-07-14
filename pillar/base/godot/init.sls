@@ -11,3 +11,4 @@ godot:
   bin:
     target: /opt/godot/Godot_v{{ version }}-{{ channel }}_mono_linux_x86_64/Godot_v{{ version }}-{{ channel }}_mono_linux.x86_64
     desktop: /usr/local/share/applications/godot.desktop
+    opts: ""
