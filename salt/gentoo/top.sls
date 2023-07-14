@@ -47,6 +47,7 @@ gentoo:
     - terraform
     - software-defined-radio
     - digitalocean-cli
+    - godot
 
     # General tools configuration
     - gpg

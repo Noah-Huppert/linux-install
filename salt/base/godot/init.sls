@@ -1,17 +1,4 @@
-# Installs godot from xbps.
-# src=SRC
-{% for pkg in pillar['godot']['xbps_godot_pkgs'] %}
-{{ pkg }}:
-  pkg.installed
-{% endfor %}
-
-# Download
-{{ pillar.godot.install_dir }}:
-  archive.extracted:
-    - source: {{ pillar.godot.godot_dl.url }}
-    - source_hash: {{ pillar.godot.godot_dl.sha256sum }}
-
-{{ pillar.godot.bin.desktop }}:
-  file.managed:
-    - source: salt://godot/godot.desktop
-    - template: jinja
+# Installs Godot engine
+pkgs_godot:
+  pkg.installed:
+    - pkgs: {{ pillar.godot.pkgs }}
