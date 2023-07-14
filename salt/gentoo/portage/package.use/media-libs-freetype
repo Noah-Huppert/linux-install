@@ -1,1 +1,1 @@
-media-libs/freetype brotli # blender
+media-libs/freetype brotli harfbuzz # blender: brotli, godot: harfbuzz
