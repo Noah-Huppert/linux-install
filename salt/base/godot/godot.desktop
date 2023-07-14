@@ -3,5 +3,5 @@ Encoding=UTF-8
 Version=4.0beta3
 Type=Application
 Terminal=false
-Exec={{ pillar.godot.bin.target }}
+Exec={{ pillar.godot.bin.target }} {{ pillar.godot.bin.opts }}
 Name=Godot
