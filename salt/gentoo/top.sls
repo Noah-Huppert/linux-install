@@ -79,3 +79,4 @@ gentoo:
     - gnucash
     - youtube-dl
     - open-broadcaster-software
+    - steam

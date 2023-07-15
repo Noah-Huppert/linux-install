@@ -14,6 +14,11 @@
     - source: salt://portage/package.use/
     - clean: true
 
+{{ pillar.portage.base_dir }}/{{ pillar.portage.pkg_accept_keywords_dir }}:
+  file.recurse:
+    - source: salt://portage/package.accept_keywords/
+    - clean: true
+
 {{ pillar.portage.base_dir }}/{{ pillar.portage.pkg_license_file }}:
   file.managed:
     - source: salt://portage/package.license

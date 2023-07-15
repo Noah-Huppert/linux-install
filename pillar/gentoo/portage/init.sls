@@ -15,6 +15,8 @@ portage:
   # Path to package specific use file directory
   pkg_use_dir: package.use
 
+  pkg_accept_keywords_dir: package.accept_keywords
+
   # Path to package licenses file
   pkg_license_file: package.license
 
