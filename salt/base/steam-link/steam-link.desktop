@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1
+Type=Application
+Terminal=false
+Exec=/bin/bash -c "flatpak run {{ pillar.steam_link.flatpak.pkg }}"
+Name=Steam Link

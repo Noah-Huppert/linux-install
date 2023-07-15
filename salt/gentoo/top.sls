@@ -81,3 +81,4 @@ gentoo:
     - youtube-dl
     - open-broadcaster-software
     - steam
+    - steam-link
