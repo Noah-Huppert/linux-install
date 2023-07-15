@@ -1,0 +1,4 @@
+flatpak:
+  pkgs:
+    - flatpak
+    - libostree

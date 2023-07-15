@@ -54,6 +54,7 @@ gentoo:
     - gpg
     - trash-cli
     - htop
+    - flatpak
     
     # User interface configuration
     - vulkan

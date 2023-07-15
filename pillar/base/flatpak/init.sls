@@ -1,8 +1,6 @@
 flatpak:
   # Packages
-  pkgs:
-    - flatpak
-    - libostree
+  pkgs: []
 
   # Flatpak repository
   repository: https://flathub.org/repo/flathub.flatpakrepo
