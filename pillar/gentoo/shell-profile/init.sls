@@ -18,6 +18,7 @@ shell_profile:
     # - go
     # - rust
     # - deno
+    - dotnet
     - prompt
     - ls_color
     - shell_reload_fn
@@ -28,7 +29,7 @@ shell_profile:
     - edit_alias
     - salt_apply_alias
     - autocd
-    # - kubectl_alias
+    - kubectl_alias
     # - kube_namespace
     - git_alias
     # - android_sdk
