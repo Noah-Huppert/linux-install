@@ -29,6 +29,7 @@ gentoo:
     # User configuration
     - users
     - sudoers
+    - home-directories
     
     - bash
     - shell-profile
