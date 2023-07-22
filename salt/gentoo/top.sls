@@ -50,6 +50,7 @@ gentoo:
     - digitalocean-cli
     - godot
     - dotnet
+    - ceph-client
 
     # General tools configuration
     - gpg

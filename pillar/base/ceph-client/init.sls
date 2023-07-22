@@ -1,0 +1,2 @@
+ceph_client:
+  pkgs: []

@@ -1,1 +1,1 @@
-dev-libs/boost python icu # net-wireless/gnu-radio: python, app-office/gnucash: icu
+dev-libs/boost python icu context # net-wireless/gnu-radio: python, app-office/gnucash: icu sys-cluster/ceph: context
