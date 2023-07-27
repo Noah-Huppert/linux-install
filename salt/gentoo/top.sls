@@ -51,6 +51,7 @@ gentoo:
     - godot
     - dotnet
     - ceph-client
+    - dig
 
     # General tools configuration
     - gpg
