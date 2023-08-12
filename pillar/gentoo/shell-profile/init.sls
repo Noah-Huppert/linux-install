@@ -18,6 +18,7 @@ shell_profile:
     # - go
     # - rust
     # - deno
+    - godot
     - dotnet
     - prompt
     - ls_color
