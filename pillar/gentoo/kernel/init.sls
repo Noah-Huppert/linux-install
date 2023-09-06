@@ -19,6 +19,10 @@ kernel:
   # Tool packages
   tool_pkgs:
     - app-admin/eclean-kernel
+    - sys-kernel/gentoo-kernel
 
   # Current version
   version: {{ version }}
+
+  # Genkernel (kernel and initramfs build tool) configuration file
+  genkernel_conf_file: /etc/genkernel.conf

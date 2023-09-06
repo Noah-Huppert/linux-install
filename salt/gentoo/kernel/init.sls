@@ -23,3 +23,8 @@ kernel_tool_pkgs:
     - require:
       - file: {{ pillar.kernel.main_dir }}
 {% endfor %}
+
+
+{{ pillar.kernel.genkernel_conf_file }}:
+  file.managed:
+    - source: salt://kernel/genkernel.conf
