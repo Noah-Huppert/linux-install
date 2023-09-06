@@ -1,11 +1,9 @@
 # Install bluetooth service
 
 # Install
-{{ pillar.bluetooth.pkg }}:
-  pkg.latest
-
-{{ pillar.bluetooth.blueman_pkg }}:
-  pkg.latest
+bluetooth_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.bluetooth.pkgs }}
 
 # Configure
 {{ pillar.bluetooth.main_config }}:
@@ -18,7 +16,7 @@
   service.enabled:
     - name: {{ pillar.bluetooth.service }}
     - require:
-      - pkg: {{ pillar.bluetooth.pkg }}
+      - pkg: bluetooth_pkgs
 
 {{ pillar.bluetooth.service }}-running:
   service.running:

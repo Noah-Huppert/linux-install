@@ -25,6 +25,7 @@ gentoo:
     - fonts
     - firewall
     - power-management
+    - bluetooth
     
     # User configuration
     - users
