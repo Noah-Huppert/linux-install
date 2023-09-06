@@ -53,6 +53,7 @@ gentoo:
     - dotnet
     - ceph-client
     - dig
+    - insomnia
 
     # General tools configuration
     - gpg
