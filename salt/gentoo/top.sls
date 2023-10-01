@@ -60,6 +60,7 @@ gentoo:
     - trash-cli
     - htop
     - flatpak
+    - flameshot
     
     # User interface configuration
     - vulkan
