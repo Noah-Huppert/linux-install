@@ -54,6 +54,7 @@ gentoo:
     - dig
     - insomnia
     - python
+    - pipenv
 
     # General tools configuration
     - gpg
