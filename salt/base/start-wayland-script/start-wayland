@@ -41,6 +41,10 @@ EOF
     done
 fi
 
+# export XDG_CURRENT_DESKTOP=sway # xdg-desktop-portal
+# export XDG_SESSION_DESKTOP=sway # systemd
+# export XDG_SESSION_TYPE=wayland # xdg/systemd
+
 echo "$(date) [start-wayland] !!!!!!!!!! NEW INVOCATION !!!!!!!!!!" >> "$log_f"
 dbus-run-session sway >> "$log_f" 2>&1
 echo "$(date) [start-wayland] !!!!!!!!!! END INVOCATION !!!!!!!!!!" >> "$log_f"

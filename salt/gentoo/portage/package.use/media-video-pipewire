@@ -1,1 +1,1 @@
-media-video/pipewire sound-server # pipewire
+media-video/pipewire sound-server readline ssl v4l # required for pipewire to work
