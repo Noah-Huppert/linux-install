@@ -24,7 +24,24 @@ kernel_tool_pkgs:
       - file: {{ pillar.kernel.main_dir }}
 {% endfor %}
 
+{{ pillar.kernel.modprobe_dir }}:
+  file.recurse:
+    - source: salt://kernel/modprobe.d/
+    - clean: True
+
+{{ pillar.kernel.kernel_config_file }}:
+  file.managed:
+    - source: salt://kernel/kernel.config
 
 {{ pillar.kernel.genkernel_conf_file }}:
   file.managed:
     - source: salt://kernel/genkernel.conf
+
+{{ pillar.kernel.dracut_conf_file_dir }}:
+  file.recurse:
+    - source: salt://kernel/dracut.conf.d/
+    - clean: True
+
+{{ pillar.kernel.vconsole_conf_file }}:
+  file.managed:
+    - source: salt://kernel/vconsole.conf

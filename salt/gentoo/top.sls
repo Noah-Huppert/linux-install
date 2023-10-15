@@ -5,7 +5,6 @@ gentoo:
 
     # Base system configuration
     - kernel
-    - genkernel
     - fstab
     - firmware
 
