@@ -53,6 +53,7 @@ gentoo:
     - ceph-client
     - dig
     - insomnia
+    - python
 
     # General tools configuration
     - gpg
