@@ -68,6 +68,7 @@ gentoo:
     - start-wayland-script
     - x11
     - sway
+    - hyprland
     - rice
     - gnome-keyring
 
