@@ -22,6 +22,18 @@
     - requires:
       - file: {{ user.home }}/{{ pillar.sway.sway_dir }}
 
+# Desktop portal
+{{ user.home }}/{{ pillar.sway.desktop_portal_script }}-{{ user.name }}:
+  file.managed:
+    - name: {{ user.home }}/{{ pillar.sway.desktop_portal_script }}
+    - source: salt://sway/desktop-portal-setup.sh
+    - template: jinja
+    - mode: 755
+    - user: {{ user.name }}
+    - group: {{ user.name }}
+    - requires:
+      - file: {{ user.home }}/{{ pillar.sway.sway_dir }}
+
 # Waybar
 {{ user.home }}/{{ pillar.sway.waybar_dir }}:
   file.directory:

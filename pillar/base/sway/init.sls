@@ -7,6 +7,8 @@ sway:
   sway_dir: {{ sway_dir }}
   sway_config_file: {{ sway_dir }}/config
 
+  desktop_portal_script: {{ sway_dir }}/desktop-portal-setup.sh
+
   # Elogind
   elogind_svc: null
 
