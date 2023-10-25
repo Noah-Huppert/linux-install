@@ -6,6 +6,8 @@ portage:
     # cpuid2cpuflags reads your CPU arch and prints CPU_FLAGS_... USE values
     - app-portage/cpuid2cpuflags
 
+    - app-portage/gentoolkit
+
   # Directory in which portage config files are located
   base_dir: /etc/portage
 
