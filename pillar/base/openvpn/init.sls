@@ -12,7 +12,7 @@ openvpn:
   # PIA configuration profiles which will be setup to work with OpenVPN
   # - File extension renamed .ovpn -> .conf
   # - auth-user-pass file directive inserted
-  client_profiles:
+  pia_client_profiles:
     - us_east
 
   # Location of file which will contain PIA login credentials
