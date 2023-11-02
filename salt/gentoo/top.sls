@@ -55,6 +55,7 @@ gentoo:
     - insomnia
     - python
     - pipenv
+    - aws-cli
 
     # General tools configuration
     - gpg

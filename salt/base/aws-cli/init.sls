@@ -1,24 +1,16 @@
-# Install and configure AWS CLI
-
-# Install
-{% for pkg in pillar['aws_cli']['pip_pkgs'] %}
-{{ pkg }}:
- pip.installed:
-   - pip_bin: {{ pillar.python.pip3_bin }}
-{% endfor %}     
-
-{% for pkg in pillar['aws_cli']['xbps_dep_pkgs'] %}
-{{ pkg }}:
-  pkg.latest
-{% endfor %}
+# Installs the AWS CLI
+aws_cli_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.aws_cli.pkgs }}
 
 # Configure credentials
-{{ pillar.aws_cli.credentials_file }}:
+{% for user in pillar['users']['users'].values() %}
+{{ user.home }}/{{ pillar.aws_cli.home_dir_credentials_files }}:
   file.managed:
     - source: salt://aws-cli/credentials
     - makedirs: True
     - template: jinja
-    - user: noah
-    - group: noah
+    - user: {{ user.name }}
+    - group: {{ user.name }}
     - mode: 600
-
+{% endfor %}
