@@ -1,2 +1,4 @@
 tailscale:
   pkgs: []
+
+  service: tailscaled
