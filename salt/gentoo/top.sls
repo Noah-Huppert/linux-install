@@ -92,3 +92,4 @@ gentoo:
     - open-broadcaster-software
     - steam
     - steam-link
+    - tailscale
