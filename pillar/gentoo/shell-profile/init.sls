@@ -2,7 +2,7 @@ shell_profile:
   shell_units:
     - meta_fns
     - usr_local_bin
-    - keyboard
+    #- keyboard
     - editor
     # - terminal
     - pager
@@ -23,8 +23,8 @@ shell_profile:
     - prompt
     - ls_color
     - shell_reload_fn
-    - user_bin
-    - scripts_fns
+    #- user_bin
+    #- scripts_fns
     # - org_mode
     - trash
     - edit_alias
