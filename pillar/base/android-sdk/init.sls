@@ -22,6 +22,9 @@ android_sdk:
   
   # SDK packages
   sdk_pkgs:
-    - build-tools;34.0.0
+    # Versions Android platform 33, and build tools 30 required by flutter
+    - build-tools;30.0.3
     - platform-tools
-    - platforms;android-34
+    - platforms;android-33
+    - tools
+    - emulator
