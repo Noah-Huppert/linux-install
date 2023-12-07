@@ -33,7 +33,7 @@ shell_profile:
     - kubectl_alias
     # - kube_namespace
     - git_alias
-    # - android_sdk
+    - android_sdk
     # - autostart
     - linux_install_edit
     # - startx

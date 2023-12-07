@@ -1,11 +1,18 @@
-{% set dir = '/home/noah/libs/android-sdk' %}
+{% set sdk_root = '/home/noah/.local/lib/android-sdk' %}
+{% set cli_tools_extract_parent_dir = sdk_root + '/download' %}
+{% set cli_tools_extract_target_dir = cli_tools_extract_parent_dir + '/cmdline-tools' %}
+{% set cli_tools_dir = sdk_root + '/cmdline-tools/latest' %}
 android_sdk:
-  dir: {{ dir }}
+  sdk_root: {{ sdk_root }}
 
   # SDK tools files
-  cli_tools_zip: {{ dir }}/sdk-tools.zip
-  cli_tools_url: https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
-  cli_tools_hash: 92ffee5a1d98d856634e8b71132e8a95d96c83a63fde1099be3d86df3106def9
+  cli_tools_extract_parent_dir: {{ cli_tools_extract_parent_dir }}
+  cli_tools_extract_target_dir: {{ cli_tools_extract_target_dir }}
+  cli_tools_dir: {{ cli_tools_dir }}
+
+  # https://developer.android.com/studio
+  cli_tools_url: https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip
+  cli_tools_hash: 8919e8752979db73d8321e9babe2caedcc393750817c1a5f56c128ec442fb540
 
   # Users in group can access Android devices
   udev_group: androiddev
@@ -15,10 +22,10 @@ android_sdk:
   
   # SDK packages
   sdk_pkgs:
-    - build-tools;29.0.2
-    - build-tools;28.0.3
+    #- build-tools;29.0.2
+    #- build-tools;28.0.3
     - platform-tools
-    - platforms;android-30
-    - platforms;android-29
-    - platforms;android-28
-    - platforms;android-27
+    #- platforms;android-30
+    #- platforms;android-29
+    #- platforms;android-28
+    #- platforms;android-27

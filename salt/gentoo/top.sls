@@ -58,6 +58,7 @@ gentoo:
     - aws-cli
     - eksctl
     - java
+    - android-sdk
 
     # General tools configuration
     - gpg
