@@ -1,6 +1,4 @@
 java:
-  xbps_java_pkgs:
-    - openjdk8
-    - openjdk8-jre
+  pkgs: []
 
-  java_home: /usr/lib/jvm/java-1.8-openjdk
+  java_home: ""

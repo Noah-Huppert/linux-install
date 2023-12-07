@@ -57,6 +57,7 @@ gentoo:
     - pipenv
     - aws-cli
     - eksctl
+    - java
 
     # General tools configuration
     - gpg

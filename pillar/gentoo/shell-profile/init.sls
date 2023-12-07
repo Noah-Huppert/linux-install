@@ -6,7 +6,7 @@ shell_profile:
     - editor
     # - terminal
     - pager
-    # - java
+    - java
     - browser
     - screenshot_dir
     - gpg_tty

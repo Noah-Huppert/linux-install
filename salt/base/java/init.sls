@@ -1,6 +1,4 @@
-# Installs openjdk8-jre from xbps.
-# src=SRC
-{% for pkg in pillar['java']['xbps_java_pkgs'] %}
-{{ pkg }}:
-  pkg.installed
-{% endfor %}
+# Installs openjdk8-jre
+java_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.java.pkgs }}
