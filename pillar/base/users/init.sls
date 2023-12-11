@@ -15,32 +15,6 @@ users:
     linux_install:
       name: linux-install
       id: 10000
-    wheel:
-      name: wheel
-      id: 4
-    audio:
-      name: audio
-      id: 12
-    video:
-      name: video
-      id: 13
-    xbuilder:
-      name: xbuilder
-      id: 101
-    lpadmin: # CUPS printer admin group
-      name: lpadmin
-      id: 976
-    vboxusers:
-      name: vboxusers
-      id: 987
-    bluetooth:
-      name: bluetooth
-      id: 990
-    docker:
-      name: docker
-      id: 991
-    movies: # Torrent destination directories
-      name: movies
 
   # Users configuration, dict of user objects with the keys:
   #
@@ -60,16 +34,7 @@ users:
       id: 1000
       home: /home/noah
       ssh_key_name: id_ed25519
-      groups:
-        linux_install: True
-        wheel: True
-        audio: True
-        video: True
-        xbuilder: True
-        lpadmin: True
-        vboxusers: True
-        bluetooth: True
-        docker: True
+      groups: {}
     root:
       name: root
       id: 0

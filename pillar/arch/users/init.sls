@@ -1,15 +1,13 @@
 users:
-  shell: /bin/bash
-  
   groups:
-    docker:
-      name: docker
-      id: null
     wheel:
+      name: wheel
       id: null
     audio:
+      name: audio
       id: null
     video:
+      name: video
       id: null
     pipewire:
       name: pipewire
@@ -17,7 +15,7 @@ users:
     docker:
       name: docker
       id: null
-    
+
   users:
     noah:
       groups:
