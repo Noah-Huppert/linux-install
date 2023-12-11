@@ -1,0 +1,2 @@
+sudoers:
+  pkg: sudo
