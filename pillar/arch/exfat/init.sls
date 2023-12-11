@@ -1,0 +1,3 @@
+exfat:
+  pkgs:
+    - exfat-utils

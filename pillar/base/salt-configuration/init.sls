@@ -13,6 +13,8 @@ salt_configuration:
       public: {{ content_root }}/salt/void
     gentoo:
       public: {{ content_root }}/salt/gentoo
+    arch:
+      public: {{ content_root }}/salt/arch
     work:
       public: {{ content_root }}/salt/work
     wsl:
@@ -27,6 +29,8 @@ salt_configuration:
       public: {{ content_root }}/pillar/void
     gentoo:
       public: {{ content_root }}/pillar/gentoo
+    arch:
+      public: {{ content_root }}/pillar/arch
     work:
       public: {{ content_root }}/pillar/work
     wsl:
@@ -42,6 +46,9 @@ salt_configuration:
     gentoo:
       public: {{ content_root }}/pillar/gentoo/pillar-stack.cfg
       secret: {{ content_root }}/pillar/gentoo-secret/pillar-stack.cfg
+    arch:
+      public: {{ content_root }}/pillar/arch/pillar-stack.cfg
+      secret: {{ content_root }}/pillar/arch-secret/pillar-stack.cfg
     work:
       public: {{ content_root }}/pillar/work/pillar-stack.cfg
     wsl:

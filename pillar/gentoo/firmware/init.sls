@@ -9,5 +9,3 @@ firmware:
     - sys-apps/input-utils
     - app-misc/evtest
     - sys-apps/dmidecode
-
-  modprobe_dir: /etc/modprobe.d/

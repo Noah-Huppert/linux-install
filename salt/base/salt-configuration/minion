@@ -694,6 +694,10 @@ file_roots:
     - {{ pillar.salt_configuration.state_dirs.gentoo.public }}
     - {{ pillar.salt_configuration.state_dirs.base.public }}
     - {{ pillar.salt_configuration.state_dirs.base.secret }}
+  arch:
+    - {{ pillar.salt_configuration.state_dirs.arch.public }}
+    - {{ pillar.salt_configuration.state_dirs.base.public }}
+    - {{ pillar.salt_configuration.state_dirs.base.secret }}
   work:
     - {{ pillar.salt_configuration.state_dirs.work.public }}
     - {{ pillar.salt_configuration.state_dirs.base.public }}
@@ -886,6 +890,8 @@ pillar_roots:
     - {{ pillar.salt_configuration.pillar_dirs.void.public }}
   gentoo:
     - {{ pillar.salt_configuration.pillar_dirs.gentoo.public }}
+  arch:
+    - {{ pillar.salt_configuration.pillar_dirs.arch.public }}
   work:
     - {{ pillar.salt_configuration.pillar_dirs.work.public }}
   wsl:
@@ -908,6 +914,11 @@ ext_pillar:
           - {{ pillar.salt_configuration.pillar_stack.base.secret }}
           - {{ pillar.salt_configuration.pillar_stack.gentoo.public }}
           - {{ pillar.salt_configuration.pillar_stack.gentoo.secret }}
+        arch:
+          - {{ pillar.salt_configuration.pillar_stack.base.public }}
+          - {{ pillar.salt_configuration.pillar_stack.base.secret }}
+          - {{ pillar.salt_configuration.pillar_stack.arch.public }}
+          - {{ pillar.salt_configuration.pillar_stack.arch.secret }}
         work:
           - {{ pillar.salt_configuration.pillar_stack.base.public }}
           - {{ pillar.salt_configuration.pillar_stack.base.secret }}
