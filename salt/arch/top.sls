@@ -27,16 +27,18 @@ arch:
     
     # User configuration
     - users
-    #- sudoers
-    #- home-directories
+    - sudoers
+
+    - home-directories
     
-    #- bash
-    #- shell-profile
+    - bash
+    - shell-profile
 
     #- user-service-manager
     #- xdg-autostart
 
     # Development environment configuration
+    - ssh
     - git
     - salt-apply-script
     #- alacritty
@@ -60,7 +62,7 @@ arch:
     #- android-sdk
 
     # General tools configuration
-    #- gpg
+    - gpg
     #- trash-cli
     #- htop
     #- flatpak
