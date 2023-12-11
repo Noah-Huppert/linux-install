@@ -1,8 +1,6 @@
 ssh:
   # Package
-  pkgs:
-    - openssh
-    - gnome-ssh-askpass
+  pkgs: []
 
   # Configuration file
   config_file: /home/noah/.ssh/config
