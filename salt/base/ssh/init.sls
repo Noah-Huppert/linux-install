@@ -1,10 +1,9 @@
 # Install and configure SSH
 
 # Install
-{% for pkg in pillar['ssh']['pkgs'] %}
-  {{ pkg }}:
-    pkg.latest
-{% endfor %}
+ssh_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.ssh.pkgs }}
 
 # Configure
 {{ pillar.ssh.config_file }}:
