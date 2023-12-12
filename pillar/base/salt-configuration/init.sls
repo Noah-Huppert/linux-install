@@ -4,6 +4,9 @@ salt_configuration:
   # Salt minion configuration file:
   minion_config_file: /etc/salt/minion
 
+  # Custom modules directory
+  custom_modules_dir: {{ content_root }}/salt/base/_modules
+
   # State directories
   state_dirs:
     base:

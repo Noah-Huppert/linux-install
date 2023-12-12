@@ -1,6 +1,8 @@
 {% set version = '12.2.0' %}
 {% set dir = '/opt/yay' %}
 
+{% import_yaml 'salt-configuration/init.sls' as salt_config %}
+
 yay:
   download:
     url: https://github.com/Jguer/yay/releases/download/v{{ version }}/yay_{{ version }}_x86_64.tar.gz
@@ -10,3 +12,5 @@ yay:
   link:
     target: /usr/local/bin/yay
     source: {{ dir }}/yay_{{ version }}_x86_64/yay
+
+  salt_module_dir: aurpkg
