@@ -7,12 +7,13 @@ arch:
     - kernel
     - fstab
     - firmware
+    - bootloader
 
     # Higher level configuration
     - hostname
     - ntp
     - timezone
-    #- internet
+    - internet
     - ntfs
     - exfat
     - audio
@@ -20,7 +21,7 @@ arch:
     #- thunderbolt
     #- pam
     #- polkit
-    #- fonts
+    - fonts
     #- firewall
     #- power-management
     #- bluetooth
@@ -41,7 +42,7 @@ arch:
     - ssh
     - git
     - salt-apply-script
-    #- alacritty
+    - alacritty
     #- ncdu
     #- containers
     #- go
@@ -70,17 +71,17 @@ arch:
     
     # User interface configuration
     #- vulkan
-    #- wayland
-    #- start-wayland-script
+    - wayland
+    - start-wayland-script
     #- x11
-    #- sway
+    - rice
+    - sway
     #- hyprland
-    #- rice
     #- gnome-keyring
 
     # Applications configuration
     #- links
-    #- firefox
+    - firefox
     #- syncthing
     #- blender
     #- vscode
