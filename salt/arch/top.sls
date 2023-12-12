@@ -17,6 +17,7 @@ arch:
     - ntfs
     - exfat
     - audio
+    - yay
     #- backlight
     #- thunderbolt
     #- pam
