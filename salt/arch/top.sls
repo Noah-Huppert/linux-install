@@ -34,7 +34,9 @@ arch:
     - home-directories
     
     - bash
+    - which
     - shell-profile
+    - pacman
 
     #- user-service-manager
     #- xdg-autostart
@@ -80,7 +82,7 @@ arch:
     - rice
     - sway
     #- hyprland
-    #- gnome-keyring
+    - gnome-keyring
 
     # Applications configuration
     #- links
