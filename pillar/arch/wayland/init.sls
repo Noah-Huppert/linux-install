@@ -1,0 +1,3 @@
+wayland:
+  pkgs:
+    - xorg-xwayland
