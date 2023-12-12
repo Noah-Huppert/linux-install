@@ -88,7 +88,7 @@ arch:
     #- syncthing
     #- blender
     - emacs
-    #- vscode
+    - vscode
     #- signal
     #- gimp
     #- discord
