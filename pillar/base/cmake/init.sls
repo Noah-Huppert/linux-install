@@ -1,2 +1,2 @@
 cmake:
-  pkg: cmake
+  pkg: ""

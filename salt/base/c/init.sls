@@ -1,6 +1,5 @@
 # Install C development environment.
 
-{% for pkg in pillar['c']['pkgs'] %}
-{{ pkg }}:
-  pkg.installed
-{% endfor %}
+c_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.c.pkgs }}

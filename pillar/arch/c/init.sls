@@ -1,0 +1,3 @@
+c:
+  pkgs:
+    - make
