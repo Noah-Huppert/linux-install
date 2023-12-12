@@ -1,5 +1,9 @@
 # Installs Pacman AUR manager yay
 
+yay_aux_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.yay.aux_pkgs }}
+
 yay_archive:
   archive.extracted:
     - name: {{ pillar.yay.download.dir }}
@@ -9,7 +13,3 @@ yay_archive:
 {{ pillar.yay.link.target }}:
   file.symlink:
     - target: {{ pillar.yay.link.source }}
-
-{{ pillar.salt_configuration.custom_modules_dir }}/{{ pillar.yay.salt_module_dir }}:
-  file.recurse:
-    - source: salt://yay/aurpkg
