@@ -6,7 +6,6 @@
     - template: jinja      
     - makedirs: True
 
-{% for pkg in pillar['firefox']['pkgs'] %}
-{{ pkg }}:
-  pkg.latest
-{% endfor %}
+firefox_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.firefox.pkgs }}
