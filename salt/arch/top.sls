@@ -43,6 +43,8 @@ arch:
     - git
     - salt-apply-script
     - alacritty
+    - c
+    - cmake
     #- ncdu
     #- containers
     #- go
@@ -65,7 +67,7 @@ arch:
     # General tools configuration
     - gpg
     #- trash-cli
-    #- htop
+    - htop
     #- flatpak
     #- flameshot
     
@@ -84,6 +86,7 @@ arch:
     - firefox
     #- syncthing
     #- blender
+    - emacs
     #- vscode
     #- signal
     #- gimp
