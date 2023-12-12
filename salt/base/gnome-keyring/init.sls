@@ -1,5 +1,4 @@
 # Installs gnome-keyring.
-{% for pkg in pillar['gnome_keyring']['pkgs'] %}
-{{ pkg }}:
-  pkg.installed
-{% endfor %}
+gnome_keyring_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.gnome_keyring.pkgs }}
