@@ -12,12 +12,12 @@
 {% endfor %}
 
 # Install
-{% for pkg in pillar['emacs']['pkgs'] %}
-{{ pkg }}:
-  pkg.installed
-{% endfor %}
+emacs_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.emacs.pkgs }}
 
 # Service
+{% if pillar['emacs']['svc'] is not none %}
 {% for _, user in pillar['users']['users'].items() %}
 {{ user.home }}/{{ pillar.emacs.svc.file }}:
   file.managed:
@@ -34,3 +34,4 @@
   file.managed:
     - contents: ""
 {% endfor %}
+{% endif %}
