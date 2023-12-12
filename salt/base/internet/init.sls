@@ -1,10 +1,9 @@
 # Configure dhcpcd and wpa_supplicant to connect to the internet
 
 # Install packages
-{% for pkg in pillar['internet']['pkgs'] %}
-{{ pkg }}:
-  pkg.installed
-{% endfor %}
+internet_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.internet.pkgs }}
 
 # Configure wpa_supplicant
 {{ pillar.internet.wpa_supplicant.config_file }}:
@@ -37,9 +36,7 @@
     - name: {{ pillar.internet.dhcpcd.service }}
     {% if pillar['internet']['pkgs'] | length > 0 -%}
     - require:
-      {% for pkg in pillar['internet']['pkgs'] %}
-      - pkg: {{ pkg }}
-      {% endfor %}
+      - pkg: internet_pkgs
     {% endif %}
 
 {{ pillar.internet.dhcpcd.service }}-running:
