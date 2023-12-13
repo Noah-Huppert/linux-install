@@ -1,5 +1,4 @@
 # Installs Signal desktop.
-{% for pkg in pillar['signal']['pkgs'] %}
-{{ pkg }}:
-  pkg.installed
-{% endfor %}
+signal_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.signal.pkgs }}

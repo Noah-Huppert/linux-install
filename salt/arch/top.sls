@@ -91,7 +91,7 @@ arch:
     #- blender
     - emacs
     - vscode
-    #- signal
+    - signal
     #- gimp
     #- discord
     #- openvpn
