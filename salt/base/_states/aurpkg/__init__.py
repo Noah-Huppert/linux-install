@@ -1,3 +1,19 @@
+"""
+Overview
+========
+Invokes the Yay AUR package manager. This utility is similar to pacman but for the auxiliary package repository which is less maintained.
+
+Configuration
+=============
+The module requires configuration via the Salt minion file.
+
+The Yay utility does not allow itself to be run as the root user. This is because it builds unknown source code. Configure the user for which Yay runs as by setting the build_user field.
+
+```yaml
+aurpkg:
+  build_user: <USER>
+```
+"""
 from typing import Optional, List, TypedDict, Union, Dict
 import subprocess
 import logging
@@ -14,20 +30,37 @@ OPTS_BUILD_USER_KEY = "build_user"
 
 class SaltStateResChanges(TypedDict):
     """ Describes changes.
+    Fields:
+    - old: User facing string describing previous status before changes
+    - new: User facing string describing status after changes
     """
     old: str
     new: str
 
 class SaltStateRes(TypedDict):
     """ Describes the result of a salt state execution.
+    Fields:
+    - name: Identifier of state block
+    - result: Indicates if the state was successful, failed, or shouldn't run, see for more details: https://docs.saltproject.io/en/latest/ref/states/writing.html#return-data
+    - changes: Describes what changed due to this state running, SaltStateResChanges if changes were made, an empty dict if no changes were made
+    - comment: Single line descibing what changed
     """
     name: str
-    result: bool
+    result: Optional[bool]
     changes: Union[SaltStateResChanges, Dict[str, str]]
     comment: str
 
 def _cmd_run(cmd: str) -> str:
     """ Run a command as the correct user.
+    This inspects the build user configuration option to determine what user to run Yay as, then runs the command using the cmd.run salt state.
+
+    Arguments:
+    - cmd: To run
+
+    Returns: String output of command
+
+    Raises:
+    - CommandExecutionError: If the command exits with a non-zero exit code
     """
     kwargs = {
         "cmd": cmd,
@@ -43,13 +76,18 @@ def _cmd_run(cmd: str) -> str:
     if build_user is not None:
         kwargs["runas"] = build_user
         kwargs["group"] = build_user
-
-
+    
+    # Run command
     return __salt__["cmd.run"](**kwargs)
     
 
 def _installed(name: str, pkgs: List[str]) -> SaltStateRes:
-    """ Actually performs the install logic.
+    """ Ensure packages are installed. Actual business logic behind installed state.
+    Arguments:
+    - name: ID of state block
+    - pkgs: Packages to install
+
+    Returns: Install result
     """
     pkgs_space_sep_str = " ".join(pkgs)
 
@@ -72,7 +110,12 @@ def _installed(name: str, pkgs: List[str]) -> SaltStateRes:
     return res
 
 def _check_installed(name: str, pkgs: List[str]) -> SaltStateRes:
-    """ Actually check if package is installed.
+    """ Check if package is installed. Business logic behind check_installed state.
+    Arguments:
+    - name: ID of state block
+    - pkgs: Packages to ensure are installed
+
+    Returns: Check result
     """
     pkgs_space_sep_str = " ".join(pkgs)
     is_installed = True
@@ -98,12 +141,22 @@ def _check_installed(name: str, pkgs: List[str]) -> SaltStateRes:
 
 def check_installed(name: str, pkgs: Optional[List[str]]=None) -> SaltStateRes:
     """ Determines if a package is installed.
+    Arguments:
+    - name: Either package to check is installed or just name of state if pkgs is set
+    - pkgs: If set then this is used as a list of packages to check are installed over name
+
+    Returns: Check result
     """
     return _check_installed(name=name, pkgs=pkgs if pkgs is not None else [name])
 
 
 def installed(name: str, pkgs: Optional[List[str]]=None) -> SaltStateRes:
     """ Ensures AUR packages are installed.
+    Arguments:
+    - name: Either package to install or just name of state if pkgs is set
+    - pkgs: If set then this is used as a list of packages to install over name
+
+    Returns: Install result
     """
     # Check if already installed
     pkgs_str = ", ".join(pkgs) if pkgs is not None else name
