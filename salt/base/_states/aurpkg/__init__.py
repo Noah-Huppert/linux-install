@@ -5,6 +5,8 @@ import os
 from pwd import getpwnam
 from grp import getgrnam
 
+from salt.exceptions import CommandExecutionError
+
 log = logging.getLogger(__name__)
 
 OPTS_PARENT_KEY = "aurpkg"
@@ -24,93 +26,63 @@ class SaltStateRes(TypedDict):
     changes: Union[SaltStateResChanges, Dict[str, str]]
     comment: str
 
-def _exec_demote() -> None:
-    """ Drop down into the configured runner user and group.
+def _cmd_run(cmd: str) -> str:
+    """ Run a command as the correct user.
     """
-    try:
-        build_user = None
-        aurpkg_opts = __opts__.get(OPTS_PARENT_KEY)
-        if aurpkg_opts is not None:
-            build_user = aurpkg_opts.get(OPTS_BUILD_USER_KEY)
+    kwargs = {
+        "cmd": cmd,
+        "raise_err": True,
+    }
+    
+    # Figure out if we want to run as a specific user
+    build_user = None
+    aurpkg_opts = __opts__.get(OPTS_PARENT_KEY)
+    if aurpkg_opts is not None:
+        build_user = aurpkg_opts.get(OPTS_BUILD_USER_KEY)
 
-        if build_user is not None:
-            uid = getpwnam(build_user).pw_uid
-            gid = getgrnam(build_user).gr_gid
-            
-            os.setgid(gid)
-            os.setuid(uid)
+    if build_user is not None:
+        kwargs["runas"] = build_user
+        kwargs["group"] = build_user
 
-            log.info("Dropped down into user %s for execution", build_user)
-        else:
-            log.info("Not dropping down into execution user, not specified")
-    except Exception as e:
-        log.error("failed to preexec: %s", e)
-        
+
+    return __salt__["cmd.run"](**kwargs)
+    
 
 def _installed(name: str, pkgs: List[str]) -> SaltStateRes:
     """ Actually performs the install logic.
     """
-    args = [
-        "yay",
-        "--sync",
-        "--refresh",
-        "--noconfirm",
-    ] + pkgs
-    log.info("Executing: %s", " ".join(args))
-
-    log.info("pre.Popen")
-    proc = subprocess.Popen(
-        args,
-        preexec_fn=_exec_demote,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
-    stdout, stderr = proc.communicate()
-
-    log.info("returncode=%d", proc.returncode)
-
-    output = []
-
-    if stderr:
-        line = stderr.decode(__salt_system_encoding__)
-        output.append(line)
-        
-        log.error(line)
-
-    if stdout:
-        line = stdout.decode(__salt_system_encoding__)
-        output.append(line)
-        
-        log.info(line)
-
-    pkgs_str = ", ".join(pkgs)
+    pkgs_space_sep_str = " ".join(pkgs)
 
     res = SaltStateRes(
             name=name,
         result=True,
         changes=SaltStateResChanges(
-            old=f"not all of {pkgs_str} installed",
-            new=f"{pkgs_str} installed",
+            old=f"not all of {pkgs_space_sep_str} installed",
+            new=f"{pkgs_space_sep_str} installed",
         ),
-        comment="\n".join(output),
+        comment="",
     )
 
-    if proc.returncode != 0:
+    try:
+        _cmd_run(f"yay --sync --refresh --noconfirm {pkgs_space_sep_str}")
+    except CommandExecutionError:
         res["result"] = False
-        res["changes"]["new"] = f"{pkgs_str} failed to installed"
-
+        res["changes"]["new"] = f"{pkgs_space_sep_str} failed to installed"
+    
     return res
 
 def _check_installed(name: str, pkgs: List[str]) -> SaltStateRes:
     """ Actually check if package is installed.
     """
     pkgs_space_sep_str = " ".join(pkgs)
-    res = __salt__["cmd.run"](f"yay --query --info {pkgs_space_sep_str}")
-    log.info("cmd.run res=%s", res)
+    is_installed = True
+
+    try:
+        _cmd_run(f"yay --query --info {pkgs_space_sep_str}")
+    except CommandExecutionError:
+        is_installed = False
 
     pkgs_str = ", ".join(pkgs)
-        
-    is_installed = res["result"] is True
     installed_comment = f"{pkgs_str} installed" if is_installed else f"{pkgs_str} not installed",
 
     return SaltStateRes(
@@ -155,7 +127,14 @@ def installed(name: str, pkgs: Optional[List[str]]=None) -> SaltStateRes:
             res["comment"] = f"{pkgs_str} already installed"
 
         return res
-        
+
+    if check_res["result"] is True:
+        return SaltStateRes(
+            name=name,
+            result=True,
+            changes={},
+            comment=f"already installed {pkgs_str}",
+        )
 
     return _installed(name=name, pkgs=pkgs)
             
