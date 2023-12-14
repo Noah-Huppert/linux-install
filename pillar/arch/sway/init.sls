@@ -1,5 +1,5 @@
 sway:
-  app_launcher: bash -c 'wofi --show drun | { read -r id name; swaymsg "[con_id=$id]" focus; }'
+  app_launcher: wofi --show drun
 
   waybar_modules:
     left:
