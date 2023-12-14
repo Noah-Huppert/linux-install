@@ -48,6 +48,7 @@ arch:
     - alacritty
     - c
     - cmake
+    - kubectl
     #- ncdu
     #- containers
     #- go
