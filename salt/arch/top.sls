@@ -53,7 +53,7 @@ arch:
     #- containers
     #- go
     #- flutter
-    #- terraform
+    - terraform
     #- software-defined-radio
     #- digitalocean-cli
     #- godot

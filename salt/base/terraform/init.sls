@@ -1,5 +1,4 @@
 # Install Terraform
-{% for pkg in pillar['terraform']['pkgs'] %}
-{{ pkg }}:
-  pkg.installed
-{% endfor %}
+terraform_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.terraform.pkgs }}
