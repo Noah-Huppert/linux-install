@@ -21,7 +21,6 @@
 {% endfor %}
 
 # Install dependencies
-{% for pkg in pillar['flutter']['dep_pkgs'] %}
-{{ pkg }}:
-  pkg.latest
-{% endfor %}
+flutter_dep_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.flutter.dep_pkgs }}
