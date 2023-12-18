@@ -1,9 +1,8 @@
 # Installs and configures podman
 
-{% for pkg in pillar['containers']['pkgs'] %}
-{{ pkg }}:
-  pkg.latest
-{% endfor %}
+containers_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.containers.pkgs }}
 
 # Configure podman registries
 {% if pillar['containers']['registries_cfg_file'] is not none %}
@@ -18,10 +17,7 @@
   service.enabled:
     - name: {{ pillar.containers.docker_svc }}
     - require:
-        {% for pkg in pillar['containers']['pkgs'] %}
-        - pkg: {{ pkg }}
-        {% endfor %}
-
+        - pkg: containers_pkgs
 
 {{ pillar.containers.docker_svc }}-running:
   service.running:
