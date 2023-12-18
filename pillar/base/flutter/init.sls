@@ -6,10 +6,10 @@ flutter:
   dir: {{ dir }}
   
   # Download URL
-  download_url: https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.16.3-stable.tar.xz
+  download_url: https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.16.4-stable.tar.xz
 
   # Download file sha256
-  download_sha: 22196f6e5d8b67cbdddf1fc94f62da07addb67da0210d0498cbcff6ddcb7127e
+  download_sha: eb4fb2bcedd3ca2bbfe7570217db611937884bbdd00dec601be9c2a74517cee2
 
   # Download file
   download_file: {{ dir }}/flutter.tar.gz
