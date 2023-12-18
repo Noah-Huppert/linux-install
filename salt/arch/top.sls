@@ -18,6 +18,7 @@ arch:
     - exfat
     - audio
     - yay
+    - network-utils
     #- backlight
     #- thunderbolt
     #- pam
@@ -50,9 +51,9 @@ arch:
     - cmake
     - kubectl
     #- ncdu
-    #- containers
+    - containers
     #- go
-    #- flutter
+    - flutter
     - terraform
     #- software-defined-radio
     #- digitalocean-cli
@@ -62,22 +63,24 @@ arch:
     #- dig
     #- insomnia
     #- python
-    #- pipenv
+    - pipenv
     #- aws-cli
     #- eksctl
-    #- java
-    #- android-sdk
+    - java
+    - android-sdk
+    - doctl
 
     # General tools configuration
     - gpg
     #- trash-cli
     - htop
     #- flatpak
-    #- flameshot
+    - flameshot
     
     # User interface configuration
     #- vulkan
     - wayland
+    - xdg-desktop-portal
     - start-wayland-script
     #- x11
     - rice
@@ -104,3 +107,4 @@ arch:
     #- steam
     #- steam-link
     #- tailscale
+    - discord
