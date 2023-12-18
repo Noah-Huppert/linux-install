@@ -1,0 +1,3 @@
+pipenv:
+  pkgs:
+    - python-pipenv
