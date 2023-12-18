@@ -1,0 +1,3 @@
+flameshot:
+  pkgs:
+    - flameshot
