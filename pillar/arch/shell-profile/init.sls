@@ -23,7 +23,7 @@ shell_profile:
     - prompt
     - ls_color
     - shell_reload_fn
-    #- user_bin
+    - user_bin
     #- scripts_fns
     # - org_mode
     - trash
