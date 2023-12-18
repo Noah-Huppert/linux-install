@@ -20,4 +20,10 @@ sway:
   pkgs: 
     - sway
     - waybar
+
+    # App Launcher
     - wofi
+
+    # Screenshots
+    - grim # capture
+    - slurp # specify area
