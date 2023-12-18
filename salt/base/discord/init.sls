@@ -1,5 +1,4 @@
 # Installs Discord
-{% for pkg in pillar['discord']['pkgs'] %}
-{{ pkg }}:
-  pkg.installed
-{% endfor %}
+discord_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.discord.pkgs }}
