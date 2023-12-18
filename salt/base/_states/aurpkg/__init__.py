@@ -95,8 +95,8 @@ def _installed(name: str, pkgs: List[str]) -> SaltStateRes:
             name=name,
         result=True,
         changes=SaltStateResChanges(
-            old=f"not all of {pkgs_space_sep_str} installed",
-            new=f"{pkgs_space_sep_str} installed",
+            old=f"not all of {pkgs} installed",
+            new=f"{pkgs} installed",
         ),
         comment="",
     )
@@ -105,7 +105,7 @@ def _installed(name: str, pkgs: List[str]) -> SaltStateRes:
         _cmd_run(f"yay --sync --refresh --noconfirm {pkgs_space_sep_str}")
     except CommandExecutionError:
         res["result"] = False
-        res["changes"]["new"] = f"{pkgs_space_sep_str} failed to installed"
+        res["changes"]["new"] = f"{pkgs} failed to installed"
     
     return res
 
