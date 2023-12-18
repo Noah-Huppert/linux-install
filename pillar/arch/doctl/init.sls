@@ -1,0 +1,3 @@
+doctl:
+  pkgs:
+    - doctl
