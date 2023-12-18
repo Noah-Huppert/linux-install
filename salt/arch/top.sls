@@ -91,6 +91,7 @@ arch:
     # Applications configuration
     #- links
     - firefox
+    - chrome
     #- syncthing
     #- blender
     - emacs

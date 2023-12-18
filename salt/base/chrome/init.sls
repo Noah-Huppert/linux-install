@@ -1,6 +1,4 @@
 # Installs Chromium
-
-{% for pkg in pillar['chrome']['pkgs'] %}
-{{ pkg }}:
-  pkg.latest
-{% endfor %}
+chrome_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.chrome.pkgs }}

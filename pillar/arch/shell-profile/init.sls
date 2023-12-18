@@ -19,6 +19,7 @@ shell_profile:
     # - rust
     # - deno
     - godot
+    - chrome_executable
     - dotnet
     - prompt
     - ls_color

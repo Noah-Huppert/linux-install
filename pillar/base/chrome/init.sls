@@ -1,4 +1,3 @@
 chrome:
-  pkgs:
-    - chromium
-    - chromium-widevine
+  pkgs: []
+  exec_path: /usr/bin/google-chrome-stable
