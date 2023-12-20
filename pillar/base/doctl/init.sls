@@ -1,2 +1,0 @@
-doctl:
-  pkgs: []
