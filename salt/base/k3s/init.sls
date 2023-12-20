@@ -1,18 +1,20 @@
 # Installs and configures K3S to run services locally
 
-{% for pkg in pillar['k3s']['pkgs'] %}
-{{ pkg }}:
-  pkg.installed
-{% endfor %}
+k3s_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.k3s.pkgs }}
+
+k3s_aur_pkgs:
+  aurpkg.installed:
+    - pkgs: {{ pillar.k3s.aur_pkgs }}
 
 {{ pillar.k3s.svc.install }}:
   file.managed:
     - source: salt://k3s/{{ pillar.k3s.svc.source }}
     - makedirs: True
-    - requires:
-      {% for pkg in pillar['k3s']['pkgs'] %}
-      - pkg: {{ pkg }}
-      {% endfor %}        
+    - require:
+      - pkg: k3s_pkgs
+      - aurpkg: k3s_aur_pkgs
 
 {{ pillar.k3s.auto_deploy_manifests_dir }}:
   file.recurse:
@@ -28,3 +30,7 @@
 {{ pillar.k3s.config_file }}:
   file.managed:
     - source: salt://k3s/config.yaml
+    - makedirs: True
+    - require:
+      - pkg: k3s_pkgs
+      - aurpkg: k3s_aur_pkgs
