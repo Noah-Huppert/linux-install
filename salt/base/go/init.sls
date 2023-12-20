@@ -1,7 +1,5 @@
 # Install Go
 
-{% for pkg in pillar['go']['pkgs'] %}
-{{ pkg }}:
-  pkg.latest
-{% endfor %}
-
+go_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.go.pkgs }}

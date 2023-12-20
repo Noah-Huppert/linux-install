@@ -1,0 +1,4 @@
+go:
+  pkgs:
+    - go
+    - gopls
