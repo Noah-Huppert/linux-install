@@ -52,11 +52,11 @@ arch:
     - kubectl
     #- ncdu
     - containers
-    #- go
+    - go
     - flutter
     - terraform
     #- software-defined-radio
-    #- digitalocean-cli
+    - digitalocean-cli
     #- godot
     #- dotnet
     #- ceph-client
@@ -68,7 +68,7 @@ arch:
     #- eksctl
     - java
     - android-sdk
-    - doctl
+    - salt-lint
 
     # General tools configuration
     - gpg
@@ -101,7 +101,7 @@ arch:
     #- discord
     #- openvpn
     #- qbittorrent
-    #- k3s
+    - k3s
     #- gnucash
     #- youtube-dl
     #- open-broadcaster-software
