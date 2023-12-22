@@ -98,8 +98,8 @@ arch:
     - emacs
     - vscode
     - signal
-    #- discord
     - gimp
+    - discord
     #- openvpn
     #- qbittorrent
     - k3s
@@ -109,4 +109,3 @@ arch:
     #- steam
     #- steam-link
     #- tailscale
-    - discord
