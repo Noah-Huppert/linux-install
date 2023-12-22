@@ -69,6 +69,7 @@ arch:
     - java
     - android-sdk
     - salt-lint
+    - jq
 
     # General tools configuration
     - gpg
