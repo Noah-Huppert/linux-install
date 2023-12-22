@@ -64,7 +64,7 @@ arch:
     #- insomnia
     #- python
     - pipenv
-    #- aws-cli
+    - aws-cli
     #- eksctl
     - java
     - android-sdk
