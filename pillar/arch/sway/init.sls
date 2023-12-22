@@ -1,6 +1,8 @@
 sway:
   app_launcher: wofi --show drun
 
+  waybar_vpn_check_cmd: nmcli con show --active | grep vpn &> /dev/null
+
   waybar_modules:
     left:
       - sway/workspaces

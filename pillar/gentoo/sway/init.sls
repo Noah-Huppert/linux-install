@@ -1,4 +1,6 @@
 sway:
+  waybar_vpn_check_cmd: systemctl list-units --type=service --state=active | grep openvpn &> /dev/null
+  
   waybar_modules:
     left:
       - sway/workspaces

@@ -19,11 +19,14 @@ sway:
 
   waybar_org_clock_script: {{ waybar_dir }}/custom-org-clock.sh
   waybar_xkb_script: {{ waybar_dir }}/custom-xkb.sh
+  waybar_vpn_check_cmd: "false"
 
   waybar_modules:
     left: []
     center: []
     right: []
+
+    vpn_check_cmd: ""
   
   # Swaynag configuration file
   swaynag_dir: {{ swaynag_dir }}

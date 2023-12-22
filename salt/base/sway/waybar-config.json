@@ -52,7 +52,7 @@
     "custom/vpn": {
         "format": "VPN ",
 	   "exec": "echo '{\"class\": \"connected\"}'",
- 	   "exec-if": "systemctl list-units --type=service --state=active | grep openvpn &> /dev/null",
+ 	   "exec-if": "{{ pillar.sway.waybar_vpn_check_cmd }}",
 	   "return-type": "json",
 	   "interval": 5
     },
