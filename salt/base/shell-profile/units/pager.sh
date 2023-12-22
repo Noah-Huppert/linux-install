@@ -1,2 +1,2 @@
 # Set PAGER so programs know which pager to use
-export PAGER=less
+export PAGER=more
