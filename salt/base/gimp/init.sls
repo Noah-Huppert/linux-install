@@ -1,5 +1,4 @@
 # Installs GIMP
-{% for pkg in pillar['gimp']['pkgs'] %}
-{{ pkg }}:
-  pkg.installed
-{% endfor %}
+gimp_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.gimp.pkgs }}

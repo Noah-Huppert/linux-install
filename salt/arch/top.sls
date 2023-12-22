@@ -97,8 +97,8 @@ arch:
     - emacs
     - vscode
     - signal
-    #- gimp
     #- discord
+    - gimp
     #- openvpn
     #- qbittorrent
     - k3s
