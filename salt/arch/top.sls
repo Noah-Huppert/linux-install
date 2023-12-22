@@ -19,7 +19,7 @@ arch:
     - audio
     - yay
     - network-utils
-    #- backlight
+    - backlight
     #- thunderbolt
     #- pam
     #- polkit
