@@ -1,0 +1,27 @@
+[connection]
+id={{ name }}
+uuid={{ name | uuid }}
+type=vpn
+
+[vpn]
+ca={{ pillar.internet.openvpn.vpn_certs_dir }}/{{ config['ca_file'] }}
+cert={{ pillar.internet.openvpn.vpn_certs_dir }}/{{ config['cert_file'] }}
+key={{ pillar.internet.openvpn.vpn_certs_dir }}/{{ config['key_file'] }}
+cipher=AES-256-GCM
+connection-type=tls
+dev=tun
+remote={{ config.endpoint }}
+remote-cert-tls=server
+remote-random-hostname=yes
+reneg-seconds=0
+verify-x509-name=name:server
+service-type=org.freedesktop.NetworkManager.openvpn
+
+[ipv4]
+method=auto
+
+[ipv6]
+addr-gen-mode=default
+method=auto
+
+[proxy]

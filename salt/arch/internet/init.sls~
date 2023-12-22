@@ -1,8 +1,0 @@
-# Install and configure NetworkManager
-
-# Install packages
-internet_pkgs:
-  pkg.installed:
-    - pkgs: {{ pillar.internet.pkgs }}
-
-# Configure connection profiles

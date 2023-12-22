@@ -1,6 +1,7 @@
 internet:
   pkgs:
     - networkmanager
+    - networkmanager-openvpn
 
   svc: NetworkManager.service
 

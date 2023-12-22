@@ -14,3 +14,7 @@ internet:
     # Service
     service: dhcpcd
 
+
+  # OpenVPN configuration
+  openvpn:
+    vpn_certs_dir: /opt/openvpn-certs/
