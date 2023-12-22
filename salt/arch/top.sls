@@ -73,7 +73,7 @@ arch:
 
     # General tools configuration
     - gpg
-    #- trash-cli
+    - trash-cli
     - htop
     #- flatpak
     - flameshot
