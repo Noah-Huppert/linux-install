@@ -60,7 +60,7 @@ arch:
     #- godot
     #- dotnet
     #- ceph-client
-    #- dig
+    - dig
     #- insomnia
     #- python
     - pipenv
