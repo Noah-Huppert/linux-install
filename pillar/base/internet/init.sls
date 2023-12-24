@@ -17,4 +17,4 @@ internet:
 
   # OpenVPN configuration
   openvpn:
-    vpn_certs_dir: /opt/openvpn-certs/
+    vpn_certs_dir: /opt/openvpn-certs

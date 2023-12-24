@@ -15,6 +15,8 @@ internet_pkgs:
   file.recurse:
     - source: salt://internet-secret/openvpn-certs/
     - makedirs: True
+    - dir_mode: 600
+    - file_mode: 600
 
 # Configure connection profiles
 # ... Internet 
