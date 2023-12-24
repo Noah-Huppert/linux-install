@@ -8,10 +8,15 @@ interface-name={{ pillar.internet.wifi_interface }}
 mode=infrastructure
 ssid={{ config['ssid'] | regex_replace('"', "") | regex_replace("'", "") }}
 
+{% if "key_mgmt" in config and config["key_mgmt"] != "NONE" -%}
 [wifi-security]
 auth-alg=open
+{% endif -%}
+
 {%- for key, value in config.items() %}
-{% if key != "ssid" %}
+{% if key == "key_mgmt" %}
+# key-mgmt=NONE
+{% elif key != "ssid" %}
 {{ key | regex_replace('_', "-") }}={{ value }}
 {% endif %}
 {%- endfor %}
