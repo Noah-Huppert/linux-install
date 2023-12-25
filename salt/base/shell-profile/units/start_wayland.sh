@@ -3,7 +3,7 @@
 # Shortcut
 alias sw=start-wayland
 
-if [ -z "$SWAYSOCK" ]; then
+if [ -z "$SWAYSOCK" ] && [[ "$XDG_SESSION_TYPE" != "wayland" ]]; then
     if ! start-wayland; then
     	   return $(unit-die "Failed to start a wayland")
     fi
