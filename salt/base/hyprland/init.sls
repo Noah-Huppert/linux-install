@@ -10,8 +10,9 @@ hyprland_aux_pkgs:
 {{ pillar.hyprland.scripts_dir }}:
   file.recurse:
     - source: salt://hyprland/scripts
+    - clean: True
     - makedirs: True
-    - dir_mode: 644
+    - dir_mode: 655
     - file_mode: 755
 
 {% for user in pillar['users']['users'].values() %}
