@@ -86,7 +86,7 @@ arch:
     #- x11
     - rice
     - sway
-    #- hyprland
+    - hyprland
     - gnome-keyring
 
     # Applications configuration
