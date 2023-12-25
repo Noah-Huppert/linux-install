@@ -47,6 +47,7 @@ arch:
     - git
     - salt-apply-script
     - alacritty
+    - kitty
     - c
     - cmake
     - kubectl
