@@ -7,13 +7,16 @@ rice:
 
   # Image
   images:
-    # Background image
     - dog-flowers.jpg
  
-    # Lock image
-    # Credit: https://www.reddit.com/r/space/comments/arer0k/i_took_nearly_50000_images_of_the_night_sky_to/
+    # Source: https://www.reddit.com/r/space/comments/arer0k/i_took_nearly_50000_images_of_the_night_sky_to/
     - moon-center.png
 
+    # Source: https://www.reddit.com/r/wallpaper/s/umkzftWgVt
+    # #3b115e 	#ca3e83 	#3150b9 	#8171e2 	#781d5d
+    # #44146c
+    # #290c41                      #140d40
+    # #0e0416                      #070415
     - night-train.jpg
 
   background_img: night-train.jpg

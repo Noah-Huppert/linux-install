@@ -9,11 +9,19 @@ hyprland:
   # Name of Salt state to use as alternative package manager
   aux_pkgs_state: pkg
 
-  # Hyprland configuration file location relative to home directory
-  hyprland_config_file: .config/hypr/hyprland.conf
+  # Configuration files
+  config_files:
+    # Hyprland configuration
+    - source: salt://hyprland/conf/hyprland.conf
+      destination: .config/hypr/hyprland.conf
 
-  # Hyperpaper configuration file location relative to home directory
-  hyprpaper_config_file: .config/hypr/hyprpaper.conf
+    # Hyprpaper configuration
+    - source: salt://hyprland/conf/hyprpaper.conf
+      destination: .config/hypr/hyprpaper.conf
+
+    # nwg-drawer styles
+    - source: salt://hyprland/conf/nwg-drawer.css
+      destination: .config/nwg-drawer/drawer.css
 
   # Directory in which supporting scripts (for stuff like bars) will be placed
   scripts_dir: {{ scripts_dir }}
@@ -24,7 +32,11 @@ hyprland:
     terminal: kitty
 
     # Lists programs to then run
-    app_launcher: wofi --show drun
+    app_launcher: nwg-drawer -mb 100 -mt 100 -ml 100 -mr 100
+
+    # Command to run when first started so launcher is ready to go
+    # If null nothing is run
+    app_launcher_preload_cmd: nwg-drawer -r
 
     # Status bar
     status_bar: {{ scripts_dir }}/nwg-panel.sh
