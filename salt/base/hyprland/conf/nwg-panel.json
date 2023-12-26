@@ -33,7 +33,7 @@
       "commands": {
         "battery": ""
       },
-      "show-values": false,
+      "show-values": true,
       "interval": 1,
       "icon-size": 16,
       "hover-opens": false,
