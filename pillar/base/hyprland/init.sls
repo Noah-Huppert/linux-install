@@ -38,6 +38,9 @@ hyprland:
     # Terminal program
     terminal: kitty
 
+    # Notification daemon
+    notification_daemon: swaync
+
     # Lists programs to then run
     app_launcher: {{ scripts_dir }}/nwg-drawer.sh launch
 
