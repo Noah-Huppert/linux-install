@@ -53,3 +53,6 @@ hyprland:
 
     # Background picture renderer
     background: {{ scripts_dir }}/hyprpaper.sh
+
+    # Screenshot program
+    screenshot: wl-snip -n notify-send
