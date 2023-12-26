@@ -103,11 +103,6 @@
     - source: salt://sway/swayexit
     - mode: 755
 
-{{ pillar.sway.wl_snip_file }}:
-  file.managed:
-    - source: salt://sway/wl-snip
-    - mode: 755
-
 {% if pillar['sway']['elogind_svc'] is not none %}
 {{ pillar.sway.elogind_svc }}-enabled:
   service.enabled:

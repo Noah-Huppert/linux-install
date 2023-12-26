@@ -35,9 +35,6 @@ sway:
   # Exit script
   swayexit_file: /usr/local/bin/swayexit
 
-  # Screenshot script
-  wl_snip_file: /usr/local/bin/wl-snip
-
   # Program used to list and execute programs
   app_launcher: rofi -show drun
 

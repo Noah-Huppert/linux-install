@@ -85,6 +85,7 @@ arch:
     - xdg-desktop-portal
     - start-wayland-script
     #- x11
+    - wl-snip
     - rice
     - sway
     - hyprland

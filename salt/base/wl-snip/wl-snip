@@ -10,19 +10,22 @@ check() {
     fi
 }
 
-while getopts "hn" opt; do
+NOTIFY_SWAYNAG="swaynag"
+NOTIFY_NOTIFY_SEND="notify-send"
+
+while getopts "hn:" opt; do
     case "$opt" in
 	   h) cat <<EOF
 wl-snip - Grab a screenshot from Wayland.
 
 USAGE
 
-    wl-snip [-h,-n] [OUT]
+    wl-snip [-h,-n NOTIFY] [OUT]
 
 OPTIONS
 
     -h    Show this help text.
-    -n    Show a swaynag message which the screenshot's path.
+    -n NOTIFY    Indicates if a notification will be sent indicating where the screenshot is, the value indicates how the notification will be sent (either: swaynag, or notify-send) 
 
 ARGUMENTS
 
@@ -30,10 +33,20 @@ ARGUMENTS
            \$HOME/pictures/screenshots/ if the directory exists otherwise saved in the 
            current directory.
 
+BEHAVIORS
+
+    Required programs: grim, slurp and swaynag or notify-send (depending on -n option).
+
 EOF
 		 exit 0
 		 ;;
-	   n) opt_nag=true ;;
+	   n)
+		  if [[ "$OPTARG" != "$NOTIFY_SWAYNAG" ]] && [[ "$OPTARG" != "$NOTIFY_NOTIFY_SEND" ]]; then
+			 die "-n NOTIFY only accepts: '$NOTIFY_SWAYNAG' or '$NOTIFY_NOTIFY_SEND'"
+		  fi
+		  
+		  opt_notify="$OPTARG"
+		  ;;
 	   *) die "Unknown option" ;;
     esac
 done
@@ -55,10 +68,26 @@ fi
 grim -g "$(slurp)" "$OUT"
 check "Failed to take screenshot"
 echo "$OUT"
-if [ -n "$opt_nag" ]; then
-    swaynag \
+
+case "$opt_notify" in
+    "$NOTIFY_SWAYNAG")
+	   swaynag \
 	   -m "Screenshot saved in $OUT" \
 	   -t ok \
 	   -z "Copy path" "echo -n $OUT | wl-copy"  \
 	   -z "View" "ristretto $OUT"
+	   ;;
+    "$NOTIFY_NOTIFY_SEND")
+	   action=$(notify-send \
+		  "Screenshot saved" "In $OUT" \
+		  --wait \
+		  --action "View" \
+		  --icon "$OUT")
+	   if [[ "$action" == "0" ]]; then
+		  xdg-open "$OUT"
+	   fi
+	   ;;
+esac
+if [ -n "$opt_nag" ]; then
+    
 fi
