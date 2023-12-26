@@ -35,12 +35,15 @@ button {
 #panel-top {
     /* background: #101010; */
     background: #0e0416;
+    opacity: 0.8;
     color: #eeeeee
 }
 
 /* Bottom panel in sample config uses this name */
 #panel-bottom {
-    background: #101010;
+    /* background: #101010; */
+    background: #0e0416;
+    opacity: 0.8;
     color: #eeeeee
 }
 
@@ -71,8 +74,8 @@ button {
 
 /* and so does the Clock */
 #clock {
-    font-family: monospace;
-    font-size: 16px
+    /*font-family: monospace;*/
+    /*font-size: 16px*/
 }
 
 /* Sample executor-weather uses "css-name": "weather" */

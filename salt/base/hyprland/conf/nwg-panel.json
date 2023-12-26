@@ -241,7 +241,7 @@
       "workspaces-spacing": 0,
       "client-padding": 0,
       "show-app-icon": true,
-      "show-app-name": true,
+      "show-app-name": false,
       "show-app-name-special": false,
       "show-layout": true,
       "all-outputs": false,
