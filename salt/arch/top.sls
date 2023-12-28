@@ -111,3 +111,4 @@ arch:
     #- steam
     #- steam-link
     #- tailscale
+    - file-manager
