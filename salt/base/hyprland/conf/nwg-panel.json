@@ -243,9 +243,9 @@
       "show-app-icon": true,
       "show-app-name": false,
       "show-app-name-special": false,
-      "show-layout": true,
+      "show-layout": false,
       "all-outputs": false,
-      "mark-xwayland": true,
+      "mark-xwayland": false,
       "angle": 0.0
     }
   }
