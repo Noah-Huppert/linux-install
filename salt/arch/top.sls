@@ -95,7 +95,7 @@ arch:
     #- links
     - firefox
     - chrome
-    #- syncthing
+    - syncthing
     #- blender
     - emacs
     - vscode

@@ -1,3 +1,3 @@
 syncthing:
-  pkg: ""
-  svc: ""
+  pkgs: []
+  svc: syncthing

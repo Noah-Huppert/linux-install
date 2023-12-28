@@ -1,3 +1,4 @@
 syncthing:
-  pkg: net-p2p/syncthing
+  pkgs:
+    - net-p2p/syncthing
   svc: syncthing
