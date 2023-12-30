@@ -30,6 +30,13 @@ hyprland:
     - source: salt://hyprland/conf/nwg-drawer.css
       destination: .config/nwg-drawer/drawer.css
 
+    # Waybar config
+    - source: salt://hyprland/conf/waybar.json
+      destination: .config/waybar/config
+
+    - source: salt://hyprland/conf/waybar.css
+      destination: .config/waybar/style.css
+
   # Directory in which supporting scripts (for stuff like bars) will be placed
   scripts_dir: {{ scripts_dir }}
 
@@ -49,7 +56,7 @@ hyprland:
     app_launcher_preload_cmd: {{ scripts_dir }}/nwg-drawer.sh preload
 
     # Status bar
-    status_bar: {{ scripts_dir }}/nwg-panel.sh
+    status_bar: {{ scripts_dir }}/waybar.sh
 
     # Bottom dock
     dock: nwg-dock-hyprland -d
