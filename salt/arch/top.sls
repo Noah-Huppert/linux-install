@@ -115,3 +115,4 @@ arch:
     #- steam-link
     #- tailscale
     - file-manager
+    - ngrok
