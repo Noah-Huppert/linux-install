@@ -62,6 +62,7 @@ arch:
     #- dotnet
     #- ceph-client
     - dig
+    - nmap
     #- insomnia
     #- python
     - pipenv

@@ -1,0 +1,3 @@
+nmap:
+  pkgs:
+    - nmap
