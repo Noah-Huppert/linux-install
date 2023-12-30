@@ -1,0 +1,3 @@
+netcat:
+  pkgs:
+    - gnu-netcat

@@ -63,6 +63,7 @@ arch:
     #- ceph-client
     - dig
     - nmap
+    - netcat
     #- insomnia
     #- python
     - pipenv
