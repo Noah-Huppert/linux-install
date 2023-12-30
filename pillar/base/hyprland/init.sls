@@ -62,3 +62,6 @@ hyprland:
 
     # Network manager
     network_menu: nm-applet
+
+    # Bluetooth manager
+    bluetooth_menu: blueman-applet
