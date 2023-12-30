@@ -1,0 +1,2 @@
+spell_check:
+  pkgs: []

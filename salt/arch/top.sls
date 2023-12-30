@@ -80,6 +80,7 @@ arch:
     - htop
     #- flatpak
     - flameshot
+    - spell-check
     
     # User interface configuration
     #- vulkan
