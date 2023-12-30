@@ -108,7 +108,7 @@
       "show-name": false,
       "name-length": 40,
       "show-empty": true,
-      "mark-content": false,
+      "mark-content": true,
       "show-names": false,
       "mark-floating": false,
       "angle": 0.0
