@@ -38,4 +38,4 @@ shell_profile:
     # - autostart
     - linux_install_edit
     # - startx
-    - start_wayland
+    #- start_wayland

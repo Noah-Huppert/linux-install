@@ -27,6 +27,7 @@ arch:
     #- firewall
     #- power-management
     #- bluetooth
+    - ssdm
     
     # User configuration
     - users
