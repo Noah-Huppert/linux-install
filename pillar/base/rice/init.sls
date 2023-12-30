@@ -19,7 +19,10 @@ rice:
     # #0e0416                      #070415
     - night-train.jpg
 
+    - blurry-bullet-train.jpg
+
   background_img: night-train.jpg
+  lock_img: blurry-bullet-train.jpg
 
   # Directory to store images in
   images_directory: /usr/share/pictures

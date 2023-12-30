@@ -48,7 +48,7 @@
         "items": [
           {
             "name": "Lock",
-            "cmd": "swaylock -f -c 000000"
+            "cmd": "swaylock -f -c 000000 --image {{ pillar.rice.images_directory }}/{{ pillar.rice.lock_img }}"
           },
           {
             "name": "Sleep",
