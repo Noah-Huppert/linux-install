@@ -2,7 +2,7 @@
   {
     "name": "panel-top",
     "output": "",
-    "layer": "bottom",
+    "layer": "top",
     "position": "top",
     "controls": "right",
     "width": "auto",
@@ -22,7 +22,8 @@
     "modules-center": [
     ],
     "modules-right": [
-      "clock"
+      "clock",
+      "tray"
     ],
     "controls-settings": {
       "components": [

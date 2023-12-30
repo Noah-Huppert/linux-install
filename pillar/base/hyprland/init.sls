@@ -59,3 +59,6 @@ hyprland:
 
     # Screenshot program
     screenshot: wl-snip -n notify-send
+
+    # Network manager
+    network_menu: nm-applet
