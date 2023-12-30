@@ -26,7 +26,7 @@ arch:
     - fonts
     #- firewall
     #- power-management
-    #- bluetooth
+    - bluetooth
     - ssdm
     
     # User configuration
