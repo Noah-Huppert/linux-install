@@ -1,8 +1,9 @@
 # Install and configure Refind to be the default bootloader
 
 # Install refind
-{{ pillar.bootloader.refind.pkg }}:
-  pkg.latest
+refind_pkg:
+  pkg.installed:
+    - name: {{ pillar.bootloader.refind.pkg }}
 
 {{ pillar.bootloader.check_refind_installed_script.file }}:
   file.managed:
@@ -21,7 +22,7 @@ refind-install:
   cmd.run:
     - unless: {{ pillar.bootloader.run_check_refind_installed_script.file }}
     - require:
-      - pkg: {{ pillar.bootloader.refind.pkg }}
+      - pkg: refind_pkg
       - file: {{ pillar.bootloader.check_refind_installed_script.file }}
       - file: {{ pillar.bootloader.run_check_refind_installed_script.file }}
 
@@ -33,7 +34,9 @@ refind-install:
     - mode: 755
     - require:
       - cmd: refind-install
+      {% if pillar['bootloader']['linux_bootloader_file'] is not none %}
       - file: {{ pillar.partitions.boot.mountpoint }}{{ pillar.bootloader.linux_bootloader_file }}
+      {% endif %}
       - file: {{ pillar.partitions.boot.mountpoint }}{{ pillar.initramfs.file }}
 
 {{ pillar.bootloader.refind.kernel_opts_file }}:
@@ -49,8 +52,10 @@ refind-install:
 # which then requires we use an external USB to rebuild these files.
 # Hopefully this Salt check will fail if the boot partition is in a state where
 # this could happen
+{% if pillar['bootloader']['linux_bootloader_file'] is not none %}
 {{ pillar.partitions.boot.mountpoint }}{{ pillar.bootloader.linux_bootloader_file }}:
   file.exists
+{% endif %}
   
 {{ pillar.partitions.boot.mountpoint }}{{ pillar.initramfs.file }}:
   file.exists

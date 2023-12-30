@@ -21,7 +21,7 @@ bootloader:
 
 
   # Linux bootloader path relative to boot loader mount point
-  linux_bootloader_file: ""
+  linux_bootloader_file: null
 
 
   # Check refind installed script
