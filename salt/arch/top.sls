@@ -74,6 +74,7 @@ arch:
     - android-sdk
     - salt-lint
     - jq
+    - gtk-dev
 
     # General tools configuration
     - gpg
