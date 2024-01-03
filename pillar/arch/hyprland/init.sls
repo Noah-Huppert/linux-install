@@ -2,6 +2,9 @@ hyprland:
   pkgs:
     - hyprland
     - hyprpaper
+    
+    - ttf-font-awesome
+    - ttf-noto-nerd
 
   aux_pkgs:
     - nwg-panel

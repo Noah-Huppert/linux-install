@@ -56,7 +56,7 @@ hyprland:
     app_launcher_preload_cmd: {{ scripts_dir }}/nwg-drawer.sh preload
 
     # Status bar
-    status_bar: {{ scripts_dir }}/waybar.sh
+    status_bar: {{ scripts_dir }}/status-bar.sh
 
     # Bottom dock
     dock: nwg-dock-hyprland -d
@@ -72,3 +72,6 @@ hyprland:
 
     # Bluetooth manager
     bluetooth_menu: blueman-applet
+
+    # Volume manager
+    volume: pavucontrol
