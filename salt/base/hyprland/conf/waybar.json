@@ -127,7 +127,7 @@
       "on-scroll-down": "hyprctl dispatch workspace e-1"
     },
     "clock": {
-      "format": "{%raw %}{:%m/%e %I:%M %p}{% endraw %}",
+      "format": "{%raw %}{:%m/%d %I:%M %p}{% endraw %}",
       "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
       "format-alt": "{:%Y-%m-%d}"
     },
