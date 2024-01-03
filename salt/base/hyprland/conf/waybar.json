@@ -15,7 +15,8 @@
       "custom/notification",
       "backlight",
       "wireplumber",
-      "battery"
+      "battery",
+      "custom/shutdown-menu"
     ],
     // Modules configuration
     "hyprland/workspaces": {
@@ -29,7 +30,7 @@
     },
     "custom/notification": {
       "tooltip": false,
-      "format": "{icon}",
+      "format": "{icon} ",
       "format-icons": {
         "notification": "<span foreground='red'><sup></sup></span>",
         "none": "",
@@ -95,6 +96,10 @@
         "󰂂",
         "󰁹"
       ]
-    }
+    },
+    "custom/shutdown-menu": {
+      "format": "   ",
+      "on-click": "{{ pillar.hyprland.bins.shutdown_menu }}"
+    },
   }
 ]

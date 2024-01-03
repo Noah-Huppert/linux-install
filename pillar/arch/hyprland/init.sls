@@ -2,6 +2,7 @@ hyprland:
   pkgs:
     - hyprland
     - hyprpaper
+    - swaylock
     
     - ttf-font-awesome
     - ttf-noto-nerd

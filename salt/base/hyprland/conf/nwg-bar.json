@@ -1,0 +1,37 @@
+[
+  {
+    "label": "Lock",
+    "exec": "{{ pillar.hyprland.bins.lock }}",
+    "icon": "{{ pillar.hyprland.icons_dir }}/lock-white.svg"
+  },
+  {
+    "label": "Logout",
+    "exec": "{{ pillar.hyprland.bins.logout }}",
+    "icon": "{{ pillar.hyprland.icons_dir }}/logout-white.svg"
+  },
+  {
+    "label": "Sleep",
+    "exec": "{{ pillar.hyprland.bins.sleep }}",
+    "icon": "{{ pillar.hyprland.icons_dir }}/sleep-white.svg"
+  },
+  {
+    "label": "Hibernate",
+    "exec": "{{ pillar.hyprland.bins.hibernate }}",
+    "icon": "{{ pillar.hyprland.icons_dir }}/hibernate-white.svg"
+  },
+  {
+    "label": "Reboot",
+    "exec": "{{ pillar.hyprland.bins.reboot }}",
+    "icon": "{{ pillar.hyprland.icons_dir }}/reboot-white.svg"
+  },
+  {
+    "label": "Shutdown",
+    "exec": "{{ pillar.hyprland.bins.shutdown }}",
+    "icon": "{{ pillar.hyprland.icons_dir }}/shutdown-white.svg"
+  },
+  {
+    "label": "Cancel",
+    "exec": "true",
+    "icon": "{{ pillar.hyprland.icons_dir }}/cancel-white.svg"
+  }
+]
