@@ -100,7 +100,7 @@ arch:
     - firefox
     - chrome
     - syncthing
-    #- blender
+    - blender
     - emacs
     - vscode
     - signal
