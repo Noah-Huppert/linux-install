@@ -66,7 +66,7 @@ arch:
     - nmap
     - netcat
     #- insomnia
-    #- python
+    - python
     - pipenv
     - aws-cli
     #- eksctl
