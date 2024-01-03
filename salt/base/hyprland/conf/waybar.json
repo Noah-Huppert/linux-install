@@ -96,40 +96,5 @@
         "󰁹"
       ]
     }
-  },
-  {
-    "id": "bottom",
-    "layer": "top", // Waybar at top layer
-    "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
-    "spacing": 4, // Gaps between modules (4px)
-    // Choose the order of the modules
-    "modules-left": [
-      // "hyprland/workspaces",
-      "wlr/taskbar",
-    ],
-    "modules-center": [],
-    "modules-right": [
-      "tray",
-      "clock",
-    ],
-    "wlr/taskbar": {
-      "on-click": "activate"
-    },
-    "tray": {
-      // "icon-size": 21,
-      "spacing": 10
-    },
-    "hyprland/workspaces": {
-      "format": "{icon} {windows}",
-      "on-scroll-up": "hyprctl dispatch workspace e+1",
-      "on-scroll-down": "hyprctl dispatch workspace e-1"
-    },
-    "clock": {
-      "format": "{%raw %}{:%m/%d %I:%M %p}{% endraw %}",
-      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-      "format-alt": "{:%Y-%m-%d}"
-    },
   }
 ]
