@@ -118,3 +118,4 @@ arch:
     #- tailscale
     - file-manager
     - ngrok
+    - inkscape
