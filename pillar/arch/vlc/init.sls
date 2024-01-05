@@ -1,0 +1,3 @@
+vlc:
+  pkgs:
+    - vlc

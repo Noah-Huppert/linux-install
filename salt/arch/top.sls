@@ -120,4 +120,5 @@ arch:
     - file-manager
     - ngrok
     - inkscape
+    - vlc
     - mpv
