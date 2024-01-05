@@ -1,0 +1,3 @@
+mpv:
+  pkgs:
+    - mpv

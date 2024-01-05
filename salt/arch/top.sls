@@ -119,3 +119,4 @@ arch:
     - file-manager
     - ngrok
     - inkscape
+    - mpv
