@@ -1,0 +1,3 @@
+steam:
+  pkgs:
+    - steam

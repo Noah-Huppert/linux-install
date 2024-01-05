@@ -114,7 +114,7 @@ arch:
     #- gnucash
     #- youtube-dl
     #- open-broadcaster-software
-    #- steam
+    - steam
     #- steam-link
     #- tailscale
     - file-manager
