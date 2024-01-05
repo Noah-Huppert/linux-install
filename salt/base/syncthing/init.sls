@@ -1,7 +1,7 @@
 # Installs syncthing
 
 syncthing_pkgs:
-  pkg.installed:
+  multipkg.installed:
     - pkgs: {{ pillar.syncthing.pkgs }}
 
 {% for user in pillar['users']['users'].values() %}
@@ -10,8 +10,9 @@ syncthing_pkgs:
   user_service.enabled:
     - name: {{ pillar.syncthing.svc }}
     - user: {{ user['name'] }}
+    - start: True
     - require:
-      - pkg: syncthing_pkgs
+      - multipkg: syncthing_pkgs
 {% endif %}
 {% endfor %}
 

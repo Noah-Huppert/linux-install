@@ -1,3 +1,4 @@
 syncthing:
   pkgs:
-    - syncthing
+    - pkg: syncthing
+    - aurpkg: syncthing-gtk
