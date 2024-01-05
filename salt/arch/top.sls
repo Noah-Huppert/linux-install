@@ -108,7 +108,7 @@ arch:
     - signal
     - gimp
     - discord
-    #- openvpn
+    - openvpn
     - qbittorrent
     - k3s
     #- gnucash
