@@ -30,13 +30,15 @@ class SaltStateRes(TypedDict):
     changes: Union[SaltStateResChanges, Dict[str, str]]
     comment: str
 
-def enabled(name: str, user: str) -> SaltStateRes:
+def enabled(name: str, user: str, start: bool=False) -> SaltStateRes:
     systemctl_cmd = [
         "systemctl",
         "enable",
         "--user",
-        "--now",
     ]
+
+    if start:
+        systemctl_cmd.append("--now")
 
     cmd = [
         "machinectl",
@@ -47,6 +49,17 @@ def enabled(name: str, user: str) -> SaltStateRes:
     
     systemctl_cmd.append(name)
     cmd.append(" ".join(systemctl_cmd))
+
+    if __opts__["test"]:
+        return SaltStateRes(
+            name=name,
+            result=True,
+            changes=SaltStateResChanges(
+                old=f"{name} for {user} ?",
+                new=f"{name} for {user} started",
+            ),
+            comment="Would be started",
+        )
 
     res = __salt__["cmd.run"](
         cmd=" ".join(cmd),
