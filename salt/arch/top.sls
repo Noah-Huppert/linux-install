@@ -95,6 +95,7 @@ arch:
     - sway
     - hyprland
     - gnome-keyring
+    - rsync
 
     # Applications configuration
     #- links

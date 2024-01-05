@@ -1,0 +1,3 @@
+rsync:
+  pkgs:
+    - rsync
