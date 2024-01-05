@@ -1,0 +1,3 @@
+qbittorrent:
+  pkgs:
+    - qbittorrent

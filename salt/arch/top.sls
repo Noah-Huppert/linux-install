@@ -108,7 +108,7 @@ arch:
     - gimp
     - discord
     #- openvpn
-    #- qbittorrent
+    - qbittorrent
     - k3s
     #- gnucash
     #- youtube-dl
