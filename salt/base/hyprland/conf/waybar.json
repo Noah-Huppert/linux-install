@@ -67,7 +67,7 @@
     "wireplumber": {
       "format": "{icon} {volume}%",
       "format-muted": "󰖁",
-      "on-click": "{{ pillar.hyprland.bins.volume }}",
+      "on-click-release": "{{ pillar.hyprland.bins.volume }}",
       "format-icons": ["", "", ""]
     },
     "battery": {
@@ -99,7 +99,7 @@
     },
     "custom/shutdown-menu": {
       "format": "   ",
-      "on-click": "{{ pillar.hyprland.bins.shutdown_menu }}"
+      "on-click-release": "{{ pillar.hyprland.bins.shutdown_menu }}"
     },
   }
 ]
