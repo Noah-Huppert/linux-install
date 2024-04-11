@@ -1,2 +1,2 @@
 unreal_engine:
-  dl_url: ""
+  multi_pkgs: []
