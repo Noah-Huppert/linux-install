@@ -88,7 +88,7 @@ arch:
     - spell-check
     
     # User interface configuration
-    #- vulkan
+    - vulkan
     - wayland
     - xdg-desktop-portal
     - start-wayland-script
