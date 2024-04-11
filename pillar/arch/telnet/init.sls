@@ -1,0 +1,3 @@
+telnet:
+  pkgs:
+    - inetutils

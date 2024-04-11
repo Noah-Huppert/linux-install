@@ -1,0 +1,2 @@
+telnet:
+  pkgs: []

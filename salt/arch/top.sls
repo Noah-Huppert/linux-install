@@ -65,6 +65,7 @@ arch:
     - dig
     - nmap
     - netcat
+    - telnet
     #- insomnia
     - python
     - pipenv
