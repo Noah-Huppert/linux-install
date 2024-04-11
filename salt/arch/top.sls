@@ -122,3 +122,4 @@ arch:
     - inkscape
     - vlc
     - mpv
+    - anki

@@ -1,0 +1,2 @@
+anki:
+  multi_pkgs: []
