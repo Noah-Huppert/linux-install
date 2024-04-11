@@ -125,5 +125,6 @@ arch:
     - vlc
     - mpv
     - anki
+    - qgis
     - jetbrains-rider
     - hidclient
