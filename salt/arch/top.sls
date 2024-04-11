@@ -96,6 +96,7 @@ arch:
     - hyprland
     - gnome-keyring
     - rsync
+    - downgrade
 
     # Applications configuration
     #- links

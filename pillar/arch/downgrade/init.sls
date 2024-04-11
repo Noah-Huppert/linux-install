@@ -1,0 +1,3 @@
+downgrade:
+  multipkgs:
+    - aurpkg: downgrade
