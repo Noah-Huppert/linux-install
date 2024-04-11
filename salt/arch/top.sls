@@ -76,6 +76,7 @@ arch:
     - jq
     - gtk-dev
     - httpie
+    - s3cmd
 
     # General tools configuration
     - gpg
