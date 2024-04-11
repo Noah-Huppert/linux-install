@@ -65,8 +65,8 @@ hyprland:
     notification_daemon: swaync
 
     # Lists programs to then run
-    app_launcher: {{ scripts_dir }}/nwg-drawer.sh launch
-
+    app_launcher: wofi --show drun #{{ scripts_dir }}/nwg-drawer.sh launch
+    
     # Command to run when first started so launcher is ready to go
     # If null nothing is run
     app_launcher_preload_cmd: {{ scripts_dir }}/nwg-drawer.sh preload
@@ -106,7 +106,6 @@ hyprland:
 
     # Logout command
     logout: hyprctl dispatch exit
-
 
     # Reboot command
     reboot: systemctl reboot

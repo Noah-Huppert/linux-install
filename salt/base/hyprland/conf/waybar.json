@@ -68,7 +68,7 @@
       "format": "{icon} {volume}%",
       "format-muted": "󰖁",
       "on-click-release": "{{ pillar.hyprland.bins.volume }}",
-      "format-icons": ["", "", ""]
+      "format-icons": ["", "", " "]
     },
     "battery": {
       "states": {

@@ -5,7 +5,7 @@ if [[ -z "$CMD" ]]; then
     exit 1
 fi
 
-NWG_DRAWER_ARGS="-mb 100 -mt 100 -ml 100 -mr 100 -c 5"
+NWG_DRAWER_ARGS="-mb 100 -mt 100 -ml 100 -mr 100 -c 5 -nofs"
 
 set -x
 if [[ "$CMD" == "launch" ]]; then
