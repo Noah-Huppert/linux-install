@@ -77,6 +77,7 @@ arch:
     - salt-lint
     - jq
     - gtk-dev
+    - unreal-engine
     - httpie
     - s3cmd
 
@@ -120,7 +121,7 @@ arch:
     #- youtube-dl
     #- open-broadcaster-software
     - steam
-    #- steam-link
+    - steam-link
     #- tailscale
     - file-manager
     - ngrok
