@@ -80,7 +80,7 @@ arch:
     - gpg
     - trash-cli
     - htop
-    #- flatpak
+    - flatpak
     - flameshot
     - spell-check
     

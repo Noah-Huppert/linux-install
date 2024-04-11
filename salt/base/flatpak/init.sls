@@ -1,16 +1,13 @@
 # Install and configure flatpak
 
 # Install
-{% for pkg in pillar['flatpak']['pkgs'] %}
-{{ pkg }}:
-  pkg.latest
-{% endfor %}
+flatpak_pkgs:
+  pkg.installed:
+    - pkgs: {{ pillar.flatpak.pkgs }}
 
 # Configure
 flatpak remote-add --if-not-exists flathub {{ pillar.flatpak.repository }}:
   cmd.run:
     - unless: bash -c '[ -z "$(flatpak remote-ls)" ] && exit 1; exit 0'
     - require:
-      {% for pkg in pillar['flatpak']['pkgs'] %}
-      - pkg: {{ pkg }}
-      {% endfor %}
+      - pkg: flatpak_pkgs
