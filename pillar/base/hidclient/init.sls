@@ -1,0 +1,2 @@
+hidclient:
+  multi_pkgs: {}

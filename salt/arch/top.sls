@@ -124,3 +124,4 @@ arch:
     - vlc
     - mpv
     - anki
+    - hidclient
