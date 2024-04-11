@@ -39,7 +39,7 @@ internet_pkgs:
 {% for name, config in pillar['internet']['openvpn']['profiles'].items() %}
 {{ pillar.internet.connection_profiles_dir }}/{{ name }}.nmconnection:
   file.managed:
-    - source: salt://internet/vpn.nmconnection
+    - source: salt://internet/openvpn.nmconnection
     - template: jinja
     - user: root
     - group: root
