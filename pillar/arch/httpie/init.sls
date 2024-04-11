@@ -1,0 +1,3 @@
+httpie:
+  pkgs:
+    - httpie

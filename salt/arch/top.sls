@@ -75,6 +75,7 @@ arch:
     - salt-lint
     - jq
     - gtk-dev
+    - httpie
 
     # General tools configuration
     - gpg
