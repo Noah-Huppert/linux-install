@@ -6,3 +6,6 @@ pillar/base/local-dns/script.sls
 
 # Salt environment flag file
 environment-flag
+
+# IDE
+.idea/
