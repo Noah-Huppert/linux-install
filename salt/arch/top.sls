@@ -59,7 +59,7 @@ arch:
     - terraform
     #- software-defined-radio
     - digitalocean-cli
-    #- godot
+    - godot
     #- dotnet
     #- ceph-client
     - dig
