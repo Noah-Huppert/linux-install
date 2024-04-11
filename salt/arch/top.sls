@@ -28,6 +28,7 @@ arch:
     #- power-management
     - bluetooth
     - ssdm
+    - wireguard
     
     # User configuration
     - users

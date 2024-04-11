@@ -1,0 +1,2 @@
+wireguard:
+  pkg: wireguard-tools

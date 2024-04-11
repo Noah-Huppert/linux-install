@@ -5,13 +5,14 @@ wireguard:
   pkg: wireguard
 
   # Directory
-  directory: {{ dir }}
+  config: null
+  #  directory: {{ dir }}
 
   # Configuration file
-  configuration_file: {{ dir }}/wg0.conf
+  #  configuration_file: {{ dir }}/wg0.conf
 
   # Interface
-  interface: wg0
+  #  interface: wg0
 
   # Script to check if Wireguard interface is up
-  check_interface_script: {{ dir }}/check-interface.sh
+  #  check_interface_script: {{ dir }}/check-interface.sh
