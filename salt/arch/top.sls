@@ -27,7 +27,7 @@ arch:
     #- firewall
     #- power-management
     - bluetooth
-    - ssdm
+    - display-manager
     - wireguard
     
     # User configuration
