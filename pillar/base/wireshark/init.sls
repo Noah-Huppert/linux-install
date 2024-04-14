@@ -1,5 +1,3 @@
 wireshark:
-  pkgs:
-    - wireshark
-    - wireshark-qt
+  pkgs: []
   group: wireshark

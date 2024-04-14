@@ -1,0 +1,3 @@
+wireshark:
+  pkgs:
+    - wireshark-qt

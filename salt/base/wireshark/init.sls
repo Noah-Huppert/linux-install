@@ -1,11 +1,8 @@
 # Install Wireshark
 
-{% for pkg in pillar['wireshark']['pkgs'] %}
-{{ pkg }}-installed:
+wireshark_pkgs:
   pkg.installed:
-    - name: {{ pkg }}
-
-{% endfor %}
+    - pkgs: {{ pillar.wireshark.pkgs }}
 
 {{ pillar.wireshark.group }}-group:
   group.present:
@@ -13,7 +10,4 @@
     - addusers:
         - {{ pillar.users.users.noah.name }}
     - require:
-      {% for pkg in pillar['wireshark']['pkgs'] %}
-      - pkg: {{ pkg }}-installed
-      {% endfor %}
-        
+      - pkg: wireshark_pkgs

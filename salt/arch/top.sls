@@ -80,6 +80,7 @@ arch:
     - unreal-engine
     - httpie
     - s3cmd
+    - wireshark
 
     # General tools configuration
     - gpg
