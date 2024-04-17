@@ -90,6 +90,7 @@ arch:
     - flatpak
     - flameshot
     - spell-check
+    - qt
     
     # User interface configuration
     - vulkan
