@@ -81,6 +81,7 @@ arch:
     - httpie
     - s3cmd
     - wireshark
+    - hugo
 
     # General tools configuration
     - gpg
