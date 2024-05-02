@@ -27,7 +27,6 @@ arch:
     - fonts
     #- firewall
     #- power-management
-    - touchpad
     - bluetooth
     - display-manager
     - wireguard
