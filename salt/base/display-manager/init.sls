@@ -3,13 +3,22 @@ display_manager_pkgs:
   pkg.installed:
     - pkgs: {{ pillar.display_manager.pkgs }}
 
-{{ pillar.display_manager.conf_dir }}:
-  file.recurse:
-    - source: salt://display-manager/sddm.conf.d/
+# {{ pillar.display_manager.conf_dir }}:
+#   file.recurse:
+#     - source: salt://display-manager/sddm.conf.d/
+#     - template: jinja
+#     - clean: True
+#     - requires:
+#       - pkg: display_manager_pkgs
+
+{% for file in pillar['display_manager']['conf_files'] %}
+{{ pillar.display_manager.conf_dir }}/{{ file }}:
+  file.managed:
+    - source: salt://display-manager/sddm.conf.d/{{ file }}
     - template: jinja
-    - clean: True
     - requires:
       - pkg: display_manager_pkgs
+{% endfor %}
 
 {{ pillar.display_manager.faces_dir }}:
   file.recurse:

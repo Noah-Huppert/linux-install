@@ -3,6 +3,10 @@ display_manager:
   svc: sddm
 
   conf_dir: /etc/sddm.conf.d
+  conf_files:
+    #- 10-wayland.conf
+    - 10-x11.conf
+    - 20-theme.conf
 
   faces_dir: /usr/share/sddm/faces/
   
