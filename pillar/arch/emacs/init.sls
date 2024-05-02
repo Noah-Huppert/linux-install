@@ -1,6 +1,6 @@
 emacs:
   pkgs:
-    - emacs-wayland
+    - emacs
    
   users:
     - noah
