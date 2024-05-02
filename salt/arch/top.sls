@@ -102,6 +102,7 @@ arch:
     - rice
     - sway
     - hyprland
+    - i3
     - gnome-keyring
     - rsync
     - downgrade
