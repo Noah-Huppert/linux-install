@@ -5,6 +5,10 @@ i3_pkgs:
   pkg.installed:
     - pkgs: {{ pillar.i3.pkgs }}
 
+i3_aux_pkgs:
+  {{ pillar.i3.aux_pkgs_state }}.installed:
+    - pkgs: {{ pillar.i3.aux_pkgs }}
+
 # Scripts
 {{ pillar.i3.scripts_dir }}:
   file.recurse:

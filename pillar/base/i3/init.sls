@@ -3,6 +3,9 @@
 i3:
   # i3 related packages
   pkgs: []
+  aux_pkgs: []
+
+  aux_pkgs_state: ""
 
   scripts_dir: {{ scripts_dir }}
 
