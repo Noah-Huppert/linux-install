@@ -98,6 +98,7 @@ arch:
     - xdg-desktop-portal
     - start-wayland-script
     - x11
+    - xorg
     - wl-snip
     - rice
     - sway

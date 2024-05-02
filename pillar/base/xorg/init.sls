@@ -1,6 +1,7 @@
 xorg:
   # X package
-  package: xorg
+  pkgs: []
  
   # Configuration file
-  configuration_file: /home/noah/.xinitrc
+  configuration_file: .xinitrc
+  xresources_file: .Xresources

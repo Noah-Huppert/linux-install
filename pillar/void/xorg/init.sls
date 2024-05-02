@@ -1,0 +1,3 @@
+xorg:
+  pkgs:
+    - xorg
