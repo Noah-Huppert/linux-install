@@ -9,3 +9,6 @@ environment-flag
 
 # IDE
 .idea/
+
+# Salt virtual environment
+.venv/

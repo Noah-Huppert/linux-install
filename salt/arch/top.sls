@@ -2,6 +2,7 @@ arch:
   '*':
     # Salt configuration
     - salt-configuration
+    - salt-virtual-environment
 
     # Base system configuration
     - kernel
