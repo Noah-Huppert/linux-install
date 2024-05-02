@@ -1,2 +1,3 @@
 blender:
-  pkg: media-gfx/blender
+  pkgs:
+    - media-gfx/blender

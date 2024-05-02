@@ -1,2 +1,3 @@
 blender:
-  pkg: blender
+  pkgs:
+    - blender
