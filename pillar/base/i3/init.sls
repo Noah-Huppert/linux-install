@@ -9,6 +9,13 @@ i3:
 
   scripts_dir: {{ scripts_dir }}
 
+  # KDE configuration
+  kde:
+    mask_default_svc: plasma-kwin_x11.service
+    user_svc_path: .config/systemd/user/plasma-i3.service
+    user_svc: plasma-i3.service
+
+
   # Config files
   config_files:
     # i3

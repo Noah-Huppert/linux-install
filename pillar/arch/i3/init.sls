@@ -1,6 +1,10 @@
 i3:
   pkgs:
+    # i3 window manager
     - i3-wm
+
+    # KDE plasma
+    - plasma-meta
 
     # Icon font
     - noto-fonts-emoji
