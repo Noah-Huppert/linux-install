@@ -13,6 +13,11 @@ Provides several custom Salt states:
   - `installed(name: str, pkgs: Optional[List[str]])`: Ensures the specified package(s)s are installed
 - `user_service`: Manages services run in a user's session
   - `enabled(name: str, user: str, start: bool)`: Enables a service for a user, if `start` given then the service is also started
+  - `disabled(name: str, user: str, stop: bool)`: Disables a service for a user, if `stop` is given the service is also stopped
+  - `running(name: str, user: str)`: Ensure a service for a user is running
+  - `stopped(name: str, user: str)`: Ensure a service for a user is stopped
+  - `masked(name: str, user: str)`: Ensure a service for a user is masked
+  - `unmasked(name: str, user: str)`: Ensure a service for a user is not masked
 - `multipkg`: Installs packages using multiple different package manager Salt states (ex., `pkg` and `aurpkg`)
   - `installed(name: str, pkgs: List[PkgDef])`: Installs packages specified by package definitions in `pkgs`, these definitions must be one of the following formats:
       - List of dictionaries with only one key. Where the key is the name of the Salt state used to install the package named by value. The value can either be a single package or a list of packages. In this list a dictionary key can only appear once
