@@ -19,6 +19,7 @@ i3:
     - polybar
 
   aux_pkgs:
-    - ttf-material-icons-git 
+    - ttf-material-icons-git
+    - latte-dock
 
   aux_pkgs_state: aurpkg

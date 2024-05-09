@@ -45,3 +45,9 @@ i3:
 
     # Top status bar
     top_bar: {{ scripts_dir }}/polybar.sh
+
+    # Bottom bar
+    bottom_bar: lattce-dock
+
+    # Logout command
+    logout: exec --no-startup-id loginctl kill-session $XDG_SESSION_ID # exit
