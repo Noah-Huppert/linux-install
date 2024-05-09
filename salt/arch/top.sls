@@ -92,6 +92,7 @@ arch:
     - flameshot
     - spell-check
     - qt
+    - pkgfile
     
     # User interface configuration
     - vulkan

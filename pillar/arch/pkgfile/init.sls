@@ -1,0 +1,3 @@
+pkgfile:
+  pkgs:
+    - pkgfile
