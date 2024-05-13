@@ -139,3 +139,4 @@ arch:
     - qgis
     - jetbrains-rider
     - hidclient
+    - go-swagger
