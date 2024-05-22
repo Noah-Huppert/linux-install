@@ -83,6 +83,7 @@ arch:
     - s3cmd
     - wireshark
     - hugo
+    - arduino
 
     # General tools configuration
     - gpg
