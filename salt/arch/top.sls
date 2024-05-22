@@ -142,3 +142,4 @@ arch:
     - jetbrains
     - hidclient
     - go-swagger
+    - openapi-generator
