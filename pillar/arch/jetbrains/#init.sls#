@@ -1,0 +1,5 @@
+jetbrains:
+  multipkgs:
+    - aurpkg:
+      - rider
+      - intellij-idea-ultimate-edition

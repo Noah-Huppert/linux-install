@@ -138,6 +138,6 @@ arch:
     - mpv
     - anki
     - qgis
-    - jetbrains-rider
+    - jetbrains
     - hidclient
     - go-swagger

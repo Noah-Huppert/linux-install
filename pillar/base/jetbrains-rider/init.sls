@@ -1,2 +1,0 @@
-jetbrains_rider:
-  multipkgs: []
