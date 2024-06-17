@@ -128,7 +128,7 @@ arch:
     - qbittorrent
     - k3s
     #- gnucash
-    #- youtube-dl
+    - youtube-dl
     #- open-broadcaster-software
     - steam
     - steam-link
