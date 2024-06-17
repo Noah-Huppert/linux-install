@@ -85,6 +85,7 @@ arch:
     - wireshark
     - hugo
     - arduino
+    - latex
 
     # General tools configuration
     - gpg
