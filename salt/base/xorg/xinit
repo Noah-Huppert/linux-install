@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 xrdb -merge ~/.Xresources
-exec i3 --shmlog-size=26214400
+# exec i3 --shmlog-size=26214400
+exec plasma-i3.sh
