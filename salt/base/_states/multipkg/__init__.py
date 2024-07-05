@@ -45,6 +45,10 @@ def installed(name: str, pkgs: List[PkgDef]) -> SaltStateRes:
     - InvalidPkgDefError: If an item of the pkgs argument does not meet the format laid out
     """
     results: List[SaltStateRes] = []
+
+    if not isinstance(pkgs, list):
+        raise InvalidPkgDefError(f"Package definitions must be a list")
+
     
     for pkg_def in pkgs:
         pkg_state = "pkg"
@@ -70,13 +74,13 @@ def installed(name: str, pkgs: List[PkgDef]) -> SaltStateRes:
                 pkgs_list = [pkgs_value]
             else:
                 raise InvalidPkgDefError(f"A package definition's one value must either be a list or a string, was: {type(pkgs_value)}")
-
-            # Run install
-            res = __states__[f"{pkg_state}.installed"](name=f"{name}.{pkg_state}", pkgs=pkgs_list)
-            results.append(res)
         else:
             # pkg def was not one of the allowed formats
             raise InvalidPkgDefError(f"A package definition must either be a dict or a list, was: {type(pkg_def)}")
+
+        # Run install
+        res = __states__[f"{pkg_state}.installed"](name=f"{name}.{pkg_state}", pkgs=pkgs_list)
+        results.append(res)
 
     # Aggregate results
     changed_state_results = len(list(filter(lambda res: res['result'], results)))
