@@ -1,0 +1,3 @@
+zoom:
+  multipkgs:
+    - aurpkg: zoom

@@ -145,3 +145,4 @@ arch:
     - hidclient
     - go-swagger
     - openapi-generator
+    - zoom
