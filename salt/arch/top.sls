@@ -78,6 +78,7 @@ arch:
     - android-sdk
     - salt-lint
     - jq
+    - yq
     - gtk-dev
     - unreal-engine
     - httpie
