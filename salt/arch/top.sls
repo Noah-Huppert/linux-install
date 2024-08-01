@@ -149,3 +149,4 @@ arch:
     - zoom
     - qemu
     - gns3
+    - virtualbox
