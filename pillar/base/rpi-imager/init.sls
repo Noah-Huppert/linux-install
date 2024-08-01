@@ -1,0 +1,2 @@
+rpi_imager:
+  pkgs: []

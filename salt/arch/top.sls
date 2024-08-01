@@ -151,3 +151,4 @@ arch:
     - gns3
     - virtualbox
     - 7zip
+    - rpi-imager
