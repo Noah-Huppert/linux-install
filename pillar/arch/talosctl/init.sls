@@ -1,0 +1,3 @@
+talosctl:
+  pkgs:
+    - talosctl

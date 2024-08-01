@@ -1,0 +1,2 @@
+talosctl:
+  pkgs: []

@@ -87,6 +87,7 @@ arch:
     - hugo
     - arduino
     - latex
+    - talosctl
 
     # General tools configuration
     - gpg
