@@ -150,3 +150,4 @@ arch:
     - qemu
     - gns3
     - virtualbox
+    - 7zip
