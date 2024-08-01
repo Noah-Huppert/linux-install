@@ -148,3 +148,4 @@ arch:
     - openapi-generator
     - zoom
     - qemu
+    - gns3
