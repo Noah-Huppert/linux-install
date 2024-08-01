@@ -147,3 +147,4 @@ arch:
     - go-swagger
     - openapi-generator
     - zoom
+    - qemu

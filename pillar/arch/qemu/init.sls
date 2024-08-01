@@ -1,0 +1,3 @@
+qemu:
+  pkgs:
+    - qemu-full
