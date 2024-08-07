@@ -121,7 +121,8 @@ arch:
     - chrome
     - syncthing
     - blender
-    - emacs
+    #- emacs
+    - doom-emacs
     - vscode
     - signal
     - gimp

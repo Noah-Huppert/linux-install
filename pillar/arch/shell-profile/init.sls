@@ -1,4 +1,5 @@
 shell_profile:
+  # Add new shell units to all_shell_units in base!
   shell_units:
     - meta_fns
     - usr_local_bin
@@ -39,3 +40,4 @@ shell_profile:
     - linux_install_edit
     # - startx
     #- start_wayland
+    - doom_emacs
