@@ -33,20 +33,32 @@
     - mode: 755
 
 # Configure users
+{% set not_shell_units = pillar['shell_profile']['all_shell_units'] | difference(pillar['shell_profile']['shell_units']) %}
 {% for _, user in pillar['users']['users'].items() %}
 
 {% set shell_profiles_dir = user.home + '/' + pillar['shell_profile']['shell_profiles_dir'] %}
 {% set units_file = user.home + '/' + pillar['shell_profile']['units_file'] %}
 
-{{ shell_profiles_dir }}:
-  file.recurse:
-    - source: salt://shell-profile/units
-    - clean: True
+{{ user.name }}_shell_profiles_dir:
+  file.directory:
+    - name: {{ shell_profiles_dir }}
+
+{% for unit in pillar['shell_profile']['shell_units'] %}
+{{ user.name }}_{{ unit }}_file:
+  file.managed:
+    - name: {{ shell_profiles_dir }}/{{ unit }}.sh
+    - source: salt://shell-profile/units/{{ unit }}.sh
     - user: {{ user.name }}
     - group: {{ user.name }}
-    - dir_mode: 755
-    - file_mode: 755
+    - mode: 755
     - template: jinja
+{% endfor %}
+
+{% for not_unit in not_shell_units %}
+{{ user.name }}_{{ not_unit }}_not_file:
+  file.pruned:
+    - name: {{ shell_profiles_dir }}/{{ not_unit }}.sh
+{% endfor %}
 
 {{ units_file }}:
   file.managed:
@@ -62,11 +74,16 @@ bake_shell_profiles-{{ user.name }}:
     - runas: {{ user.name }}
     - onchanges:
       - file: {{ pillar.shell_profile.bake_script }}
-      - file: {{ shell_profiles_dir }}
+      - file:  {{ user.name }}_shell_profiles_dir
       - file: {{ units_file }}
+      {% for unit in pillar['shell_profile']['shell_units'] %}
+      - file: {{ user.name }}_{{ unit }}_file
+      {% endfor %}
+      {% for not_unit in not_shell_units %}
+      - file: {{ user.name }}_{{ not_unit }}_not_file
+      {% endfor %}
     - require:
       - file: {{ shell_profiles_dir }}
       - file: {{ pillar.shell_profile.bake_script }}
-      - file: {{ units_file }}
 
 {% endfor %}
