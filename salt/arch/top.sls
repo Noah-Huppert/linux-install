@@ -53,6 +53,7 @@ arch:
     - kitty
     - c
     - cmake
+    - shellcheck
     - screen
     - kubectl
     #- ncdu
