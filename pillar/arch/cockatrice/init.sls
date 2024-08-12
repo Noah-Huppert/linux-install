@@ -1,0 +1,3 @@
+cockatrice:
+  pkgs:
+    - cockatrice

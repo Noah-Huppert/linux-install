@@ -154,3 +154,4 @@ arch:
     - virtualbox
     - 7zip
     - rpi-imager
+    - cockatrice
