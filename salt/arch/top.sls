@@ -155,3 +155,4 @@ arch:
     - 7zip
     - rpi-imager
     - cockatrice
+    - wine

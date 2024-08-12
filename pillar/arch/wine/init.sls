@@ -1,0 +1,3 @@
+wine:
+  pkgs:
+    - wine
