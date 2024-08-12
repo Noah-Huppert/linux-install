@@ -133,7 +133,7 @@ arch:
     - k3s
     #- gnucash
     - youtube-dl
-    #- open-broadcaster-software
+    - open-broadcaster-software
     - steam
     - steam-link
     #- tailscale
