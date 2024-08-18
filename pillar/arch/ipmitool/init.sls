@@ -1,0 +1,3 @@
+ipmitool:
+  pkgs:
+    - ipmitool

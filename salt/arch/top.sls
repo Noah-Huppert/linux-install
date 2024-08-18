@@ -89,6 +89,7 @@ arch:
     - arduino
     - latex
     - talosctl
+    - ipmitool
 
     # General tools configuration
     - gpg
