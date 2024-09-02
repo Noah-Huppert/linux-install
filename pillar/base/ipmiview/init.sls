@@ -1,0 +1,2 @@
+ipmiview:
+  multipkgs: []

@@ -1,0 +1,3 @@
+ipmiview:
+  multipkgs:
+    - aurpkg: ipmiview

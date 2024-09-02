@@ -158,3 +158,4 @@ arch:
     - rpi-imager
     - cockatrice
     - wine
+    - ipmiview
