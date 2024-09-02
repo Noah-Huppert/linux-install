@@ -91,6 +91,7 @@ arch:
     - talosctl
     - ipmitool
     - icedtea-web
+    - buffalo
 
     # General tools configuration
     - gpg
