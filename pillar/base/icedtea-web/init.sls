@@ -1,0 +1,2 @@
+icedtea_web:
+  pkgs: []

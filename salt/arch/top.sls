@@ -90,6 +90,7 @@ arch:
     - latex
     - talosctl
     - ipmitool
+    - icedtea-web
 
     # General tools configuration
     - gpg
