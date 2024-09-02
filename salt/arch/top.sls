@@ -117,6 +117,7 @@ arch:
     - gnome-keyring
     - rsync
     - downgrade
+    - xxd
 
     # Applications configuration
     #- links

@@ -1,0 +1,3 @@
+xxd:
+  pkgs:
+    - gvim
