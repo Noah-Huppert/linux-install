@@ -1,0 +1,3 @@
+iperf:
+  pkgs:
+    - iperf

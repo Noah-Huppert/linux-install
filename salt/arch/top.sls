@@ -161,3 +161,4 @@ arch:
     - cockatrice
     - wine
     - ipmiview
+    - iperf
