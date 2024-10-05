@@ -24,6 +24,12 @@ Run:
 > uv venv --python 3.11
 > uv pip install salt
 > ```
+>
+> Then Salt configuration is all working [uninstall uv](https://docs.astral.sh/uv/getting-started/installation/#uninstallation) and let the Salt state do it:
+> ```shell
+> rm ~/.cargo/bin/uv ~/.cargo/bin/uvx
+> sa -s uv
+> ```
 
 1. Clone this repository to the `/etc/linux-install/` directory
 2. Run the `live-scripts/link-salt-dirs.sh` to make symlinks to the `/srv/{salt,pillar}` directory

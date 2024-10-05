@@ -41,3 +41,4 @@ shell_profile:
     # - startx
     #- start_wayland
     - doom_emacs
+    - cargo_path
