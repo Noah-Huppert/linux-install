@@ -130,6 +130,7 @@ arch:
     #- emacs
     - doom-emacs
     - vscode
+    - cursor-editor
     - signal
     - gimp
     - discord
