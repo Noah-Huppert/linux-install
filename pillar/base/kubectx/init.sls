@@ -1,0 +1,2 @@
+kubectx:
+  pkgs: []

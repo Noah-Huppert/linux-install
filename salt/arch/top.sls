@@ -120,6 +120,7 @@ arch:
     - rsync
     - downgrade
     - xxd
+    - kubectx
 
     # Applications configuration
     #- links

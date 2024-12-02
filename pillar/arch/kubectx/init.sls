@@ -1,0 +1,3 @@
+kubectx:
+  pkgs:
+    - kubectx
