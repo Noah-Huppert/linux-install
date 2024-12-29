@@ -115,6 +115,7 @@ arch:
     - rice
     - sway
     - hyprland
+    - scrot
     - i3
     - gnome-keyring
     - rsync

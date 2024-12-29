@@ -1,0 +1,3 @@
+scrot:
+  pkgs:
+    - scrot
