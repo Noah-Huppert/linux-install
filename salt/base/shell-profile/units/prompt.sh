@@ -47,12 +47,20 @@ color_fg_green() {
     color_tput setaf 2
 }
 
+color_fg_blue() {
+    color_tput setaf 4
+}
+
 color_fg_magenta() {
     color_tput setaf 5
 }
 
 color_fg_red() {
     color_tput setaf 1
+}
+
+icon_kubernetes() {
+    echo -e '\Uf10fe'
 }
 
 shell-no-color() {
@@ -133,6 +141,33 @@ pwd_prompt() {
     fi
     
     echo "$(color_fg_red)$d"
+}
+
+kubectx_prompt() {
+    # Check kubeconfig exists
+    kubeconfig="$KUBECONFIG"
+    if [[ -z "$kubeconfig" ]]; then
+       # Default location
+       kubeconfig="$HOME/.kube/config"
+    fi
+
+    if ! [[ -f "$kubeconfig" ]]; then
+       # Doesn't exist
+       return
+    fi
+
+    # Get namespace
+    kubectx_ns=$(kubens - 2>&1 | sed 's/.*"\(.*\)"/\1/g')
+    if (( $? != 0 )); then
+       return
+    fi
+
+    if [[ "$kubectx_ns" == "default" ]]; then
+       # Nothing special
+       return
+    fi
+
+    echo "$(color_fg_blue) ($(icon_kubernetes) ${kubectx_ns}) $(color_reset)"
 }
 
 user_symbol() {
