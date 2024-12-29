@@ -1,6 +1,8 @@
 fingerprint_reader:
   # Package with fingerprint reader support
-  pkg: fprintd
+  pkgs: []
 
   # PAM configuration file
-  pam_configuration_file: /etc/pam.d/system-local-login
+  pam_configuration_files:
+    - system-local-login
+    - sddm

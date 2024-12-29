@@ -30,6 +30,7 @@ arch:
     - bluetooth
     - display-manager
     - wireguard
+    - fingerprint-reader
     
     # User configuration
     - users
