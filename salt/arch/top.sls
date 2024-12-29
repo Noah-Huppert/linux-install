@@ -165,3 +165,4 @@ arch:
     - wine
     - ipmiview
     - iperf
+    - software-defined-radio
