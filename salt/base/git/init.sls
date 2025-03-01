@@ -1,8 +1,9 @@
 # Install and configure Git.
 
 # Package
-{{ pillar.git.pkg }}:
-  pkg.latest
+git_pkgs:
+  pkg.latest:
+    - pkgs: {{ pillar.git.pkgs }}
 
 # User configuration
 /home/noah/.gitconfig:

@@ -1,2 +1,3 @@
 git:
-  pkg: dev-vcs/git
+  pkgs:
+    - dev-vcs/git

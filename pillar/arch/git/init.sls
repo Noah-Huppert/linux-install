@@ -1,2 +1,4 @@
 git:
-  pkg: git
+  pkgs:
+    - git
+    - patchutils
