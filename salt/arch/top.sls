@@ -168,3 +168,4 @@ arch:
     - ipmiview
     - iperf
     - software-defined-radio
+    - chirp
