@@ -127,6 +127,7 @@ arch:
     # Applications configuration
     #- links
     - firefox
+    - librewolf
     - chrome
     - syncthing
     - blender

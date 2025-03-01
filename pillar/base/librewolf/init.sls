@@ -1,0 +1,2 @@
+librewolf:
+  multipkgs: []
