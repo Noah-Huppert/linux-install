@@ -1,5 +1,8 @@
 software_defined_radio:
-  pkgs:
-    - gnuradio
-    - gnuradio-companion
-    - gnuradio-osmosdr
+  multipkgs:
+    - pkg:
+      - gnuradio
+      - gnuradio-companion
+      - gnuradio-osmosdr
+    - aurpkg:
+      - sdrtrunk-git

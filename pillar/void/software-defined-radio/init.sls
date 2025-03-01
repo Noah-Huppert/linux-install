@@ -1,8 +1,8 @@
 software_defined_radio:
-  pkgs:
-    - gnuradio
-    - gqrx
-    - rtl-sdr
-    - sox
-    - gnuradio-osmosdr
-    
+  multipkgs:
+    - pkg:
+      - gnuradio
+      - gqrx
+      - rtl-sdr
+      - sox
+      - gnuradio-osmosdr
