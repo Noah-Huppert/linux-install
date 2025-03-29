@@ -1,0 +1,3 @@
+korganizer:
+  pkgs:
+    - korganizer

@@ -171,4 +171,5 @@ arch:
     - software-defined-radio
     - chirp
     - gthumb
+    - korganizer
     - evolution
