@@ -170,3 +170,4 @@ arch:
     - iperf
     - software-defined-radio
     - chirp
+    - evolution
