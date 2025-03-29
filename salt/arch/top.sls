@@ -170,4 +170,5 @@ arch:
     - iperf
     - software-defined-radio
     - chirp
+    - gthumb
     - evolution

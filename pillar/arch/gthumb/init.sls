@@ -1,0 +1,3 @@
+gthumb:
+  pkgs:
+    - gthumb
