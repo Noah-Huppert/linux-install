@@ -15,6 +15,9 @@ users:
     docker:
       name: docker
       id: null
+    uucp: # USB serial ports are owned by this group
+      name: uucp
+      id: null
 
   users:
     noah:
@@ -25,3 +28,4 @@ users:
         audio: False
         video: True
         docker: True
+        uucp: True
