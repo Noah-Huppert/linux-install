@@ -70,19 +70,37 @@ mkdir -p "$pillar_base_dir"
 
 if [[ -n "$ENV" ]]; then
     mkdir -p "$pillar_env_dir"
-else
-    pillar_env_dir=""
 fi
 
 # Fill in files
-cat <<EOF | tee "$salt_base_dir"
-# Installs $DESC
-$NAME_pkgs:
-  multipkg.installed:
-    - pkgs: {{ pillar.${NAME}.multipkgs }}
-EOF
+salt_base_file="$salt_base_dir/init.sls"
+pillar_files=("$pillar_base_dir/init.sls")
+if [[ -n "$ENV" ]]; then
+    pillar_files+=("$pillar_env_dir/init.sls")
+fi
 
-cat <<EOF | tee "$pillar_base_dir" "$pillar_env_dir"
-${NAME}:
+jinja_name=$(echo "$NAME" | sed 's/-/_/g')
+
+if ! [[ -f "$salt_base_file" ]]; then
+    echo "${salt_base_file}:"
+    cat <<EOF | tee "$salt_base_file"
+# Installs $DESC
+${jinja_name}_pkgs:
+  multipkg.installed:
+    - pkgs: {{ pillar.${jinja_name}.multipkgs }}
+EOF
+else
+    echo "Not writing scaffold salt state to '$salt_base_file' because it already exists"
+fi
+
+for pillar_f in "${pillar_files[@]}"; do
+    if ! [[ -f "$pillar_f" ]]; then
+        echo "${pillar_f}:"
+        cat <<EOF | tee "$pillar_f"
+${jinja_name}:
   multipkgs: []
 EOF
+    else
+        echo "Not writing scaffold pillar file to '$pillar_f' because it already exists"
+    fi
+done
