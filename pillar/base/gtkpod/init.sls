@@ -1,0 +1,2 @@
+gtkpod:
+  multipkgs: []
