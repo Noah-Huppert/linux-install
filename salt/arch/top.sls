@@ -173,3 +173,4 @@ arch:
     - gthumb
     - korganizer
     - evolution
+    - strawberry-music-organizer
