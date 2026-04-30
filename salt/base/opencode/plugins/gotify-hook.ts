@@ -14,7 +14,7 @@ function log(client, obj) {
 } 
 
 export const NotificationPlugin = async ({ project, client }) => {
-    const { server_url, app_token } = JSON.parse(await readFile(CONFIG_FILE));
+    const { server_url, app_token, priority } = JSON.parse(await readFile(CONFIG_FILE));
 
     let sessionName = project.worktree;
 
@@ -46,6 +46,7 @@ export const NotificationPlugin = async ({ project, client }) => {
 \`\`\`shell
 ${cmd}
 \`\`\``,
+                                priority,
                                 extras: {
                                     "client::display": {
                                         contentType: "text/markdown",

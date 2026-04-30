@@ -1,4 +1,5 @@
 {
   "server_url": "{{ pillar.opencode.gotify_hook.server_url }}",
-  "app_token": "{{ pillar.opencode.gotify_hook.app_token }}"
+  "app_token": "{{ pillar.opencode.gotify_hook.app_token }}",
+  "priority": {{ pillar.opencode.gotify_hook.priority }}
 }

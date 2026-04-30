@@ -20,3 +20,4 @@ opencode:
     enabled: false
     server_url: http://gotify.bagel.internal
     app_token: null
+    priority: 10
